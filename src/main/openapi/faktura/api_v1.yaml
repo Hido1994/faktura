@@ -79,6 +79,942 @@ paths:
       responses:
         '200':
           description: successful operation
+  /customer:
+    get:
+      tags:
+        - faktura
+      operationId: getCustomers
+      parameters:
+        - in: query
+          name: pageable
+          required: false
+          schema:
+            $ref: '#/components/schemas/Pageable'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerPage'
+    post:
+      tags:
+        - faktura
+      operationId: saveCustomer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Customer'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+  /customer/{id}:
+    get:
+      tags:
+        - faktura
+      summary: Find by ID.
+      operationId: getCustomerById
+      parameters:
+        - name: id
+          in: path
+          description: ID of entity
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+    delete:
+      tags:
+        - faktura
+      summary: Deletes a entity.
+      operationId: deleteCustomer
+      parameters:
+        - name: id
+          in: path
+          description: Id to delete
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+  /earning:
+    get:
+      tags:
+        - faktura
+      operationId: getEarnings
+      parameters:
+        - in: query
+          name: pageable
+          required: false
+          schema:
+            $ref: '#/components/schemas/Pageable'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EarningPage'
+    post:
+      tags:
+        - faktura
+      operationId: saveEarning
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Earning'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Earning'
+  /earning/{id}:
+    get:
+      tags:
+        - faktura
+      summary: Find by ID.
+      operationId: getEarningById
+      parameters:
+        - name: id
+          in: path
+          description: ID of entity
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Earning'
+    delete:
+      tags:
+        - faktura
+      summary: Deletes a entity.
+      operationId: deleteEarning
+      parameters:
+        - name: id
+          in: path
+          description: Id to delete
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+  /expense:
+    get:
+      tags:
+        - faktura
+      operationId: getExpenses
+      parameters:
+        - in: query
+          name: pageable
+          required: false
+          schema:
+            $ref: '#/components/schemas/Pageable'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpensePage'
+    post:
+      tags:
+        - faktura
+      operationId: saveExpense
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Expense'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Expense'
+  /expense/{id}:
+    get:
+      tags:
+        - faktura
+      summary: Find by ID.
+      operationId: getExpenseById
+      parameters:
+        - name: id
+          in: path
+          description: ID of entity
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Expense'
+    delete:
+      tags:
+        - faktura
+      summary: Deletes a entity.
+      operationId: deleteExpense
+      parameters:
+        - name: id
+          in: path
+          description: Id to delete
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+  /file:
+    get:
+      tags:
+        - faktura
+      operationId: getFiles
+      parameters:
+        - in: query
+          name: pageable
+          required: false
+          schema:
+            $ref: '#/components/schemas/Pageable'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FilePage'
+    post:
+      tags:
+        - faktura
+      operationId: saveFile
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/File'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/File'
+  /file/{id}:
+    get:
+      tags:
+        - faktura
+      summary: Find by ID.
+      operationId: getFileById
+      parameters:
+        - name: id
+          in: path
+          description: ID of entity
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/File'
+    delete:
+      tags:
+        - faktura
+      summary: Deletes a entity.
+      operationId: deleteFile
+      parameters:
+        - name: id
+          in: path
+          description: Id to delete
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+  /internationalInfo:
+    get:
+      tags:
+        - faktura
+      operationId: getInternationalInfos
+      parameters:
+        - in: query
+          name: pageable
+          required: false
+          schema:
+            $ref: '#/components/schemas/Pageable'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternationalInfoPage'
+    post:
+      tags:
+        - faktura
+      operationId: saveInternationalInfo
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InternationalInfo'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternationalInfo'
+  /internationalInfo/{id}:
+    get:
+      tags:
+        - faktura
+      summary: Find by ID.
+      operationId: getInternationalInfoById
+      parameters:
+        - name: id
+          in: path
+          description: ID of entity
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternationalInfo'
+    delete:
+      tags:
+        - faktura
+      summary: Deletes a entity.
+      operationId: deleteInternationalInfo
+      parameters:
+        - name: id
+          in: path
+          description: Id to delete
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+  /invoice:
+    get:
+      tags:
+        - faktura
+      operationId: getInvoices
+      parameters:
+        - in: query
+          name: pageable
+          required: false
+          schema:
+            $ref: '#/components/schemas/Pageable'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvoicePage'
+    post:
+      tags:
+        - faktura
+      operationId: saveInvoice
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Invoice'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Invoice'
+  /invoice/{id}:
+    get:
+      tags:
+        - faktura
+      summary: Find by ID.
+      operationId: getInvoiceById
+      parameters:
+        - name: id
+          in: path
+          description: ID of entity
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Invoice'
+    delete:
+      tags:
+        - faktura
+      summary: Deletes a entity.
+      operationId: deleteInvoice
+      parameters:
+        - name: id
+          in: path
+          description: Id to delete
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+  /paymentMethod:
+    get:
+      tags:
+        - faktura
+      operationId: getPaymentMethods
+      parameters:
+        - in: query
+          name: pageable
+          required: false
+          schema:
+            $ref: '#/components/schemas/Pageable'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentMethodPage'
+    post:
+      tags:
+        - faktura
+      operationId: savePaymentMethod
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentMethod'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentMethod'
+  /paymentMethod/{id}:
+    get:
+      tags:
+        - faktura
+      summary: Find by ID.
+      operationId: getPaymentMethodById
+      parameters:
+        - name: id
+          in: path
+          description: ID of entity
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentMethod'
+    delete:
+      tags:
+        - faktura
+      summary: Deletes a entity.
+      operationId: deletePaymentMethod
+      parameters:
+        - name: id
+          in: path
+          description: Id to delete
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+  /prepaidTax:
+    get:
+      tags:
+        - faktura
+      operationId: getPrepaidTaxes
+      parameters:
+        - in: query
+          name: pageable
+          required: false
+          schema:
+            $ref: '#/components/schemas/Pageable'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PrepaidTaxPage'
+    post:
+      tags:
+        - faktura
+      operationId: savePrepaidTax
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PrepaidTax'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PrepaidTax'
+  /prepaidTax/{id}:
+    get:
+      tags:
+        - faktura
+      summary: Find by ID.
+      operationId: getPrepaidTaxById
+      parameters:
+        - name: id
+          in: path
+          description: ID of entity
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PrepaidTax'
+    delete:
+      tags:
+        - faktura
+      summary: Deletes a entity.
+      operationId: deletePrepaidTax
+      parameters:
+        - name: id
+          in: path
+          description: Id to delete
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+  /saleArticle:
+    get:
+      tags:
+        - faktura
+      operationId: getSaleArticles
+      parameters:
+        - in: query
+          name: pageable
+          required: false
+          schema:
+            $ref: '#/components/schemas/Pageable'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SaleArticlePage'
+    post:
+      tags:
+        - faktura
+      operationId: saveSaleArticle
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SaleArticle'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SaleArticle'
+  /saleArticle/{id}:
+    get:
+      tags:
+        - faktura
+      summary: Find by ID.
+      operationId: getSaleArticleById
+      parameters:
+        - name: id
+          in: path
+          description: ID of entity
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SaleArticle'
+    delete:
+      tags:
+        - faktura
+      summary: Deletes a entity.
+      operationId: deleteSaleArticle
+      parameters:
+        - name: id
+          in: path
+          description: Id to delete
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+  /saleService:
+    get:
+      tags:
+        - faktura
+      operationId: getSaleServices
+      parameters:
+        - in: query
+          name: pageable
+          required: false
+          schema:
+            $ref: '#/components/schemas/Pageable'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SaleServicePage'
+    post:
+      tags:
+        - faktura
+      operationId: saveSaleService
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SaleService'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SaleService'
+  /saleService/{id}:
+    get:
+      tags:
+        - faktura
+      summary: Find by ID.
+      operationId: getSaleServiceById
+      parameters:
+        - name: id
+          in: path
+          description: ID of entity
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SaleService'
+    delete:
+      tags:
+        - faktura
+      summary: Deletes a entity.
+      operationId: deleteSaleService
+      parameters:
+        - name: id
+          in: path
+          description: Id to delete
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+  /setting:
+    get:
+      tags:
+        - faktura
+      operationId: getSettings
+      parameters:
+        - in: query
+          name: pageable
+          required: false
+          schema:
+            $ref: '#/components/schemas/Pageable'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SettingPage'
+    post:
+      tags:
+        - faktura
+      operationId: saveSetting
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Setting'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Setting'
+  /setting/{id}:
+    get:
+      tags:
+        - faktura
+      summary: Find by ID.
+      operationId: getSettingById
+      parameters:
+        - name: id
+          in: path
+          description: ID of entity
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Setting'
+    delete:
+      tags:
+        - faktura
+      summary: Deletes a entity.
+      operationId: deleteSetting
+      parameters:
+        - name: id
+          in: path
+          description: Id to delete
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+  /supplier:
+    get:
+      tags:
+        - faktura
+      operationId: getSuppliers
+      parameters:
+        - in: query
+          name: pageable
+          required: false
+          schema:
+            $ref: '#/components/schemas/Pageable'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SupplierPage'
+    post:
+      tags:
+        - faktura
+      operationId: saveSupplier
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Supplier'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Supplier'
+  /supplier/{id}:
+    get:
+      tags:
+        - faktura
+      summary: Find by ID.
+      operationId: getSupplierById
+      parameters:
+        - name: id
+          in: path
+          description: ID of entity
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Supplier'
+    delete:
+      tags:
+        - faktura
+      summary: Deletes a entity.
+      operationId: deleteSupplier
+      parameters:
+        - name: id
+          in: path
+          description: Id to delete
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+  /timeEntry:
+    get:
+      tags:
+        - faktura
+      operationId: getTimeEntries
+      parameters:
+        - in: query
+          name: pageable
+          required: false
+          schema:
+            $ref: '#/components/schemas/Pageable'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimeEntryPage'
+    post:
+      tags:
+        - faktura
+      operationId: saveTimeEntry
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TimeEntry'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimeEntry'
+  /timeEntry/{id}:
+    get:
+      tags:
+        - faktura
+      summary: Find by ID.
+      operationId: getTimeEntryById
+      parameters:
+        - name: id
+          in: path
+          description: ID of entity
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimeEntry'
+    delete:
+      tags:
+        - faktura
+      summary: Deletes a entity.
+      operationId: deleteTimeEntry
+      parameters:
+        - name: id
+          in: path
+          description: Id to delete
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
 
 components:
   schemas:
@@ -113,16 +1049,697 @@ components:
           items:
             $ref: '#/components/schemas/Account'
     Account:
-      description: Account
       type: object
       properties:
         id:
           type: integer
           format: int64
-          description: "Unique identifier for the account"
+          description: Primary key identifier for the account
         description:
           type: string
-          description: "Description of the account"
+          maxLength: 512
+          description: Description of the account
         noCharging:
           type: boolean
-          description: "Indicates if charging is disabled"
+          description: Flag indicating if charging is disabled for this account
+      required:
+        - id
+        - description
+    PaymentMethodPage:
+      description: typed Page
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/Page'
+        - $ref: '#/components/schemas/PaymentMethodList'
+    PaymentMethodList:
+      description: List of PaymentMethods
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentMethod'
+    PaymentMethod:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Primary key identifier for the payment method
+        description:
+          type: string
+          maxLength: 512
+          description: Description of the payment method
+      required:
+        - id
+        - description
+    InternationalInfoPage:
+      description: typed Page
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/Page'
+        - $ref: '#/components/schemas/InternationalInfoList'
+    InternationalInfoList:
+      description: List of InternationalInfos
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/InternationalInfo'
+    InternationalInfo:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Primary key identifier for the international info
+        description:
+          type: string
+          maxLength: 256
+          description: Description of the international information
+        invoiceText:
+          type: string
+          maxLength: 1024
+          description: Text to be displayed on bills for international transactions
+      required:
+        - id
+    SupplierPage:
+      description: typed Page
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/Page'
+        - $ref: '#/components/schemas/SupplierList'
+    SupplierList:
+      description: List of Suppliers
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/Supplier'
+    Supplier:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Primary key identifier for the supplier
+        searchName:
+          type: string
+          maxLength: 512
+          description: Search name for the supplier
+        name:
+          type: string
+          maxLength: 512
+          description: Full name of the supplier
+      required:
+        - id
+        - searchName
+        - name
+    SettingPage:
+      description: typed Page
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/Page'
+        - $ref: '#/components/schemas/SettingList'
+    SettingList:
+      description: List of Settings
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/Setting'
+    Setting:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Primary key identifier for the setting
+        settingKey:
+          type: string
+          maxLength: 64
+          description: Key identifier for the setting
+        settingValue:
+          type: string
+          maxLength: 1024
+          description: Value of the setting
+      required:
+        - id
+        - settingKey
+        - settingValue
+    FilePage:
+      description: typed Page
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/Page'
+        - $ref: '#/components/schemas/FileList'
+    FileList:
+      description: List of Files
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/File'
+    File:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Primary key identifier for the file
+        fileKey:
+          type: string
+          maxLength: 64
+          description: Key identifier for the file
+        filename:
+          type: string
+          maxLength: 350
+          description: Name of the file
+        mimeType:
+          type: string
+          maxLength: 350
+          description: MIME type of the file
+        charset:
+          type: string
+          maxLength: 350
+          description: Character set of the file
+        lastUpdatedOn:
+          type: string
+          format: date-time
+          description: Date and time when the file was last updated
+        content:
+          type: string
+          format: binary
+          description: Content of the file
+      required:
+        - id
+        - fileKey
+    InvoicePage:
+      description: typed Page
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/Page'
+        - $ref: '#/components/schemas/InvoiceList'
+    InvoiceList:
+      description: List of Invoices
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/Invoice'
+    Invoice:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Primary key identifier for the invoice
+        invoiceNumber:
+          type: integer
+          format: int64
+          description: Invoice number
+        subject:
+          type: string
+          maxLength: 1024
+          description: Subject of the invoice
+        createdOn:
+          type: string
+          format: date
+          description: Date when the invoice was created
+        paidOn:
+          type: string
+          format: date
+          description: Date when the invoice was paid
+        paymentMethodId:
+          type: integer
+          format: int64
+          description: Reference to payment method used
+        customerId:
+          type: integer
+          format: int64
+          description: Reference to the customer
+        servicePeriod:
+          type: string
+          maxLength: 1024
+          description: Period of service covered by the invoice
+        revision:
+          type: string
+          maxLength: 1024
+          description: Revision information for the invoice
+      required:
+        - id
+        - subject
+        - createdOn
+        - customerId
+    CustomerPage:
+      description: typed Page
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/Page'
+        - $ref: '#/components/schemas/CustomerList'
+    CustomerList:
+      description: List of Customers
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/Customer'
+    Customer:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Primary key identifier for the customer
+        searchName:
+          type: string
+          maxLength: 256
+          description: Search name for the customer
+        name:
+          type: string
+          maxLength: 512
+          description: Full name of the customer
+        addressLine1:
+          type: string
+          maxLength: 512
+          description: First line of customer address
+        addressLine2:
+          type: string
+          maxLength: 512
+          description: Second line of customer address
+        city:
+          type: string
+          maxLength: 128
+          description: City of the customer
+        postalCode:
+          type: string
+          maxLength: 32
+          description: Postal code of the customer
+        taxIdentificationNumber:
+          type: string
+          maxLength: 64
+          description: Sales tax identifier for the customer
+        email:
+          type: string
+          maxLength: 256
+          description: Email address of the customer
+        phone:
+          type: string
+          maxLength: 256
+          description: Phone number of the customer
+        hourlyRate:
+          type: number
+          format: double
+          description: Hourly rate charged to the customer
+        countryCode:
+          type: string
+          maxLength: 3
+          description: Country code of the customer
+        paymentInfo:
+          type: string
+          maxLength: 1024
+          description: Payment information for the customer
+      required:
+        - id
+        - searchName
+        - name
+        - addressLine1
+        - city
+        - postalCode
+        - countryCode
+    EarningPage:
+      description: typed Page
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/Page'
+        - $ref: '#/components/schemas/EarningList'
+    EarningList:
+      description: List of Earnings
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/Earning'
+    Earning:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Primary key identifier for the earning
+        description:
+          type: string
+          maxLength: 1024
+          description: Description of the earning
+        accountId:
+          type: integer
+          format: int64
+          description: Reference to the account
+        priceNet:
+          type: number
+          format: double
+          description: Net price of the earning
+        paidOn:
+          type: string
+          format: date
+          description: Date when the earning was paid
+        paymentMethodId:
+          type: integer
+          format: int64
+          description: Reference to the payment method
+        supplierId:
+          type: integer
+          format: int64
+          description: Reference to the supplier
+        note:
+          type: string
+          maxLength: 1024
+          description: Additional notes about the earning
+      required:
+        - id
+        - description
+    ExpensePage:
+      description: typed Page
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/Page'
+        - $ref: '#/components/schemas/ExpenseList'
+    ExpenseList:
+      description: List of Expenses
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/Expense'
+    Expense:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Primary key identifier for the expense
+        incomingOn:
+          type: string
+          format: date
+          description: Date when the expense was received
+        description:
+          type: string
+          maxLength: 1024
+          description: Description of the expense
+        accountId:
+          type: integer
+          format: int64
+          description: Reference to the account
+        paidOn:
+          type: string
+          format: date
+          description: Date when the expense was paid
+        paymentMethodId:
+          type: integer
+          format: int64
+          description: Reference to the payment method
+        supplierId:
+          type: integer
+          format: int64
+          description: Reference to the supplier
+        priceNet:
+          type: number
+          format: double
+          description: Net price of the expense
+        priceTax:
+          type: number
+          format: double
+          description: Tax amount of the expense
+        internationalInfoId:
+          type: integer
+          format: int64
+          description: Reference to international information
+        note:
+          type: string
+          maxLength: 1024
+          description: Additional notes about the expense
+        depreciationYears:
+          type: integer
+          format: int64
+          description: Number of years for tax depreciation
+      required:
+        - id
+        - incomingOn
+        - description
+        - accountId
+        - paymentMethodId
+        - supplierId
+        - priceNet
+        - priceTax
+    PrepaidTaxPage:
+      description: typed Page
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/Page'
+        - $ref: '#/components/schemas/PrepaidTaxList'
+    PrepaidTaxList:
+      description: List of PrepaidTaxs
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/PrepaidTax'
+    PrepaidTax:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Primary key identifier for the prepaid tax
+        taxYear:
+          type: integer
+          format: int64
+          description: Tax year
+        taxQuarter:
+          type: integer
+          format: int64
+          description: Quarter of the tax year
+        taxCalculated:
+          type: number
+          format: double
+          description: Calculated prepaid tax amount
+        accountSurplus:
+          type: number
+          format: double
+          description: Surplus amount in the tax account
+        cashTransfer:
+          type: number
+          format: double
+          description: Cash transfer amount
+        note:
+          type: string
+          maxLength: 1024
+          description: Additional notes about the prepaid tax
+      required:
+        - id
+        - taxYear
+        - taxQuarter
+    SaleArticlePage:
+      description: typed Page
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/Page'
+        - $ref: '#/components/schemas/SaleArticleList'
+    SaleArticleList:
+      description: List of SalesArticles
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/SaleArticle'
+    SaleArticle:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Primary key identifier for the sales article
+        description:
+          type: string
+          maxLength: 1024
+          description: Description of the sales article
+        incomingOn:
+          type: string
+          format: date
+          description: Date when the sales article was received
+        supplierId:
+          type: integer
+          format: int64
+          description: Reference to the supplier
+        internationalInfoId:
+          type: integer
+          format: int64
+          description: Reference to international information
+        accountId:
+          type: integer
+          format: int64
+          description: Reference to the account
+        customerId:
+          type: integer
+          format: int64
+          description: Reference to the customer
+        priceNet:
+          type: number
+          format: double
+          description: Net price of the sales article
+        priceTax:
+          type: number
+          format: double
+          description: Tax amount of the sales article
+        paidOn:
+          type: string
+          format: date
+          description: Date when the sales article was paid
+        invoiceId:
+          type: integer
+          format: int64
+          description: Reference to the invoice
+        salesNet:
+          type: number
+          format: double
+          description: Net sales amount
+        salesTax:
+          type: number
+          format: double
+          description: Sales tax amount
+        paymentMethodId:
+          type: integer
+          format: int64
+          description: Reference to the payment method
+        info:
+          type: string
+          maxLength: 1024
+          description: Additional information about the sales article
+        amount:
+          type: integer
+          format: int64
+          description: Quantity of the sales article
+      required:
+        - id
+        - description
+        - incomingOn
+        - supplierId
+        - accountId
+        - priceNet
+        - priceTax
+    SaleServicePage:
+      description: typed Page
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/Page'
+        - $ref: '#/components/schemas/SaleServiceList'
+    SaleServiceList:
+      description: List of SalesServices
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/SaleService'
+    SaleService:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Primary key identifier for the sales service
+        customerId:
+          type: integer
+          format: int64
+          description: Reference to the customer
+        hourlyRate:
+          type: number
+          format: double
+          description: Hourly rate for the service
+        suppliedOn:
+          type: string
+          format: date
+          description: Date when the service was supplied
+        hours:
+          type: number
+          format: float
+          description: Number of hours of service provided
+        description:
+          type: string
+          maxLength: 1024
+          description: Description of the sales service
+        invoiceId:
+          type: integer
+          format: int64
+          description: Reference to the invoice
+        timeInfo:
+          type: string
+          maxLength: 256
+          description: Time information for the service
+        salesNet:
+          type: number
+          format: double
+          description: Net sales amount
+      required:
+        - id
+        - customerId
+        - hourlyRate
+        - suppliedOn
+        - hours
+        - description
+    TimeEntryPage:
+      description: typed Page
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/Page'
+        - $ref: '#/components/schemas/TimeEntryList'
+    TimeEntryList:
+      description: List of TimeEntries
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/TimeEntry'
+    TimeEntry:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Primary key identifier for the time entry
+        customerId:
+          type: integer
+          format: int64
+          description: Reference to the customer
+        startedOn:
+          type: string
+          format: date-time
+          description: Date and time when the entry started
+        endedOn:
+          type: string
+          format: date-time
+          description: Date and time when the entry ended
+        description:
+          type: string
+          maxLength: 1024
+          description: Description of the time entry
+        saleServiceId:
+          type: integer
+          format: int64
+          description: Reference to the sales service
+      required:
+        - id
+        - customerId
+        - startedOn
+        - description

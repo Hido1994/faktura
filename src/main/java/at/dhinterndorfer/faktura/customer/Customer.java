@@ -34,7 +34,7 @@ public class Customer {
     private String postalCode;
 
     @Column(name = "tax_identification_number", length = 64)
-    private String taxIndentificationNumber;
+    private String taxIdentificationNumber;
 
     @Column(name = "email", length = 256)
     private String email;

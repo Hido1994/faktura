@@ -17,8 +17,8 @@ public class Invoice {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "no")
-    private Long number;
+    @Column(name = "invoice_number")
+    private Long invoiceNumber;
 
     @Column(name = "subject", nullable = false, length = 1024)
     private String subject;

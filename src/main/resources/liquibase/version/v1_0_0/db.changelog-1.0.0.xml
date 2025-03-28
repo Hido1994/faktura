@@ -335,6 +335,7 @@
         <renameColumn tableName="bills" oldColumnName="createdon" newColumnName="created_on"/>
         <renameColumn tableName="bills" oldColumnName="paidon" newColumnName="paid_on"/>
         <renameColumn tableName="bills" oldColumnName="serviceperiod" newColumnName="service_period"/>
+        <renameColumn tableName="bills" oldColumnName="no" newColumnName="invoice_number"/>
         <renameTable oldTableName="bills" newTableName="invoice"/>
         
         <renameColumn tableName="expenses" oldColumnName="suppler_id" newColumnName="supplier_id"/>
@@ -354,7 +355,7 @@
         <renameColumn tableName="customers" oldColumnName="salestaxidentifier" newColumnName="tax_identification_number"/>
         <renameColumn tableName="customers" oldColumnName="dateofpaymentinfo" newColumnName="payment_info"/>
 
-        <renameColumn tableName="internationalinfo" oldColumnName="billtext" newColumnName="bill_text"/>
+        <renameColumn tableName="internationalinfo" oldColumnName="billtext" newColumnName="invoice_text"/>
         <renameTable oldTableName="internationalinfo" newTableName="international_info"/>
 
         <renameColumn tableName="sales_articles" oldColumnName="meansofpayment_id" newColumnName="payment_method_id"/>

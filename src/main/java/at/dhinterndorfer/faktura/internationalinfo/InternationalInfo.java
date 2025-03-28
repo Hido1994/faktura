@@ -16,6 +16,6 @@ public class InternationalInfo {
     @Column(name = "description", length = 256)
     private String description;
 
-    @Column(name = "bill_text", length = 1024)
-    private String billText;
+    @Column(name = "invoice_text", length = 1024)
+    private String invoiceText;
 }
