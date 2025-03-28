@@ -155,7 +155,7 @@
             </column>
             <column name="paidon" type="date"/>
             <column name="meansofpayment_id" type="bigint"/>
-            <column name="SUPPLER_ID" type="bigint"/>
+            <column name="suppler_id" type="bigint"/>
             <column name="note" type="varchar(1024)"/>
         </createTable>
     </changeSet>
@@ -1953,5 +1953,9 @@ ATU76869916');
 
     <changeSet id="EXPENSES-2" author="David Hinterndorfer">
         <renameColumn newColumnName="supplier_id" oldColumnName="suppler_id" tableName="EXPENSES"/>
+    </changeSet>
+
+    <changeSet id="EARNINGS-2" author="David Hinterndorfer">
+        <renameColumn newColumnName="supplier_id" oldColumnName="suppler_id" tableName="EARNINGS"/>
     </changeSet>
 </databaseChangeLog>
