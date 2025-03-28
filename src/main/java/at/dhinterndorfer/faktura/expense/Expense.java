@@ -2,7 +2,7 @@ package at.dhinterndorfer.faktura.expense;
 
 import at.dhinterndorfer.faktura.account.Account;
 import at.dhinterndorfer.faktura.internationalinfo.InternationalInfo;
-import at.dhinterndorfer.faktura.meansofpayment.MeansOfPayment;
+import at.dhinterndorfer.faktura.paymentmethod.PaymentMethod;
 import at.dhinterndorfer.faktura.supplier.Supplier;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -20,7 +20,7 @@ public class Expense {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "incomingon", nullable = false)
+    @Column(name = "incoming_on", nullable = false)
     private LocalDate incomingOn;
 
     @Column(name = "description", nullable = false, length = 1024)
@@ -30,12 +30,12 @@ public class Expense {
     @JoinColumn(name = "account_id", nullable = false)
     private Account account;
 
-    @Column(name = "paidon")
+    @Column(name = "paid_on")
     private LocalDate paidOn;
 
     @ManyToOne
-    @JoinColumn(name = "meansofpayment_id", nullable = false)
-    private MeansOfPayment meansOfPayment;
+    @JoinColumn(name = "payment_method_id", nullable = false)
+    private PaymentMethod paymentMethod;
 
     @ManyToOne
     @JoinColumn(name = "supplier_id", nullable = false)
@@ -48,12 +48,12 @@ public class Expense {
     private BigDecimal priceTax;
 
     @ManyToOne
-    @JoinColumn(name = "internationalinfo_id")
+    @JoinColumn(name = "international_info_id")
     private InternationalInfo internationalInfo;
 
     @Column(name = "note", length = 1024)
     private String note;
 
-    @Column(name = "depreciationtax_years")
-    private Long depreciationTaxYears;
+    @Column(name = "depreciation_years")
+    private Long depreciationYears;
 }

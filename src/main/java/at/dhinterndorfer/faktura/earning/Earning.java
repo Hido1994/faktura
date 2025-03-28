@@ -1,7 +1,7 @@
 package at.dhinterndorfer.faktura.earning;
 
 import at.dhinterndorfer.faktura.account.Account;
-import at.dhinterndorfer.faktura.meansofpayment.MeansOfPayment;
+import at.dhinterndorfer.faktura.paymentmethod.PaymentMethod;
 import at.dhinterndorfer.faktura.supplier.Supplier;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -29,12 +29,12 @@ public class Earning {
     @Column(name = "price_net")
     private BigDecimal priceNet;
 
-    @Column(name = "paidon")
+    @Column(name = "paid_on")
     private LocalDate paidOn;
 
     @ManyToOne
-    @JoinColumn(name = "meansofpayment_id")
-    private MeansOfPayment meansOfPayment;
+    @JoinColumn(name = "payment_method_id")
+    private PaymentMethod paymentMethod;
 
     @ManyToOne
     @JoinColumn(name = "supplier_id")

@@ -1,7 +1,7 @@
 package at.dhinterndorfer.faktura.timeentry;
 
 import at.dhinterndorfer.faktura.customer.Customer;
-import at.dhinterndorfer.faktura.saleservice.SalesService;
+import at.dhinterndorfer.faktura.sale.service.SaleService;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,16 +21,16 @@ public class TimeEntry {
     @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;
 
-    @Column(name = "startedon", nullable = false)
+    @Column(name = "started_on", nullable = false)
     private LocalDateTime startedOn;
 
-    @Column(name = "endedon")
+    @Column(name = "ended_on")
     private LocalDateTime endedOn;
 
     @Column(name = "description", nullable = false, length = 1024)
     private String description;
 
     @ManyToOne
-    @JoinColumn(name = "sales_service_id")
-    private SalesService salesService;
+    @JoinColumn(name = "sale_service_id")
+    private SaleService saleService;
 }

@@ -1,4 +1,4 @@
-package at.dhinterndorfer.faktura.meansofpayment;
+package at.dhinterndorfer.faktura.paymentmethod;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -7,8 +7,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "MEANSOFPAYMENTS")
-public class MeansOfPayment {
+@Table(name = "PAYMENT_METHODS")
+public class PaymentMethod {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

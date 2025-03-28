@@ -1,6 +1,6 @@
-package at.dhinterndorfer.faktura.saleservice;
+package at.dhinterndorfer.faktura.sale.service;
 
-import at.dhinterndorfer.faktura.bill.Bill;
+import at.dhinterndorfer.faktura.invoice.Invoice;
 import at.dhinterndorfer.faktura.customer.Customer;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -13,7 +13,7 @@ import java.time.LocalDate;
 @Setter
 @Entity
 @Table(name = "SALES_SERVICES")
-public class SalesService {
+public class SaleService {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -22,11 +22,11 @@ public class SalesService {
     @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;
 
-    @Column(name = "hourlyrate", nullable = false)
+    @Column(name = "hourly_rate", nullable = false)
     private BigDecimal hourlyRate;
 
-    @Column(name = "supplydate", nullable = false)
-    private LocalDate supplyDate;
+    @Column(name = "supplied_on", nullable = false)
+    private LocalDate suppliedOn;
 
     @Column(name = "hours", nullable = false)
     private Float hours;
@@ -35,10 +35,10 @@ public class SalesService {
     private String description;
 
     @ManyToOne
-    @JoinColumn(name = "bill_id")
-    private Bill bill;
+    @JoinColumn(name = "invoice_id")
+    private Invoice invoice;
 
-    @Column(name = "timeinfo", length = 256)
+    @Column(name = "time_info", length = 256)
     private String timeInfo;
 
     @Column(name = "sales_net")

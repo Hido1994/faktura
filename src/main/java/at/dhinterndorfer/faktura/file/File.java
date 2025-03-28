@@ -28,7 +28,7 @@ public class File {
     private String charset;
 
     @Column(name = "last_update_date")
-    private LocalDate lastUpdateDate;
+    private LocalDate lastUpdate;
 
     @Lob
     @Column(name = "content")

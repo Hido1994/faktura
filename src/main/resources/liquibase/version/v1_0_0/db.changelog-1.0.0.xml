@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+
+    <changeSet id="accounts" author="David Hinterndorfer">
+        <createTable tableName="accounts">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="description" type="varchar(512)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="no_charging" type="boolean"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="meansofpayments" author="David Hinterndorfer">
+        <createTable tableName="meansofpayments">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="description" type="varchar(512)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="internationalinfo" author="David Hinterndorfer">
+        <createTable tableName="internationalinfo">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="description" type="varchar(256)"/>
+            <column name="billtext" type="varchar(1024)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="suppliers" author="David Hinterndorfer">
+        <createTable tableName="suppliers">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="searchname" type="varchar(512)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="varchar(512)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="settings" author="David Hinterndorfer">
+        <createTable tableName="settings">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="settings_key" type="varchar(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="settings_value" type="varchar(1024)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="files" author="David Hinterndorfer">
+        <createTable tableName="files">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="file_key" type="varchar(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="filename" type="varchar(350)"/>
+            <column name="mime_type" type="varchar(350)"/>
+            <column name="charset" type="varchar(350)"/>
+            <column name="last_update_date" type="date"/>
+            <column name="content" type="blob"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="bills" author="David Hinterndorfer">
+        <createTable tableName="bills">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="no" type="bigint"/>
+            <column name="subject" type="varchar(1024)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="createdon" type="date" defaultValueComputed="CURRENT_DATE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="paidon" type="date"/>
+            <column name="meansofpayment_id" type="bigint"/>
+            <column name="customer_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="serviceperiod" type="varchar(1024)"/>
+            <column name="revision" type="varchar(1024)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="customers" author="David Hinterndorfer">
+        <createTable tableName="customers">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="searchname" type="varchar(256)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="varchar(512)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="addressline1" type="varchar(512)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="addressline2" type="varchar(512)"/>
+            <column name="city" type="varchar(128)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="postalcode" type="varchar(32)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="salestaxidentifier" type="varchar(64)">
+            </column>
+            <column name="email" type="varchar(256)">
+            </column>
+            <column name="phone" type="varchar(256)">
+            </column>
+            <column name="hourlyrate" type="currency">
+            </column>
+            <column name="countrycode" type="varchar(3)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="dateofpaymentinfo" type="varchar(1024)">
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="earnings" author="David Hinterndorfer">
+        <createTable tableName="earnings">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="description" type="varchar(1024)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="account_id" type="bigint"/>
+            <column name="price_net" type="currency">
+            </column>
+            <column name="paidon" type="date"/>
+            <column name="meansofpayment_id" type="bigint"/>
+            <column name="suppler_id" type="bigint"/>
+            <column name="note" type="varchar(1024)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="expenses" author="David Hinterndorfer">
+        <createTable tableName="expenses">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="incomingon" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="varchar(1024)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="account_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="paidon" type="date"/>
+            <column name="meansofpayment_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="suppler_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="price_net" type="currency">
+                <constraints nullable="false"/>
+            </column>
+            <column name="price_tax" type="currency">
+                <constraints nullable="false"/>
+            </column>
+            <column name="internationalinfo_id" type="bigint"/>
+            <column name="note" type="varchar(1024)"/>
+            <column name="depreciationtax_years" type="bigint"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="prepaidtax" author="David Hinterndorfer">
+        <createTable tableName="prepaidtax">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="tax_year" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="quarter" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="taxaccount_prepaidtax_calc" type="currency">
+            </column>
+            <column name="taxaccount_surplus" type="currency">
+            </column>
+            <column name="cash_transfer" type="currency">
+            </column>
+            <column name="note" type="varchar(1024)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="sales_articles" author="David Hinterndorfer">
+        <createTable tableName="sales_articles">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="description" type="varchar(1024)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="incomingon" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="supplier_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="internationalinfo_id" type="bigint">
+            </column>
+            <column name="account_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="customer_id" type="bigint">
+            </column>
+            <column name="price_net" type="currency">
+                <constraints nullable="false"/>
+            </column>
+            <column name="price_tax" type="currency">
+                <constraints nullable="false"/>
+            </column>
+            <column name="paidon" type="date"/>
+            <column name="bill_id" type="bigint">
+            </column>
+            <column name="sales_net" type="currency">
+            </column>
+            <column name="sales_tax" type="currency">
+            </column>
+            <column name="meansofpayment_id" type="bigint">
+            </column>
+            <column name="info" type="varchar(1024)"/>
+            <column name="amount" type="bigint">
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="sales_services" author="David Hinterndorfer">
+        <createTable tableName="sales_services">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="customer_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="hourlyrate" type="currency">
+                <constraints nullable="false"/>
+            </column>
+            <column name="supplydate" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="hours" type="float">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="varchar(1024)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="bill_id" type="bigint">
+            </column>
+            <column name="timeinfo" type="varchar(256)">
+            </column>
+            <column name="sales_net" type="currency">
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="timetable" author="David Hinterndorfer">
+        <createTable tableName="timetable">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="customer_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="startedon" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="endedon" type="datetime">
+            </column>
+            <column name="description" type="varchar(1024)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="sales_service_id" type="bigint"/>
+        </createTable>
+    </changeSet>
+
+    <!--
+    - in sqldeveloper: alter SESSION set NLS_DATE_FORMAT = 'dd-MM-yyyy HH:mm:ss'
+    - export
+    - replace 'DD-MM-YYYY HH24:MI:SS' > 'dd-MM-yyyy HH:mm:ss'
+    - replace to_date > PARSEDATETIME
+    - replace & > &amp;
+    - replace key > [resource]_key
+    - replace value > [resource]_value
+    - replace year > tax_year
+    - replace ? > umlaute or fix encoding
+    -->
+    <changeSet id="init-data" author="David Hinterndorfer">
+        <sqlFile path="data.sql"
+                 relativeToChangelogFile="true"
+                 stripComments="true"
+                 encoding="UTF-8"/>
+    </changeSet>
+
+    <changeSet id="refactorings" author="David Hinterndorfer">
+        <renameTable oldTableName="meansofpayments" newTableName="payment_methods"/>
+
+        <renameColumn tableName="prepaidtax" oldColumnName="taxaccount_surplus" newColumnName="account_surplus"/>
+        <renameColumn tableName="prepaidtax" oldColumnName="taxaccount_prepaidtax_calc" newColumnName="tax_calculated"/>
+        <renameColumn tableName="prepaidtax" oldColumnName="quarter" newColumnName="tax_quarter"/>
+        <renameTable oldTableName="prepaidtax" newTableName="prepaid_tax"/>
+
+        <renameColumn tableName="bills" oldColumnName="meansofpayment_id" newColumnName="payment_method_id"/>
+        <renameColumn tableName="bills" oldColumnName="createdon" newColumnName="created_on"/>
+        <renameColumn tableName="bills" oldColumnName="paidon" newColumnName="paid_on"/>
+        <renameColumn tableName="bills" oldColumnName="serviceperiod" newColumnName="service_period"/>
+        <renameTable oldTableName="bills" newTableName="invoice"/>
+        
+        <renameColumn tableName="expenses" oldColumnName="suppler_id" newColumnName="supplier_id"/>
+        <renameColumn tableName="expenses" oldColumnName="incomingon" newColumnName="incoming_on"/>
+        <renameColumn tableName="expenses" oldColumnName="paidon" newColumnName="paid_on"/>
+        <renameColumn tableName="expenses" oldColumnName="meansofpayment_id" newColumnName="payment_method_id"/>
+        <renameColumn tableName="expenses" oldColumnName="depreciationtax_years" newColumnName="depreciation_years"/>
+        <renameColumn tableName="expenses" oldColumnName="internationalinfo_id" newColumnName="international_info_id"/>
+
+        <renameColumn tableName="earnings" oldColumnName="suppler_id" newColumnName="supplier_id"/>
+        <renameColumn tableName="earnings" oldColumnName="paidon" newColumnName="paid_on"/>
+        <renameColumn tableName="earnings" oldColumnName="meansofpayment_id" newColumnName="payment_method_id"/>
+
+        <renameColumn tableName="customers" oldColumnName="postalcode" newColumnName="postal_code"/>
+        <renameColumn tableName="customers" oldColumnName="hourlyrate" newColumnName="hourly_rate"/>
+        <renameColumn tableName="customers" oldColumnName="countrycode" newColumnName="country_code"/>
+        <renameColumn tableName="customers" oldColumnName="salestaxidentifier" newColumnName="tax_identification_number"/>
+        <renameColumn tableName="customers" oldColumnName="dateofpaymentinfo" newColumnName="payment_info"/>
+
+        <renameColumn tableName="internationalinfo" oldColumnName="billtext" newColumnName="bill_text"/>
+        <renameTable oldTableName="internationalinfo" newTableName="international_info"/>
+
+        <renameColumn tableName="sales_articles" oldColumnName="meansofpayment_id" newColumnName="payment_method_id"/>
+        <renameColumn tableName="sales_articles" oldColumnName="incomingon" newColumnName="incoming_on"/>
+        <renameColumn tableName="sales_articles" oldColumnName="internationalinfo_id" newColumnName="international_info_id"/>
+        <renameColumn tableName="sales_articles" oldColumnName="paidon" newColumnName="paid_on"/>
+        <renameColumn tableName="sales_articles" oldColumnName="bill_id" newColumnName="invoice_id"/>
+
+        <renameColumn tableName="sales_services" oldColumnName="hourlyrate" newColumnName="hourly_rate"/>
+        <renameColumn tableName="sales_services" oldColumnName="supplydate" newColumnName="supplied_on"/>
+        <renameColumn tableName="sales_services" oldColumnName="bill_id" newColumnName="invoice_id"/>
+        <renameColumn tableName="sales_services" oldColumnName="timeinfo" newColumnName="time_info"/>
+
+        <renameColumn tableName="timetable" oldColumnName="startedon" newColumnName="started_on"/>
+        <renameColumn tableName="timetable" oldColumnName="endedon" newColumnName="ended_on"/>
+        <renameColumn tableName="timetable" oldColumnName="sales_service_id" newColumnName="sale_service_id"/>
+
+        <renameColumn tableName="settings" oldColumnName="settings_key" newColumnName="setting_key"/>
+        <renameColumn tableName="settings" oldColumnName="settings_value" newColumnName="setting_value"/>
+    </changeSet>
+</databaseChangeLog>

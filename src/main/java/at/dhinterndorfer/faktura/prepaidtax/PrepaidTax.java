@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 @Getter
 @Setter
 @Entity
-@Table(name = "PREPAIDTAX")
+@Table(name = "PREPAID_TAX")
 public class PrepaidTax {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,14 +18,14 @@ public class PrepaidTax {
     @Column(name = "tax_year", nullable = false)
     private Long taxYear;
 
-    @Column(name = "quarter", nullable = false)
+    @Column(name = "tax_quarter", nullable = false)
     private Long quarter;
 
-    @Column(name = "taxaccount_prepaidtax_calc")
-    private BigDecimal taxAccountPrepaidTaxCalc;
+    @Column(name = "tax_calculated")
+    private BigDecimal taxCalculated;
 
-    @Column(name = "taxaccount_surplus")
-    private BigDecimal taxAccountSurplus;
+    @Column(name = "account_surplus")
+    private BigDecimal accountSurplus;
 
     @Column(name = "cash_transfer")
     private BigDecimal cashTransfer;

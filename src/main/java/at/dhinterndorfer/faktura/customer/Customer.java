@@ -30,11 +30,11 @@ public class Customer {
     @Column(name = "city", nullable = false, length = 128)
     private String city;
 
-    @Column(name = "postalcode", nullable = false, length = 32)
+    @Column(name = "postal_code", nullable = false, length = 32)
     private String postalCode;
 
-    @Column(name = "salestaxidentifier", length = 64)
-    private String salesTaxIdentifier;
+    @Column(name = "tax_identification_number", length = 64)
+    private String taxIndentificationNumber;
 
     @Column(name = "email", length = 256)
     private String email;
@@ -42,12 +42,12 @@ public class Customer {
     @Column(name = "phone", length = 256)
     private String phone;
 
-    @Column(name = "hourlyrate")
+    @Column(name = "hourly_rate")
     private BigDecimal hourlyRate;
 
-    @Column(name = "countrycode", nullable = false, length = 3)
+    @Column(name = "country_code", nullable = false, length = 3)
     private String countryCode;
 
-    @Column(name = "dateofpaymentinfo", length = 1024)
-    private String dateOfPaymentInfo;
+    @Column(name = "payment_info", length = 1024)
+    private String paymentInfo;
 }

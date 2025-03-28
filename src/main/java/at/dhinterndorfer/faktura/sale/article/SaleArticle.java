@@ -1,10 +1,10 @@
-package at.dhinterndorfer.faktura.salearticle;
+package at.dhinterndorfer.faktura.sale.article;
 
 import at.dhinterndorfer.faktura.account.Account;
-import at.dhinterndorfer.faktura.bill.Bill;
+import at.dhinterndorfer.faktura.invoice.Invoice;
 import at.dhinterndorfer.faktura.customer.Customer;
 import at.dhinterndorfer.faktura.internationalinfo.InternationalInfo;
-import at.dhinterndorfer.faktura.meansofpayment.MeansOfPayment;
+import at.dhinterndorfer.faktura.paymentmethod.PaymentMethod;
 import at.dhinterndorfer.faktura.supplier.Supplier;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -17,7 +17,7 @@ import java.time.LocalDate;
 @Setter
 @Entity
 @Table(name = "SALES_ARTICLES")
-public class SalesArticle {
+public class SaleArticle {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -25,7 +25,7 @@ public class SalesArticle {
     @Column(name = "description", nullable = false, length = 1024)
     private String description;
 
-    @Column(name = "incomingon", nullable = false)
+    @Column(name = "incoming_on", nullable = false)
     private LocalDate incomingOn;
 
     @ManyToOne
@@ -33,7 +33,7 @@ public class SalesArticle {
     private Supplier supplier;
 
     @ManyToOne
-    @JoinColumn(name = "internationalinfo_id")
+    @JoinColumn(name = "international_info_id")
     private InternationalInfo internationalInfo;
 
     @ManyToOne
@@ -50,12 +50,12 @@ public class SalesArticle {
     @Column(name = "price_tax", nullable = false)
     private BigDecimal priceTax;
 
-    @Column(name = "paidon")
+    @Column(name = "paid_on")
     private LocalDate paidOn;
 
     @ManyToOne
-    @JoinColumn(name = "bill_id")
-    private Bill bill;
+    @JoinColumn(name = "invoice_id")
+    private Invoice invoice;
 
     @Column(name = "sales_net")
     private BigDecimal salesNet;
@@ -64,8 +64,8 @@ public class SalesArticle {
     private BigDecimal salesTax;
 
     @ManyToOne
-    @JoinColumn(name = "meansofpayment_id")
-    private MeansOfPayment meansOfPayment;
+    @JoinColumn(name = "payment_method_id")
+    private PaymentMethod paymentMethodId;
 
     @Column(name = "info", length = 1024)
     private String info;
