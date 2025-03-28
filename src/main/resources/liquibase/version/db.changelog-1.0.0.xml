@@ -178,7 +178,7 @@
             <column name="meansofpayment_id" type="bigint">
                 <constraints nullable="false"/>
             </column>
-            <column name="SUPPLER_ID" type="bigint">
+            <column name="suppler_id" type="bigint">
                 <constraints nullable="false"/>
             </column>
             <column name="price_net" type="currency">
