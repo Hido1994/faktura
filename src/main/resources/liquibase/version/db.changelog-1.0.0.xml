@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+
+    <changeSet id="ACCOUNTS-INIT" author="David Hinterndorfer">
+        <createTable tableName="ACCOUNTS">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="description" type="varchar(512)"/>
+            <column name="no_charging" type="number(1,0)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="ACCOUNTS-INIT-DATA" author="David Hinterndorfer">
+        <sql>
+            Insert into ACCOUNTS (ID,DESCRIPTION,NO_CHARGING) values (248,'SPESEN DES GELDVERKEHRS',null);
+            Insert into ACCOUNTS (ID,DESCRIPTION,NO_CHARGING) values (185,'FORTBILDUNG',null);
+            Insert into ACCOUNTS (ID,DESCRIPTION,NO_CHARGING) values (188,'KFZ',null);
+            Insert into ACCOUNTS (ID,DESCRIPTION,NO_CHARGING) values (221,'BÜROMATERIAL',null);
+            Insert into ACCOUNTS (ID,DESCRIPTION,NO_CHARGING) values (181,'NICHT VERRECHNEN',1);
+            Insert into ACCOUNTS (ID,DESCRIPTION,NO_CHARGING) values (182,'VERSICHERUNGEN',null);
+            Insert into ACCOUNTS (ID,DESCRIPTION,NO_CHARGING) values (184,'WEBSEITE/CLOUD/SERVER',null);
+            Insert into ACCOUNTS (ID,DESCRIPTION,NO_CHARGING) values (189,'REISESPESEN',null);
+            Insert into ACCOUNTS (ID,DESCRIPTION,NO_CHARGING) values (201,'TELEFON/INTERNETGEBÜHREN',null);
+            Insert into ACCOUNTS (ID,DESCRIPTION,NO_CHARGING) values (190,'SOZIALVERSICHERUNG',null);
+            Insert into ACCOUNTS (ID,DESCRIPTION,NO_CHARGING) values (228,'SONSTIGES',null);
+            Insert into ACCOUNTS (ID,DESCRIPTION,NO_CHARGING) values (249,'STEUER- UND RECHTSBERATUNG',null);
+            Insert into ACCOUNTS (ID,DESCRIPTION,NO_CHARGING) values (229,'SACHANLAGEN',null);
+            Insert into ACCOUNTS (ID,DESCRIPTION,NO_CHARGING) values (268,'BETRIEBS-/GESCHÄFTSAUSSTATTUNG',null);
+            Insert into ACCOUNTS (ID,DESCRIPTION,NO_CHARGING) values (269,'KAMMER UND SONSTIGE BEITRÄGE',null);
+        </sql>
+    </changeSet>
+</databaseChangeLog>

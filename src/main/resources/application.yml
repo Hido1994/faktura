@@ -1,0 +1,12 @@
+openapi:
+  faktura:
+    base-path: /api/v1
+
+spring:
+  application:
+    name: faktura
+  liquibase:
+    change-log: classpath:liquibase/db.changelog-master.xml
+    contexts: default
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
