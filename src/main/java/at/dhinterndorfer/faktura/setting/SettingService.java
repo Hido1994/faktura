@@ -1,4 +1,4 @@
-package at.dhinterndorfer.faktura.customer;
+package at.dhinterndorfer.faktura.setting;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -9,21 +9,21 @@ import org.springframework.transaction.annotation.Transactional;
 
 @RequiredArgsConstructor
 @Service
-public class CustomerService {
-    private final CustomerRepository repository;
+public class SettingService {
+    private final SettingRepository repository;
 
     @Transactional
-    public Customer save(@NonNull Customer entity) {
+    public Setting save(@NonNull Setting entity) {
         return repository.save(entity);
     }
 
     @Transactional
-    public Customer findById(@NonNull Long objId) {
+    public Setting findById(@NonNull Long objId) {
         return repository.findById(objId).orElse(null);
     }
 
     @Transactional
-    public Page<Customer> findAll(@NonNull Pageable pageable) {
+    public Page<Setting> findAll(@NonNull Pageable pageable) {
         return repository.findAll(pageable);
     }
 

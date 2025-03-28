@@ -88,6 +88,12 @@
                             <generateApiTests>false</generateApiTests>
                             <ignoreFileOverride>${project.basedir}/src/main/openapi/.openapi-generator-ignore
                             </ignoreFileOverride>
+                            <typeMappings>
+                                <typeMapping>OffsetDateTime=LocalDateTime</typeMapping>
+                            </typeMappings>
+                            <importMappings>
+                                <importMapping>java.time.OffsetDateTime=java.time.LocalDateTime</importMapping>
+                            </importMappings>
                             <configOptions>
                                 <sourceFolder>/</sourceFolder>
                                 <basePackage>${java.package.base}</basePackage>
@@ -170,12 +176,6 @@
             <scope>runtime</scope>
         </dependency>
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-            <scope>runtime</scope>
-            <optional>true</optional>
-        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>

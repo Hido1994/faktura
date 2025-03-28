@@ -1,9 +1,9 @@
 package at.dhinterndorfer.faktura.sale.article;
 
 import at.dhinterndorfer.faktura.account.Account;
-import at.dhinterndorfer.faktura.invoice.Invoice;
 import at.dhinterndorfer.faktura.customer.Customer;
 import at.dhinterndorfer.faktura.internationalinfo.InternationalInfo;
+import at.dhinterndorfer.faktura.invoice.Invoice;
 import at.dhinterndorfer.faktura.paymentmethod.PaymentMethod;
 import at.dhinterndorfer.faktura.supplier.Supplier;
 import jakarta.persistence.*;
@@ -65,7 +65,7 @@ public class SaleArticle {
 
     @ManyToOne
     @JoinColumn(name = "payment_method_id")
-    private PaymentMethod paymentMethodId;
+    private PaymentMethod paymentMethod;
 
     @Column(name = "info", length = 1024)
     private String info;

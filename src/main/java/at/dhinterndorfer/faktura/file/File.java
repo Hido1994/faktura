@@ -16,7 +16,7 @@ public class File {
     private Long id;
 
     @Column(name = "file_key", nullable = false, length = 64)
-    private String fileKey;
+    private String key;
 
     @Column(name = "filename", length = 350)
     private String filename;

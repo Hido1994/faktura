@@ -1,4 +1,4 @@
-package at.dhinterndorfer.faktura.customer;
+package at.dhinterndorfer.faktura.internationalinfo;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -9,21 +9,21 @@ import org.springframework.transaction.annotation.Transactional;
 
 @RequiredArgsConstructor
 @Service
-public class CustomerService {
-    private final CustomerRepository repository;
+public class InternationalInfoService {
+    private final InternationalInfoRepository repository;
 
     @Transactional
-    public Customer save(@NonNull Customer entity) {
+    public InternationalInfo save(@NonNull InternationalInfo entity) {
         return repository.save(entity);
     }
 
     @Transactional
-    public Customer findById(@NonNull Long objId) {
+    public InternationalInfo findById(@NonNull Long objId) {
         return repository.findById(objId).orElse(null);
     }
 
     @Transactional
-    public Page<Customer> findAll(@NonNull Pageable pageable) {
+    public Page<InternationalInfo> findAll(@NonNull Pageable pageable) {
         return repository.findAll(pageable);
     }
 

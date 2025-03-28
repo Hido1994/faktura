@@ -5,12 +5,26 @@ info:
 
 tags:
   - name: faktura
+  - name: account
+  - name: customer
+  - name: earning
+  - name: expense
+  - name: file
+  - name: internationalInfo
+  - name: invoice
+  - name: paymentMethod
+  - name: prepaidTax
+  - name: saleArticle
+  - name: saleService
+  - name: setting
+  - name: supplier
+  - name: timeentry
 
 paths:
   /account:
     get:
       tags:
-        - faktura
+        - account
       operationId: getAccounts
       parameters:
         - in: query
@@ -27,7 +41,7 @@ paths:
                 $ref: '#/components/schemas/AccountPage'
     post:
       tags:
-        - faktura
+        - account
       operationId: saveAccount
       requestBody:
         content:
@@ -45,7 +59,7 @@ paths:
   /account/{id}:
     get:
       tags:
-        - faktura
+        - account
       summary: Find by ID.
       operationId: getAccountById
       parameters:
@@ -65,7 +79,7 @@ paths:
                 $ref: '#/components/schemas/Account'
     delete:
       tags:
-        - faktura
+        - account
       summary: Deletes a entity.
       operationId: deleteAccount
       parameters:
@@ -82,7 +96,7 @@ paths:
   /customer:
     get:
       tags:
-        - faktura
+        - customer
       operationId: getCustomers
       parameters:
         - in: query
@@ -99,7 +113,7 @@ paths:
                 $ref: '#/components/schemas/CustomerPage'
     post:
       tags:
-        - faktura
+        - customer
       operationId: saveCustomer
       requestBody:
         content:
@@ -117,7 +131,7 @@ paths:
   /customer/{id}:
     get:
       tags:
-        - faktura
+        - customer
       summary: Find by ID.
       operationId: getCustomerById
       parameters:
@@ -137,7 +151,7 @@ paths:
                 $ref: '#/components/schemas/Customer'
     delete:
       tags:
-        - faktura
+        - customer
       summary: Deletes a entity.
       operationId: deleteCustomer
       parameters:
@@ -154,7 +168,7 @@ paths:
   /earning:
     get:
       tags:
-        - faktura
+        - earning
       operationId: getEarnings
       parameters:
         - in: query
@@ -171,7 +185,7 @@ paths:
                 $ref: '#/components/schemas/EarningPage'
     post:
       tags:
-        - faktura
+        - earning
       operationId: saveEarning
       requestBody:
         content:
@@ -189,7 +203,7 @@ paths:
   /earning/{id}:
     get:
       tags:
-        - faktura
+        - earning
       summary: Find by ID.
       operationId: getEarningById
       parameters:
@@ -209,7 +223,7 @@ paths:
                 $ref: '#/components/schemas/Earning'
     delete:
       tags:
-        - faktura
+        - earning
       summary: Deletes a entity.
       operationId: deleteEarning
       parameters:
@@ -226,7 +240,7 @@ paths:
   /expense:
     get:
       tags:
-        - faktura
+        - expense
       operationId: getExpenses
       parameters:
         - in: query
@@ -243,7 +257,7 @@ paths:
                 $ref: '#/components/schemas/ExpensePage'
     post:
       tags:
-        - faktura
+        - expense
       operationId: saveExpense
       requestBody:
         content:
@@ -261,7 +275,7 @@ paths:
   /expense/{id}:
     get:
       tags:
-        - faktura
+        - expense
       summary: Find by ID.
       operationId: getExpenseById
       parameters:
@@ -281,7 +295,7 @@ paths:
                 $ref: '#/components/schemas/Expense'
     delete:
       tags:
-        - faktura
+        - expense
       summary: Deletes a entity.
       operationId: deleteExpense
       parameters:
@@ -298,7 +312,7 @@ paths:
   /file:
     get:
       tags:
-        - faktura
+        - file
       operationId: getFiles
       parameters:
         - in: query
@@ -315,7 +329,7 @@ paths:
                 $ref: '#/components/schemas/FilePage'
     post:
       tags:
-        - faktura
+        - file
       operationId: saveFile
       requestBody:
         content:
@@ -333,7 +347,7 @@ paths:
   /file/{id}:
     get:
       tags:
-        - faktura
+        - file
       summary: Find by ID.
       operationId: getFileById
       parameters:
@@ -353,7 +367,7 @@ paths:
                 $ref: '#/components/schemas/File'
     delete:
       tags:
-        - faktura
+        - file
       summary: Deletes a entity.
       operationId: deleteFile
       parameters:
@@ -370,7 +384,7 @@ paths:
   /internationalInfo:
     get:
       tags:
-        - faktura
+        - internationalInfo
       operationId: getInternationalInfos
       parameters:
         - in: query
@@ -387,7 +401,7 @@ paths:
                 $ref: '#/components/schemas/InternationalInfoPage'
     post:
       tags:
-        - faktura
+        - internationalInfo
       operationId: saveInternationalInfo
       requestBody:
         content:
@@ -405,7 +419,7 @@ paths:
   /internationalInfo/{id}:
     get:
       tags:
-        - faktura
+        - internationalInfo
       summary: Find by ID.
       operationId: getInternationalInfoById
       parameters:
@@ -425,7 +439,7 @@ paths:
                 $ref: '#/components/schemas/InternationalInfo'
     delete:
       tags:
-        - faktura
+        - internationalInfo
       summary: Deletes a entity.
       operationId: deleteInternationalInfo
       parameters:
@@ -442,7 +456,7 @@ paths:
   /invoice:
     get:
       tags:
-        - faktura
+        - invoice
       operationId: getInvoices
       parameters:
         - in: query
@@ -459,7 +473,7 @@ paths:
                 $ref: '#/components/schemas/InvoicePage'
     post:
       tags:
-        - faktura
+        - invoice
       operationId: saveInvoice
       requestBody:
         content:
@@ -477,7 +491,7 @@ paths:
   /invoice/{id}:
     get:
       tags:
-        - faktura
+        - invoice
       summary: Find by ID.
       operationId: getInvoiceById
       parameters:
@@ -497,7 +511,7 @@ paths:
                 $ref: '#/components/schemas/Invoice'
     delete:
       tags:
-        - faktura
+        - invoice
       summary: Deletes a entity.
       operationId: deleteInvoice
       parameters:
@@ -514,7 +528,7 @@ paths:
   /paymentMethod:
     get:
       tags:
-        - faktura
+        - paymentMethod
       operationId: getPaymentMethods
       parameters:
         - in: query
@@ -531,7 +545,7 @@ paths:
                 $ref: '#/components/schemas/PaymentMethodPage'
     post:
       tags:
-        - faktura
+        - paymentMethod
       operationId: savePaymentMethod
       requestBody:
         content:
@@ -549,7 +563,7 @@ paths:
   /paymentMethod/{id}:
     get:
       tags:
-        - faktura
+        - paymentMethod
       summary: Find by ID.
       operationId: getPaymentMethodById
       parameters:
@@ -569,7 +583,7 @@ paths:
                 $ref: '#/components/schemas/PaymentMethod'
     delete:
       tags:
-        - faktura
+        - paymentMethod
       summary: Deletes a entity.
       operationId: deletePaymentMethod
       parameters:
@@ -586,7 +600,7 @@ paths:
   /prepaidTax:
     get:
       tags:
-        - faktura
+        - prepaidTax
       operationId: getPrepaidTaxes
       parameters:
         - in: query
@@ -603,7 +617,7 @@ paths:
                 $ref: '#/components/schemas/PrepaidTaxPage'
     post:
       tags:
-        - faktura
+        - prepaidTax
       operationId: savePrepaidTax
       requestBody:
         content:
@@ -621,7 +635,7 @@ paths:
   /prepaidTax/{id}:
     get:
       tags:
-        - faktura
+        - prepaidTax
       summary: Find by ID.
       operationId: getPrepaidTaxById
       parameters:
@@ -641,7 +655,7 @@ paths:
                 $ref: '#/components/schemas/PrepaidTax'
     delete:
       tags:
-        - faktura
+        - prepaidTax
       summary: Deletes a entity.
       operationId: deletePrepaidTax
       parameters:
@@ -658,7 +672,7 @@ paths:
   /saleArticle:
     get:
       tags:
-        - faktura
+        - saleArticle
       operationId: getSaleArticles
       parameters:
         - in: query
@@ -675,7 +689,7 @@ paths:
                 $ref: '#/components/schemas/SaleArticlePage'
     post:
       tags:
-        - faktura
+        - saleArticle
       operationId: saveSaleArticle
       requestBody:
         content:
@@ -693,7 +707,7 @@ paths:
   /saleArticle/{id}:
     get:
       tags:
-        - faktura
+        - saleArticle
       summary: Find by ID.
       operationId: getSaleArticleById
       parameters:
@@ -713,7 +727,7 @@ paths:
                 $ref: '#/components/schemas/SaleArticle'
     delete:
       tags:
-        - faktura
+        - saleArticle
       summary: Deletes a entity.
       operationId: deleteSaleArticle
       parameters:
@@ -730,7 +744,7 @@ paths:
   /saleService:
     get:
       tags:
-        - faktura
+        - saleService
       operationId: getSaleServices
       parameters:
         - in: query
@@ -747,7 +761,7 @@ paths:
                 $ref: '#/components/schemas/SaleServicePage'
     post:
       tags:
-        - faktura
+        - saleService
       operationId: saveSaleService
       requestBody:
         content:
@@ -765,7 +779,7 @@ paths:
   /saleService/{id}:
     get:
       tags:
-        - faktura
+        - saleService
       summary: Find by ID.
       operationId: getSaleServiceById
       parameters:
@@ -785,7 +799,7 @@ paths:
                 $ref: '#/components/schemas/SaleService'
     delete:
       tags:
-        - faktura
+        - saleService
       summary: Deletes a entity.
       operationId: deleteSaleService
       parameters:
@@ -802,7 +816,7 @@ paths:
   /setting:
     get:
       tags:
-        - faktura
+        - setting
       operationId: getSettings
       parameters:
         - in: query
@@ -819,7 +833,7 @@ paths:
                 $ref: '#/components/schemas/SettingPage'
     post:
       tags:
-        - faktura
+        - setting
       operationId: saveSetting
       requestBody:
         content:
@@ -837,7 +851,7 @@ paths:
   /setting/{id}:
     get:
       tags:
-        - faktura
+        - setting
       summary: Find by ID.
       operationId: getSettingById
       parameters:
@@ -857,7 +871,7 @@ paths:
                 $ref: '#/components/schemas/Setting'
     delete:
       tags:
-        - faktura
+        - setting
       summary: Deletes a entity.
       operationId: deleteSetting
       parameters:
@@ -874,7 +888,7 @@ paths:
   /supplier:
     get:
       tags:
-        - faktura
+        - supplier
       operationId: getSuppliers
       parameters:
         - in: query
@@ -891,7 +905,7 @@ paths:
                 $ref: '#/components/schemas/SupplierPage'
     post:
       tags:
-        - faktura
+        - supplier
       operationId: saveSupplier
       requestBody:
         content:
@@ -909,7 +923,7 @@ paths:
   /supplier/{id}:
     get:
       tags:
-        - faktura
+        - supplier
       summary: Find by ID.
       operationId: getSupplierById
       parameters:
@@ -929,7 +943,7 @@ paths:
                 $ref: '#/components/schemas/Supplier'
     delete:
       tags:
-        - faktura
+        - supplier
       summary: Deletes a entity.
       operationId: deleteSupplier
       parameters:
@@ -946,7 +960,7 @@ paths:
   /timeEntry:
     get:
       tags:
-        - faktura
+        - timeEntry
       operationId: getTimeEntries
       parameters:
         - in: query
@@ -963,7 +977,7 @@ paths:
                 $ref: '#/components/schemas/TimeEntryPage'
     post:
       tags:
-        - faktura
+        - timeEntry
       operationId: saveTimeEntry
       requestBody:
         content:
@@ -981,7 +995,7 @@ paths:
   /timeEntry/{id}:
     get:
       tags:
-        - faktura
+        - timeEntry
       summary: Find by ID.
       operationId: getTimeEntryById
       parameters:
@@ -1001,7 +1015,7 @@ paths:
                 $ref: '#/components/schemas/TimeEntry'
     delete:
       tags:
-        - faktura
+        - timeEntry
       summary: Deletes a entity.
       operationId: deleteTimeEntry
       parameters:
@@ -1178,18 +1192,18 @@ components:
           type: integer
           format: int64
           description: Primary key identifier for the setting
-        settingKey:
+        key:
           type: string
           maxLength: 64
           description: Key identifier for the setting
-        settingValue:
+        value:
           type: string
           maxLength: 1024
           description: Value of the setting
       required:
         - id
-        - settingKey
-        - settingValue
+        - key
+        - value
     FilePage:
       description: typed Page
       type: object
@@ -1211,7 +1225,7 @@ components:
           type: integer
           format: int64
           description: Primary key identifier for the file
-        fileKey:
+        key:
           type: string
           maxLength: 64
           description: Key identifier for the file
@@ -1275,14 +1289,10 @@ components:
           type: string
           format: date
           description: Date when the invoice was paid
-        paymentMethodId:
-          type: integer
-          format: int64
-          description: Reference to payment method used
-        customerId:
-          type: integer
-          format: int64
-          description: Reference to the customer
+        paymentMethod:
+          $ref: '#/components/schemas/PaymentMethod'
+        customer:
+          $ref: '#/components/schemas/Customer'
         servicePeriod:
           type: string
           maxLength: 1024
@@ -1398,10 +1408,8 @@ components:
           type: string
           maxLength: 1024
           description: Description of the earning
-        accountId:
-          type: integer
-          format: int64
-          description: Reference to the account
+        account:
+          $ref: '#/components/schemas/Account'
         priceNet:
           type: number
           format: double
@@ -1410,14 +1418,10 @@ components:
           type: string
           format: date
           description: Date when the earning was paid
-        paymentMethodId:
-          type: integer
-          format: int64
-          description: Reference to the payment method
-        supplierId:
-          type: integer
-          format: int64
-          description: Reference to the supplier
+        paymentMethod:
+          $ref: '#/components/schemas/PaymentMethod'
+        supplier:
+          $ref: '#/components/schemas/Supplier'
         note:
           type: string
           maxLength: 1024
@@ -1454,22 +1458,16 @@ components:
           type: string
           maxLength: 1024
           description: Description of the expense
-        accountId:
-          type: integer
-          format: int64
-          description: Reference to the account
+        account:
+          $ref: '#/components/schemas/Account'
         paidOn:
           type: string
           format: date
           description: Date when the expense was paid
-        paymentMethodId:
-          type: integer
-          format: int64
-          description: Reference to the payment method
-        supplierId:
-          type: integer
-          format: int64
-          description: Reference to the supplier
+        paymentMethod:
+          $ref: '#/components/schemas/PaymentMethod'
+        supplier:
+          $ref: '#/components/schemas/Supplier'
         priceNet:
           type: number
           format: double
@@ -1478,10 +1476,8 @@ components:
           type: number
           format: double
           description: Tax amount of the expense
-        internationalInfoId:
-          type: integer
-          format: int64
-          description: Reference to international information
+        internationalInfo:
+          $ref: '#/components/schemas/InternationalInfo'
         note:
           type: string
           maxLength: 1024
@@ -1577,22 +1573,14 @@ components:
           type: string
           format: date
           description: Date when the sales article was received
-        supplierId:
-          type: integer
-          format: int64
-          description: Reference to the supplier
-        internationalInfoId:
-          type: integer
-          format: int64
-          description: Reference to international information
-        accountId:
-          type: integer
-          format: int64
-          description: Reference to the account
-        customerId:
-          type: integer
-          format: int64
-          description: Reference to the customer
+        supplier:
+          $ref: '#/components/schemas/Supplier'
+        internationalInfo:
+          $ref: '#/components/schemas/InternationalInfo'
+        account:
+          $ref: '#/components/schemas/Account'
+        customer:
+          $ref: '#/components/schemas/Customer'
         priceNet:
           type: number
           format: double
@@ -1605,10 +1593,8 @@ components:
           type: string
           format: date
           description: Date when the sales article was paid
-        invoiceId:
-          type: integer
-          format: int64
-          description: Reference to the invoice
+        invoice:
+          $ref: '#/components/schemas/Invoice'
         salesNet:
           type: number
           format: double
@@ -1617,10 +1603,8 @@ components:
           type: number
           format: double
           description: Sales tax amount
-        paymentMethodId:
-          type: integer
-          format: int64
-          description: Reference to the payment method
+        paymentMethod:
+          $ref: '#/components/schemas/PaymentMethod'
         info:
           type: string
           maxLength: 1024
@@ -1658,10 +1642,8 @@ components:
           type: integer
           format: int64
           description: Primary key identifier for the sales service
-        customerId:
-          type: integer
-          format: int64
-          description: Reference to the customer
+        customer:
+          $ref: '#/components/schemas/Customer'
         hourlyRate:
           type: number
           format: double
@@ -1678,10 +1660,8 @@ components:
           type: string
           maxLength: 1024
           description: Description of the sales service
-        invoiceId:
-          type: integer
-          format: int64
-          description: Reference to the invoice
+        invoice:
+          $ref: '#/components/schemas/Invoice'
         timeInfo:
           type: string
           maxLength: 256
@@ -1718,10 +1698,8 @@ components:
           type: integer
           format: int64
           description: Primary key identifier for the time entry
-        customerId:
-          type: integer
-          format: int64
-          description: Reference to the customer
+        customer:
+          $ref: '#/components/schemas/Customer'
         startedOn:
           type: string
           format: date-time
@@ -1734,10 +1712,8 @@ components:
           type: string
           maxLength: 1024
           description: Description of the time entry
-        saleServiceId:
-          type: integer
-          format: int64
-          description: Reference to the sales service
+        saleService:
+          $ref: '#/components/schemas/SaleService'
       required:
         - id
         - customerId

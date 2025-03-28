@@ -13,9 +13,9 @@ public class Setting {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "code", nullable = false, length = 64)
-    private String code;
+    @Column(name = "setting_key", nullable = false, length = 64)
+    private String key;
 
-    @Column(name = "data", nullable = false, length = 1024)
-    private String data;
+    @Column(name = "settingValue", nullable = false, length = 1024)
+    private String value;
 }

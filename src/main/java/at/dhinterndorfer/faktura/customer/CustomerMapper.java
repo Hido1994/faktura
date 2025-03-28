@@ -1,6 +1,5 @@
 package at.dhinterndorfer.faktura.customer;
 
-import at.dhinterndorfer.faktura.customer.Customer;
 import at.dhinterndorfer.faktura.dto.v1.CustomerPageRestDto;
 import at.dhinterndorfer.faktura.dto.v1.CustomerRestDto;
 import org.mapstruct.Mapper;

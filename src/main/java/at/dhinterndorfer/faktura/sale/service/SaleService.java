@@ -1,7 +1,7 @@
 package at.dhinterndorfer.faktura.sale.service;
 
-import at.dhinterndorfer.faktura.invoice.Invoice;
 import at.dhinterndorfer.faktura.customer.Customer;
+import at.dhinterndorfer.faktura.invoice.Invoice;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;

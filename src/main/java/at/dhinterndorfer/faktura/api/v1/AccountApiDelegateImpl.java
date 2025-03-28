@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
 @Service
-public class PublicApiDelegateImpl implements FakturaApiDelegate {
+public class AccountApiDelegateImpl implements AccountApiDelegate {
     private final AccountController accountController;
 
     @Override

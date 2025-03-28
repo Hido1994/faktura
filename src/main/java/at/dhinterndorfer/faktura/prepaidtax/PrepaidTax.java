@@ -19,7 +19,7 @@ public class PrepaidTax {
     private Long taxYear;
 
     @Column(name = "tax_quarter", nullable = false)
-    private Long quarter;
+    private Long taxQuarter;
 
     @Column(name = "tax_calculated")
     private BigDecimal taxCalculated;
