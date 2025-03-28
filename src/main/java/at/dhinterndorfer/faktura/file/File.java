@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -27,8 +27,8 @@ public class File {
     @Column(name = "charset", length = 350)
     private String charset;
 
-    @Column(name = "last_update_date")
-    private LocalDate lastUpdate;
+    @Column(name = "last_updated_on")
+    private LocalDateTime lastUpdatedOn;
 
     @Lob
     @Column(name = "content")

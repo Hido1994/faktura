@@ -78,7 +78,7 @@
             <column name="filename" type="varchar(350)"/>
             <column name="mime_type" type="varchar(350)"/>
             <column name="charset" type="varchar(350)"/>
-            <column name="last_update_date" type="date"/>
+            <column name="last_update_date" type="datetime"/>
             <column name="content" type="blob"/>
         </createTable>
     </changeSet>
@@ -374,5 +374,7 @@
 
         <renameColumn tableName="settings" oldColumnName="settings_key" newColumnName="setting_key"/>
         <renameColumn tableName="settings" oldColumnName="settings_value" newColumnName="setting_value"/>
+
+        <renameColumn tableName="files" oldColumnName="last_update_date" newColumnName="last_updated_on"/>
     </changeSet>
 </databaseChangeLog>
