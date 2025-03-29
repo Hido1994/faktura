@@ -72,6 +72,55 @@ class _MainScreen extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("test"),
+        leading: Builder(
+          builder: (context) {
+            return IconButton(
+              icon: const Icon(Icons.menu),
+              onPressed: () {
+                Scaffold.of(context).openDrawer();
+              },
+            );
+          },
+        ),
+      ),
+      drawer: Drawer(
+        // Add a ListView to the drawer. This ensures the user can scroll
+        // through the options in the drawer if there isn't enough vertical
+        // space to fit everything.
+        child: ListView(
+          // Important: Remove any padding from the ListView.
+          padding: EdgeInsets.zero,
+          children: [
+            const DrawerHeader(
+              decoration: BoxDecoration(color: Colors.blue),
+              child: Text('Drawer Header'),
+            ),
+            ListTile(
+              title: const Text('Stammdaten'),
+              onTap: () {
+                _navigatorKey.currentState?.pushNamed("/calendar");
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: const Text('Stundentafel'),
+              onTap: () {
+                _navigatorKey.currentState?.pushNamed("/calendar");
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: const Text('Ausgaben'),
+              onTap: () {
+                _navigatorKey.currentState?.pushNamed("/calendar");
+                Navigator.pop(context);
+              },
+            )
+          ],
+        ),
+      ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         items: const <BottomNavigationBarItem>[
