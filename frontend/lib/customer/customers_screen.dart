@@ -1,4 +1,4 @@
-import 'package:faktura/common/widget/custom_list_screen.dart';
+import 'package:faktura/common/widget/custom_screen.dart';
 import 'package:faktura/customer/customer_form_screen.dart';
 import 'package:faktura/customer/customer_list_item.dart';
 import 'package:faktura/customer/customers_model.dart';
@@ -15,10 +15,10 @@ class CustomersScreen extends StatefulWidget {
 class _MyCustomersScreen extends State<CustomersScreen> {
   @override
   Widget build(BuildContext context) {
-    return CustomListScreen(
+    return CustomScreen(
       title: "Kunden",
       form: const CustomerFormScreen(),
-      consumer: Consumer<CustomersModel>(
+      body: Consumer<CustomersModel>(
         builder: (context, model, child) {
           return ListView.separated(
             padding: const EdgeInsets.only(top: 20),

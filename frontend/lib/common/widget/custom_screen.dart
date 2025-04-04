@@ -3,16 +3,13 @@ import 'package:provider/provider.dart';
 
 import 'custom_drawer.dart';
 
-class CustomListScreen extends StatelessWidget {
+class CustomScreen extends StatelessWidget {
   final String title;
   final Widget form;
-  final Consumer consumer;
+  final Widget body;
 
-  const CustomListScreen(
-      {super.key,
-      required this.title,
-      required this.form,
-      required this.consumer});
+  const CustomScreen(
+      {super.key, required this.title, required this.form, required this.body});
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +28,7 @@ class CustomListScreen extends StatelessWidget {
         ),
       ),
       drawer: CustomDrawer(),
-      body: consumer,
+      body: body,
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           await Navigator.of(context)
