@@ -42,26 +42,6 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      // darkTheme: ThemeData.from(
-      //         colorScheme: ColorScheme.fromSwatch(
-      //             brightness: Brightness.dark,
-      //             backgroundColor: Colors.black,
-      //             accentColor: Colors.white,
-      //             cardColor: Colors.black))
-      //     .copyWith(
-      //         // textTheme: const TextTheme(
-      //         //     titleMedium:
-      //         //         TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-      //         //     bodyMedium: TextStyle()),
-      //         canvasColor: Colors.grey.shade900.withOpacity(0.9),
-      //         appBarTheme: const AppBarTheme(
-      //             elevation: 0,
-      //             titleTextStyle:
-      //                 TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
-      //         snackBarTheme: const SnackBarThemeData(
-      //           backgroundColor: Colors.black54,
-      //           contentTextStyle: TextStyle(color: Colors.white),
-      //         )),
       themeMode: ThemeMode.light,
       home: const MainScreen(),
     );
@@ -96,7 +76,7 @@ class _MainScreen extends State<MainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(routes[_currentRoute]!['title']),
+        title: Text("Faktura"),
         leading: Builder(
           builder: (context) {
             return IconButton(
@@ -132,9 +112,6 @@ class _MainScreen extends State<MainScreen> {
             initialRoute: _currentRoute,
             key: _navigatorKey,
             onGenerateRoute: (settings) {
-              setState(() {
-                _currentRoute = settings.name!;
-              });
               return MaterialPageRoute(
                   builder: (_) => routes[settings.name]!['component']);
             },
