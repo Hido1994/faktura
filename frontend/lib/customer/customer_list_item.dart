@@ -1,12 +1,8 @@
 import 'package:faktura/customer/customer_form_screen.dart';
-import 'package:faktura/view/screen/form_screen.dart';
 import 'package:faktura_api/faktura_api.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import 'package:provider/provider.dart';
 
 import '../common/string_formats.dart';
-import 'customers_model.dart';
 
 class CustomerListItem extends StatefulWidget {
   final Customer entry;
@@ -18,7 +14,6 @@ class CustomerListItem extends StatefulWidget {
 }
 
 class _CustomerListItem extends State<CustomerListItem> {
-
   @override
   Widget build(BuildContext context) {
     return Dismissible(
@@ -80,13 +75,15 @@ class _CustomerListItem extends State<CustomerListItem> {
           ),
           isThreeLine: true,
           onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => CustomerFormScreen(
-                  entry: widget.entry,
-                ),
-              ),
+            showModalBottomSheet(
+              isScrollControlled: true,
+              showDragHandle: true,
+              useSafeArea: true,
+              context: context,
+              builder: (context) =>
+                  CustomerFormScreen(
+                    entry: widget.entry,
+                  ),
             );
           },
         ));

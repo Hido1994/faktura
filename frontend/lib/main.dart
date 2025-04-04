@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'common/app_routes.dart';
+import 'customer/customers_model.dart';
 
 void main() {
   runApp(
@@ -24,6 +25,10 @@ void main() {
           create: (context) =>
               CustomerService(Provider.of<CustomerApi>(context, listen: false)),
         ),
+        ChangeNotifierProvider<CustomersModel>(
+            create: (context) => CustomersModel(
+                Provider.of<CustomerApi>(context, listen: false))
+        )
       ],
       child: MyApp(),
     ),
