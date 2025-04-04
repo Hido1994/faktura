@@ -1,7 +1,7 @@
 import 'package:faktura/persistence/model/trip.dart';
 import 'package:faktura/service/trip_service.dart';
-import 'package:faktura/view/widget/autocomplete_text_form_field.dart';
-import 'package:faktura/view/widget/datetime_picker_text_form_field.dart';
+import 'package:faktura/common/widget/autocomplete_text_form_field.dart';
+import 'package:faktura/common/widget/datetime_picker_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

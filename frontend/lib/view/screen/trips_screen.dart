@@ -1,9 +1,11 @@
 import 'package:faktura/service/trip_service.dart';
 import 'package:faktura/state/trip_provider_state.dart';
 import 'package:faktura/view/screen/form_screen.dart';
-import 'package:faktura/view/widget/trip_list_item.dart';
+import 'package:faktura/common/widget/trip_list_item.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../../common/widget/custom_drawer.dart';
 
 class TripsScreen extends StatefulWidget {
   const TripsScreen({super.key});
@@ -24,7 +26,20 @@ class _MyTripsScreen extends State<TripsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Journal')),
+      appBar: AppBar(
+        title: const Text('Journal'),
+        leading: Builder(
+          builder: (context) {
+            return IconButton(
+              icon: const Icon(Icons.menu),
+              onPressed: () {
+                Scaffold.of(context).openDrawer();
+              },
+            );
+          },
+        ),
+      ),
+      drawer: CustomDrawer(),
       body: Consumer<TripProviderState>(builder: (context, state, child) {
         return ListView.separated(
           padding: const EdgeInsets.only(top: 20),
