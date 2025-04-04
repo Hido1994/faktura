@@ -1,11 +1,7 @@
-import 'package:faktura/persistence/model/trip.dart';
-import 'package:faktura/service/trip_service.dart';
-import 'package:faktura/state/trip_provider_state.dart';
 import 'package:faktura/view/screen/form_screen.dart';
 import 'package:faktura_api/faktura_api.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:provider/provider.dart';
 
 class CustomerListItem extends StatefulWidget {
   final Customer entry;
@@ -20,7 +16,8 @@ class _CustomerListItem extends State<CustomerListItem> {
   static final DateFormat dateTimeFormat = DateFormat('dd.MM.yyyy HH:mm');
   static final DateFormat timeFormat = DateFormat('HH:mm');
   static final NumberFormat numberFormat = NumberFormat('#,### km', 'de_AT');
-  static final NumberFormat currencyFormat = NumberFormat('#,###.## €', 'de_AT');
+  static final NumberFormat currencyFormat =
+      NumberFormat('#,###.## €', 'de_AT');
 
   @override
   Widget build(BuildContext context) {
