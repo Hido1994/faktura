@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:faktura/service/customer_service.dart';
 import 'package:faktura/state/trip_provider_state.dart';
 import 'package:faktura/view/screen/calendar_screen.dart';
-import 'package:faktura/view/screen/customers_screen.dart';
+import 'package:faktura/view/customers/customers_screen.dart';
 import 'package:faktura/view/screen/report_screen.dart';
 import 'package:faktura/view/screen/settings_screen.dart';
 import 'package:faktura/view/screen/trips_screen.dart';
@@ -76,15 +76,15 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreen extends State<MainScreen> {
-  int _selectedIndex = 0;
+  String _title = "Faktura";
   final _navigatorKey = GlobalKey<NavigatorState>();
 
-  Map<String, dynamic> routes = {
-    '/': const TripsScreen(),
-    '/report': const ReportScreen(),
-    '/settings': const SettingsScreen(),
-    '/calendar': const CalendarScreen(),
-    '/customers': const CustomersScreen(),
+  Map<String, Map<String, dynamic>> routes = {
+    '/': {'title': 'Trips', 'component': const TripsScreen()},
+    '/report': {'title': 'Reports', 'component': const ReportScreen()},
+    '/settings': {'title': 'Settings', 'component': const SettingsScreen()},
+    '/calendar': {'title': 'Tracking', 'component': const CalendarScreen()},
+    '/customers': {'title': 'Customers', 'component': const CustomersScreen()},
   };
 
   @override
@@ -96,7 +96,7 @@ class _MainScreen extends State<MainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Faktura"),
+        title: Text(_title),
         leading: Builder(
           builder: (context) {
             return IconButton(
@@ -109,11 +109,7 @@ class _MainScreen extends State<MainScreen> {
         ),
       ),
       drawer: Drawer(
-        // Add a ListView to the drawer. This ensures the user can scroll
-        // through the options in the drawer if there isn't enough vertical
-        // space to fit everything.
         child: ListView(
-          // Important: Remove any padding from the ListView.
           padding: EdgeInsets.zero,
           children: [
             const DrawerHeader(
@@ -164,7 +160,12 @@ class _MainScreen extends State<MainScreen> {
           child: Navigator(
             key: _navigatorKey,
             onGenerateRoute: (settings) {
-              return MaterialPageRoute(builder: (_) => routes[settings.name]);
+              if (routes.containsKey(settings.name)) {
+                setState(() {
+                  _title = routes[settings.name]!['title'];
+                });
+              }
+              return MaterialPageRoute(builder: (_) => routes[settings.name]?['component']);
             },
           )),
     );

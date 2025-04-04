@@ -1,4 +1,4 @@
-import 'package:faktura/state/customers_model.dart';
+import 'package:faktura/view/customers/customers_model.dart';
 import 'package:faktura/view/screen/form_screen.dart';
 import 'package:faktura/view/widget/customer_list_item.dart';
 import 'package:faktura_api/faktura_api.dart';
