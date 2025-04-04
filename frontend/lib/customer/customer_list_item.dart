@@ -1,7 +1,10 @@
+import 'package:faktura/customer/customer_form_screen.dart';
 import 'package:faktura/view/screen/form_screen.dart';
 import 'package:faktura_api/faktura_api.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+
+import '../common/string_formats.dart';
 
 class CustomerListItem extends StatefulWidget {
   final Customer entry;
@@ -13,11 +16,6 @@ class CustomerListItem extends StatefulWidget {
 }
 
 class _CustomerListItem extends State<CustomerListItem> {
-  static final DateFormat dateTimeFormat = DateFormat('dd.MM.yyyy HH:mm');
-  static final DateFormat timeFormat = DateFormat('HH:mm');
-  static final NumberFormat numberFormat = NumberFormat('#,### km', 'de_AT');
-  static final NumberFormat currencyFormat =
-      NumberFormat('#,###.## €', 'de_AT');
 
   @override
   Widget build(BuildContext context) {
@@ -55,16 +53,6 @@ class _CustomerListItem extends State<CustomerListItem> {
                 );
               },
             );
-          } else {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => FormScreen(
-                  parentId: widget.entry.id,
-                ),
-              ),
-            );
-            return false;
           }
         },
         onDismissed: (direction) {
@@ -83,6 +71,7 @@ class _CustomerListItem extends State<CustomerListItem> {
           subtitle: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Text(widget.entry.taxIdentificationNumber!),
               Text(widget.entry.addressLine1),
               Text(currencyFormat.format(widget.entry.hourlyRate)),
             ],
@@ -92,7 +81,7 @@ class _CustomerListItem extends State<CustomerListItem> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => FormScreen(
+                builder: (context) => CustomerFormScreen(
                   entryId: widget.entry.id,
                 ),
               ),

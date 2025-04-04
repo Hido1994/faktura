@@ -5,7 +5,6 @@ class CustomersModel extends ChangeNotifier {
   final CustomerApi _customerApi;
 
   List<Customer> entities = [];
-  Customer? selectedEntity;
 
   CustomersModel(this._customerApi) {
     getAll();

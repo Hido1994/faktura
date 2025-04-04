@@ -1,6 +1,7 @@
+import 'package:faktura/common/widget/autocomplete_text_form_field.dart';
+import 'package:faktura/customer/customers_model.dart';
 import 'package:faktura/persistence/model/trip.dart';
 import 'package:faktura/service/trip_service.dart';
-import 'package:faktura/common/widget/autocomplete_text_form_field.dart';
 import 'package:faktura_api/faktura_api.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -18,71 +19,21 @@ class CustomerFormScreen extends StatefulWidget {
 
 class _CustomerFormScreenState extends State<CustomerFormScreen> {
   final _formKey = GlobalKey<FormState>();
-  TripService tripService = TripService.instance;
 
-  Trip trip = Trip();
+  CustomerBuilder entity = CustomerBuilder();
 
-  List<String> vehicles = [];
-  List<String> reasons = [];
-  List<String> locations = [];
-  List<String> types = [];
-
-  Future<void> _initTrip() async {
-    DateTime now = DateTime.now();
-    now = DateTime(now.year, now.month, now.day, now.hour, now.minute);
-    now = now.subtract(Duration(seconds: now.second));
-
-    List<String> vehicles = await tripService.getVehicles();
-    List<String> reasons = await tripService.getReasons();
-    List<String> locations = await tripService.getLocations();
-    List<String> types = await tripService.getTypes();
-
-    Customer customer = Customer();
+  Future<void> _initCustomer() async {
+    CustomerBuilder entity = CustomerBuilder();
 
     if (widget.entryId == null) {
-      trip.startDate = now;
-
-      if (reasons.isNotEmpty) {
-        trip.reason = reasons[0];
-      }
-      if (vehicles.isNotEmpty) {
-        trip.vehicle = vehicles[0];
-      }
-      if (types.isNotEmpty) {
-        trip.type = types[0];
-      }
-
-      trip.startMileage = await tripService.getLastEndMileage(trip.vehicle);
-      trip.startLocation = await tripService.getLastEndLocation();
     } else {
-      trip = await tripService.getById(widget.entryId!);
-    }
-
-    if (this.trip.endDate == null) {
-      trip.endDate = now;
-      if (trip.endLocation == null && trip.parent != null) {
-        Trip parent = await tripService.getById(trip.parent!);
-        trip.endLocation = parent.startLocation;
-
-        if (trip.endLocation != null &&
-            trip.startLocation != null &&
-            trip.startMileage != null &&
-            trip.endMileage == null) {
-          tripService
-              .getLastTripDistance(trip.startLocation, trip.endLocation)
-              .then((value) => setState(() {
-                    trip.endMileage = (trip.startMileage! + value!);
-                  }));
-        }
-      }
+      entity = await Provider.of<CustomerApi>(context, listen: false)
+          .getCustomerById(id: widget.entryId!)
+          .then((response) => response.data!.toBuilder());
     }
 
     setState(() {
-      this.trip = trip;
-      this.vehicles = vehicles;
-      this.reasons = reasons;
-      this.locations = locations;
-      this.types = types;
+      this.entity = entity;
     });
   }
 
@@ -90,7 +41,7 @@ class _CustomerFormScreenState extends State<CustomerFormScreen> {
   void initState() {
     super.initState();
 
-    _initTrip();
+    _initCustomer();
   }
 
   @override
@@ -110,9 +61,9 @@ class _CustomerFormScreenState extends State<CustomerFormScreen> {
                     key: UniqueKey(),
                     title: 'Name',
                     options: [],
-                    initialValue: trip.type,
+                    initialValue: entity.name,
                     onChanged: (value) {
-                      trip.type = value;
+                      entity.name = value;
                     }),
               ],
             ),
@@ -122,8 +73,8 @@ class _CustomerFormScreenState extends State<CustomerFormScreen> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           if (_formKey.currentState!.validate()) {
-            tripService.save(trip).then((value) {
-              Provider.of<TripProviderState>(context, listen: false).refresh();
+            Provider.of<CustomerApi>(context, listen: false).saveCustomer(customer: entity.build()).then((response) {
+              Provider.of<CustomersModel>(context, listen: false).getAll();
 
               ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                 content: Text('Saved'),

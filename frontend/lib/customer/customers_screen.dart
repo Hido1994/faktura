@@ -1,4 +1,5 @@
 import 'package:faktura/common/widget/custom_list_screen.dart';
+import 'package:faktura/customer/customer_form_screen.dart';
 import 'package:faktura/customer/customer_list_item.dart';
 import 'package:faktura/customer/customers_model.dart';
 import 'package:faktura/view/screen/form_screen.dart';
@@ -23,7 +24,7 @@ class _MyCustomersScreen extends State<CustomersScreen> {
           CustomersModel(Provider.of<CustomerApi>(context, listen: false)),
       child: CustomListScreen(
         title: "Kunden",
-        form: const FormScreen(),
+        form: const CustomerFormScreen(),
         consumer: Consumer<CustomersModel>(
           builder: (context, model, child) {
             return ListView.separated(

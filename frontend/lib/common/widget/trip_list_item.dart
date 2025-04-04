@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
+import '../string_formats.dart';
+
 class TripListItem extends StatefulWidget {
   final Trip entry;
 
@@ -16,9 +18,6 @@ class TripListItem extends StatefulWidget {
 }
 
 class _TripListItem extends State<TripListItem> {
-  static final DateFormat dateTimeFormat = DateFormat('dd.MM.yyyy HH:mm');
-  static final DateFormat timeFormat = DateFormat('HH:mm');
-  static final NumberFormat numberFormat = NumberFormat('#,### km', 'de_AT');
 
   TripService tripService = TripService.instance;
 
