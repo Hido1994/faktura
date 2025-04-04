@@ -46,6 +46,9 @@ dependencies:
   flutter_launcher_icons: ^0.14.2
   syncfusion_flutter_calendar: ^28.1.39
   openapi_generator_annotations: ^6.1.0
+  dio: ^5.7.0
+  faktura_api:
+      path: api/faktura_api
 
 dev_dependencies:
   flutter_test:

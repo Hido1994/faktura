@@ -1,13 +1,35 @@
+import 'package:dio/dio.dart';
+import 'package:faktura/service/customer_service.dart';
 import 'package:faktura/state/trip_provider_state.dart';
 import 'package:faktura/view/screen/calendar_screen.dart';
+import 'package:faktura/view/screen/customers_screen.dart';
 import 'package:faktura/view/screen/report_screen.dart';
 import 'package:faktura/view/screen/settings_screen.dart';
 import 'package:faktura/view/screen/trips_screen.dart';
+import 'package:faktura_api/faktura_api.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        Provider<Dio>(
+          create: (_) =>
+              Dio(BaseOptions(baseUrl: "http://10.0.2.2:8080/api/v1")),
+        ),
+        Provider<CustomerApi>(
+          create: (context) => CustomerApi(
+              Provider.of<Dio>(context, listen: false), standardSerializers),
+        ),
+        Provider<CustomerService>(
+          create: (context) =>
+              CustomerService(Provider.of<CustomerApi>(context, listen: false)),
+        ),
+      ],
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -62,6 +84,7 @@ class _MainScreen extends State<MainScreen> {
     '/report': const ReportScreen(),
     '/settings': const SettingsScreen(),
     '/calendar': const CalendarScreen(),
+    '/customers': const CustomersScreen(),
   };
 
   @override
@@ -73,7 +96,7 @@ class _MainScreen extends State<MainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("test"),
+        title: Text("Faktura"),
         leading: Builder(
           builder: (context) {
             return IconButton(
@@ -98,30 +121,16 @@ class _MainScreen extends State<MainScreen> {
               child: Text('Drawer Header'),
             ),
             ListTile(
-              title: const Text('Stammdaten'),
+              title: const Text('Kunden'),
               onTap: () {
-                _navigatorKey.currentState?.pushNamed("/calendar");
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              title: const Text('Stundentafel'),
-              onTap: () {
-                _navigatorKey.currentState?.pushNamed("/calendar");
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              title: const Text('Ausgaben'),
-              onTap: () {
-                _navigatorKey.currentState?.pushNamed("/calendar");
+                _navigatorKey.currentState?.pushNamed("/customers");
                 Navigator.pop(context);
               },
             )
           ],
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
+      /*bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
@@ -149,7 +158,7 @@ class _MainScreen extends State<MainScreen> {
             _selectedIndex = index;
           });
         },
-      ),
+      ),*/
       body: ChangeNotifierProvider(
           create: (context) => TripProviderState(),
           child: Navigator(
