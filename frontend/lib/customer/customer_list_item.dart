@@ -3,8 +3,10 @@ import 'package:faktura/view/screen/form_screen.dart';
 import 'package:faktura_api/faktura_api.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 import '../common/string_formats.dart';
+import 'customers_model.dart';
 
 class CustomerListItem extends StatefulWidget {
   final Customer entry;
@@ -82,7 +84,7 @@ class _CustomerListItem extends State<CustomerListItem> {
               context,
               MaterialPageRoute(
                 builder: (context) => CustomerFormScreen(
-                  entryId: widget.entry.id,
+                  entry: widget.entry,
                 ),
               ),
             );

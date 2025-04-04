@@ -1,17 +1,13 @@
 import 'package:faktura/common/widget/autocomplete_text_form_field.dart';
 import 'package:faktura/customer/customers_model.dart';
-import 'package:faktura/persistence/model/trip.dart';
-import 'package:faktura/service/trip_service.dart';
 import 'package:faktura_api/faktura_api.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../state/trip_provider_state.dart';
-
 class CustomerFormScreen extends StatefulWidget {
-  final int? entryId;
+  final Customer? entry;
 
-  const CustomerFormScreen({super.key, this.entryId});
+  const CustomerFormScreen({super.key, this.entry});
 
   @override
   State<CustomerFormScreen> createState() => _CustomerFormScreenState();
@@ -20,20 +16,18 @@ class CustomerFormScreen extends StatefulWidget {
 class _CustomerFormScreenState extends State<CustomerFormScreen> {
   final _formKey = GlobalKey<FormState>();
 
-  CustomerBuilder entity = CustomerBuilder();
+  CustomerBuilder builder = CustomerBuilder();
 
   Future<void> _initCustomer() async {
-    CustomerBuilder entity = CustomerBuilder();
+    CustomerBuilder entityBuilder = CustomerBuilder();
 
-    if (widget.entryId == null) {
+    if (widget.entry == null) {
     } else {
-      entity = await Provider.of<CustomerApi>(context, listen: false)
-          .getCustomerById(id: widget.entryId!)
-          .then((response) => response.data!.toBuilder());
+      entityBuilder = widget.entry!.toBuilder();
     }
 
     setState(() {
-      this.entity = entity;
+      builder = entityBuilder;
     });
   }
 
@@ -48,7 +42,7 @@ class _CustomerFormScreenState extends State<CustomerFormScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text((widget.entryId == null ? "Neu" : "Bearbeiten")),
+        title: Text(widget.entry?.id == null ? "Neu" : "Bearbeiten"),
       ),
       body: Form(
         key: _formKey,
@@ -61,9 +55,9 @@ class _CustomerFormScreenState extends State<CustomerFormScreen> {
                     key: UniqueKey(),
                     title: 'Name',
                     options: [],
-                    initialValue: entity.name,
+                    initialValue: builder.name,
                     onChanged: (value) {
-                      entity.name = value;
+                      builder.name = value;
                     }),
               ],
             ),
@@ -73,9 +67,9 @@ class _CustomerFormScreenState extends State<CustomerFormScreen> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           if (_formKey.currentState!.validate()) {
-            Provider.of<CustomerApi>(context, listen: false).saveCustomer(customer: entity.build()).then((response) {
-              Provider.of<CustomersModel>(context, listen: false).getAll();
-
+            Provider.of<CustomersModel>(context, listen: false)
+                .save(builder.build())
+                .then((response) {
               ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                 content: Text('Saved'),
                 behavior: SnackBarBehavior.floating,

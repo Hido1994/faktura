@@ -5,6 +5,7 @@ class CustomersModel extends ChangeNotifier {
   final CustomerApi _customerApi;
 
   List<Customer> entities = [];
+  Customer? selectedEntity;
 
   CustomersModel(this._customerApi) {
     getAll();
@@ -13,6 +14,13 @@ class CustomersModel extends ChangeNotifier {
   void getAll() {
     _customerApi.getCustomers().then((response) {
       entities = response.data?.content?.toList() ?? [];
+      notifyListeners();
+    });
+  }
+
+  Future<Null> save(Customer customer) {
+    return _customerApi.saveCustomer(customer: customer).then((response) {
+      getAll();
       notifyListeners();
     });
   }
