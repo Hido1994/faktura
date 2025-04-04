@@ -17,5 +17,6 @@ class CustomersModel extends ChangeNotifier {
     _customerApi.getCustomers().then((response) {
       entities = response.data?.content?.toList() ?? [];
     });
+    notifyListeners();
   }
 }

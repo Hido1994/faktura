@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:faktura/service/customer_service.dart';
 import 'package:faktura/state/trip_provider_state.dart';
-import 'package:faktura/view/screen/calendar_screen.dart';
 import 'package:faktura/view/customers/customers_screen.dart';
+import 'package:faktura/view/screen/calendar_screen.dart';
 import 'package:faktura/view/screen/report_screen.dart';
 import 'package:faktura/view/screen/settings_screen.dart';
 import 'package:faktura/view/screen/trips_screen.dart';
@@ -76,7 +76,7 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreen extends State<MainScreen> {
-  String _title = "Faktura";
+  String _currentRoute = "/";
   final _navigatorKey = GlobalKey<NavigatorState>();
 
   Map<String, Map<String, dynamic>> routes = {
@@ -96,7 +96,7 @@ class _MainScreen extends State<MainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(_title),
+        title: Text(routes[_currentRoute]!['title']),
         leading: Builder(
           builder: (context) {
             return IconButton(
@@ -126,46 +126,17 @@ class _MainScreen extends State<MainScreen> {
           ],
         ),
       ),
-      /*bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.list),
-            label: 'Einträge',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.document_scanner),
-            label: 'Bericht',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: 'Settings',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.calendar_month),
-            label: 'Kalendar',
-          )
-        ],
-        currentIndex: _selectedIndex,
-        onTap: (index) {
-          _navigatorKey.currentState
-              ?.popAndPushNamed(routes.keys.toList()[index]);
-          setState(() {
-            _selectedIndex = index;
-          });
-        },
-      ),*/
       body: ChangeNotifierProvider(
           create: (context) => TripProviderState(),
           child: Navigator(
+            initialRoute: _currentRoute,
             key: _navigatorKey,
             onGenerateRoute: (settings) {
-              if (routes.containsKey(settings.name)) {
-                setState(() {
-                  _title = routes[settings.name]!['title'];
-                });
-              }
-              return MaterialPageRoute(builder: (_) => routes[settings.name]?['component']);
+              setState(() {
+                _currentRoute = settings.name!;
+              });
+              return MaterialPageRoute(
+                  builder: (_) => routes[settings.name]!['component']);
             },
           )),
     );
