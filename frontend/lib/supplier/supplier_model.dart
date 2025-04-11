@@ -41,7 +41,7 @@ class SupplierModel extends ChangeNotifier {
     }
 
     pagingState.copyWith(isLoading: true);
-    final nextKey = (pagingState.keys?.last ?? 0) + 1;
+    final nextKey = (pagingState.keys?.last ?? -1) + 1;
     _supplierApi.getSuppliers(pageable: Pageable((builder) {
       builder.pageNumber = nextKey;
       builder.pageSize = pageSize;
