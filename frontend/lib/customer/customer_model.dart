@@ -1,13 +1,13 @@
 import 'package:faktura_api/faktura_api.dart';
 import 'package:flutter/material.dart';
 
-class CustomersModel extends ChangeNotifier {
+class CustomerModel extends ChangeNotifier {
   final CustomerApi _customerApi;
 
   List<Customer> entities = [];
   Customer? selectedEntity;
 
-  CustomersModel(this._customerApi) {
+  CustomerModel(this._customerApi) {
     getAll();
   }
 

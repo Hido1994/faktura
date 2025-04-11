@@ -15,8 +15,8 @@ part 'earning.g.dart';
 /// Earning
 ///
 /// Properties:
-/// * [id] - Primary key identifier for the earning
 /// * [description] - Description of the earning
+/// * [id] - Primary key identifier for the earning
 /// * [account]
 /// * [priceNet] - Net price of the earning
 /// * [paidOn] - Date when the earning was paid
@@ -25,13 +25,13 @@ part 'earning.g.dart';
 /// * [note] - Additional notes about the earning
 @BuiltValue()
 abstract class Earning implements Built<Earning, EarningBuilder> {
-  /// Primary key identifier for the earning
-  @BuiltValueField(wireName: r'id')
-  int get id;
-
   /// Description of the earning
   @BuiltValueField(wireName: r'description')
   String get description;
+
+  /// Primary key identifier for the earning
+  @BuiltValueField(wireName: r'id')
+  int? get id;
 
   @BuiltValueField(wireName: r'account')
   Account? get account;
@@ -77,16 +77,18 @@ class _$EarningSerializer implements PrimitiveSerializer<Earning> {
     Earning object, {
     FullType specifiedType = FullType.unspecified,
   }) sync* {
-    yield r'id';
-    yield serializers.serialize(
-      object.id,
-      specifiedType: const FullType(int),
-    );
     yield r'description';
     yield serializers.serialize(
       object.description,
       specifiedType: const FullType(String),
     );
+    if (object.id != null) {
+      yield r'id';
+      yield serializers.serialize(
+        object.id,
+        specifiedType: const FullType(int),
+      );
+    }
     if (object.account != null) {
       yield r'account';
       yield serializers.serialize(
@@ -154,19 +156,19 @@ class _$EarningSerializer implements PrimitiveSerializer<Earning> {
       final key = serializedList[i] as String;
       final value = serializedList[i + 1];
       switch (key) {
-        case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(int),
-          ) as int;
-          result.id = valueDes;
-          break;
         case r'description':
           final valueDes = serializers.deserialize(
             value,
             specifiedType: const FullType(String),
           ) as String;
           result.description = valueDes;
+          break;
+        case r'id':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(int),
+          ) as int;
+          result.id = valueDes;
           break;
         case r'account':
           final valueDes = serializers.deserialize(

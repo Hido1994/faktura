@@ -8,8 +8,8 @@ import 'package:faktura_api/api.dart';
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **int** | Primary key identifier for the international info | 
-**description** | **String** | Description of the international information | [optional] 
+**description** | **String** | Description of the international information | 
+**id** | **int** | Primary key identifier for the international info | [optional] 
 **invoiceText** | **String** | Text to be displayed on bills for international transactions | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

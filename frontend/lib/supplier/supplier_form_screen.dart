@@ -1,25 +1,25 @@
 import 'package:faktura/common/widget/autocomplete_text_form_field.dart';
-import 'package:faktura/customer/customer_model.dart';
+import 'package:faktura/supplier/supplier_model.dart';
 import 'package:faktura_api/faktura_api.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class CustomerFormScreen extends StatefulWidget {
-  final Customer? entry;
+class SupplierFormScreen extends StatefulWidget {
+  final Supplier? entry;
 
-  const CustomerFormScreen({super.key, this.entry});
+  const SupplierFormScreen({super.key, this.entry});
 
   @override
-  State<CustomerFormScreen> createState() => _CustomerFormScreenState();
+  State<SupplierFormScreen> createState() => _SupplierFormScreenState();
 }
 
-class _CustomerFormScreenState extends State<CustomerFormScreen> {
+class _SupplierFormScreenState extends State<SupplierFormScreen> {
   final _formKey = GlobalKey<FormState>();
 
-  CustomerBuilder builder = CustomerBuilder();
+  SupplierBuilder builder = SupplierBuilder();
 
-  Future<void> _initCustomer() async {
-    CustomerBuilder entityBuilder = CustomerBuilder();
+  Future<void> _initSupplier() async {
+    SupplierBuilder entityBuilder = SupplierBuilder();
 
     if (widget.entry == null) {
     } else {
@@ -35,7 +35,7 @@ class _CustomerFormScreenState extends State<CustomerFormScreen> {
   void initState() {
     super.initState();
 
-    _initCustomer();
+    _initSupplier();
   }
 
   @override
@@ -67,7 +67,7 @@ class _CustomerFormScreenState extends State<CustomerFormScreen> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           if (_formKey.currentState!.validate()) {
-            Provider.of<CustomerModel>(context, listen: false)
+            Provider.of<SupplierModel>(context, listen: false)
                 .save(builder.build())
                 .then((response) {
               ScaffoldMessenger.of(context).showSnackBar(const SnackBar(

@@ -8,9 +8,9 @@ import 'package:faktura_api/api.dart';
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **int** | Primary key identifier for the invoice | 
 **subject** | **String** | Subject of the invoice | 
 **createdOn** | [**Date**](Date.md) | Date when the invoice was created | 
+**id** | **int** | Primary key identifier for the invoice | [optional] 
 **invoiceNumber** | **int** | Invoice number | [optional] 
 **paidOn** | [**Date**](Date.md) | Date when the invoice was paid | [optional] 
 **paymentMethod** | [**PaymentMethod**](PaymentMethod.md) |  | [optional] 

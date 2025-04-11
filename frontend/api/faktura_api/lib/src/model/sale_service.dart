@@ -14,21 +14,17 @@ part 'sale_service.g.dart';
 /// SaleService
 ///
 /// Properties:
-/// * [id] - Primary key identifier for the sales service
 /// * [hourlyRate] - Hourly rate for the service
 /// * [suppliedOn] - Date when the service was supplied
 /// * [hours] - Number of hours of service provided
 /// * [description] - Description of the sales service
+/// * [id] - Primary key identifier for the sales service
 /// * [customer]
 /// * [invoice]
 /// * [timeInfo] - Time information for the service
 /// * [salesNet] - Net sales amount
 @BuiltValue()
 abstract class SaleService implements Built<SaleService, SaleServiceBuilder> {
-  /// Primary key identifier for the sales service
-  @BuiltValueField(wireName: r'id')
-  int get id;
-
   /// Hourly rate for the service
   @BuiltValueField(wireName: r'hourlyRate')
   double get hourlyRate;
@@ -44,6 +40,10 @@ abstract class SaleService implements Built<SaleService, SaleServiceBuilder> {
   /// Description of the sales service
   @BuiltValueField(wireName: r'description')
   String get description;
+
+  /// Primary key identifier for the sales service
+  @BuiltValueField(wireName: r'id')
+  int? get id;
 
   @BuiltValueField(wireName: r'customer')
   Customer? get customer;
@@ -82,11 +82,6 @@ class _$SaleServiceSerializer implements PrimitiveSerializer<SaleService> {
     SaleService object, {
     FullType specifiedType = FullType.unspecified,
   }) sync* {
-    yield r'id';
-    yield serializers.serialize(
-      object.id,
-      specifiedType: const FullType(int),
-    );
     yield r'hourlyRate';
     yield serializers.serialize(
       object.hourlyRate,
@@ -107,6 +102,13 @@ class _$SaleServiceSerializer implements PrimitiveSerializer<SaleService> {
       object.description,
       specifiedType: const FullType(String),
     );
+    if (object.id != null) {
+      yield r'id';
+      yield serializers.serialize(
+        object.id,
+        specifiedType: const FullType(int),
+      );
+    }
     if (object.customer != null) {
       yield r'customer';
       yield serializers.serialize(
@@ -160,13 +162,6 @@ class _$SaleServiceSerializer implements PrimitiveSerializer<SaleService> {
       final key = serializedList[i] as String;
       final value = serializedList[i + 1];
       switch (key) {
-        case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(int),
-          ) as int;
-          result.id = valueDes;
-          break;
         case r'hourlyRate':
           final valueDes = serializers.deserialize(
             value,
@@ -194,6 +189,13 @@ class _$SaleServiceSerializer implements PrimitiveSerializer<SaleService> {
             specifiedType: const FullType(String),
           ) as String;
           result.description = valueDes;
+          break;
+        case r'id':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(int),
+          ) as int;
+          result.id = valueDes;
           break;
         case r'customer':
           final valueDes = serializers.deserialize(

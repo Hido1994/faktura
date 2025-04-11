@@ -13,18 +13,14 @@ part 'time_entry.g.dart';
 /// TimeEntry
 ///
 /// Properties:
-/// * [id] - Primary key identifier for the time entry
 /// * [startedOn] - Date and time when the entry started
 /// * [description] - Description of the time entry
+/// * [id] - Primary key identifier for the time entry
 /// * [customer]
 /// * [endedOn] - Date and time when the entry ended
 /// * [saleService]
 @BuiltValue()
 abstract class TimeEntry implements Built<TimeEntry, TimeEntryBuilder> {
-  /// Primary key identifier for the time entry
-  @BuiltValueField(wireName: r'id')
-  int get id;
-
   /// Date and time when the entry started
   @BuiltValueField(wireName: r'startedOn')
   DateTime get startedOn;
@@ -32,6 +28,10 @@ abstract class TimeEntry implements Built<TimeEntry, TimeEntryBuilder> {
   /// Description of the time entry
   @BuiltValueField(wireName: r'description')
   String get description;
+
+  /// Primary key identifier for the time entry
+  @BuiltValueField(wireName: r'id')
+  int? get id;
 
   @BuiltValueField(wireName: r'customer')
   Customer? get customer;
@@ -66,11 +66,6 @@ class _$TimeEntrySerializer implements PrimitiveSerializer<TimeEntry> {
     TimeEntry object, {
     FullType specifiedType = FullType.unspecified,
   }) sync* {
-    yield r'id';
-    yield serializers.serialize(
-      object.id,
-      specifiedType: const FullType(int),
-    );
     yield r'startedOn';
     yield serializers.serialize(
       object.startedOn,
@@ -81,6 +76,13 @@ class _$TimeEntrySerializer implements PrimitiveSerializer<TimeEntry> {
       object.description,
       specifiedType: const FullType(String),
     );
+    if (object.id != null) {
+      yield r'id';
+      yield serializers.serialize(
+        object.id,
+        specifiedType: const FullType(int),
+      );
+    }
     if (object.customer != null) {
       yield r'customer';
       yield serializers.serialize(
@@ -127,13 +129,6 @@ class _$TimeEntrySerializer implements PrimitiveSerializer<TimeEntry> {
       final key = serializedList[i] as String;
       final value = serializedList[i + 1];
       switch (key) {
-        case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(int),
-          ) as int;
-          result.id = valueDes;
-          break;
         case r'startedOn':
           final valueDes = serializers.deserialize(
             value,
@@ -147,6 +142,13 @@ class _$TimeEntrySerializer implements PrimitiveSerializer<TimeEntry> {
             specifiedType: const FullType(String),
           ) as String;
           result.description = valueDes;
+          break;
+        case r'id':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(int),
+          ) as int;
+          result.id = valueDes;
           break;
         case r'customer':
           final valueDes = serializers.deserialize(

@@ -8,11 +8,11 @@ import 'package:faktura_api/api.dart';
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **int** | Primary key identifier for the sales service | 
 **hourlyRate** | **double** | Hourly rate for the service | 
 **suppliedOn** | [**Date**](Date.md) | Date when the service was supplied | 
 **hours** | **double** | Number of hours of service provided | 
 **description** | **String** | Description of the sales service | 
+**id** | **int** | Primary key identifier for the sales service | [optional] 
 **customer** | [**Customer**](Customer.md) |  | [optional] 
 **invoice** | [**Invoice**](Invoice.md) |  | [optional] 
 **timeInfo** | **String** | Time information for the service | [optional] 

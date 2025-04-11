@@ -11,13 +11,13 @@ part 'customer.g.dart';
 /// Customer
 ///
 /// Properties:
-/// * [id] - Primary key identifier for the customer
-/// * [searchName] - Search name for the customer
 /// * [name] - Full name of the customer
 /// * [addressLine1] - First line of customer address
 /// * [city] - City of the customer
 /// * [postalCode] - Postal code of the customer
 /// * [countryCode] - Country code of the customer
+/// * [id] - Primary key identifier for the customer
+/// * [searchName] - Search name for the customer
 /// * [addressLine2] - Second line of customer address
 /// * [taxIdentificationNumber] - Sales tax identifier for the customer
 /// * [email] - Email address of the customer
@@ -26,14 +26,6 @@ part 'customer.g.dart';
 /// * [paymentInfo] - Payment information for the customer
 @BuiltValue()
 abstract class Customer implements Built<Customer, CustomerBuilder> {
-  /// Primary key identifier for the customer
-  @BuiltValueField(wireName: r'id')
-  int get id;
-
-  /// Search name for the customer
-  @BuiltValueField(wireName: r'searchName')
-  String get searchName;
-
   /// Full name of the customer
   @BuiltValueField(wireName: r'name')
   String get name;
@@ -53,6 +45,14 @@ abstract class Customer implements Built<Customer, CustomerBuilder> {
   /// Country code of the customer
   @BuiltValueField(wireName: r'countryCode')
   String get countryCode;
+
+  /// Primary key identifier for the customer
+  @BuiltValueField(wireName: r'id')
+  int? get id;
+
+  /// Search name for the customer
+  @BuiltValueField(wireName: r'searchName')
+  String? get searchName;
 
   /// Second line of customer address
   @BuiltValueField(wireName: r'addressLine2')
@@ -101,16 +101,6 @@ class _$CustomerSerializer implements PrimitiveSerializer<Customer> {
     Customer object, {
     FullType specifiedType = FullType.unspecified,
   }) sync* {
-    yield r'id';
-    yield serializers.serialize(
-      object.id,
-      specifiedType: const FullType(int),
-    );
-    yield r'searchName';
-    yield serializers.serialize(
-      object.searchName,
-      specifiedType: const FullType(String),
-    );
     yield r'name';
     yield serializers.serialize(
       object.name,
@@ -136,6 +126,20 @@ class _$CustomerSerializer implements PrimitiveSerializer<Customer> {
       object.countryCode,
       specifiedType: const FullType(String),
     );
+    if (object.id != null) {
+      yield r'id';
+      yield serializers.serialize(
+        object.id,
+        specifiedType: const FullType(int),
+      );
+    }
+    if (object.searchName != null) {
+      yield r'searchName';
+      yield serializers.serialize(
+        object.searchName,
+        specifiedType: const FullType(String),
+      );
+    }
     if (object.addressLine2 != null) {
       yield r'addressLine2';
       yield serializers.serialize(
@@ -203,20 +207,6 @@ class _$CustomerSerializer implements PrimitiveSerializer<Customer> {
       final key = serializedList[i] as String;
       final value = serializedList[i + 1];
       switch (key) {
-        case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(int),
-          ) as int;
-          result.id = valueDes;
-          break;
-        case r'searchName':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
-          result.searchName = valueDes;
-          break;
         case r'name':
           final valueDes = serializers.deserialize(
             value,
@@ -251,6 +241,20 @@ class _$CustomerSerializer implements PrimitiveSerializer<Customer> {
             specifiedType: const FullType(String),
           ) as String;
           result.countryCode = valueDes;
+          break;
+        case r'id':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(int),
+          ) as int;
+          result.id = valueDes;
+          break;
+        case r'searchName':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(String),
+          ) as String;
+          result.searchName = valueDes;
           break;
         case r'addressLine2':
           final valueDes = serializers.deserialize(

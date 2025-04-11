@@ -8,8 +8,8 @@ import 'package:faktura_api/api.dart';
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **int** | Primary key identifier for the earning | 
 **description** | **String** | Description of the earning | 
+**id** | **int** | Primary key identifier for the earning | [optional] 
 **account** | [**Account**](Account.md) |  | [optional] 
 **priceNet** | **double** | Net price of the earning | [optional] 
 **paidOn** | [**Date**](Date.md) | Date when the earning was paid | [optional] 

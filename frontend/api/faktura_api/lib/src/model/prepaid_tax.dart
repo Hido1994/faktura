@@ -11,19 +11,15 @@ part 'prepaid_tax.g.dart';
 /// PrepaidTax
 ///
 /// Properties:
-/// * [id] - Primary key identifier for the prepaid tax
 /// * [taxYear] - Tax year
 /// * [taxQuarter] - Quarter of the tax year
+/// * [id] - Primary key identifier for the prepaid tax
 /// * [taxCalculated] - Calculated prepaid tax amount
 /// * [accountSurplus] - Surplus amount in the tax account
 /// * [cashTransfer] - Cash transfer amount
 /// * [note] - Additional notes about the prepaid tax
 @BuiltValue()
 abstract class PrepaidTax implements Built<PrepaidTax, PrepaidTaxBuilder> {
-  /// Primary key identifier for the prepaid tax
-  @BuiltValueField(wireName: r'id')
-  int get id;
-
   /// Tax year
   @BuiltValueField(wireName: r'taxYear')
   int get taxYear;
@@ -31,6 +27,10 @@ abstract class PrepaidTax implements Built<PrepaidTax, PrepaidTaxBuilder> {
   /// Quarter of the tax year
   @BuiltValueField(wireName: r'taxQuarter')
   int get taxQuarter;
+
+  /// Primary key identifier for the prepaid tax
+  @BuiltValueField(wireName: r'id')
+  int? get id;
 
   /// Calculated prepaid tax amount
   @BuiltValueField(wireName: r'taxCalculated')
@@ -71,11 +71,6 @@ class _$PrepaidTaxSerializer implements PrimitiveSerializer<PrepaidTax> {
     PrepaidTax object, {
     FullType specifiedType = FullType.unspecified,
   }) sync* {
-    yield r'id';
-    yield serializers.serialize(
-      object.id,
-      specifiedType: const FullType(int),
-    );
     yield r'taxYear';
     yield serializers.serialize(
       object.taxYear,
@@ -86,6 +81,13 @@ class _$PrepaidTaxSerializer implements PrimitiveSerializer<PrepaidTax> {
       object.taxQuarter,
       specifiedType: const FullType(int),
     );
+    if (object.id != null) {
+      yield r'id';
+      yield serializers.serialize(
+        object.id,
+        specifiedType: const FullType(int),
+      );
+    }
     if (object.taxCalculated != null) {
       yield r'taxCalculated';
       yield serializers.serialize(
@@ -139,13 +141,6 @@ class _$PrepaidTaxSerializer implements PrimitiveSerializer<PrepaidTax> {
       final key = serializedList[i] as String;
       final value = serializedList[i + 1];
       switch (key) {
-        case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(int),
-          ) as int;
-          result.id = valueDes;
-          break;
         case r'taxYear':
           final valueDes = serializers.deserialize(
             value,
@@ -159,6 +154,13 @@ class _$PrepaidTaxSerializer implements PrimitiveSerializer<PrepaidTax> {
             specifiedType: const FullType(int),
           ) as int;
           result.taxQuarter = valueDes;
+          break;
+        case r'id':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(int),
+          ) as int;
+          result.id = valueDes;
           break;
         case r'taxCalculated':
           final valueDes = serializers.deserialize(

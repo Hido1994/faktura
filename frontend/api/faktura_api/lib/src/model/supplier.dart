@@ -11,22 +11,22 @@ part 'supplier.g.dart';
 /// Supplier
 ///
 /// Properties:
+/// * [name] - Full name of the supplier
 /// * [id] - Primary key identifier for the supplier
 /// * [searchName] - Search name for the supplier
-/// * [name] - Full name of the supplier
 @BuiltValue()
 abstract class Supplier implements Built<Supplier, SupplierBuilder> {
-  /// Primary key identifier for the supplier
-  @BuiltValueField(wireName: r'id')
-  int get id;
-
-  /// Search name for the supplier
-  @BuiltValueField(wireName: r'searchName')
-  String get searchName;
-
   /// Full name of the supplier
   @BuiltValueField(wireName: r'name')
   String get name;
+
+  /// Primary key identifier for the supplier
+  @BuiltValueField(wireName: r'id')
+  int? get id;
+
+  /// Search name for the supplier
+  @BuiltValueField(wireName: r'searchName')
+  String? get searchName;
 
   Supplier._();
 
@@ -51,21 +51,25 @@ class _$SupplierSerializer implements PrimitiveSerializer<Supplier> {
     Supplier object, {
     FullType specifiedType = FullType.unspecified,
   }) sync* {
-    yield r'id';
-    yield serializers.serialize(
-      object.id,
-      specifiedType: const FullType(int),
-    );
-    yield r'searchName';
-    yield serializers.serialize(
-      object.searchName,
-      specifiedType: const FullType(String),
-    );
     yield r'name';
     yield serializers.serialize(
       object.name,
       specifiedType: const FullType(String),
     );
+    if (object.id != null) {
+      yield r'id';
+      yield serializers.serialize(
+        object.id,
+        specifiedType: const FullType(int),
+      );
+    }
+    if (object.searchName != null) {
+      yield r'searchName';
+      yield serializers.serialize(
+        object.searchName,
+        specifiedType: const FullType(String),
+      );
+    }
   }
 
   @override
@@ -91,6 +95,13 @@ class _$SupplierSerializer implements PrimitiveSerializer<Supplier> {
       final key = serializedList[i] as String;
       final value = serializedList[i + 1];
       switch (key) {
+        case r'name':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(String),
+          ) as String;
+          result.name = valueDes;
+          break;
         case r'id':
           final valueDes = serializers.deserialize(
             value,
@@ -104,13 +115,6 @@ class _$SupplierSerializer implements PrimitiveSerializer<Supplier> {
             specifiedType: const FullType(String),
           ) as String;
           result.searchName = valueDes;
-          break;
-        case r'name':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
-          result.name = valueDes;
           break;
         default:
           unhandled.add(key);

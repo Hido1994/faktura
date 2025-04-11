@@ -12,8 +12,8 @@ part 'file.g.dart';
 /// File
 ///
 /// Properties:
-/// * [id] - Primary key identifier for the file
 /// * [key] - Key identifier for the file
+/// * [id] - Primary key identifier for the file
 /// * [filename] - Name of the file
 /// * [mimeType] - MIME type of the file
 /// * [charset] - Character set of the file
@@ -21,13 +21,13 @@ part 'file.g.dart';
 /// * [content] - Content of the file
 @BuiltValue()
 abstract class File implements Built<File, FileBuilder> {
-  /// Primary key identifier for the file
-  @BuiltValueField(wireName: r'id')
-  int get id;
-
   /// Key identifier for the file
   @BuiltValueField(wireName: r'key')
-  String? get key;
+  String get key;
+
+  /// Primary key identifier for the file
+  @BuiltValueField(wireName: r'id')
+  int? get id;
 
   /// Name of the file
   @BuiltValueField(wireName: r'filename')
@@ -72,16 +72,16 @@ class _$FileSerializer implements PrimitiveSerializer<File> {
     File object, {
     FullType specifiedType = FullType.unspecified,
   }) sync* {
-    yield r'id';
+    yield r'key';
     yield serializers.serialize(
-      object.id,
-      specifiedType: const FullType(int),
+      object.key,
+      specifiedType: const FullType(String),
     );
-    if (object.key != null) {
-      yield r'key';
+    if (object.id != null) {
+      yield r'id';
       yield serializers.serialize(
-        object.key,
-        specifiedType: const FullType(String),
+        object.id,
+        specifiedType: const FullType(int),
       );
     }
     if (object.filename != null) {
@@ -144,19 +144,19 @@ class _$FileSerializer implements PrimitiveSerializer<File> {
       final key = serializedList[i] as String;
       final value = serializedList[i + 1];
       switch (key) {
-        case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(int),
-          ) as int;
-          result.id = valueDes;
-          break;
         case r'key':
           final valueDes = serializers.deserialize(
             value,
             specifiedType: const FullType(String),
           ) as String;
           result.key = valueDes;
+          break;
+        case r'id':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(int),
+          ) as int;
+          result.id = valueDes;
           break;
         case r'filename':
           final valueDes = serializers.deserialize(

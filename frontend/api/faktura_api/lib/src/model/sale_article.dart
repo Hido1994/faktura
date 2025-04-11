@@ -18,11 +18,11 @@ part 'sale_article.g.dart';
 /// SaleArticle
 ///
 /// Properties:
-/// * [id] - Primary key identifier for the sales article
 /// * [description] - Description of the sales article
 /// * [incomingOn] - Date when the sales article was received
 /// * [priceNet] - Net price of the sales article
 /// * [priceTax] - Tax amount of the sales article
+/// * [id] - Primary key identifier for the sales article
 /// * [supplier]
 /// * [internationalInfo]
 /// * [account]
@@ -36,10 +36,6 @@ part 'sale_article.g.dart';
 /// * [amount] - Quantity of the sales article
 @BuiltValue()
 abstract class SaleArticle implements Built<SaleArticle, SaleArticleBuilder> {
-  /// Primary key identifier for the sales article
-  @BuiltValueField(wireName: r'id')
-  int get id;
-
   /// Description of the sales article
   @BuiltValueField(wireName: r'description')
   String get description;
@@ -55,6 +51,10 @@ abstract class SaleArticle implements Built<SaleArticle, SaleArticleBuilder> {
   /// Tax amount of the sales article
   @BuiltValueField(wireName: r'priceTax')
   double get priceTax;
+
+  /// Primary key identifier for the sales article
+  @BuiltValueField(wireName: r'id')
+  int? get id;
 
   @BuiltValueField(wireName: r'supplier')
   Supplier? get supplier;
@@ -117,11 +117,6 @@ class _$SaleArticleSerializer implements PrimitiveSerializer<SaleArticle> {
     SaleArticle object, {
     FullType specifiedType = FullType.unspecified,
   }) sync* {
-    yield r'id';
-    yield serializers.serialize(
-      object.id,
-      specifiedType: const FullType(int),
-    );
     yield r'description';
     yield serializers.serialize(
       object.description,
@@ -142,6 +137,13 @@ class _$SaleArticleSerializer implements PrimitiveSerializer<SaleArticle> {
       object.priceTax,
       specifiedType: const FullType(double),
     );
+    if (object.id != null) {
+      yield r'id';
+      yield serializers.serialize(
+        object.id,
+        specifiedType: const FullType(int),
+      );
+    }
     if (object.supplier != null) {
       yield r'supplier';
       yield serializers.serialize(
@@ -244,13 +246,6 @@ class _$SaleArticleSerializer implements PrimitiveSerializer<SaleArticle> {
       final key = serializedList[i] as String;
       final value = serializedList[i + 1];
       switch (key) {
-        case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(int),
-          ) as int;
-          result.id = valueDes;
-          break;
         case r'description':
           final valueDes = serializers.deserialize(
             value,
@@ -278,6 +273,13 @@ class _$SaleArticleSerializer implements PrimitiveSerializer<SaleArticle> {
             specifiedType: const FullType(double),
           ) as double;
           result.priceTax = valueDes;
+          break;
+        case r'id':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(int),
+          ) as int;
+          result.id = valueDes;
           break;
         case r'supplier':
           final valueDes = serializers.deserialize(

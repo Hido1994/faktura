@@ -8,8 +8,8 @@ import 'package:faktura_api/api.dart';
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **int** | Primary key identifier for the file | 
-**key** | **String** | Key identifier for the file | [optional] 
+**key** | **String** | Key identifier for the file | 
+**id** | **int** | Primary key identifier for the file | [optional] 
 **filename** | **String** | Name of the file | [optional] 
 **mimeType** | **String** | MIME type of the file | [optional] 
 **charset** | **String** | Character set of the file | [optional] 

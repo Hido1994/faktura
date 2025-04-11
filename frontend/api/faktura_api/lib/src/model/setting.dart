@@ -11,15 +11,11 @@ part 'setting.g.dart';
 /// Setting
 ///
 /// Properties:
-/// * [id] - Primary key identifier for the setting
 /// * [key] - Key identifier for the setting
 /// * [value] - Value of the setting
+/// * [id] - Primary key identifier for the setting
 @BuiltValue()
 abstract class Setting implements Built<Setting, SettingBuilder> {
-  /// Primary key identifier for the setting
-  @BuiltValueField(wireName: r'id')
-  int get id;
-
   /// Key identifier for the setting
   @BuiltValueField(wireName: r'key')
   String get key;
@@ -27,6 +23,10 @@ abstract class Setting implements Built<Setting, SettingBuilder> {
   /// Value of the setting
   @BuiltValueField(wireName: r'value')
   String get value;
+
+  /// Primary key identifier for the setting
+  @BuiltValueField(wireName: r'id')
+  int? get id;
 
   Setting._();
 
@@ -51,11 +51,6 @@ class _$SettingSerializer implements PrimitiveSerializer<Setting> {
     Setting object, {
     FullType specifiedType = FullType.unspecified,
   }) sync* {
-    yield r'id';
-    yield serializers.serialize(
-      object.id,
-      specifiedType: const FullType(int),
-    );
     yield r'key';
     yield serializers.serialize(
       object.key,
@@ -66,6 +61,13 @@ class _$SettingSerializer implements PrimitiveSerializer<Setting> {
       object.value,
       specifiedType: const FullType(String),
     );
+    if (object.id != null) {
+      yield r'id';
+      yield serializers.serialize(
+        object.id,
+        specifiedType: const FullType(int),
+      );
+    }
   }
 
   @override
@@ -91,13 +93,6 @@ class _$SettingSerializer implements PrimitiveSerializer<Setting> {
       final key = serializedList[i] as String;
       final value = serializedList[i + 1];
       switch (key) {
-        case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(int),
-          ) as int;
-          result.id = valueDes;
-          break;
         case r'key':
           final valueDes = serializers.deserialize(
             value,
@@ -111,6 +106,13 @@ class _$SettingSerializer implements PrimitiveSerializer<Setting> {
             specifiedType: const FullType(String),
           ) as String;
           result.value = valueDes;
+          break;
+        case r'id':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(int),
+          ) as int;
+          result.id = valueDes;
           break;
         default:
           unhandled.add(key);

@@ -14,9 +14,9 @@ part 'invoice.g.dart';
 /// Invoice
 ///
 /// Properties:
-/// * [id] - Primary key identifier for the invoice
 /// * [subject] - Subject of the invoice
 /// * [createdOn] - Date when the invoice was created
+/// * [id] - Primary key identifier for the invoice
 /// * [invoiceNumber] - Invoice number
 /// * [paidOn] - Date when the invoice was paid
 /// * [paymentMethod]
@@ -25,10 +25,6 @@ part 'invoice.g.dart';
 /// * [revision] - Revision information for the invoice
 @BuiltValue()
 abstract class Invoice implements Built<Invoice, InvoiceBuilder> {
-  /// Primary key identifier for the invoice
-  @BuiltValueField(wireName: r'id')
-  int get id;
-
   /// Subject of the invoice
   @BuiltValueField(wireName: r'subject')
   String get subject;
@@ -36,6 +32,10 @@ abstract class Invoice implements Built<Invoice, InvoiceBuilder> {
   /// Date when the invoice was created
   @BuiltValueField(wireName: r'createdOn')
   Date get createdOn;
+
+  /// Primary key identifier for the invoice
+  @BuiltValueField(wireName: r'id')
+  int? get id;
 
   /// Invoice number
   @BuiltValueField(wireName: r'invoiceNumber')
@@ -82,11 +82,6 @@ class _$InvoiceSerializer implements PrimitiveSerializer<Invoice> {
     Invoice object, {
     FullType specifiedType = FullType.unspecified,
   }) sync* {
-    yield r'id';
-    yield serializers.serialize(
-      object.id,
-      specifiedType: const FullType(int),
-    );
     yield r'subject';
     yield serializers.serialize(
       object.subject,
@@ -97,6 +92,13 @@ class _$InvoiceSerializer implements PrimitiveSerializer<Invoice> {
       object.createdOn,
       specifiedType: const FullType(Date),
     );
+    if (object.id != null) {
+      yield r'id';
+      yield serializers.serialize(
+        object.id,
+        specifiedType: const FullType(int),
+      );
+    }
     if (object.invoiceNumber != null) {
       yield r'invoiceNumber';
       yield serializers.serialize(
@@ -164,13 +166,6 @@ class _$InvoiceSerializer implements PrimitiveSerializer<Invoice> {
       final key = serializedList[i] as String;
       final value = serializedList[i + 1];
       switch (key) {
-        case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(int),
-          ) as int;
-          result.id = valueDes;
-          break;
         case r'subject':
           final valueDes = serializers.deserialize(
             value,
@@ -184,6 +179,13 @@ class _$InvoiceSerializer implements PrimitiveSerializer<Invoice> {
             specifiedType: const FullType(Date),
           ) as Date;
           result.createdOn = valueDes;
+          break;
+        case r'id':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(int),
+          ) as int;
+          result.id = valueDes;
           break;
         case r'invoiceNumber':
           final valueDes = serializers.deserialize(

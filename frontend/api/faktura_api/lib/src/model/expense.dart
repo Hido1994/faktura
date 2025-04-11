@@ -16,11 +16,11 @@ part 'expense.g.dart';
 /// Expense
 ///
 /// Properties:
-/// * [id] - Primary key identifier for the expense
 /// * [incomingOn] - Date when the expense was received
 /// * [description] - Description of the expense
 /// * [priceNet] - Net price of the expense
 /// * [priceTax] - Tax amount of the expense
+/// * [id] - Primary key identifier for the expense
 /// * [account]
 /// * [paidOn] - Date when the expense was paid
 /// * [paymentMethod]
@@ -30,10 +30,6 @@ part 'expense.g.dart';
 /// * [depreciationYears] - Number of years for tax depreciation
 @BuiltValue()
 abstract class Expense implements Built<Expense, ExpenseBuilder> {
-  /// Primary key identifier for the expense
-  @BuiltValueField(wireName: r'id')
-  int get id;
-
   /// Date when the expense was received
   @BuiltValueField(wireName: r'incomingOn')
   Date get incomingOn;
@@ -49,6 +45,10 @@ abstract class Expense implements Built<Expense, ExpenseBuilder> {
   /// Tax amount of the expense
   @BuiltValueField(wireName: r'priceTax')
   double get priceTax;
+
+  /// Primary key identifier for the expense
+  @BuiltValueField(wireName: r'id')
+  int? get id;
 
   @BuiltValueField(wireName: r'account')
   Account? get account;
@@ -97,11 +97,6 @@ class _$ExpenseSerializer implements PrimitiveSerializer<Expense> {
     Expense object, {
     FullType specifiedType = FullType.unspecified,
   }) sync* {
-    yield r'id';
-    yield serializers.serialize(
-      object.id,
-      specifiedType: const FullType(int),
-    );
     yield r'incomingOn';
     yield serializers.serialize(
       object.incomingOn,
@@ -122,6 +117,13 @@ class _$ExpenseSerializer implements PrimitiveSerializer<Expense> {
       object.priceTax,
       specifiedType: const FullType(double),
     );
+    if (object.id != null) {
+      yield r'id';
+      yield serializers.serialize(
+        object.id,
+        specifiedType: const FullType(int),
+      );
+    }
     if (object.account != null) {
       yield r'account';
       yield serializers.serialize(
@@ -196,13 +198,6 @@ class _$ExpenseSerializer implements PrimitiveSerializer<Expense> {
       final key = serializedList[i] as String;
       final value = serializedList[i + 1];
       switch (key) {
-        case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(int),
-          ) as int;
-          result.id = valueDes;
-          break;
         case r'incomingOn':
           final valueDes = serializers.deserialize(
             value,
@@ -230,6 +225,13 @@ class _$ExpenseSerializer implements PrimitiveSerializer<Expense> {
             specifiedType: const FullType(double),
           ) as double;
           result.priceTax = valueDes;
+          break;
+        case r'id':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(int),
+          ) as int;
+          result.id = valueDes;
           break;
         case r'account':
           final valueDes = serializers.deserialize(

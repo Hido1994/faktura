@@ -8,11 +8,11 @@ import 'package:faktura_api/api.dart';
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **int** | Primary key identifier for the sales article | 
 **description** | **String** | Description of the sales article | 
 **incomingOn** | [**Date**](Date.md) | Date when the sales article was received | 
 **priceNet** | **double** | Net price of the sales article | 
 **priceTax** | **double** | Tax amount of the sales article | 
+**id** | **int** | Primary key identifier for the sales article | [optional] 
 **supplier** | [**Supplier**](Supplier.md) |  | [optional] 
 **internationalInfo** | [**InternationalInfo**](InternationalInfo.md) |  | [optional] 
 **account** | [**Account**](Account.md) |  | [optional] 

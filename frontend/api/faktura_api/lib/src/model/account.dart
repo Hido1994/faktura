@@ -11,18 +11,18 @@ part 'account.g.dart';
 /// Account
 ///
 /// Properties:
-/// * [id] - Primary key identifier for the account
 /// * [description] - Description of the account
+/// * [id] - Primary key identifier for the account
 /// * [noCharging] - Flag indicating if charging is disabled for this account
 @BuiltValue()
 abstract class Account implements Built<Account, AccountBuilder> {
-  /// Primary key identifier for the account
-  @BuiltValueField(wireName: r'id')
-  int get id;
-
   /// Description of the account
   @BuiltValueField(wireName: r'description')
   String get description;
+
+  /// Primary key identifier for the account
+  @BuiltValueField(wireName: r'id')
+  int? get id;
 
   /// Flag indicating if charging is disabled for this account
   @BuiltValueField(wireName: r'noCharging')
@@ -51,16 +51,18 @@ class _$AccountSerializer implements PrimitiveSerializer<Account> {
     Account object, {
     FullType specifiedType = FullType.unspecified,
   }) sync* {
-    yield r'id';
-    yield serializers.serialize(
-      object.id,
-      specifiedType: const FullType(int),
-    );
     yield r'description';
     yield serializers.serialize(
       object.description,
       specifiedType: const FullType(String),
     );
+    if (object.id != null) {
+      yield r'id';
+      yield serializers.serialize(
+        object.id,
+        specifiedType: const FullType(int),
+      );
+    }
     if (object.noCharging != null) {
       yield r'noCharging';
       yield serializers.serialize(
@@ -93,19 +95,19 @@ class _$AccountSerializer implements PrimitiveSerializer<Account> {
       final key = serializedList[i] as String;
       final value = serializedList[i + 1];
       switch (key) {
-        case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(int),
-          ) as int;
-          result.id = valueDes;
-          break;
         case r'description':
           final valueDes = serializers.deserialize(
             value,
             specifiedType: const FullType(String),
           ) as String;
           result.description = valueDes;
+          break;
+        case r'id':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(int),
+          ) as int;
+          result.id = valueDes;
           break;
         case r'noCharging':
           final valueDes = serializers.deserialize(

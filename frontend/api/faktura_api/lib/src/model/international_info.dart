@@ -11,19 +11,19 @@ part 'international_info.g.dart';
 /// InternationalInfo
 ///
 /// Properties:
-/// * [id] - Primary key identifier for the international info
 /// * [description] - Description of the international information
+/// * [id] - Primary key identifier for the international info
 /// * [invoiceText] - Text to be displayed on bills for international transactions
 @BuiltValue()
 abstract class InternationalInfo
     implements Built<InternationalInfo, InternationalInfoBuilder> {
-  /// Primary key identifier for the international info
-  @BuiltValueField(wireName: r'id')
-  int get id;
-
   /// Description of the international information
   @BuiltValueField(wireName: r'description')
-  String? get description;
+  String get description;
+
+  /// Primary key identifier for the international info
+  @BuiltValueField(wireName: r'id')
+  int? get id;
 
   /// Text to be displayed on bills for international transactions
   @BuiltValueField(wireName: r'invoiceText')
@@ -55,16 +55,16 @@ class _$InternationalInfoSerializer
     InternationalInfo object, {
     FullType specifiedType = FullType.unspecified,
   }) sync* {
-    yield r'id';
+    yield r'description';
     yield serializers.serialize(
-      object.id,
-      specifiedType: const FullType(int),
+      object.description,
+      specifiedType: const FullType(String),
     );
-    if (object.description != null) {
-      yield r'description';
+    if (object.id != null) {
+      yield r'id';
       yield serializers.serialize(
-        object.description,
-        specifiedType: const FullType(String),
+        object.id,
+        specifiedType: const FullType(int),
       );
     }
     if (object.invoiceText != null) {
@@ -99,19 +99,19 @@ class _$InternationalInfoSerializer
       final key = serializedList[i] as String;
       final value = serializedList[i + 1];
       switch (key) {
-        case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(int),
-          ) as int;
-          result.id = valueDes;
-          break;
         case r'description':
           final valueDes = serializers.deserialize(
             value,
             specifiedType: const FullType(String),
           ) as String;
           result.description = valueDes;
+          break;
+        case r'id':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(int),
+          ) as int;
+          result.id = valueDes;
           break;
         case r'invoiceText':
           final valueDes = serializers.deserialize(

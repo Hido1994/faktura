@@ -11,18 +11,18 @@ part 'payment_method.g.dart';
 /// PaymentMethod
 ///
 /// Properties:
-/// * [id] - Primary key identifier for the payment method
 /// * [description] - Description of the payment method
+/// * [id] - Primary key identifier for the payment method
 @BuiltValue()
 abstract class PaymentMethod
     implements Built<PaymentMethod, PaymentMethodBuilder> {
-  /// Primary key identifier for the payment method
-  @BuiltValueField(wireName: r'id')
-  int get id;
-
   /// Description of the payment method
   @BuiltValueField(wireName: r'description')
   String get description;
+
+  /// Primary key identifier for the payment method
+  @BuiltValueField(wireName: r'id')
+  int? get id;
 
   PaymentMethod._();
 
@@ -49,16 +49,18 @@ class _$PaymentMethodSerializer implements PrimitiveSerializer<PaymentMethod> {
     PaymentMethod object, {
     FullType specifiedType = FullType.unspecified,
   }) sync* {
-    yield r'id';
-    yield serializers.serialize(
-      object.id,
-      specifiedType: const FullType(int),
-    );
     yield r'description';
     yield serializers.serialize(
       object.description,
       specifiedType: const FullType(String),
     );
+    if (object.id != null) {
+      yield r'id';
+      yield serializers.serialize(
+        object.id,
+        specifiedType: const FullType(int),
+      );
+    }
   }
 
   @override
@@ -84,19 +86,19 @@ class _$PaymentMethodSerializer implements PrimitiveSerializer<PaymentMethod> {
       final key = serializedList[i] as String;
       final value = serializedList[i + 1];
       switch (key) {
-        case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(int),
-          ) as int;
-          result.id = valueDes;
-          break;
         case r'description':
           final valueDes = serializers.deserialize(
             value,
             specifiedType: const FullType(String),
           ) as String;
           result.description = valueDes;
+          break;
+        case r'id':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(int),
+          ) as int;
+          result.id = valueDes;
           break;
         default:
           unhandled.add(key);

@@ -8,9 +8,9 @@ import 'package:faktura_api/api.dart';
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **int** | Primary key identifier for the prepaid tax | 
 **taxYear** | **int** | Tax year | 
 **taxQuarter** | **int** | Quarter of the tax year | 
+**id** | **int** | Primary key identifier for the prepaid tax | [optional] 
 **taxCalculated** | **double** | Calculated prepaid tax amount | [optional] 
 **accountSurplus** | **double** | Surplus amount in the tax account | [optional] 
 **cashTransfer** | **double** | Cash transfer amount | [optional] 

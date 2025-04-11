@@ -8,11 +8,11 @@ import 'package:faktura_api/api.dart';
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **int** | Primary key identifier for the expense | 
 **incomingOn** | [**Date**](Date.md) | Date when the expense was received | 
 **description** | **String** | Description of the expense | 
 **priceNet** | **double** | Net price of the expense | 
 **priceTax** | **double** | Tax amount of the expense | 
+**id** | **int** | Primary key identifier for the expense | [optional] 
 **account** | [**Account**](Account.md) |  | [optional] 
 **paidOn** | [**Date**](Date.md) | Date when the expense was paid | [optional] 
 **paymentMethod** | [**PaymentMethod**](PaymentMethod.md) |  | [optional] 
