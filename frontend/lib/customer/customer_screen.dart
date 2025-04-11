@@ -10,6 +10,10 @@ class CustomerScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Provider.of<CustomerModel>(context, listen: false).getAll();
+    });
+
     return CustomScreen(
       title: "Kunden",
       form: const CustomerFormScreen(),

@@ -49,6 +49,7 @@ dependencies:
   dio: ^5.7.0
   faktura_api:
       path: api/faktura_api
+  loading_animation_widget: ^1.3.0
 
 dev_dependencies:
   flutter_test:

@@ -10,6 +10,10 @@ class SupplierScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Provider.of<SupplierModel>(context, listen: false).getAll();
+    });
+
     return CustomScreen(
       title: "Lieferanten",
       form: const SupplierFormScreen(),
