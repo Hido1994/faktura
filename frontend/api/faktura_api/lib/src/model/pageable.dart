@@ -3,6 +3,8 @@
 //
 
 // ignore_for_file: unused_element
+import 'package:built_collection/built_collection.dart';
+import 'package:faktura_api/src/model/sort.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 
@@ -13,6 +15,7 @@ part 'pageable.g.dart';
 /// Properties:
 /// * [pageNumber]
 /// * [pageSize]
+/// * [sort] - List of sorting criteria
 @BuiltValue()
 abstract class Pageable implements Built<Pageable, PageableBuilder> {
   @BuiltValueField(wireName: r'pageNumber')
@@ -20,6 +23,10 @@ abstract class Pageable implements Built<Pageable, PageableBuilder> {
 
   @BuiltValueField(wireName: r'pageSize')
   int? get pageSize;
+
+  /// List of sorting criteria
+  @BuiltValueField(wireName: r'sort')
+  BuiltList<Sort>? get sort;
 
   Pageable._();
 
@@ -56,6 +63,13 @@ class _$PageableSerializer implements PrimitiveSerializer<Pageable> {
       yield serializers.serialize(
         object.pageSize,
         specifiedType: const FullType(int),
+      );
+    }
+    if (object.sort != null) {
+      yield r'sort';
+      yield serializers.serialize(
+        object.sort,
+        specifiedType: const FullType(BuiltList, [FullType(Sort)]),
       );
     }
   }
@@ -96,6 +110,13 @@ class _$PageableSerializer implements PrimitiveSerializer<Pageable> {
             specifiedType: const FullType(int),
           ) as int;
           result.pageSize = valueDes;
+          break;
+        case r'sort':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(BuiltList, [FullType(Sort)]),
+          ) as BuiltList<Sort>;
+          result.sort.replace(valueDes);
           break;
         default:
           unhandled.add(key);

@@ -14,7 +14,6 @@ Name | Type | Description | Notes
 **postalCode** | **String** | Postal code of the customer | 
 **countryCode** | **String** | Country code of the customer | 
 **id** | **int** | Primary key identifier for the customer | [optional] 
-**searchName** | **String** | Search name for the customer | [optional] 
 **addressLine2** | **String** | Second line of customer address | [optional] 
 **taxIdentificationNumber** | **String** | Sales tax identifier for the customer | [optional] 
 **email** | **String** | Email address of the customer | [optional] 

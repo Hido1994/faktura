@@ -5,6 +5,7 @@ import at.dhinterndorfer.faktura.dto.v1.SupplierPageRestDto;
 import at.dhinterndorfer.faktura.dto.v1.SupplierRestDto;
 import at.dhinterndorfer.faktura.page.PageableMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Controller;
 

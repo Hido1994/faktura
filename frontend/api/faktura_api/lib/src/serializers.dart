@@ -52,6 +52,7 @@ import 'package:faktura_api/src/model/sale_service_page.dart';
 import 'package:faktura_api/src/model/setting.dart';
 import 'package:faktura_api/src/model/setting_list.dart';
 import 'package:faktura_api/src/model/setting_page.dart';
+import 'package:faktura_api/src/model/sort.dart';
 import 'package:faktura_api/src/model/supplier.dart';
 import 'package:faktura_api/src/model/supplier_list.dart';
 import 'package:faktura_api/src/model/supplier_page.dart';
@@ -113,6 +114,7 @@ part 'serializers.g.dart';
   SettingList,
   $SettingList,
   SettingPage,
+  Sort,
   Supplier,
   SupplierList,
   $SupplierList,

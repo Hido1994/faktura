@@ -8,7 +8,7 @@
 
     <changeSet id="accounts" author="David Hinterndorfer">
         <createTable tableName="accounts">
-            <column name="id" type="bigint">
+            <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="description" type="varchar(512)">
@@ -20,7 +20,7 @@
 
     <changeSet id="meansofpayments" author="David Hinterndorfer">
         <createTable tableName="meansofpayments">
-            <column name="id" type="bigint">
+            <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="description" type="varchar(512)">
@@ -31,7 +31,7 @@
 
     <changeSet id="internationalinfo" author="David Hinterndorfer">
         <createTable tableName="internationalinfo">
-            <column name="id" type="bigint">
+            <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="description" type="varchar(256)"/>
@@ -41,7 +41,7 @@
 
     <changeSet id="suppliers" author="David Hinterndorfer">
         <createTable tableName="suppliers">
-            <column name="id" type="bigint">
+            <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="searchname" type="varchar(512)">
@@ -55,7 +55,7 @@
 
     <changeSet id="settings" author="David Hinterndorfer">
         <createTable tableName="settings">
-            <column name="id" type="bigint">
+            <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="settings_key" type="varchar(64)">
@@ -69,7 +69,7 @@
 
     <changeSet id="files" author="David Hinterndorfer">
         <createTable tableName="files">
-            <column name="id" type="bigint">
+            <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="file_key" type="varchar(64)">
@@ -85,7 +85,7 @@
 
     <changeSet id="bills" author="David Hinterndorfer">
         <createTable tableName="bills">
-            <column name="id" type="bigint">
+            <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="no" type="bigint"/>
@@ -107,7 +107,7 @@
 
     <changeSet id="customers" author="David Hinterndorfer">
         <createTable tableName="customers">
-            <column name="id" type="bigint">
+            <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="searchname" type="varchar(256)">
@@ -144,7 +144,7 @@
 
     <changeSet id="earnings" author="David Hinterndorfer">
         <createTable tableName="earnings">
-            <column name="id" type="bigint">
+            <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="description" type="varchar(1024)">
@@ -162,7 +162,7 @@
 
     <changeSet id="expenses" author="David Hinterndorfer">
         <createTable tableName="expenses">
-            <column name="id" type="bigint">
+            <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="incomingon" type="date">
@@ -195,7 +195,7 @@
 
     <changeSet id="prepaidtax" author="David Hinterndorfer">
         <createTable tableName="prepaidtax">
-            <column name="id" type="bigint">
+            <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="tax_year" type="bigint">
@@ -216,7 +216,7 @@
 
     <changeSet id="sales_articles" author="David Hinterndorfer">
         <createTable tableName="sales_articles">
-            <column name="id" type="bigint">
+            <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="description" type="varchar(1024)">
@@ -258,7 +258,7 @@
 
     <changeSet id="sales_services" author="David Hinterndorfer">
         <createTable tableName="sales_services">
-            <column name="id" type="bigint">
+            <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="customer_id" type="bigint">
@@ -287,7 +287,7 @@
 
     <changeSet id="timetable" author="David Hinterndorfer">
         <createTable tableName="timetable">
-            <column name="id" type="bigint">
+            <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="customer_id" type="bigint">
@@ -324,6 +324,8 @@
     </changeSet>
 
     <changeSet id="refactorings" author="David Hinterndorfer">
+        <dropColumn tableName="suppliers" columnName="searchname"/>
+
         <renameTable oldTableName="meansofpayments" newTableName="payment_methods"/>
 
         <renameColumn tableName="prepaidtax" oldColumnName="taxaccount_surplus" newColumnName="account_surplus"/>
@@ -349,6 +351,7 @@
         <renameColumn tableName="earnings" oldColumnName="paidon" newColumnName="paid_on"/>
         <renameColumn tableName="earnings" oldColumnName="meansofpayment_id" newColumnName="payment_method_id"/>
 
+        <dropColumn tableName="customers" columnName="searchname"/>
         <renameColumn tableName="customers" oldColumnName="postalcode" newColumnName="postal_code"/>
         <renameColumn tableName="customers" oldColumnName="hourlyrate" newColumnName="hourly_rate"/>
         <renameColumn tableName="customers" oldColumnName="countrycode" newColumnName="country_code"/>

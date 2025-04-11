@@ -13,7 +13,6 @@ part 'supplier.g.dart';
 /// Properties:
 /// * [name] - Full name of the supplier
 /// * [id] - Primary key identifier for the supplier
-/// * [searchName] - Search name for the supplier
 @BuiltValue()
 abstract class Supplier implements Built<Supplier, SupplierBuilder> {
   /// Full name of the supplier
@@ -23,10 +22,6 @@ abstract class Supplier implements Built<Supplier, SupplierBuilder> {
   /// Primary key identifier for the supplier
   @BuiltValueField(wireName: r'id')
   int? get id;
-
-  /// Search name for the supplier
-  @BuiltValueField(wireName: r'searchName')
-  String? get searchName;
 
   Supplier._();
 
@@ -61,13 +56,6 @@ class _$SupplierSerializer implements PrimitiveSerializer<Supplier> {
       yield serializers.serialize(
         object.id,
         specifiedType: const FullType(int),
-      );
-    }
-    if (object.searchName != null) {
-      yield r'searchName';
-      yield serializers.serialize(
-        object.searchName,
-        specifiedType: const FullType(String),
       );
     }
   }
@@ -108,13 +96,6 @@ class _$SupplierSerializer implements PrimitiveSerializer<Supplier> {
             specifiedType: const FullType(int),
           ) as int;
           result.id = valueDes;
-          break;
-        case r'searchName':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
-          result.searchName = valueDes;
           break;
         default:
           unhandled.add(key);

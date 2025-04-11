@@ -17,7 +17,6 @@ part 'customer.g.dart';
 /// * [postalCode] - Postal code of the customer
 /// * [countryCode] - Country code of the customer
 /// * [id] - Primary key identifier for the customer
-/// * [searchName] - Search name for the customer
 /// * [addressLine2] - Second line of customer address
 /// * [taxIdentificationNumber] - Sales tax identifier for the customer
 /// * [email] - Email address of the customer
@@ -49,10 +48,6 @@ abstract class Customer implements Built<Customer, CustomerBuilder> {
   /// Primary key identifier for the customer
   @BuiltValueField(wireName: r'id')
   int? get id;
-
-  /// Search name for the customer
-  @BuiltValueField(wireName: r'searchName')
-  String? get searchName;
 
   /// Second line of customer address
   @BuiltValueField(wireName: r'addressLine2')
@@ -131,13 +126,6 @@ class _$CustomerSerializer implements PrimitiveSerializer<Customer> {
       yield serializers.serialize(
         object.id,
         specifiedType: const FullType(int),
-      );
-    }
-    if (object.searchName != null) {
-      yield r'searchName';
-      yield serializers.serialize(
-        object.searchName,
-        specifiedType: const FullType(String),
       );
     }
     if (object.addressLine2 != null) {
@@ -248,13 +236,6 @@ class _$CustomerSerializer implements PrimitiveSerializer<Customer> {
             specifiedType: const FullType(int),
           ) as int;
           result.id = valueDes;
-          break;
-        case r'searchName':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
-          result.searchName = valueDes;
           break;
         case r'addressLine2':
           final valueDes = serializers.deserialize(

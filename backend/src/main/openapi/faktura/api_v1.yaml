@@ -1040,6 +1040,26 @@ components:
           type: integer
         pageSize:
           type: integer
+        sort:
+          type: array
+          description: List of sorting criteria
+          items:
+            $ref: '#/components/schemas/Sort'
+    Sort:
+      description: Sorting criteria
+      type: object
+      properties:
+        property:
+          type: string
+          description: Property/field to sort by
+        direction:
+          type: string
+          enum: [ ASC, DESC ]
+          default: ASC
+          description: Sort direction
+      required:
+        - property
+        - direction
     Page:
       description: Page response
       type: object
@@ -1157,10 +1177,6 @@ components:
           type: integer
           format: int64
           description: Primary key identifier for the supplier
-        searchName:
-          type: string
-          maxLength: 512
-          description: Search name for the supplier
         name:
           type: string
           maxLength: 512
@@ -1320,10 +1336,6 @@ components:
           type: integer
           format: int64
           description: Primary key identifier for the customer
-        searchName:
-          type: string
-          maxLength: 256
-          description: Search name for the customer
         name:
           type: string
           maxLength: 512

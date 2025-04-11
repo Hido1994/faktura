@@ -13,9 +13,6 @@ public class Supplier {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "searchname", nullable = false, length = 512)
-    private String searchName;
-
     @Column(name = "name", nullable = false, length = 512)
     private String name;
 }
