@@ -2,6 +2,7 @@ package at.dhinterndorfer.faktura.page;
 
 import at.dhinterndorfer.faktura.dto.v1.PageableRestDto;
 import org.mapstruct.Mapper;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
@@ -9,17 +10,22 @@ import org.springframework.data.domain.Sort;
 public interface PageableMapper {
     default Pageable map(PageableRestDto pageable) {
         Pageable result;
-        if (pageable == null || pageable.getPageNumber() == null || pageable.getPageSize() == null) {
-            result = Pageable.unpaged();
-        } else {
-            result = Pageable.ofSize(pageable.getPageSize()).withPage(pageable.getPageNumber());
-        }
+        Sort sort = Sort.unsorted();
 
         if (pageable != null && pageable.getSort() != null) {
-            result.getSort().and(pageable.getSort().stream()
-                .map(sort -> new Sort.Order(Sort.Direction.valueOf(sort.getDirection().getValue()),
-                    sort.getProperty()))
+            sort = Sort.by(pageable.getSort().stream()
+                .map(order -> new Sort.Order(Sort.Direction.valueOf(order.getDirection().getValue()),
+                    order.getProperty()))
                 .toList());
+        }
+
+        if (pageable == null || pageable.getPageNumber() == null || pageable.getPageSize() == null) {
+            result = Pageable.unpaged(sort);
+        } else {
+            result = PageRequest
+                .ofSize(pageable.getPageSize())
+                .withPage(pageable.getPageNumber())
+                .withSort(sort);
         }
 
         return result;

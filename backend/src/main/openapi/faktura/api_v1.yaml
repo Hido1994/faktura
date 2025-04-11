@@ -26,12 +26,11 @@ paths:
       tags:
         - account
       operationId: getAccounts
-      parameters:
-        - in: query
-          name: pageable
-          required: false
-          schema:
-            $ref: '#/components/schemas/Pageable'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Pageable'
       responses:
         '200':
           description: Successful operation
@@ -98,12 +97,11 @@ paths:
       tags:
         - customer
       operationId: getCustomers
-      parameters:
-        - in: query
-          name: pageable
-          required: false
-          schema:
-            $ref: '#/components/schemas/Pageable'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Pageable'
       responses:
         '200':
           description: Successful operation
@@ -170,12 +168,11 @@ paths:
       tags:
         - earning
       operationId: getEarnings
-      parameters:
-        - in: query
-          name: pageable
-          required: false
-          schema:
-            $ref: '#/components/schemas/Pageable'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Pageable'
       responses:
         '200':
           description: Successful operation
@@ -242,12 +239,11 @@ paths:
       tags:
         - expense
       operationId: getExpenses
-      parameters:
-        - in: query
-          name: pageable
-          required: false
-          schema:
-            $ref: '#/components/schemas/Pageable'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Pageable'
       responses:
         '200':
           description: Successful operation
@@ -314,12 +310,11 @@ paths:
       tags:
         - file
       operationId: getFiles
-      parameters:
-        - in: query
-          name: pageable
-          required: false
-          schema:
-            $ref: '#/components/schemas/Pageable'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Pageable'
       responses:
         '200':
           description: Successful operation
@@ -386,12 +381,11 @@ paths:
       tags:
         - internationalInfo
       operationId: getInternationalInfos
-      parameters:
-        - in: query
-          name: pageable
-          required: false
-          schema:
-            $ref: '#/components/schemas/Pageable'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Pageable'
       responses:
         '200':
           description: Successful operation
@@ -458,12 +452,11 @@ paths:
       tags:
         - invoice
       operationId: getInvoices
-      parameters:
-        - in: query
-          name: pageable
-          required: false
-          schema:
-            $ref: '#/components/schemas/Pageable'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Pageable'
       responses:
         '200':
           description: Successful operation
@@ -530,12 +523,11 @@ paths:
       tags:
         - paymentMethod
       operationId: getPaymentMethods
-      parameters:
-        - in: query
-          name: pageable
-          required: false
-          schema:
-            $ref: '#/components/schemas/Pageable'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Pageable'
       responses:
         '200':
           description: Successful operation
@@ -602,12 +594,11 @@ paths:
       tags:
         - prepaidTax
       operationId: getPrepaidTaxes
-      parameters:
-        - in: query
-          name: pageable
-          required: false
-          schema:
-            $ref: '#/components/schemas/Pageable'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Pageable'
       responses:
         '200':
           description: Successful operation
@@ -674,12 +665,11 @@ paths:
       tags:
         - saleArticle
       operationId: getSaleArticles
-      parameters:
-        - in: query
-          name: pageable
-          required: false
-          schema:
-            $ref: '#/components/schemas/Pageable'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Pageable'
       responses:
         '200':
           description: Successful operation
@@ -746,12 +736,11 @@ paths:
       tags:
         - saleService
       operationId: getSaleServices
-      parameters:
-        - in: query
-          name: pageable
-          required: false
-          schema:
-            $ref: '#/components/schemas/Pageable'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Pageable'
       responses:
         '200':
           description: Successful operation
@@ -818,12 +807,11 @@ paths:
       tags:
         - setting
       operationId: getSettings
-      parameters:
-        - in: query
-          name: pageable
-          required: false
-          schema:
-            $ref: '#/components/schemas/Pageable'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Pageable'
       responses:
         '200':
           description: Successful operation
@@ -890,12 +878,11 @@ paths:
       tags:
         - supplier
       operationId: getSuppliers
-      parameters:
-        - in: query
-          name: pageable
-          required: false
-          schema:
-            $ref: '#/components/schemas/Pageable'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Pageable'
       responses:
         '200':
           description: Successful operation
@@ -962,12 +949,11 @@ paths:
       tags:
         - timeEntry
       operationId: getTimeEntries
-      parameters:
-        - in: query
-          name: pageable
-          required: false
-          schema:
-            $ref: '#/components/schemas/Pageable'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Pageable'
       responses:
         '200':
           description: Successful operation

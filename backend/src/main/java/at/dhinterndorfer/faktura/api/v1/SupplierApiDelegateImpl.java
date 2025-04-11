@@ -7,11 +7,13 @@ import at.dhinterndorfer.faktura.dto.v1.PageableRestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.request.NativeWebRequest;
 
 @RequiredArgsConstructor
 @Service
 public class SupplierApiDelegateImpl implements SupplierApiDelegate {
     private final SupplierController supplierController;
+    private final NativeWebRequest nativeWebRequest;
 
     @Override
     public ResponseEntity<Void> deleteSupplier(Long id) {

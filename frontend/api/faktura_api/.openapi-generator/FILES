@@ -131,4 +131,3 @@ lib/src/model/time_entry_list.dart
 lib/src/model/time_entry_page.dart
 lib/src/serializers.dart
 pubspec.yaml
-test/sort_test.dart

@@ -178,19 +178,33 @@ class PaymentMethodApi {
         'secure': <Map<String, String>>[],
         ...?extra,
       },
+      contentType: 'application/json',
       validateStatus: validateStatus,
     );
 
-    final _queryParameters = <String, dynamic>{
-      if (pageable != null)
-        r'pageable': encodeQueryParameter(
-            _serializers, pageable, const FullType(Pageable)),
-    };
+    dynamic _bodyData;
+
+    try {
+      const _type = FullType(Pageable);
+      _bodyData = pageable == null
+          ? null
+          : _serializers.serialize(pageable, specifiedType: _type);
+    } catch (error, stackTrace) {
+      throw DioException(
+        requestOptions: _options.compose(
+          _dio.options,
+          _path,
+        ),
+        type: DioExceptionType.unknown,
+        error: error,
+        stackTrace: stackTrace,
+      );
+    }
 
     final _response = await _dio.request<Object>(
       _path,
+      data: _bodyData,
       options: _options,
-      queryParameters: _queryParameters,
       cancelToken: cancelToken,
       onSendProgress: onSendProgress,
       onReceiveProgress: onReceiveProgress,

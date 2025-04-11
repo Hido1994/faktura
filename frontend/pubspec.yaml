@@ -51,6 +51,7 @@ dependencies:
       path: api/faktura_api
   loading_animation_widget: ^1.3.0
   built_collection: ^5.1.1
+  infinite_scroll_pagination: ^5.0.0
 
 dev_dependencies:
   flutter_test:
