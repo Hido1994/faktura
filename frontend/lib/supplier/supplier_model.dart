@@ -17,7 +17,6 @@ class SupplierModel extends ChangeNotifier {
     _appStateModel.setLoading(true);
     _supplierApi.getSuppliers(
       pageable: Pageable((builder) {
-        builder.pageNumber = 1;
         builder.sort = ListBuilder<Sort>([
           Sort((builder) {
             builder.property = "name";
