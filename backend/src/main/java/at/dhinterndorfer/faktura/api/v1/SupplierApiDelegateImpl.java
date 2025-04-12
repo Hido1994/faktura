@@ -1,9 +1,9 @@
 package at.dhinterndorfer.faktura.api.v1;
 
-import at.dhinterndorfer.faktura.supplier.SupplierController;
+import at.dhinterndorfer.faktura.dto.v1.SupplierFilterRequestRestDto;
 import at.dhinterndorfer.faktura.dto.v1.SupplierPageRestDto;
 import at.dhinterndorfer.faktura.dto.v1.SupplierRestDto;
-import at.dhinterndorfer.faktura.dto.v1.PageableRestDto;
+import at.dhinterndorfer.faktura.supplier.SupplierController;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -27,8 +27,9 @@ public class SupplierApiDelegateImpl implements SupplierApiDelegate {
     }
 
     @Override
-    public ResponseEntity<SupplierPageRestDto> getSuppliers(PageableRestDto pageable) {
-        return ResponseEntity.ok(supplierController.findAll(pageable));
+    public ResponseEntity<SupplierPageRestDto> getSuppliers(SupplierFilterRequestRestDto supplierFilterRequestRestDto) {
+        return ResponseEntity.ok(supplierController.findAll(supplierFilterRequestRestDto.getFilter(),
+            supplierFilterRequestRestDto.getPageable()));
     }
 
     @Override

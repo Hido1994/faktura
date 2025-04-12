@@ -882,7 +882,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Pageable'
+              $ref: '#/components/schemas/SupplierFilterRequest'
       responses:
         '200':
           description: Successful operation
@@ -1169,6 +1169,19 @@ components:
           description: Full name of the supplier
       required:
         - name
+    SupplierFilterRequest:
+      type: object
+      properties:
+        filter:
+          $ref: '#/components/schemas/SupplierFilter'
+        pageable:
+          $ref: '#/components/schemas/Pageable'
+    SupplierFilter:
+      type: object
+      properties:
+        name:
+          type: string
+          nullable: true
     SettingPage:
       description: typed Page
       type: object

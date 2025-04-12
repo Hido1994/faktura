@@ -1,4 +1,4 @@
-package at.dhinterndorfer.faktura.page;
+package at.dhinterndorfer.faktura.commons.page;
 
 import at.dhinterndorfer.faktura.dto.v1.PageableRestDto;
 import org.mapstruct.Mapper;

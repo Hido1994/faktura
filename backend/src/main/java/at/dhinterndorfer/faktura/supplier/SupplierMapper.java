@@ -1,5 +1,7 @@
 package at.dhinterndorfer.faktura.supplier;
 
+import at.dhinterndorfer.faktura.commons.filter.NullableMapper;
+import at.dhinterndorfer.faktura.dto.v1.SupplierFilterRestDto;
 import at.dhinterndorfer.faktura.dto.v1.SupplierPageRestDto;
 import at.dhinterndorfer.faktura.dto.v1.SupplierRestDto;
 import org.mapstruct.Mapper;
@@ -7,7 +9,7 @@ import org.springframework.data.domain.Page;
 
 import java.util.List;
 
-@Mapper
+@Mapper(uses = {NullableMapper.class})
 public interface SupplierMapper {
 
     SupplierRestDto mapToDto(Supplier entity);
@@ -25,4 +27,7 @@ public interface SupplierMapper {
         pageRestDto.setNumber(page.getNumber());
         return pageRestDto;
     }
+
+    SupplierSearchFilter mapFilter(SupplierFilterRestDto entity);
+
 }

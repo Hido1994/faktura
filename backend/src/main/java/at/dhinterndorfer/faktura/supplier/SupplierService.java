@@ -23,8 +23,14 @@ public class SupplierService {
     }
 
     @Transactional
-    public Page<Supplier> findAll(@NonNull Pageable pageable) {
-        return repository.findAll(pageable);
+    public Page<Supplier> findAll(SupplierSearchFilter filter, Pageable pageable) {
+        if (filter == null) {
+            filter = SupplierSearchFilter.builder().build();
+        }
+        if (pageable == null) {
+            pageable = Pageable.unpaged();
+        }
+        return repository.findAllByFilter(filter, pageable);
     }
 
     @Transactional

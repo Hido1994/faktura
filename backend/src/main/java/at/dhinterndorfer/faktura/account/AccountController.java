@@ -3,7 +3,7 @@ package at.dhinterndorfer.faktura.account;
 import at.dhinterndorfer.faktura.dto.v1.AccountPageRestDto;
 import at.dhinterndorfer.faktura.dto.v1.AccountRestDto;
 import at.dhinterndorfer.faktura.dto.v1.PageableRestDto;
-import at.dhinterndorfer.faktura.page.PageableMapper;
+import at.dhinterndorfer.faktura.commons.page.PageableMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Controller;
