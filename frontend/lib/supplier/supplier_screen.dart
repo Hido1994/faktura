@@ -1,4 +1,5 @@
 import 'package:faktura/common/widget/custom_screen.dart';
+import 'package:faktura/supplier/supplier_filter_screen.dart';
 import 'package:faktura/supplier/supplier_form_screen.dart';
 import 'package:faktura/supplier/supplier_list_item.dart';
 import 'package:faktura/supplier/supplier_model.dart';
@@ -15,6 +16,7 @@ class SupplierScreen extends StatelessWidget {
     return CustomScreen(
       title: "Lieferanten",
       form: const SupplierFormScreen(),
+      filter: const SupplierFilterScreen(),
       body: Consumer<SupplierModel>(
         builder: (context, model, child) {
           return PagedListView<int, Supplier>.separated(

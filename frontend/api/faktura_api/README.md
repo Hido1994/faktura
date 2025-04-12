@@ -164,6 +164,8 @@ Class | Method | HTTP request | Description
  - [SettingPage](doc/SettingPage.md)
  - [Sort](doc/Sort.md)
  - [Supplier](doc/Supplier.md)
+ - [SupplierFilter](doc/SupplierFilter.md)
+ - [SupplierFilterRequest](doc/SupplierFilterRequest.md)
  - [SupplierList](doc/SupplierList.md)
  - [SupplierPage](doc/SupplierPage.md)
  - [TimeEntry](doc/TimeEntry.md)

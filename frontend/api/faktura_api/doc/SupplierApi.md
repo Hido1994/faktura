@@ -97,7 +97,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **getSuppliers**
-> SupplierPage getSuppliers(pageable)
+> SupplierPage getSuppliers(supplierFilterRequest)
 
 
 
@@ -106,10 +106,10 @@ No authorization required
 import 'package:faktura_api/api.dart';
 
 final api = FakturaApi().getSupplierApi();
-final Pageable pageable = ; // Pageable | 
+final SupplierFilterRequest supplierFilterRequest = ; // SupplierFilterRequest | 
 
 try {
-    final response = api.getSuppliers(pageable);
+    final response = api.getSuppliers(supplierFilterRequest);
     print(response);
 } catch on DioException (e) {
     print('Exception when calling SupplierApi->getSuppliers: $e\n');
@@ -120,7 +120,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **pageable** | [**Pageable**](Pageable.md)|  | [optional] 
+ **supplierFilterRequest** | [**SupplierFilterRequest**](SupplierFilterRequest.md)|  | [optional] 
 
 ### Return type
 

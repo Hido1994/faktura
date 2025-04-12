@@ -30,7 +30,7 @@ public class SupplierService {
         if (pageable == null) {
             pageable = Pageable.unpaged();
         }
-        return repository.findAllByFilter(filter, pageable);
+        return repository.findAll(repository.getDefaultFilterClause(filter), pageable);
     }
 
     @Transactional

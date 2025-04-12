@@ -1,17 +1,19 @@
-import 'package:faktura/app_state_model.dart';
 import 'package:flutter/material.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
-import 'package:provider/provider.dart';
 
 import 'custom_drawer.dart';
 
 class CustomScreen extends StatelessWidget {
   final String title;
-  final Widget form;
+  final Widget? form;
+  final Widget? filter;
   final Widget body;
 
   const CustomScreen(
-      {super.key, required this.title, required this.form, required this.body});
+      {super.key,
+      required this.title,
+      this.form,
+      this.filter,
+      required this.body});
 
   @override
   Widget build(BuildContext context) {
@@ -28,17 +30,41 @@ class CustomScreen extends StatelessWidget {
             );
           },
         ),
+        actions: filter != null
+            ? [
+                IconButton(
+                  icon: Icon(Icons.filter_list),
+                  onPressed: ()  {
+                    showModalBottomSheet(
+                      isScrollControlled: true,
+                      showDragHandle: true,
+                      useSafeArea: true,
+                      context: context,
+                      builder: (context) => filter!,
+                    );
+                  },
+                  tooltip: 'Filter',
+                ),
+              ]
+            : [],
       ),
       drawer: CustomDrawer(),
       body: body,
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          await Navigator.of(context)
-              .push(MaterialPageRoute(builder: (context) => form));
-        },
-        tooltip: 'Neu',
-        child: const Icon(Icons.add),
-      ),
+      floatingActionButton: form != null
+          ? FloatingActionButton(
+              onPressed: () {
+                showModalBottomSheet(
+                  isScrollControlled: true,
+                  showDragHandle: true,
+                  useSafeArea: true,
+                  context: context,
+                  builder: (context) => form!,
+                );
+              },
+              tooltip: 'Neu',
+              child: const Icon(Icons.add),
+            )
+          : null,
     );
   }
 }

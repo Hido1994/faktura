@@ -9,8 +9,8 @@ import 'package:built_value/serializer.dart';
 import 'package:dio/dio.dart';
 
 import 'package:faktura_api/src/api_util.dart';
-import 'package:faktura_api/src/model/pageable.dart';
 import 'package:faktura_api/src/model/supplier.dart';
+import 'package:faktura_api/src/model/supplier_filter_request.dart';
 import 'package:faktura_api/src/model/supplier_page.dart';
 
 class SupplierApi {
@@ -149,7 +149,7 @@ class SupplierApi {
   ///
   ///
   /// Parameters:
-  /// * [pageable]
+  /// * [supplierFilterRequest]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -160,7 +160,7 @@ class SupplierApi {
   /// Returns a [Future] containing a [Response] with a [SupplierPage] as data
   /// Throws [DioException] if API call or serialization fails
   Future<Response<SupplierPage>> getSuppliers({
-    Pageable? pageable,
+    SupplierFilterRequest? supplierFilterRequest,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -185,10 +185,10 @@ class SupplierApi {
     dynamic _bodyData;
 
     try {
-      const _type = FullType(Pageable);
-      _bodyData = pageable == null
+      const _type = FullType(SupplierFilterRequest);
+      _bodyData = supplierFilterRequest == null
           ? null
-          : _serializers.serialize(pageable, specifiedType: _type);
+          : _serializers.serialize(supplierFilterRequest, specifiedType: _type);
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _options.compose(

@@ -65,6 +65,8 @@ export 'package:faktura_api/src/model/setting_list.dart';
 export 'package:faktura_api/src/model/setting_page.dart';
 export 'package:faktura_api/src/model/sort.dart';
 export 'package:faktura_api/src/model/supplier.dart';
+export 'package:faktura_api/src/model/supplier_filter.dart';
+export 'package:faktura_api/src/model/supplier_filter_request.dart';
 export 'package:faktura_api/src/model/supplier_list.dart';
 export 'package:faktura_api/src/model/supplier_page.dart';
 export 'package:faktura_api/src/model/time_entry.dart';

@@ -54,6 +54,8 @@ doc/SettingPage.md
 doc/Sort.md
 doc/Supplier.md
 doc/SupplierApi.md
+doc/SupplierFilter.md
+doc/SupplierFilterRequest.md
 doc/SupplierList.md
 doc/SupplierPage.md
 doc/TimeEntry.md
@@ -124,6 +126,8 @@ lib/src/model/setting_list.dart
 lib/src/model/setting_page.dart
 lib/src/model/sort.dart
 lib/src/model/supplier.dart
+lib/src/model/supplier_filter.dart
+lib/src/model/supplier_filter_request.dart
 lib/src/model/supplier_list.dart
 lib/src/model/supplier_page.dart
 lib/src/model/time_entry.dart
@@ -131,3 +135,5 @@ lib/src/model/time_entry_list.dart
 lib/src/model/time_entry_page.dart
 lib/src/serializers.dart
 pubspec.yaml
+test/supplier_filter_request_test.dart
+test/supplier_filter_test.dart
