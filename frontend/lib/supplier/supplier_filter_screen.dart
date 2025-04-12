@@ -15,43 +15,51 @@ class _SupplierFilterScreenState extends State<SupplierFilterScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<SupplierModel>(
-        builder: (context, model, child) {
-          return Scaffold(
-            appBar: AppBar(
-              title: Text("Filter"),
-            ),
-            body: Form(
-              key: _formKey,
-              child: Container(
-                padding: const EdgeInsets.all(30),
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: <Widget>[
-                      AutocompleteTextFormField(
-                          key: UniqueKey(),
-                          title: 'Name',
-                          options: [],
-                          initialValue: model.filter.name,
-                          onChanged: (value) {
-                            model.filter.name = value;
-                          }),
-                    ],
+    return Consumer<SupplierModel>(builder: (context, model, child) {
+      return Padding(
+        padding: EdgeInsets.only(
+          left: 10,
+          right: 10,
+          bottom: 30,
+        ),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Form(
+                key: _formKey,
+                child: Container(
+                  padding: const EdgeInsets.all(30),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: <Widget>[
+                        AutocompleteTextFormField(
+                            key: UniqueKey(),
+                            title: 'Name',
+                            options: [],
+                            initialValue: model.filter.name,
+                            onChanged: (value) {
+                              model.filter.name = value;
+                            }),
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-            floatingActionButton: FloatingActionButton(
-              onPressed: () {
-                if (_formKey.currentState!.validate()) {
-                  Provider.of<SupplierModel>(context, listen: false).refresh();
-                  Navigator.pop(context);
-                }
-              },
-              child: const Icon(Icons.filter_alt),
-            ),
-          );
-        }
-    );
+              ElevatedButton.icon(
+                onPressed: () {
+                  if (_formKey.currentState!.validate()) {
+                    Provider.of<SupplierModel>(context, listen: false)
+                        .refresh();
+                    Navigator.pop(context);
+                  }
+                },
+                icon: Icon(Icons.filter_alt),
+                label: Text('Anwenden'),
+              ),
+            ],
+          ),
+        ),
+      );
+    });
   }
 }
