@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:faktura/app_state_model.dart';
+import 'package:faktura/paymentmethod/payment_method_model.dart';
 import 'package:faktura/state/trip_provider_state.dart';
 import 'package:faktura/supplier/supplier_model.dart';
 import 'package:faktura_api/faktura_api.dart';
@@ -55,7 +56,18 @@ void main() {
             create: (context) =>
                 SupplierModel(
                     Provider.of<AppStateModel>(context, listen: false),
-                    Provider.of<SupplierApi>(context, listen: false)))
+                    Provider.of<SupplierApi>(context, listen: false))),
+        Provider<PaymentMethodApi>(
+          create: (context) =>
+              PaymentMethodApi(
+                  Provider.of<Dio>(context, listen: false),
+                  standardSerializers),
+        ),
+        ChangeNotifierProvider<PaymentMethodModel>(
+            create: (context) =>
+                PaymentMethodModel(
+                    Provider.of<AppStateModel>(context, listen: false),
+                    Provider.of<PaymentMethodApi>(context, listen: false))),
       ],
       child: MyApp(),
     ),
