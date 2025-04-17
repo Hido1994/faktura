@@ -40,46 +40,53 @@ class _SupplierFormScreenState extends State<SupplierFormScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.entry?.id == null ? "Neu" : "Bearbeiten"),
-      ),
-      body: Form(
-        key: _formKey,
-        child: Container(
-          padding: const EdgeInsets.all(30),
-          child: SingleChildScrollView(
-            child: Column(
-              children: <Widget>[
-                AutocompleteTextFormField(
-                    key: UniqueKey(),
-                    title: 'Name',
-                    options: [],
-                    initialValue: builder.name,
-                    onChanged: (value) {
-                      builder.name = value;
-                    }),
-              ],
-            ),
+    return Form(
+      key: _formKey,
+      child: Container(
+        padding: const EdgeInsets.all(30),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              // Bottom sheet title
+              Text(
+                widget.entry?.id == null ? "Erstellen" : "Bearbeiten",
+                style: Theme.of(context).textTheme.titleLarge,
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 20),
+              AutocompleteTextFormField(
+                key: UniqueKey(),
+                title: 'Name',
+                options: [],
+                initialValue: builder.name,
+                onChanged: (value) {
+                  builder.name = value;
+                },
+              ),
+              const SizedBox(height: 20),
+
+              ElevatedButton.icon(
+                onPressed: () {
+                  if (_formKey.currentState!.validate()) {
+                    Provider.of<SupplierModel>(context, listen: false)
+                        .save(builder.build())
+                        .then((response) {
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                        content: Text('Gespeichert'),
+                        behavior: SnackBarBehavior.floating,
+                      ));
+                      Navigator.pop(context);
+                    });
+                  }
+                },
+                icon: Icon(Icons.check),
+                label: Text('Speichern'),
+              ),
+            ],
           ),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          if (_formKey.currentState!.validate()) {
-            Provider.of<SupplierModel>(context, listen: false)
-                .save(builder.build())
-                .then((response) {
-              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                content: Text('Saved'),
-                behavior: SnackBarBehavior.floating,
-              ));
-              Navigator.pop(context);
-            });
-          }
-        },
-        tooltip: 'Speichern',
-        child: const Icon(Icons.check),
       ),
     );
   }

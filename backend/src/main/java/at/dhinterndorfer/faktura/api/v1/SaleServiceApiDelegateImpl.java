@@ -1,6 +1,6 @@
 package at.dhinterndorfer.faktura.api.v1;
 
-import at.dhinterndorfer.faktura.dto.v1.PageableRestDto;
+import at.dhinterndorfer.faktura.dto.v1.SaleServiceFilterRequestRestDto;
 import at.dhinterndorfer.faktura.dto.v1.SaleServicePageRestDto;
 import at.dhinterndorfer.faktura.dto.v1.SaleServiceRestDto;
 import at.dhinterndorfer.faktura.sale.service.SaleServiceController;
@@ -25,8 +25,10 @@ public class SaleServiceApiDelegateImpl implements SaleServiceApiDelegate {
     }
 
     @Override
-    public ResponseEntity<SaleServicePageRestDto> getSaleServices(PageableRestDto pageable) {
-        return ResponseEntity.ok(saleServiceController.findAll(pageable));
+    public ResponseEntity<SaleServicePageRestDto> getSaleServices(
+        SaleServiceFilterRequestRestDto saleServiceFilterRequestRestDto) {
+        return ResponseEntity.ok(saleServiceController.findAll(saleServiceFilterRequestRestDto.getFilter(),
+            saleServiceFilterRequestRestDto.getPageable()));
     }
 
     @Override

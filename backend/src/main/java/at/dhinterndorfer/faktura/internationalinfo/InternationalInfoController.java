@@ -1,9 +1,10 @@
 package at.dhinterndorfer.faktura.internationalinfo;
 
+import at.dhinterndorfer.faktura.commons.page.PageableMapper;
+import at.dhinterndorfer.faktura.dto.v1.InternationalInfoFilterRestDto;
 import at.dhinterndorfer.faktura.dto.v1.InternationalInfoPageRestDto;
 import at.dhinterndorfer.faktura.dto.v1.InternationalInfoRestDto;
 import at.dhinterndorfer.faktura.dto.v1.PageableRestDto;
-import at.dhinterndorfer.faktura.commons.page.PageableMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Controller;
@@ -25,8 +26,8 @@ public class InternationalInfoController {
         return mapper.mapToDto(service.findById(objId));
     }
 
-    public InternationalInfoPageRestDto findAll(PageableRestDto pageable) {
-        return mapper.mapPage(service.findAll(pageableMapper.map(pageable)));
+    public InternationalInfoPageRestDto findAll(InternationalInfoFilterRestDto filter, PageableRestDto pageable) {
+        return mapper.mapPage(service.findAll(mapper.mapFilter(filter), pageableMapper.map(pageable)));
     }
 
     public void delete(@NonNull Long objId) {

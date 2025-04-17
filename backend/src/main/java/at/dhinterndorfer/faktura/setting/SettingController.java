@@ -1,9 +1,10 @@
 package at.dhinterndorfer.faktura.setting;
 
+import at.dhinterndorfer.faktura.commons.page.PageableMapper;
 import at.dhinterndorfer.faktura.dto.v1.PageableRestDto;
+import at.dhinterndorfer.faktura.dto.v1.SettingFilterRestDto;
 import at.dhinterndorfer.faktura.dto.v1.SettingPageRestDto;
 import at.dhinterndorfer.faktura.dto.v1.SettingRestDto;
-import at.dhinterndorfer.faktura.commons.page.PageableMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Controller;
@@ -25,8 +26,8 @@ public class SettingController {
         return mapper.mapToDto(service.findById(objId));
     }
 
-    public SettingPageRestDto findAll(PageableRestDto pageable) {
-        return mapper.mapPage(service.findAll(pageableMapper.map(pageable)));
+    public SettingPageRestDto findAll(SettingFilterRestDto filter, PageableRestDto pageable) {
+        return mapper.mapPage(service.findAll(mapper.mapFilter(filter), pageableMapper.map(pageable)));
     }
 
     public void delete(@NonNull Long objId) {

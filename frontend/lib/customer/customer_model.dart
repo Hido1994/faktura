@@ -11,6 +11,7 @@ class CustomerModel extends ChangeNotifier {
   List<Customer> entities = [];
   Customer? selectedEntity;
   int pageSize = 50;
+  CustomerFilterBuilder filter = CustomerFilterBuilder();
   ListBuilder<Sort>? sort = ListBuilder<Sort>([
     Sort((builder) {
       builder.property = "name";
@@ -23,9 +24,14 @@ class CustomerModel extends ChangeNotifier {
 
   void getAll() {
     _appStateModel.setLoading(true);
-    _customerApi.getCustomers(pageable: Pageable((builder) {
-      builder.sort = sort;
-    })).then((response) {
+    _customerApi.getCustomers(
+      customerFilterRequest: CustomerFilterRequest((builder) {
+        builder.filter = filter;
+        builder.pageable = Pageable((builder) {
+          builder.sort = sort;
+        }).toBuilder();
+      }),
+    ).then((response) {
       entities = response.data?.content?.toList() ?? [];
       notifyListeners();
       _appStateModel.setLoading(false);
@@ -35,6 +41,11 @@ class CustomerModel extends ChangeNotifier {
     });
   }
 
+  void refresh() {
+    pagingState = PagingState();
+    notifyListeners();
+  }
+
   void getNextPage() {
     if (pagingState.isLoading) {
       return;
@@ -42,15 +53,23 @@ class CustomerModel extends ChangeNotifier {
 
     pagingState.copyWith(isLoading: true);
     final nextKey = (pagingState.keys?.last ?? -1) + 1;
-    _customerApi.getCustomers(pageable: Pageable((builder) {
-      builder.pageNumber = nextKey;
-      builder.pageSize = pageSize;
-      builder.sort = sort;
-    })).then((response) {
+    _customerApi.getCustomers(
+      customerFilterRequest: CustomerFilterRequest((builder) {
+        builder.filter = filter;
+        builder.pageable = Pageable((builder) {
+          builder.pageNumber = nextKey;
+          builder.pageSize = pageSize;
+          builder.sort = sort;
+        }).toBuilder();
+      }),
+    ).then((response) {
       final pageItems = response.data?.content?.toList() ?? [];
       if (pageItems.isEmpty) {
         pagingState =
-            pagingState.copyWith(hasNextPage: false, isLoading: false);
+            pagingState.copyWith(
+                pages: [...?pagingState.pages, pageItems],
+                keys: [...?pagingState.keys, nextKey],
+                hasNextPage: false, isLoading: false);
       } else {
         pagingState = pagingState.copyWith(
             pages: [...?pagingState.pages, pageItems],
@@ -65,11 +84,17 @@ class CustomerModel extends ChangeNotifier {
   }
 
   Future<void> save(Customer customer) {
-    _appStateModel.setLoading(true);
     return _customerApi.saveCustomer(customer: customer).then((response) {
-      getAll();
+      refresh();
     }).catchError((error) {
-      _appStateModel.setLoading(false);
+      _appStateModel.setMessage("Ein unerwarteter Fehler ist aufgetreten.");
+    });
+  }
+
+  Future<void> delete(int id) {
+    return _customerApi.deleteCustomer(id: id).then((response) {
+      refresh();
+    }).catchError((error) {
       _appStateModel.setMessage("Ein unerwarteter Fehler ist aufgetreten.");
     });
   }

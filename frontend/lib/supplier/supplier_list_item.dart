@@ -1,8 +1,8 @@
 import 'package:faktura/supplier/supplier_form_screen.dart';
+import 'package:faktura/supplier/supplier_model.dart';
 import 'package:faktura_api/faktura_api.dart';
 import 'package:flutter/material.dart';
-
-import '../common/string_formats.dart';
+import 'package:provider/provider.dart';
 
 class SupplierListItem extends StatefulWidget {
   final Supplier entry;
@@ -54,10 +54,14 @@ class _SupplierListItem extends State<SupplierListItem> {
         },
         onDismissed: (direction) {
           if (DismissDirection.endToStart == direction) {
-            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-              content: Text('TODO!'),
-              behavior: SnackBarBehavior.floating,
-            ));
+            Provider.of<SupplierModel>(context, listen: false)
+                .delete(widget.entry.id!)
+                .then((response) {
+              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                content: Text('Gelöscht'),
+                behavior: SnackBarBehavior.floating,
+              ));
+            });
           }
         },
         child: ListTile(

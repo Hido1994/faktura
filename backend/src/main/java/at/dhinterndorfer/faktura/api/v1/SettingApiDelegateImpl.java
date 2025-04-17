@@ -1,8 +1,6 @@
 package at.dhinterndorfer.faktura.api.v1;
 
-import at.dhinterndorfer.faktura.dto.v1.PageableRestDto;
-import at.dhinterndorfer.faktura.dto.v1.SettingPageRestDto;
-import at.dhinterndorfer.faktura.dto.v1.SettingRestDto;
+import at.dhinterndorfer.faktura.dto.v1.*;
 import at.dhinterndorfer.faktura.setting.SettingController;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -23,10 +21,11 @@ public class SettingApiDelegateImpl implements SettingApiDelegate {
     public ResponseEntity<SettingRestDto> getSettingById(Long id) {
         return ResponseEntity.ok(settingController.findById(id));
     }
-
+    
     @Override
-    public ResponseEntity<SettingPageRestDto> getSettings(PageableRestDto pageable) {
-        return ResponseEntity.ok(settingController.findAll(pageable));
+    public ResponseEntity<SettingPageRestDto> getSettings(SettingFilterRequestRestDto settingFilterRequestRestDto) {
+        return ResponseEntity.ok(settingController.findAll(settingFilterRequestRestDto.getFilter(),
+            settingFilterRequestRestDto.getPageable()));
     }
 
     @Override

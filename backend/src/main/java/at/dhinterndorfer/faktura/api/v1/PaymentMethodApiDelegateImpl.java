@@ -1,8 +1,6 @@
 package at.dhinterndorfer.faktura.api.v1;
 
-import at.dhinterndorfer.faktura.dto.v1.PaymentMethodPageRestDto;
-import at.dhinterndorfer.faktura.dto.v1.PaymentMethodRestDto;
-import at.dhinterndorfer.faktura.dto.v1.PageableRestDto;
+import at.dhinterndorfer.faktura.dto.v1.*;
 import at.dhinterndorfer.faktura.paymentmethod.PaymentMethodController;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -23,10 +21,11 @@ public class PaymentMethodApiDelegateImpl implements PaymentMethodApiDelegate {
     public ResponseEntity<PaymentMethodRestDto> getPaymentMethodById(Long id) {
         return ResponseEntity.ok(paymentMethodController.findById(id));
     }
-
+    
     @Override
-    public ResponseEntity<PaymentMethodPageRestDto> getPaymentMethods(PageableRestDto pageable) {
-        return ResponseEntity.ok(paymentMethodController.findAll(pageable));
+    public ResponseEntity<PaymentMethodPageRestDto> getPaymentMethods(PaymentMethodFilterRequestRestDto paymentMethodFilterRequestRestDto) {
+        return ResponseEntity.ok(paymentMethodController.findAll(paymentMethodFilterRequestRestDto.getFilter(),
+            paymentMethodFilterRequestRestDto.getPageable()));
     }
 
     @Override

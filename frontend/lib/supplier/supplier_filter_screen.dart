@@ -16,47 +16,43 @@ class _SupplierFilterScreenState extends State<SupplierFilterScreen> {
   @override
   Widget build(BuildContext context) {
     return Consumer<SupplierModel>(builder: (context, model, child) {
-      return Padding(
-        padding: EdgeInsets.only(
-          left: 10,
-          right: 10,
-          bottom: 30,
-        ),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Form(
-                key: _formKey,
-                child: Container(
-                  padding: const EdgeInsets.all(30),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: <Widget>[
-                        AutocompleteTextFormField(
-                            key: UniqueKey(),
-                            title: 'Name',
-                            options: [],
-                            initialValue: model.filter.name,
-                            onChanged: (value) {
-                              model.filter.name = value;
-                            }),
-                      ],
-                    ),
-                  ),
+      return Form(
+        key: _formKey,
+        child: Container(
+          padding: const EdgeInsets.all(30),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Text(
+                  "Filter",
+                  style: Theme.of(context).textTheme.titleLarge,
+                  textAlign: TextAlign.center,
                 ),
-              ),
-              ElevatedButton.icon(
-                onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    Provider.of<SupplierModel>(context, listen: false)
-                        .refresh();
-                    Navigator.pop(context);
-                  }
-                },
-                icon: Icon(Icons.filter_alt),
-                label: Text('Anwenden'),
-              ),
-            ],
+                const SizedBox(height: 20),
+                AutocompleteTextFormField(
+                    key: UniqueKey(),
+                    title: 'Name',
+                    options: [],
+                    initialValue: model.filter.name,
+                    onChanged: (value) {
+                      model.filter.name = value;
+                    }),
+                const SizedBox(height: 20),
+                ElevatedButton.icon(
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      Provider.of<SupplierModel>(context, listen: false)
+                          .refresh();
+                      Navigator.pop(context);
+                    }
+                  },
+                  icon: Icon(Icons.filter_alt),
+                  label: Text('Anwenden'),
+                ),
+              ],
+            ),
           ),
         ),
       );

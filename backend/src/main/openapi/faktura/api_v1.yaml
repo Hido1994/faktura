@@ -30,7 +30,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Pageable'
+              $ref: '#/components/schemas/AccountFilterRequest'
       responses:
         '200':
           description: Successful operation
@@ -101,7 +101,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Pageable'
+              $ref: '#/components/schemas/CustomerFilterRequest'
       responses:
         '200':
           description: Successful operation
@@ -172,7 +172,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Pageable'
+              $ref: '#/components/schemas/EarningFilterRequest'
       responses:
         '200':
           description: Successful operation
@@ -243,7 +243,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Pageable'
+              $ref: '#/components/schemas/ExpenseFilterRequest'
       responses:
         '200':
           description: Successful operation
@@ -314,7 +314,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Pageable'
+              $ref: '#/components/schemas/FileFilterRequest'
       responses:
         '200':
           description: Successful operation
@@ -385,7 +385,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Pageable'
+              $ref: '#/components/schemas/InternationalInfoFilterRequest'
       responses:
         '200':
           description: Successful operation
@@ -456,7 +456,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Pageable'
+              $ref: '#/components/schemas/InvoiceFilterRequest'
       responses:
         '200':
           description: Successful operation
@@ -527,7 +527,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Pageable'
+              $ref: '#/components/schemas/PaymentMethodFilterRequest'
       responses:
         '200':
           description: Successful operation
@@ -598,7 +598,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Pageable'
+              $ref: '#/components/schemas/PrepaidTaxFilterRequest'
       responses:
         '200':
           description: Successful operation
@@ -669,7 +669,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Pageable'
+              $ref: '#/components/schemas/SaleArticleFilterRequest'
       responses:
         '200':
           description: Successful operation
@@ -740,7 +740,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Pageable'
+              $ref: '#/components/schemas/SaleServiceFilterRequest'
       responses:
         '200':
           description: Successful operation
@@ -811,7 +811,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Pageable'
+              $ref: '#/components/schemas/SettingFilterRequest'
       responses:
         '200':
           description: Successful operation
@@ -953,7 +953,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Pageable'
+              $ref: '#/components/schemas/TimeEntryFilterRequest'
       responses:
         '200':
           description: Successful operation
@@ -1054,6 +1054,19 @@ components:
           type: integer
         size:
           type: integer
+    AccountFilterRequest:
+      type: object
+      properties:
+        filter:
+          $ref: '#/components/schemas/AccountFilter'
+        pageable:
+          $ref: '#/components/schemas/Pageable'
+    AccountFilter:
+      type: object
+      properties:
+        description:
+          type: string
+          nullable: true
     AccountPage:
       description: typed Page
       type: object
@@ -1084,6 +1097,19 @@ components:
           description: Flag indicating if charging is disabled for this account
       required:
         - description
+    PaymentMethodFilterRequest:
+      type: object
+      properties:
+        filter:
+          $ref: '#/components/schemas/PaymentMethodFilter'
+        pageable:
+          $ref: '#/components/schemas/Pageable'
+    PaymentMethodFilter:
+      type: object
+      properties:
+        description:
+          type: string
+          nullable: true
     PaymentMethodPage:
       description: typed Page
       type: object
@@ -1111,6 +1137,19 @@ components:
           description: Description of the payment method
       required:
         - description
+    InternationalInfoFilterRequest:
+      type: object
+      properties:
+        filter:
+          $ref: '#/components/schemas/InternationalInfoFilter'
+        pageable:
+          $ref: '#/components/schemas/Pageable'
+    InternationalInfoFilter:
+      type: object
+      properties:
+        description:
+          type: string
+          nullable: true
     InternationalInfoPage:
       description: typed Page
       type: object
@@ -1142,6 +1181,19 @@ components:
           description: Text to be displayed on bills for international transactions
       required:
         - description
+    SupplierFilterRequest:
+      type: object
+      properties:
+        filter:
+          $ref: '#/components/schemas/SupplierFilter'
+        pageable:
+          $ref: '#/components/schemas/Pageable'
+    SupplierFilter:
+      type: object
+      properties:
+        name:
+          type: string
+          nullable: true
     SupplierPage:
       description: typed Page
       type: object
@@ -1169,17 +1221,17 @@ components:
           description: Full name of the supplier
       required:
         - name
-    SupplierFilterRequest:
+    SettingFilterRequest:
       type: object
       properties:
         filter:
-          $ref: '#/components/schemas/SupplierFilter'
+          $ref: '#/components/schemas/SettingFilter'
         pageable:
           $ref: '#/components/schemas/Pageable'
-    SupplierFilter:
+    SettingFilter:
       type: object
       properties:
-        name:
+        key:
           type: string
           nullable: true
     SettingPage:
@@ -1214,6 +1266,19 @@ components:
       required:
         - key
         - value
+    FileFilterRequest:
+      type: object
+      properties:
+        filter:
+          $ref: '#/components/schemas/FileFilter'
+        pageable:
+          $ref: '#/components/schemas/Pageable'
+    FileFilter:
+      type: object
+      properties:
+        key:
+          type: string
+          nullable: true
     FilePage:
       description: typed Page
       type: object
@@ -1261,6 +1326,20 @@ components:
           description: Content of the file
       required:
         - key
+    InvoiceFilterRequest:
+      type: object
+      properties:
+        filter:
+          $ref: '#/components/schemas/InvoiceFilter'
+        pageable:
+          $ref: '#/components/schemas/Pageable'
+    InvoiceFilter:
+      type: object
+      properties:
+        invoiceNumber:
+          type: integer
+          format: int64
+          nullable: true
     InvoicePage:
       description: typed Page
       type: object
@@ -1314,6 +1393,19 @@ components:
         - subject
         - createdOn
         - customerId
+    CustomerFilterRequest:
+      type: object
+      properties:
+        filter:
+          $ref: '#/components/schemas/CustomerFilter'
+        pageable:
+          $ref: '#/components/schemas/Pageable'
+    CustomerFilter:
+      type: object
+      properties:
+        name:
+          type: string
+          nullable: true
     CustomerPage:
       description: typed Page
       type: object
@@ -1385,6 +1477,19 @@ components:
         - city
         - postalCode
         - countryCode
+    EarningFilterRequest:
+      type: object
+      properties:
+        filter:
+          $ref: '#/components/schemas/EarningFilter'
+        pageable:
+          $ref: '#/components/schemas/Pageable'
+    EarningFilter:
+      type: object
+      properties:
+        description:
+          type: string
+          nullable: true
     EarningPage:
       description: typed Page
       type: object
@@ -1430,6 +1535,19 @@ components:
           description: Additional notes about the earning
       required:
         - description
+    ExpenseFilterRequest:
+      type: object
+      properties:
+        filter:
+          $ref: '#/components/schemas/ExpenseFilter'
+        pageable:
+          $ref: '#/components/schemas/Pageable'
+    ExpenseFilter:
+      type: object
+      properties:
+        description:
+          type: string
+          nullable: true
     ExpensePage:
       description: typed Page
       type: object
@@ -1495,6 +1613,20 @@ components:
         - supplierId
         - priceNet
         - priceTax
+    PrepaidTaxFilterRequest:
+      type: object
+      properties:
+        filter:
+          $ref: '#/components/schemas/PrepaidTaxFilter'
+        pageable:
+          $ref: '#/components/schemas/Pageable'
+    PrepaidTaxFilter:
+      type: object
+      properties:
+        taxYear:
+          type: integer
+          format: int64
+          nullable: true
     PrepaidTaxPage:
       description: typed Page
       type: object
@@ -1543,6 +1675,19 @@ components:
       required:
         - taxYear
         - taxQuarter
+    SaleArticleFilterRequest:
+      type: object
+      properties:
+        filter:
+          $ref: '#/components/schemas/SaleArticleFilter'
+        pageable:
+          $ref: '#/components/schemas/Pageable'
+    SaleArticleFilter:
+      type: object
+      properties:
+        description:
+          type: string
+          nullable: true
     SaleArticlePage:
       description: typed Page
       type: object
@@ -1619,6 +1764,19 @@ components:
         - accountId
         - priceNet
         - priceTax
+    SaleServiceFilterRequest:
+      type: object
+      properties:
+        filter:
+          $ref: '#/components/schemas/SaleServiceFilter'
+        pageable:
+          $ref: '#/components/schemas/Pageable'
+    SaleServiceFilter:
+      type: object
+      properties:
+        description:
+          type: string
+          nullable: true
     SaleServicePage:
       description: typed Page
       type: object
@@ -1674,6 +1832,19 @@ components:
         - suppliedOn
         - hours
         - description
+    TimeEntryFilterRequest:
+      type: object
+      properties:
+        filter:
+          $ref: '#/components/schemas/TimeEntryFilter'
+        pageable:
+          $ref: '#/components/schemas/Pageable'
+    TimeEntryFilter:
+      type: object
+      properties:
+        description:
+          type: string
+          nullable: true
     TimeEntryPage:
       description: typed Page
       type: object

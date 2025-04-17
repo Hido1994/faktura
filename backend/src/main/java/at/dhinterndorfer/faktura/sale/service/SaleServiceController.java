@@ -1,9 +1,10 @@
 package at.dhinterndorfer.faktura.sale.service;
 
+import at.dhinterndorfer.faktura.commons.page.PageableMapper;
 import at.dhinterndorfer.faktura.dto.v1.PageableRestDto;
+import at.dhinterndorfer.faktura.dto.v1.SaleServiceFilterRestDto;
 import at.dhinterndorfer.faktura.dto.v1.SaleServicePageRestDto;
 import at.dhinterndorfer.faktura.dto.v1.SaleServiceRestDto;
-import at.dhinterndorfer.faktura.commons.page.PageableMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Controller;
@@ -25,8 +26,8 @@ public class SaleServiceController {
         return mapper.mapToDto(service.findById(objId));
     }
 
-    public SaleServicePageRestDto findAll(PageableRestDto pageable) {
-        return mapper.mapPage(service.findAll(pageableMapper.map(pageable)));
+    public SaleServicePageRestDto findAll(SaleServiceFilterRestDto filter, PageableRestDto pageable) {
+        return mapper.mapPage(service.findAll(mapper.mapFilter(filter), pageableMapper.map(pageable)));
     }
 
     public void delete(@NonNull Long objId) {

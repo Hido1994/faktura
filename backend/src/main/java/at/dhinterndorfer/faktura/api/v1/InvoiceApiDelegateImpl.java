@@ -1,9 +1,7 @@
 package at.dhinterndorfer.faktura.api.v1;
 
+import at.dhinterndorfer.faktura.dto.v1.*;
 import at.dhinterndorfer.faktura.invoice.InvoiceController;
-import at.dhinterndorfer.faktura.dto.v1.InvoicePageRestDto;
-import at.dhinterndorfer.faktura.dto.v1.InvoiceRestDto;
-import at.dhinterndorfer.faktura.dto.v1.PageableRestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -24,9 +22,11 @@ public class InvoiceApiDelegateImpl implements InvoiceApiDelegate {
         return ResponseEntity.ok(invoiceController.findById(id));
     }
 
+
     @Override
-    public ResponseEntity<InvoicePageRestDto> getInvoices(PageableRestDto pageable) {
-        return ResponseEntity.ok(invoiceController.findAll(pageable));
+    public ResponseEntity<InvoicePageRestDto> getInvoices(InvoiceFilterRequestRestDto invoiceFilterRequestRestDto) {
+        return ResponseEntity.ok(invoiceController.findAll(invoiceFilterRequestRestDto.getFilter(),
+            invoiceFilterRequestRestDto.getPageable()));
     }
 
     @Override

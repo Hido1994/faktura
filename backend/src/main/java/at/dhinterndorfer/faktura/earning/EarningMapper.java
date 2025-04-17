@@ -1,13 +1,16 @@
 package at.dhinterndorfer.faktura.earning;
 
+import at.dhinterndorfer.faktura.commons.filter.NullableMapper;
+import at.dhinterndorfer.faktura.dto.v1.EarningFilterRestDto;
 import at.dhinterndorfer.faktura.dto.v1.EarningPageRestDto;
 import at.dhinterndorfer.faktura.dto.v1.EarningRestDto;
+import at.dhinterndorfer.faktura.earning.Earning;
 import org.mapstruct.Mapper;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
 
-@Mapper
+@Mapper(uses = {NullableMapper.class})
 public interface EarningMapper {
 
     EarningRestDto mapToDto(Earning entity);
@@ -25,4 +28,7 @@ public interface EarningMapper {
         pageRestDto.setNumber(page.getNumber());
         return pageRestDto;
     }
+
+    EarningSearchFilter mapFilter(EarningFilterRestDto entity);
+
 }

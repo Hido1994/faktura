@@ -23,8 +23,14 @@ public class TimeEntryService {
     }
 
     @Transactional
-    public Page<TimeEntry> findAll(@NonNull Pageable pageable) {
-        return repository.findAll(pageable);
+    public Page<TimeEntry> findAll(TimeEntrySearchFilter filter, Pageable pageable) {
+        if (filter == null) {
+            filter = TimeEntrySearchFilter.builder().build();
+        }
+        if (pageable == null) {
+            pageable = Pageable.unpaged();
+        }
+        return repository.findAll(repository.getDefaultFilterClause(filter), pageable);
     }
 
     @Transactional

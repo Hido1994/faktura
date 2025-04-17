@@ -1,13 +1,16 @@
 package at.dhinterndorfer.faktura.setting;
 
+import at.dhinterndorfer.faktura.commons.filter.NullableMapper;
+import at.dhinterndorfer.faktura.dto.v1.SettingFilterRestDto;
 import at.dhinterndorfer.faktura.dto.v1.SettingPageRestDto;
 import at.dhinterndorfer.faktura.dto.v1.SettingRestDto;
+import at.dhinterndorfer.faktura.setting.Setting;
 import org.mapstruct.Mapper;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
 
-@Mapper
+@Mapper(uses = {NullableMapper.class})
 public interface SettingMapper {
 
     SettingRestDto mapToDto(Setting entity);
@@ -25,4 +28,7 @@ public interface SettingMapper {
         pageRestDto.setNumber(page.getNumber());
         return pageRestDto;
     }
+
+    SettingSearchFilter mapFilter(SettingFilterRestDto entity);
+
 }

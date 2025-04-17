@@ -15,7 +15,7 @@ public interface PageableMapper {
         if (pageable != null && pageable.getSort() != null) {
             sort = Sort.by(pageable.getSort().stream()
                 .map(order -> new Sort.Order(Sort.Direction.valueOf(order.getDirection().getValue()),
-                    order.getProperty()))
+                    order.getProperty(), true, Sort.NullHandling.NATIVE))
                 .toList());
         }
 

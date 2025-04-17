@@ -23,8 +23,14 @@ public class ExpenseService {
     }
 
     @Transactional
-    public Page<Expense> findAll(@NonNull Pageable pageable) {
-        return repository.findAll(pageable);
+    public Page<Expense> findAll(ExpenseSearchFilter filter, Pageable pageable) {
+        if (filter == null) {
+            filter = ExpenseSearchFilter.builder().build();
+        }
+        if (pageable == null) {
+            pageable = Pageable.unpaged();
+        }
+        return repository.findAll(repository.getDefaultFilterClause(filter), pageable);
     }
 
     @Transactional

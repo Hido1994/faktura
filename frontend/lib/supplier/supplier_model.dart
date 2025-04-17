@@ -84,11 +84,17 @@ class SupplierModel extends ChangeNotifier {
   }
 
   Future<void> save(Supplier supplier) {
-    _appStateModel.setLoading(true);
     return _supplierApi.saveSupplier(supplier: supplier).then((response) {
-      getAll();
+      refresh();
     }).catchError((error) {
-      _appStateModel.setLoading(false);
+      _appStateModel.setMessage("Ein unerwarteter Fehler ist aufgetreten.");
+    });
+  }
+
+  Future<void> delete(int id) {
+    return _supplierApi.deleteSupplier(id: id).then((response) {
+      refresh();
+    }).catchError((error) {
       _appStateModel.setMessage("Ein unerwarteter Fehler ist aufgetreten.");
     });
   }

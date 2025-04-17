@@ -1,5 +1,7 @@
 package at.dhinterndorfer.faktura.account;
 
+import at.dhinterndorfer.faktura.commons.filter.NullableMapper;
+import at.dhinterndorfer.faktura.dto.v1.AccountFilterRestDto;
 import at.dhinterndorfer.faktura.dto.v1.AccountPageRestDto;
 import at.dhinterndorfer.faktura.dto.v1.AccountRestDto;
 import org.mapstruct.Mapper;
@@ -7,7 +9,7 @@ import org.springframework.data.domain.Page;
 
 import java.util.List;
 
-@Mapper
+@Mapper(uses = {NullableMapper.class})
 public interface AccountMapper {
 
     AccountRestDto mapToDto(Account entity);
@@ -25,4 +27,7 @@ public interface AccountMapper {
         pageRestDto.setNumber(page.getNumber());
         return pageRestDto;
     }
+
+    AccountSearchFilter mapFilter(AccountFilterRestDto entity);
+
 }

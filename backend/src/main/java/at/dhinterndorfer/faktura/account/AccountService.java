@@ -23,8 +23,14 @@ public class AccountService {
     }
 
     @Transactional
-    public Page<Account> findAll(@NonNull Pageable pageable) {
-        return repository.findAll(pageable);
+    public Page<Account> findAll(AccountSearchFilter filter, Pageable pageable) {
+        if (filter == null) {
+            filter = AccountSearchFilter.builder().build();
+        }
+        if (pageable == null) {
+            pageable = Pageable.unpaged();
+        }
+        return repository.findAll(repository.getDefaultFilterClause(filter), pageable);
     }
 
     @Transactional

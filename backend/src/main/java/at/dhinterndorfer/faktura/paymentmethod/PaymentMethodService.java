@@ -23,8 +23,14 @@ public class PaymentMethodService {
     }
 
     @Transactional
-    public Page<PaymentMethod> findAll(@NonNull Pageable pageable) {
-        return repository.findAll(pageable);
+    public Page<PaymentMethod> findAll(PaymentMethodSearchFilter filter, Pageable pageable) {
+        if (filter == null) {
+            filter = PaymentMethodSearchFilter.builder().build();
+        }
+        if (pageable == null) {
+            pageable = Pageable.unpaged();
+        }
+        return repository.findAll(repository.getDefaultFilterClause(filter), pageable);
     }
 
     @Transactional

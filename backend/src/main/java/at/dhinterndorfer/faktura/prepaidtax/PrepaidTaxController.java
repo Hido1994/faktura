@@ -1,9 +1,10 @@
 package at.dhinterndorfer.faktura.prepaidtax;
 
+import at.dhinterndorfer.faktura.commons.page.PageableMapper;
 import at.dhinterndorfer.faktura.dto.v1.PageableRestDto;
+import at.dhinterndorfer.faktura.dto.v1.PrepaidTaxFilterRestDto;
 import at.dhinterndorfer.faktura.dto.v1.PrepaidTaxPageRestDto;
 import at.dhinterndorfer.faktura.dto.v1.PrepaidTaxRestDto;
-import at.dhinterndorfer.faktura.commons.page.PageableMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Controller;
@@ -25,8 +26,8 @@ public class PrepaidTaxController {
         return mapper.mapToDto(service.findById(objId));
     }
 
-    public PrepaidTaxPageRestDto findAll(PageableRestDto pageable) {
-        return mapper.mapPage(service.findAll(pageableMapper.map(pageable)));
+    public PrepaidTaxPageRestDto findAll(PrepaidTaxFilterRestDto filter, PageableRestDto pageable) {
+        return mapper.mapPage(service.findAll(mapper.mapFilter(filter), pageableMapper.map(pageable)));
     }
 
     public void delete(@NonNull Long objId) {

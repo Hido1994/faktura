@@ -1,5 +1,7 @@
 package at.dhinterndorfer.faktura.file;
 
+import at.dhinterndorfer.faktura.commons.filter.NullableMapper;
+import at.dhinterndorfer.faktura.dto.v1.FileFilterRestDto;
 import at.dhinterndorfer.faktura.dto.v1.FilePageRestDto;
 import at.dhinterndorfer.faktura.dto.v1.FileRestDto;
 import org.mapstruct.Mapper;
@@ -8,10 +10,9 @@ import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 
-@Mapper
+@Mapper(uses = {NullableMapper.class})
 public interface FileMapper {
 
     FileRestDto mapToDto(File entity);
@@ -30,6 +31,7 @@ public interface FileMapper {
         return pageRestDto;
     }
 
+    FileSearchFilter mapFilter(FileFilterRestDto entity);
 
     default Resource map(byte[] value) {
         return new ByteArrayResource(value);

@@ -1,5 +1,7 @@
 package at.dhinterndorfer.faktura.internationalinfo;
 
+import at.dhinterndorfer.faktura.commons.filter.NullableMapper;
+import at.dhinterndorfer.faktura.dto.v1.InternationalInfoFilterRestDto;
 import at.dhinterndorfer.faktura.dto.v1.InternationalInfoPageRestDto;
 import at.dhinterndorfer.faktura.dto.v1.InternationalInfoRestDto;
 import org.mapstruct.Mapper;
@@ -7,7 +9,7 @@ import org.springframework.data.domain.Page;
 
 import java.util.List;
 
-@Mapper
+@Mapper(uses = {NullableMapper.class})
 public interface InternationalInfoMapper {
 
     InternationalInfoRestDto mapToDto(InternationalInfo entity);
@@ -25,4 +27,7 @@ public interface InternationalInfoMapper {
         pageRestDto.setNumber(page.getNumber());
         return pageRestDto;
     }
+
+    InternationalInfoSearchFilter mapFilter(InternationalInfoFilterRestDto entity);
+
 }

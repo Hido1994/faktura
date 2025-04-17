@@ -1,9 +1,7 @@
 package at.dhinterndorfer.faktura.api.v1;
 
+import at.dhinterndorfer.faktura.dto.v1.*;
 import at.dhinterndorfer.faktura.earning.EarningController;
-import at.dhinterndorfer.faktura.dto.v1.EarningPageRestDto;
-import at.dhinterndorfer.faktura.dto.v1.EarningRestDto;
-import at.dhinterndorfer.faktura.dto.v1.PageableRestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -23,10 +21,11 @@ public class EarningApiDelegateImpl implements EarningApiDelegate {
     public ResponseEntity<EarningRestDto> getEarningById(Long id) {
         return ResponseEntity.ok(earningController.findById(id));
     }
-
+    
     @Override
-    public ResponseEntity<EarningPageRestDto> getEarnings(PageableRestDto pageable) {
-        return ResponseEntity.ok(earningController.findAll(pageable));
+    public ResponseEntity<EarningPageRestDto> getEarnings(EarningFilterRequestRestDto earningFilterRequestRestDto) {
+        return ResponseEntity.ok(earningController.findAll(earningFilterRequestRestDto.getFilter(),
+            earningFilterRequestRestDto.getPageable()));
     }
 
     @Override

@@ -1,5 +1,7 @@
 package at.dhinterndorfer.faktura.expense;
 
+import at.dhinterndorfer.faktura.commons.filter.NullableMapper;
+import at.dhinterndorfer.faktura.dto.v1.ExpenseFilterRestDto;
 import at.dhinterndorfer.faktura.dto.v1.ExpensePageRestDto;
 import at.dhinterndorfer.faktura.dto.v1.ExpenseRestDto;
 import org.mapstruct.Mapper;
@@ -7,7 +9,7 @@ import org.springframework.data.domain.Page;
 
 import java.util.List;
 
-@Mapper
+@Mapper(uses = {NullableMapper.class})
 public interface ExpenseMapper {
 
     ExpenseRestDto mapToDto(Expense entity);
@@ -25,4 +27,7 @@ public interface ExpenseMapper {
         pageRestDto.setNumber(page.getNumber());
         return pageRestDto;
     }
+
+    ExpenseSearchFilter mapFilter(ExpenseFilterRestDto entity);
+
 }

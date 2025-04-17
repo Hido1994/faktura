@@ -1,9 +1,10 @@
 package at.dhinterndorfer.faktura.timeentry;
 
+import at.dhinterndorfer.faktura.commons.page.PageableMapper;
 import at.dhinterndorfer.faktura.dto.v1.PageableRestDto;
+import at.dhinterndorfer.faktura.dto.v1.TimeEntryFilterRestDto;
 import at.dhinterndorfer.faktura.dto.v1.TimeEntryPageRestDto;
 import at.dhinterndorfer.faktura.dto.v1.TimeEntryRestDto;
-import at.dhinterndorfer.faktura.commons.page.PageableMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Controller;
@@ -25,8 +26,8 @@ public class TimeEntryController {
         return mapper.mapToDto(service.findById(objId));
     }
 
-    public TimeEntryPageRestDto findAll(PageableRestDto pageable) {
-        return mapper.mapPage(service.findAll(pageableMapper.map(pageable)));
+    public TimeEntryPageRestDto findAll(TimeEntryFilterRestDto filter, PageableRestDto pageable) {
+        return mapper.mapPage(service.findAll(mapper.mapFilter(filter), pageableMapper.map(pageable)));
     }
 
     public void delete(@NonNull Long objId) {

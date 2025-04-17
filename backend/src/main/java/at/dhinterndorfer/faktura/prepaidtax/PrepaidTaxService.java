@@ -23,8 +23,14 @@ public class PrepaidTaxService {
     }
 
     @Transactional
-    public Page<PrepaidTax> findAll(@NonNull Pageable pageable) {
-        return repository.findAll(pageable);
+    public Page<PrepaidTax> findAll(PrepaidTaxSearchFilter filter, Pageable pageable) {
+        if (filter == null) {
+            filter = PrepaidTaxSearchFilter.builder().build();
+        }
+        if (pageable == null) {
+            pageable = Pageable.unpaged();
+        }
+        return repository.findAll(repository.getDefaultFilterClause(filter), pageable);
     }
 
     @Transactional

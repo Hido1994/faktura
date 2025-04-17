@@ -1,9 +1,9 @@
 package at.dhinterndorfer.faktura.api.v1;
 
 import at.dhinterndorfer.faktura.account.AccountController;
+import at.dhinterndorfer.faktura.dto.v1.AccountFilterRequestRestDto;
 import at.dhinterndorfer.faktura.dto.v1.AccountPageRestDto;
 import at.dhinterndorfer.faktura.dto.v1.AccountRestDto;
-import at.dhinterndorfer.faktura.dto.v1.PageableRestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -25,8 +25,9 @@ public class AccountApiDelegateImpl implements AccountApiDelegate {
     }
 
     @Override
-    public ResponseEntity<AccountPageRestDto> getAccounts(PageableRestDto pageable) {
-        return ResponseEntity.ok(accountController.findAll(pageable));
+    public ResponseEntity<AccountPageRestDto> getAccounts(AccountFilterRequestRestDto accountFilterRequestRestDto) {
+        return ResponseEntity.ok(accountController.findAll(accountFilterRequestRestDto.getFilter(),
+            accountFilterRequestRestDto.getPageable()));
     }
 
     @Override

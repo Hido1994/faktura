@@ -23,8 +23,14 @@ public class InternationalInfoService {
     }
 
     @Transactional
-    public Page<InternationalInfo> findAll(@NonNull Pageable pageable) {
-        return repository.findAll(pageable);
+    public Page<InternationalInfo> findAll(InternationalInfoSearchFilter filter, Pageable pageable) {
+        if (filter == null) {
+            filter = InternationalInfoSearchFilter.builder().build();
+        }
+        if (pageable == null) {
+            pageable = Pageable.unpaged();
+        }
+        return repository.findAll(repository.getDefaultFilterClause(filter), pageable);
     }
 
     @Transactional

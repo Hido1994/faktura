@@ -1,8 +1,6 @@
 package at.dhinterndorfer.faktura.api.v1;
 
-import at.dhinterndorfer.faktura.dto.v1.PageableRestDto;
-import at.dhinterndorfer.faktura.dto.v1.TimeEntryPageRestDto;
-import at.dhinterndorfer.faktura.dto.v1.TimeEntryRestDto;
+import at.dhinterndorfer.faktura.dto.v1.*;
 import at.dhinterndorfer.faktura.timeentry.TimeEntryController;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -23,10 +21,11 @@ public class TimeEntryApiDelegateImpl implements TimeEntryApiDelegate {
     public ResponseEntity<TimeEntryRestDto> getTimeEntryById(Long id) {
         return ResponseEntity.ok(timeEntryController.findById(id));
     }
-
+    
     @Override
-    public ResponseEntity<TimeEntryPageRestDto> getTimeEntries(PageableRestDto pageable) {
-        return ResponseEntity.ok(timeEntryController.findAll(pageable));
+    public ResponseEntity<TimeEntryPageRestDto> getTimeEntries(TimeEntryFilterRequestRestDto timeEntryFilterRequestRestDto) {
+        return ResponseEntity.ok(timeEntryController.findAll(timeEntryFilterRequestRestDto.getFilter(),
+            timeEntryFilterRequestRestDto.getPageable()));
     }
 
     @Override

@@ -1,9 +1,7 @@
 package at.dhinterndorfer.faktura.api.v1;
 
+import at.dhinterndorfer.faktura.dto.v1.*;
 import at.dhinterndorfer.faktura.file.FileController;
-import at.dhinterndorfer.faktura.dto.v1.FilePageRestDto;
-import at.dhinterndorfer.faktura.dto.v1.FileRestDto;
-import at.dhinterndorfer.faktura.dto.v1.PageableRestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -23,10 +21,11 @@ public class FileApiDelegateImpl implements FileApiDelegate {
     public ResponseEntity<FileRestDto> getFileById(Long id) {
         return ResponseEntity.ok(fileController.findById(id));
     }
-
+    
     @Override
-    public ResponseEntity<FilePageRestDto> getFiles(PageableRestDto pageable) {
-        return ResponseEntity.ok(fileController.findAll(pageable));
+    public ResponseEntity<FilePageRestDto> getFiles(FileFilterRequestRestDto fileFilterRequestRestDto) {
+        return ResponseEntity.ok(fileController.findAll(fileFilterRequestRestDto.getFilter(),
+            fileFilterRequestRestDto.getPageable()));
     }
 
     @Override

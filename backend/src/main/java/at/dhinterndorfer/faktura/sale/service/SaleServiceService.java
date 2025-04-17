@@ -23,8 +23,14 @@ public class SaleServiceService {
     }
 
     @Transactional
-    public Page<SaleService> findAll(@NonNull Pageable pageable) {
-        return repository.findAll(pageable);
+    public Page<SaleService> findAll(SaleServiceSearchFilter filter, Pageable pageable) {
+        if (filter == null) {
+            filter = SaleServiceSearchFilter.builder().build();
+        }
+        if (pageable == null) {
+            pageable = Pageable.unpaged();
+        }
+        return repository.findAll(repository.getDefaultFilterClause(filter), pageable);
     }
 
     @Transactional

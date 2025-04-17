@@ -23,8 +23,14 @@ public class FileService {
     }
 
     @Transactional
-    public Page<File> findAll(@NonNull Pageable pageable) {
-        return repository.findAll(pageable);
+    public Page<File> findAll(FileSearchFilter filter, Pageable pageable) {
+        if (filter == null) {
+            filter = FileSearchFilter.builder().build();
+        }
+        if (pageable == null) {
+            pageable = Pageable.unpaged();
+        }
+        return repository.findAll(repository.getDefaultFilterClause(filter), pageable);
     }
 
     @Transactional

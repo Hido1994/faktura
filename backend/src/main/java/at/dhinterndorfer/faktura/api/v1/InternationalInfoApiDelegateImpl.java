@@ -1,8 +1,6 @@
 package at.dhinterndorfer.faktura.api.v1;
 
-import at.dhinterndorfer.faktura.dto.v1.InternationalInfoPageRestDto;
-import at.dhinterndorfer.faktura.dto.v1.InternationalInfoRestDto;
-import at.dhinterndorfer.faktura.dto.v1.PageableRestDto;
+import at.dhinterndorfer.faktura.dto.v1.*;
 import at.dhinterndorfer.faktura.internationalinfo.InternationalInfoController;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -23,10 +21,11 @@ public class InternationalInfoApiDelegateImpl implements InternationalInfoApiDel
     public ResponseEntity<InternationalInfoRestDto> getInternationalInfoById(Long id) {
         return ResponseEntity.ok(internationalInfoController.findById(id));
     }
-
+    
     @Override
-    public ResponseEntity<InternationalInfoPageRestDto> getInternationalInfos(PageableRestDto pageable) {
-        return ResponseEntity.ok(internationalInfoController.findAll(pageable));
+    public ResponseEntity<InternationalInfoPageRestDto> getInternationalInfos(InternationalInfoFilterRequestRestDto internationalInfoFilterRequestRestDto) {
+        return ResponseEntity.ok(internationalInfoController.findAll(internationalInfoFilterRequestRestDto.getFilter(),
+            internationalInfoFilterRequestRestDto.getPageable()));
     }
 
     @Override

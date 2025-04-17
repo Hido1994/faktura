@@ -1,5 +1,6 @@
 package at.dhinterndorfer.faktura.setting;
 
+import at.dhinterndorfer.faktura.setting.Setting;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -23,8 +24,14 @@ public class SettingService {
     }
 
     @Transactional
-    public Page<Setting> findAll(@NonNull Pageable pageable) {
-        return repository.findAll(pageable);
+    public Page<Setting> findAll(SettingSearchFilter filter, Pageable pageable) {
+        if (filter == null) {
+            filter = SettingSearchFilter.builder().build();
+        }
+        if (pageable == null) {
+            pageable = Pageable.unpaged();
+        }
+        return repository.findAll(repository.getDefaultFilterClause(filter), pageable);
     }
 
     @Transactional

@@ -23,8 +23,14 @@ public class CustomerService {
     }
 
     @Transactional
-    public Page<Customer> findAll(@NonNull Pageable pageable) {
-        return repository.findAll(pageable);
+    public Page<Customer> findAll(CustomerSearchFilter filter, Pageable pageable) {
+        if (filter == null) {
+            filter = CustomerSearchFilter.builder().build();
+        }
+        if (pageable == null) {
+            pageable = Pageable.unpaged();
+        }
+        return repository.findAll(repository.getDefaultFilterClause(filter), pageable);
     }
 
     @Transactional

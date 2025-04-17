@@ -1,9 +1,10 @@
 package at.dhinterndorfer.faktura.earning;
 
+import at.dhinterndorfer.faktura.commons.page.PageableMapper;
+import at.dhinterndorfer.faktura.dto.v1.PageableRestDto;
+import at.dhinterndorfer.faktura.dto.v1.EarningFilterRestDto;
 import at.dhinterndorfer.faktura.dto.v1.EarningPageRestDto;
 import at.dhinterndorfer.faktura.dto.v1.EarningRestDto;
-import at.dhinterndorfer.faktura.dto.v1.PageableRestDto;
-import at.dhinterndorfer.faktura.commons.page.PageableMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Controller;
@@ -25,8 +26,8 @@ public class EarningController {
         return mapper.mapToDto(service.findById(objId));
     }
 
-    public EarningPageRestDto findAll(PageableRestDto pageable) {
-        return mapper.mapPage(service.findAll(pageableMapper.map(pageable)));
+    public EarningPageRestDto findAll(EarningFilterRestDto filter, PageableRestDto pageable) {
+        return mapper.mapPage(service.findAll(mapper.mapFilter(filter), pageableMapper.map(pageable)));
     }
 
     public void delete(@NonNull Long objId) {
