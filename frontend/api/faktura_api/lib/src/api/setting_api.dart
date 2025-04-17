@@ -9,8 +9,8 @@ import 'package:built_value/serializer.dart';
 import 'package:dio/dio.dart';
 
 import 'package:faktura_api/src/api_util.dart';
-import 'package:faktura_api/src/model/pageable.dart';
 import 'package:faktura_api/src/model/setting.dart';
+import 'package:faktura_api/src/model/setting_filter_request.dart';
 import 'package:faktura_api/src/model/setting_page.dart';
 
 class SettingApi {
@@ -149,7 +149,7 @@ class SettingApi {
   ///
   ///
   /// Parameters:
-  /// * [pageable]
+  /// * [settingFilterRequest]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -160,7 +160,7 @@ class SettingApi {
   /// Returns a [Future] containing a [Response] with a [SettingPage] as data
   /// Throws [DioException] if API call or serialization fails
   Future<Response<SettingPage>> getSettings({
-    Pageable? pageable,
+    SettingFilterRequest? settingFilterRequest,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -185,10 +185,10 @@ class SettingApi {
     dynamic _bodyData;
 
     try {
-      const _type = FullType(Pageable);
-      _bodyData = pageable == null
+      const _type = FullType(SettingFilterRequest);
+      _bodyData = settingFilterRequest == null
           ? null
-          : _serializers.serialize(pageable, specifiedType: _type);
+          : _serializers.serialize(settingFilterRequest, specifiedType: _type);
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _options.compose(

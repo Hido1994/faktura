@@ -97,7 +97,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **getSettings**
-> SettingPage getSettings(pageable)
+> SettingPage getSettings(settingFilterRequest)
 
 
 
@@ -106,10 +106,10 @@ No authorization required
 import 'package:faktura_api/api.dart';
 
 final api = FakturaApi().getSettingApi();
-final Pageable pageable = ; // Pageable | 
+final SettingFilterRequest settingFilterRequest = ; // SettingFilterRequest | 
 
 try {
-    final response = api.getSettings(pageable);
+    final response = api.getSettings(settingFilterRequest);
     print(response);
 } catch on DioException (e) {
     print('Exception when calling SettingApi->getSettings: $e\n');
@@ -120,7 +120,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **pageable** | [**Pageable**](Pageable.md)|  | [optional] 
+ **settingFilterRequest** | [**SettingFilterRequest**](SettingFilterRequest.md)|  | [optional] 
 
 ### Return type
 

@@ -10,8 +10,8 @@ import 'package:dio/dio.dart';
 
 import 'package:faktura_api/src/api_util.dart';
 import 'package:faktura_api/src/model/international_info.dart';
+import 'package:faktura_api/src/model/international_info_filter_request.dart';
 import 'package:faktura_api/src/model/international_info_page.dart';
-import 'package:faktura_api/src/model/pageable.dart';
 
 class InternationalInfoApi {
   final Dio _dio;
@@ -149,7 +149,7 @@ class InternationalInfoApi {
   ///
   ///
   /// Parameters:
-  /// * [pageable]
+  /// * [internationalInfoFilterRequest]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -160,7 +160,7 @@ class InternationalInfoApi {
   /// Returns a [Future] containing a [Response] with a [InternationalInfoPage] as data
   /// Throws [DioException] if API call or serialization fails
   Future<Response<InternationalInfoPage>> getInternationalInfos({
-    Pageable? pageable,
+    InternationalInfoFilterRequest? internationalInfoFilterRequest,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -185,10 +185,11 @@ class InternationalInfoApi {
     dynamic _bodyData;
 
     try {
-      const _type = FullType(Pageable);
-      _bodyData = pageable == null
+      const _type = FullType(InternationalInfoFilterRequest);
+      _bodyData = internationalInfoFilterRequest == null
           ? null
-          : _serializers.serialize(pageable, specifiedType: _type);
+          : _serializers.serialize(internationalInfoFilterRequest,
+              specifiedType: _type);
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _options.compose(

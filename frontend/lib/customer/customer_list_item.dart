@@ -68,9 +68,9 @@ class _CustomerListItem extends State<CustomerListItem> {
           subtitle: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(widget.entry.taxIdentificationNumber!),
-              Text(widget.entry.addressLine1),
-              Text(currencyFormat.format(widget.entry.hourlyRate)),
+              Text(widget.entry.taxIdentificationNumber != null ? widget.entry.taxIdentificationNumber! : '?'),
+              Text('${widget.entry.addressLine1}, ${widget.entry.postalCode} ${widget.entry.city}'),
+              Text(widget.entry.hourlyRate != null ? currencyFormat.format(widget.entry.hourlyRate!) : '?')
             ],
           ),
           isThreeLine: true,

@@ -10,8 +10,8 @@ import 'package:dio/dio.dart';
 
 import 'package:faktura_api/src/api_util.dart';
 import 'package:faktura_api/src/model/customer.dart';
+import 'package:faktura_api/src/model/customer_filter_request.dart';
 import 'package:faktura_api/src/model/customer_page.dart';
-import 'package:faktura_api/src/model/pageable.dart';
 
 class CustomerApi {
   final Dio _dio;
@@ -149,7 +149,7 @@ class CustomerApi {
   ///
   ///
   /// Parameters:
-  /// * [pageable]
+  /// * [customerFilterRequest]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -160,7 +160,7 @@ class CustomerApi {
   /// Returns a [Future] containing a [Response] with a [CustomerPage] as data
   /// Throws [DioException] if API call or serialization fails
   Future<Response<CustomerPage>> getCustomers({
-    Pageable? pageable,
+    CustomerFilterRequest? customerFilterRequest,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -185,10 +185,10 @@ class CustomerApi {
     dynamic _bodyData;
 
     try {
-      const _type = FullType(Pageable);
-      _bodyData = pageable == null
+      const _type = FullType(CustomerFilterRequest);
+      _bodyData = customerFilterRequest == null
           ? null
-          : _serializers.serialize(pageable, specifiedType: _type);
+          : _serializers.serialize(customerFilterRequest, specifiedType: _type);
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _options.compose(

@@ -97,7 +97,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **getSaleServices**
-> SaleServicePage getSaleServices(pageable)
+> SaleServicePage getSaleServices(saleServiceFilterRequest)
 
 
 
@@ -106,10 +106,10 @@ No authorization required
 import 'package:faktura_api/api.dart';
 
 final api = FakturaApi().getSaleServiceApi();
-final Pageable pageable = ; // Pageable | 
+final SaleServiceFilterRequest saleServiceFilterRequest = ; // SaleServiceFilterRequest | 
 
 try {
-    final response = api.getSaleServices(pageable);
+    final response = api.getSaleServices(saleServiceFilterRequest);
     print(response);
 } catch on DioException (e) {
     print('Exception when calling SaleServiceApi->getSaleServices: $e\n');
@@ -120,7 +120,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **pageable** | [**Pageable**](Pageable.md)|  | [optional] 
+ **saleServiceFilterRequest** | [**SaleServiceFilterRequest**](SaleServiceFilterRequest.md)|  | [optional] 
 
 ### Return type
 

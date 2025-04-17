@@ -64,21 +64,41 @@ class _SupplierFormScreenState extends State<SupplierFormScreen> {
                 onChanged: (value) {
                   builder.name = value;
                 },
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return "Muss angegeben werden";
+                  }
+                  return null;
+                },
               ),
               const SizedBox(height: 20),
-
               ElevatedButton.icon(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
-                    Provider.of<SupplierModel>(context, listen: false)
-                        .save(builder.build())
-                        .then((response) {
-                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                        content: Text('Gespeichert'),
+                    try {
+                      Provider.of<SupplierModel>(context, listen: false)
+                          .save(builder.build())
+                          .then((response) {
+                        ScaffoldMessenger.of(context)
+                            .showSnackBar(const SnackBar(
+                          content: Text('Gespeichert'),
+                          behavior: SnackBarBehavior.floating,
+                        ));
+                        Navigator.pop(context);
+                      });
+                    } catch (e) {
+                      print('Unexpected error: $e');
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content:
+                            Text('Ein unerwarteter Fehler ist aufgetreten.'),
                         behavior: SnackBarBehavior.floating,
                       ));
-                      Navigator.pop(context);
-                    });
+                    }
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content: Text('Objekt konnte nicht gespeichert werden.'),
+                      behavior: SnackBarBehavior.floating,
+                    ));
                   }
                 },
                 icon: Icon(Icons.check),

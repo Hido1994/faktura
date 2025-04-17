@@ -97,7 +97,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **getExpenses**
-> ExpensePage getExpenses(pageable)
+> ExpensePage getExpenses(expenseFilterRequest)
 
 
 
@@ -106,10 +106,10 @@ No authorization required
 import 'package:faktura_api/api.dart';
 
 final api = FakturaApi().getExpenseApi();
-final Pageable pageable = ; // Pageable | 
+final ExpenseFilterRequest expenseFilterRequest = ; // ExpenseFilterRequest | 
 
 try {
-    final response = api.getExpenses(pageable);
+    final response = api.getExpenses(expenseFilterRequest);
     print(response);
 } catch on DioException (e) {
     print('Exception when calling ExpenseApi->getExpenses: $e\n');
@@ -120,7 +120,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **pageable** | [**Pageable**](Pageable.md)|  | [optional] 
+ **expenseFilterRequest** | [**ExpenseFilterRequest**](ExpenseFilterRequest.md)|  | [optional] 
 
 ### Return type
 

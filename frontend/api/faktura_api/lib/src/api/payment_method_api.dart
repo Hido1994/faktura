@@ -9,8 +9,8 @@ import 'package:built_value/serializer.dart';
 import 'package:dio/dio.dart';
 
 import 'package:faktura_api/src/api_util.dart';
-import 'package:faktura_api/src/model/pageable.dart';
 import 'package:faktura_api/src/model/payment_method.dart';
+import 'package:faktura_api/src/model/payment_method_filter_request.dart';
 import 'package:faktura_api/src/model/payment_method_page.dart';
 
 class PaymentMethodApi {
@@ -149,7 +149,7 @@ class PaymentMethodApi {
   ///
   ///
   /// Parameters:
-  /// * [pageable]
+  /// * [paymentMethodFilterRequest]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -160,7 +160,7 @@ class PaymentMethodApi {
   /// Returns a [Future] containing a [Response] with a [PaymentMethodPage] as data
   /// Throws [DioException] if API call or serialization fails
   Future<Response<PaymentMethodPage>> getPaymentMethods({
-    Pageable? pageable,
+    PaymentMethodFilterRequest? paymentMethodFilterRequest,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -185,10 +185,11 @@ class PaymentMethodApi {
     dynamic _bodyData;
 
     try {
-      const _type = FullType(Pageable);
-      _bodyData = pageable == null
+      const _type = FullType(PaymentMethodFilterRequest);
+      _bodyData = paymentMethodFilterRequest == null
           ? null
-          : _serializers.serialize(pageable, specifiedType: _type);
+          : _serializers.serialize(paymentMethodFilterRequest,
+              specifiedType: _type);
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _options.compose(

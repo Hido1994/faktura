@@ -97,7 +97,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **getAccounts**
-> AccountPage getAccounts(pageable)
+> AccountPage getAccounts(accountFilterRequest)
 
 
 
@@ -106,10 +106,10 @@ No authorization required
 import 'package:faktura_api/api.dart';
 
 final api = FakturaApi().getAccountApi();
-final Pageable pageable = ; // Pageable | 
+final AccountFilterRequest accountFilterRequest = ; // AccountFilterRequest | 
 
 try {
-    final response = api.getAccounts(pageable);
+    final response = api.getAccounts(accountFilterRequest);
     print(response);
 } catch on DioException (e) {
     print('Exception when calling AccountApi->getAccounts: $e\n');
@@ -120,7 +120,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **pageable** | [**Pageable**](Pageable.md)|  | [optional] 
+ **accountFilterRequest** | [**AccountFilterRequest**](AccountFilterRequest.md)|  | [optional] 
 
 ### Return type
 

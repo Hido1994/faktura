@@ -67,8 +67,8 @@ class SupplierModel extends ChangeNotifier {
       if (pageItems.isEmpty) {
         pagingState =
             pagingState.copyWith(
-                pages: [...?pagingState.pages, pageItems],
-                keys: [...?pagingState.keys, nextKey],
+                pages: [...?pagingState.pages],
+                keys: [...?pagingState.keys],
                 hasNextPage: false, isLoading: false);
       } else {
         pagingState = pagingState.copyWith(

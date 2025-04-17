@@ -97,7 +97,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **getFiles**
-> FilePage getFiles(pageable)
+> FilePage getFiles(fileFilterRequest)
 
 
 
@@ -106,10 +106,10 @@ No authorization required
 import 'package:faktura_api/api.dart';
 
 final api = FakturaApi().getFileApi();
-final Pageable pageable = ; // Pageable | 
+final FileFilterRequest fileFilterRequest = ; // FileFilterRequest | 
 
 try {
-    final response = api.getFiles(pageable);
+    final response = api.getFiles(fileFilterRequest);
     print(response);
 } catch on DioException (e) {
     print('Exception when calling FileApi->getFiles: $e\n');
@@ -120,7 +120,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **pageable** | [**Pageable**](Pageable.md)|  | [optional] 
+ **fileFilterRequest** | [**FileFilterRequest**](FileFilterRequest.md)|  | [optional] 
 
 ### Return type
 

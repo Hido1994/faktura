@@ -9,8 +9,8 @@ import 'package:built_value/serializer.dart';
 import 'package:dio/dio.dart';
 
 import 'package:faktura_api/src/api_util.dart';
-import 'package:faktura_api/src/model/pageable.dart';
 import 'package:faktura_api/src/model/time_entry.dart';
+import 'package:faktura_api/src/model/time_entry_filter_request.dart';
 import 'package:faktura_api/src/model/time_entry_page.dart';
 
 class TimeEntryApi {
@@ -72,7 +72,7 @@ class TimeEntryApi {
   ///
   ///
   /// Parameters:
-  /// * [pageable]
+  /// * [timeEntryFilterRequest]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -83,7 +83,7 @@ class TimeEntryApi {
   /// Returns a [Future] containing a [Response] with a [TimeEntryPage] as data
   /// Throws [DioException] if API call or serialization fails
   Future<Response<TimeEntryPage>> getTimeEntries({
-    Pageable? pageable,
+    TimeEntryFilterRequest? timeEntryFilterRequest,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -108,10 +108,11 @@ class TimeEntryApi {
     dynamic _bodyData;
 
     try {
-      const _type = FullType(Pageable);
-      _bodyData = pageable == null
+      const _type = FullType(TimeEntryFilterRequest);
+      _bodyData = timeEntryFilterRequest == null
           ? null
-          : _serializers.serialize(pageable, specifiedType: _type);
+          : _serializers.serialize(timeEntryFilterRequest,
+              specifiedType: _type);
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _options.compose(

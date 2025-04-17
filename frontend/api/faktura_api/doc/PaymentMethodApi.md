@@ -97,7 +97,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **getPaymentMethods**
-> PaymentMethodPage getPaymentMethods(pageable)
+> PaymentMethodPage getPaymentMethods(paymentMethodFilterRequest)
 
 
 
@@ -106,10 +106,10 @@ No authorization required
 import 'package:faktura_api/api.dart';
 
 final api = FakturaApi().getPaymentMethodApi();
-final Pageable pageable = ; // Pageable | 
+final PaymentMethodFilterRequest paymentMethodFilterRequest = ; // PaymentMethodFilterRequest | 
 
 try {
-    final response = api.getPaymentMethods(pageable);
+    final response = api.getPaymentMethods(paymentMethodFilterRequest);
     print(response);
 } catch on DioException (e) {
     print('Exception when calling PaymentMethodApi->getPaymentMethods: $e\n');
@@ -120,7 +120,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **pageable** | [**Pageable**](Pageable.md)|  | [optional] 
+ **paymentMethodFilterRequest** | [**PaymentMethodFilterRequest**](PaymentMethodFilterRequest.md)|  | [optional] 
 
 ### Return type
 

@@ -97,7 +97,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **getEarnings**
-> EarningPage getEarnings(pageable)
+> EarningPage getEarnings(earningFilterRequest)
 
 
 
@@ -106,10 +106,10 @@ No authorization required
 import 'package:faktura_api/api.dart';
 
 final api = FakturaApi().getEarningApi();
-final Pageable pageable = ; // Pageable | 
+final EarningFilterRequest earningFilterRequest = ; // EarningFilterRequest | 
 
 try {
-    final response = api.getEarnings(pageable);
+    final response = api.getEarnings(earningFilterRequest);
     print(response);
 } catch on DioException (e) {
     print('Exception when calling EarningApi->getEarnings: $e\n');
@@ -120,7 +120,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **pageable** | [**Pageable**](Pageable.md)|  | [optional] 
+ **earningFilterRequest** | [**EarningFilterRequest**](EarningFilterRequest.md)|  | [optional] 
 
 ### Return type
 

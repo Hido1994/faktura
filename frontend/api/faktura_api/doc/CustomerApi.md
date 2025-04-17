@@ -97,7 +97,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **getCustomers**
-> CustomerPage getCustomers(pageable)
+> CustomerPage getCustomers(customerFilterRequest)
 
 
 
@@ -106,10 +106,10 @@ No authorization required
 import 'package:faktura_api/api.dart';
 
 final api = FakturaApi().getCustomerApi();
-final Pageable pageable = ; // Pageable | 
+final CustomerFilterRequest customerFilterRequest = ; // CustomerFilterRequest | 
 
 try {
-    final response = api.getCustomers(pageable);
+    final response = api.getCustomers(customerFilterRequest);
     print(response);
 } catch on DioException (e) {
     print('Exception when calling CustomerApi->getCustomers: $e\n');
@@ -120,7 +120,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **pageable** | [**Pageable**](Pageable.md)|  | [optional] 
+ **customerFilterRequest** | [**CustomerFilterRequest**](CustomerFilterRequest.md)|  | [optional] 
 
 ### Return type
 

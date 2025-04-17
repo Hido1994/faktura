@@ -56,7 +56,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **getTimeEntries**
-> TimeEntryPage getTimeEntries(pageable)
+> TimeEntryPage getTimeEntries(timeEntryFilterRequest)
 
 
 
@@ -65,10 +65,10 @@ No authorization required
 import 'package:faktura_api/api.dart';
 
 final api = FakturaApi().getTimeEntryApi();
-final Pageable pageable = ; // Pageable | 
+final TimeEntryFilterRequest timeEntryFilterRequest = ; // TimeEntryFilterRequest | 
 
 try {
-    final response = api.getTimeEntries(pageable);
+    final response = api.getTimeEntries(timeEntryFilterRequest);
     print(response);
 } catch on DioException (e) {
     print('Exception when calling TimeEntryApi->getTimeEntries: $e\n');
@@ -79,7 +79,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **pageable** | [**Pageable**](Pageable.md)|  | [optional] 
+ **timeEntryFilterRequest** | [**TimeEntryFilterRequest**](TimeEntryFilterRequest.md)|  | [optional] 
 
 ### Return type
 

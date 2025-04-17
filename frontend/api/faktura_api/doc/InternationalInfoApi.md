@@ -97,7 +97,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **getInternationalInfos**
-> InternationalInfoPage getInternationalInfos(pageable)
+> InternationalInfoPage getInternationalInfos(internationalInfoFilterRequest)
 
 
 
@@ -106,10 +106,10 @@ No authorization required
 import 'package:faktura_api/api.dart';
 
 final api = FakturaApi().getInternationalInfoApi();
-final Pageable pageable = ; // Pageable | 
+final InternationalInfoFilterRequest internationalInfoFilterRequest = ; // InternationalInfoFilterRequest | 
 
 try {
-    final response = api.getInternationalInfos(pageable);
+    final response = api.getInternationalInfos(internationalInfoFilterRequest);
     print(response);
 } catch on DioException (e) {
     print('Exception when calling InternationalInfoApi->getInternationalInfos: $e\n');
@@ -120,7 +120,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **pageable** | [**Pageable**](Pageable.md)|  | [optional] 
+ **internationalInfoFilterRequest** | [**InternationalInfoFilterRequest**](InternationalInfoFilterRequest.md)|  | [optional] 
 
 ### Return type
 

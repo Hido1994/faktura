@@ -97,7 +97,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **getPrepaidTaxes**
-> PrepaidTaxPage getPrepaidTaxes(pageable)
+> PrepaidTaxPage getPrepaidTaxes(prepaidTaxFilterRequest)
 
 
 
@@ -106,10 +106,10 @@ No authorization required
 import 'package:faktura_api/api.dart';
 
 final api = FakturaApi().getPrepaidTaxApi();
-final Pageable pageable = ; // Pageable | 
+final PrepaidTaxFilterRequest prepaidTaxFilterRequest = ; // PrepaidTaxFilterRequest | 
 
 try {
-    final response = api.getPrepaidTaxes(pageable);
+    final response = api.getPrepaidTaxes(prepaidTaxFilterRequest);
     print(response);
 } catch on DioException (e) {
     print('Exception when calling PrepaidTaxApi->getPrepaidTaxes: $e\n');
@@ -120,7 +120,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **pageable** | [**Pageable**](Pageable.md)|  | [optional] 
+ **prepaidTaxFilterRequest** | [**PrepaidTaxFilterRequest**](PrepaidTaxFilterRequest.md)|  | [optional] 
 
 ### Return type
 

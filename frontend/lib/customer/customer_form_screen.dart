@@ -64,21 +64,165 @@ class _CustomerFormScreenState extends State<CustomerFormScreen> {
                 onChanged: (value) {
                   builder.name = value;
                 },
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return "Muss angegeben werden";
+                  }
+                  return null;
+                },
               ),
               const SizedBox(height: 20),
-
+              AutocompleteTextFormField(
+                key: UniqueKey(),
+                title: 'Adresszeile 1',
+                options: [],
+                initialValue: builder.addressLine1,
+                onChanged: (value) {
+                  builder.addressLine1 = value;
+                },
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return "Muss angegeben werden";
+                  }
+                  return null;
+                },
+              ),
+              const SizedBox(height: 20),
+              AutocompleteTextFormField(
+                key: UniqueKey(),
+                title: 'Adresszeile 2',
+                options: [],
+                initialValue: builder.addressLine2,
+                onChanged: (value) {
+                  builder.addressLine2 = value;
+                },
+              ),
+              const SizedBox(height: 20),
+              AutocompleteTextFormField(
+                key: UniqueKey(),
+                title: 'Stadt',
+                options: [],
+                initialValue: builder.city,
+                onChanged: (value) {
+                  builder.city = value;
+                },
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return "Muss angegeben werden";
+                  }
+                  return null;
+                },
+              ),
+              const SizedBox(height: 20),
+              AutocompleteTextFormField(
+                key: UniqueKey(),
+                title: 'PLZ',
+                options: [],
+                initialValue: builder.postalCode,
+                onChanged: (value) {
+                  builder.postalCode = value;
+                },
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return "Muss angegeben werden";
+                  }
+                  return null;
+                },
+              ),
+              const SizedBox(height: 20),
+              AutocompleteTextFormField(
+                key: UniqueKey(),
+                title: 'UID',
+                options: [],
+                initialValue: builder.taxIdentificationNumber,
+                onChanged: (value) {
+                  builder.taxIdentificationNumber = value;
+                },
+              ),
+              const SizedBox(height: 20),
+              AutocompleteTextFormField(
+                key: UniqueKey(),
+                title: 'E-Mail',
+                options: [],
+                initialValue: builder.email,
+                onChanged: (value) {
+                  builder.email = value;
+                },
+              ),
+              const SizedBox(height: 20),
+              AutocompleteTextFormField(
+                key: UniqueKey(),
+                title: 'Telefon',
+                options: [],
+                initialValue: builder.phone,
+                onChanged: (value) {
+                  builder.phone = value;
+                },
+              ),
+              const SizedBox(height: 20),
+              AutocompleteTextFormField(
+                  key: UniqueKey(),
+                  title: 'Stundensatz',
+                  options: const [],
+                  initialValue: builder.hourlyRate?.toString(),
+                  textInputType: TextInputType.numberWithOptions(decimal: true),
+                  onChanged: (value) {
+                    builder.hourlyRate = double.tryParse(value);
+                  }),
+              const SizedBox(height: 20),
+              AutocompleteTextFormField(
+                key: UniqueKey(),
+                title: 'Ländercode',
+                options: [],
+                initialValue: builder.countryCode,
+                onChanged: (value) {
+                  builder.countryCode = value;
+                },
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return "Muss angegeben werden";
+                  }
+                  return null;
+                },
+              ),
+              const SizedBox(height: 20),
+              AutocompleteTextFormField(
+                key: UniqueKey(),
+                title: 'Zahlungsbedingung',
+                options: [],
+                initialValue: builder.paymentInfo,
+                onChanged: (value) {
+                  builder.paymentInfo = value;
+                },
+              ),
+              const SizedBox(height: 20),
               ElevatedButton.icon(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
-                    Provider.of<CustomerModel>(context, listen: false)
-                        .save(builder.build())
-                        .then((response) {
-                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                        content: Text('Gespeichert'),
+                    try {
+                      Provider.of<CustomerModel>(context, listen: false)
+                          .save(builder.build())
+                          .then((response) {
+                        ScaffoldMessenger.of(context)
+                            .showSnackBar(const SnackBar(
+                          content: Text('Gespeichert'),
+                          behavior: SnackBarBehavior.floating,
+                        ));
+                        Navigator.pop(context);
+                      });
+                    } catch (e) {
+                      print('Unexpected error: $e');
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content:
+                            Text('Ein unerwarteter Fehler ist aufgetreten.'),
                         behavior: SnackBarBehavior.floating,
                       ));
-                      Navigator.pop(context);
-                    });
+                    }
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content: Text('Objekt konnte nicht gespeichert werden.'),
+                      behavior: SnackBarBehavior.floating,
+                    ));
                   }
                 },
                 icon: Icon(Icons.check),

@@ -97,7 +97,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **getInvoices**
-> InvoicePage getInvoices(pageable)
+> InvoicePage getInvoices(invoiceFilterRequest)
 
 
 
@@ -106,10 +106,10 @@ No authorization required
 import 'package:faktura_api/api.dart';
 
 final api = FakturaApi().getInvoiceApi();
-final Pageable pageable = ; // Pageable | 
+final InvoiceFilterRequest invoiceFilterRequest = ; // InvoiceFilterRequest | 
 
 try {
-    final response = api.getInvoices(pageable);
+    final response = api.getInvoices(invoiceFilterRequest);
     print(response);
 } catch on DioException (e) {
     print('Exception when calling InvoiceApi->getInvoices: $e\n');
@@ -120,7 +120,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **pageable** | [**Pageable**](Pageable.md)|  | [optional] 
+ **invoiceFilterRequest** | [**InvoiceFilterRequest**](InvoiceFilterRequest.md)|  | [optional] 
 
 ### Return type
 
