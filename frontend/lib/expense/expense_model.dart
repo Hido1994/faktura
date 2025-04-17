@@ -4,6 +4,18 @@ import 'package:faktura_api/faktura_api.dart';
 import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
+final ExpenseFilterBuilder _defaultFilter = ExpenseFilterBuilder();
+final ListBuilder<Sort> _defaultSort = ListBuilder<Sort>([
+  Sort((builder) {
+    builder.property = "paidOn";
+    builder.direction = SortDirectionEnum.DESC;
+  }),
+  Sort((builder) {
+    builder.property = "incomingOn";
+    builder.direction = SortDirectionEnum.DESC;
+  }),
+]);
+
 class ExpenseModel extends ChangeNotifier {
   final AppStateModel _appStateModel;
   final ExpenseApi _expenseApi;
@@ -11,36 +23,23 @@ class ExpenseModel extends ChangeNotifier {
   List<Expense> entities = [];
   Expense? selectedEntity;
   int pageSize = 50;
-  ExpenseFilterBuilder filter = ExpenseFilterBuilder();
-  ListBuilder<Sort>? sort = ListBuilder<Sort>([
-    Sort((builder) {
-      builder.property = "paidOn";
-      builder.direction = SortDirectionEnum.DESC;
-    }),
-    Sort((builder) {
-      builder.property = "incomingOn";
-      builder.direction = SortDirectionEnum.DESC;
-    }),
-  ]);
+  ExpenseFilterBuilder filter = _defaultFilter;
+  ListBuilder<Sort>? sort = _defaultSort;
   PagingState<int, Expense> pagingState = PagingState();
 
   ExpenseModel(this._appStateModel, this._expenseApi);
 
   void getAll() {
-    _appStateModel.setLoading(true);
     _expenseApi.getExpenses(
       expenseFilterRequest: ExpenseFilterRequest((builder) {
-        builder.filter = filter;
+        builder.filter = _defaultFilter;
         builder.pageable = Pageable((builder) {
-          builder.sort = sort;
+          builder.sort = _defaultSort;
         }).toBuilder();
       }),
     ).then((response) {
       entities = response.data?.content?.toList() ?? [];
-      notifyListeners();
-      _appStateModel.setLoading(false);
     }).catchError((error) {
-      _appStateModel.setLoading(false);
       _appStateModel.setMessage("Ein unerwarteter Fehler ist aufgetreten.");
     });
   }

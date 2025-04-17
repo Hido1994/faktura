@@ -14,8 +14,8 @@ class PrepaidTaxModel extends ChangeNotifier {
   PrepaidTaxFilterBuilder filter = PrepaidTaxFilterBuilder();
   ListBuilder<Sort>? sort = ListBuilder<Sort>([
     Sort((builder) {
-      builder.property = "name";
-      builder.direction = SortDirectionEnum.ASC;
+      builder.property = "taxYear";
+      builder.direction = SortDirectionEnum.DESC;
     }),
   ]);
   PagingState<int, PrepaidTax> pagingState = PagingState();

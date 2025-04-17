@@ -1,9 +1,11 @@
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:faktura/common/widget/autocomplete_text_form_field.dart';
 import 'package:faktura/expense/expense_model.dart';
 import 'package:faktura_api/faktura_api.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../account/account_model.dart';
 import '../common/widget/datetime_picker_text_form_field.dart';
 
 class ExpenseFormScreen extends StatefulWidget {
@@ -38,6 +40,10 @@ class _ExpenseFormScreenState extends State<ExpenseFormScreen> {
     super.initState();
 
     _initExpense();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Provider.of<AccountModel>(context, listen: false).getAll();
+    });
   }
 
   @override
@@ -74,6 +80,16 @@ class _ExpenseFormScreenState extends State<ExpenseFormScreen> {
                 },
               ),
               const SizedBox(height: 20),
+              DateTimePickerTextFormField(
+                key: UniqueKey(),
+                title: 'Bezahlt am',
+                initialValue: builder.paidOn?.toDateTime(),
+                includeTime: false,
+                onChanged: (date) {
+                  builder.paidOn = date.toDate();
+                },
+              ),
+              const SizedBox(height: 20),
               AutocompleteTextFormField(
                 key: UniqueKey(),
                 title: 'Description',
@@ -89,6 +105,25 @@ class _ExpenseFormScreenState extends State<ExpenseFormScreen> {
                   return null;
                 },
               ),
+              const SizedBox(height: 20),
+              Consumer<AccountModel>(builder: (context, model, child) {
+                return DropdownSearch<Account>(
+                  items: (f, cs) => model.entities,
+                  itemAsString: (Account account) => account.description,
+                  decoratorProps: DropDownDecoratorProps(
+                      decoration: InputDecoration(label: Text("Konto"))),
+                  compareFn: (e, e2) => e.id == e2.id,
+                  popupProps: PopupProps.menu(
+                      showSearchBox: true,
+                      fit: FlexFit.loose),
+                  onChanged: (value) {
+                    builder.account = value?.toBuilder();
+                  },
+                  filterFn: (Account account, String filter) {
+                    return account.description.toLowerCase().contains(filter.toLowerCase());
+                  },
+                );
+              }),
               const SizedBox(height: 20),
               ElevatedButton.icon(
                 onPressed: () {
