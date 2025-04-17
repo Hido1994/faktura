@@ -92,7 +92,7 @@ class _ExpenseFormScreenState extends State<ExpenseFormScreen> {
               const SizedBox(height: 20),
               AutocompleteTextFormField(
                 key: UniqueKey(),
-                title: 'Description',
+                title: 'Beschreibung',
                 options: [],
                 initialValue: builder.description,
                 onChanged: (value) {
