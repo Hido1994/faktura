@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:provider/provider.dart';
 
+import 'account/account_model.dart';
 import 'common/app_routes.dart';
 import 'customer/customer_model.dart';
 
@@ -17,26 +18,44 @@ void main() {
         ChangeNotifierProvider<AppStateModel>(
             create: (context) => AppStateModel()),
         Provider<Dio>(
-          create: (_) => Dio(BaseOptions(
-              baseUrl: "http://10.0.2.2:8080/api/v1",
-              connectTimeout: Duration(seconds: 10))),
+          create: (_) =>
+              Dio(BaseOptions(
+                  baseUrl: "http://10.0.2.2:8080/api/v1",
+                  connectTimeout: Duration(seconds: 10))),
         ),
+        Provider<AccountApi>(
+          create: (context) =>
+              AccountApi(
+                  Provider.of<Dio>(context, listen: false),
+                  standardSerializers),
+        ),
+        ChangeNotifierProvider<AccountModel>(
+            create: (context) =>
+                AccountModel(
+                    Provider.of<AppStateModel>(context, listen: false),
+                    Provider.of<AccountApi>(context, listen: false))),
         Provider<CustomerApi>(
-          create: (context) => CustomerApi(
-              Provider.of<Dio>(context, listen: false), standardSerializers),
+          create: (context) =>
+              CustomerApi(
+                  Provider.of<Dio>(context, listen: false),
+                  standardSerializers),
         ),
         ChangeNotifierProvider<CustomerModel>(
-            create: (context) => CustomerModel(
-                Provider.of<AppStateModel>(context, listen: false),
-                Provider.of<CustomerApi>(context, listen: false))),
+            create: (context) =>
+                CustomerModel(
+                    Provider.of<AppStateModel>(context, listen: false),
+                    Provider.of<CustomerApi>(context, listen: false))),
         Provider<SupplierApi>(
-          create: (context) => SupplierApi(
-              Provider.of<Dio>(context, listen: false), standardSerializers),
+          create: (context) =>
+              SupplierApi(
+                  Provider.of<Dio>(context, listen: false),
+                  standardSerializers),
         ),
         ChangeNotifierProvider<SupplierModel>(
-            create: (context) => SupplierModel(
-                Provider.of<AppStateModel>(context, listen: false),
-                Provider.of<SupplierApi>(context, listen: false)))
+            create: (context) =>
+                SupplierModel(
+                    Provider.of<AppStateModel>(context, listen: false),
+                    Provider.of<SupplierApi>(context, listen: false)))
       ],
       child: MyApp(),
     ),
@@ -72,14 +91,14 @@ class MyApp extends StatelessWidget {
             }
             return model.loading
                 ? Container(
-                    color: Colors.black.withValues(alpha: 0.5),
-                    child: Center(
-                      child: LoadingAnimationWidget.staggeredDotsWave(
-                        color: Colors.white,
-                        size: 50,
-                      ),
-                    ),
-                  )
+              color: Colors.black.withValues(alpha: 0.5),
+              child: Center(
+                child: LoadingAnimationWidget.staggeredDotsWave(
+                  color: Colors.white,
+                  size: 50,
+                ),
+              ),
+            )
                 : const SizedBox.shrink();
           },
         ),
@@ -112,9 +131,10 @@ class _MainScreen extends State<MainScreen> {
             key: _navigatorKey,
             onGenerateRoute: (settings) {
               return MaterialPageRoute(
-                  builder: (_) => appRoutes.firstWhere(
+                  builder: (_) =>
+                  appRoutes.firstWhere(
                         (item) => item['route'] == settings.name,
-                      )['component']);
+                  )['component']);
             },
           )),
     );

@@ -1,3 +1,4 @@
+import 'package:faktura/account/account_screen.dart';
 import 'package:faktura/supplier/supplier_screen.dart';
 
 import '../customer/customer_screen.dart';
@@ -7,6 +8,11 @@ import '../view/screen/settings_screen.dart';
 import '../view/screen/trips_screen.dart';
 
 List<Map<String, dynamic>> appRoutes = [
+  {
+    'title': 'Konten',
+    'component': const AccountScreen(),
+    'route': '/accounts'
+  },
   {
     'title': 'Kunden',
     'component': const CustomerScreen(),

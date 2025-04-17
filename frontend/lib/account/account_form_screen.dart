@@ -1,25 +1,25 @@
+import 'package:faktura/account/account_model.dart';
 import 'package:faktura/common/widget/autocomplete_text_form_field.dart';
-import 'package:faktura/customer/customer_model.dart';
 import 'package:faktura_api/faktura_api.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class CustomerFormScreen extends StatefulWidget {
-  final Customer? entry;
+class AccountFormScreen extends StatefulWidget {
+  final Account? entry;
 
-  const CustomerFormScreen({super.key, this.entry});
+  const AccountFormScreen({super.key, this.entry});
 
   @override
-  State<CustomerFormScreen> createState() => _CustomerFormScreenState();
+  State<AccountFormScreen> createState() => _AccountFormScreenState();
 }
 
-class _CustomerFormScreenState extends State<CustomerFormScreen> {
+class _AccountFormScreenState extends State<AccountFormScreen> {
   final _formKey = GlobalKey<FormState>();
 
-  CustomerBuilder builder = CustomerBuilder();
+  AccountBuilder builder = AccountBuilder();
 
-  Future<void> _initCustomer() async {
-    CustomerBuilder entityBuilder = CustomerBuilder();
+  Future<void> _initAccount() async {
+    AccountBuilder entityBuilder = AccountBuilder();
 
     if (widget.entry == null) {
     } else {
@@ -35,7 +35,7 @@ class _CustomerFormScreenState extends State<CustomerFormScreen> {
   void initState() {
     super.initState();
 
-    _initCustomer();
+    _initAccount();
   }
 
   @override
@@ -58,11 +58,11 @@ class _CustomerFormScreenState extends State<CustomerFormScreen> {
               const SizedBox(height: 20),
               AutocompleteTextFormField(
                 key: UniqueKey(),
-                title: 'Name',
+                title: 'Beschreibung',
                 options: [],
-                initialValue: builder.name,
+                initialValue: builder.description,
                 onChanged: (value) {
-                  builder.name = value;
+                  builder.description = value;
                 },
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -76,7 +76,7 @@ class _CustomerFormScreenState extends State<CustomerFormScreen> {
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
                     try {
-                      Provider.of<CustomerModel>(context, listen: false)
+                      Provider.of<AccountModel>(context, listen: false)
                           .save(builder.build())
                           .then((response) {
                         ScaffoldMessenger.of(context)

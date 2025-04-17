@@ -51,6 +51,7 @@ class _SupplierListItem extends State<SupplierListItem> {
               },
             );
           }
+          return null;
         },
         onDismissed: (direction) {
           if (DismissDirection.endToStart == direction) {

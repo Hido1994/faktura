@@ -1,21 +1,19 @@
-import 'package:faktura/customer/customer_form_screen.dart';
+import 'package:faktura/account/account_form_screen.dart';
+import 'package:faktura/account/account_model.dart';
 import 'package:faktura_api/faktura_api.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../common/string_formats.dart';
-import 'customer_model.dart';
+class AccountListItem extends StatefulWidget {
+  final Account entry;
 
-class CustomerListItem extends StatefulWidget {
-  final Customer entry;
-
-  const CustomerListItem({super.key, required this.entry});
+  const AccountListItem({super.key, required this.entry});
 
   @override
-  State<CustomerListItem> createState() => _CustomerListItem();
+  State<AccountListItem> createState() => _AccountListItem();
 }
 
-class _CustomerListItem extends State<CustomerListItem> {
+class _AccountListItem extends State<AccountListItem> {
   @override
   Widget build(BuildContext context) {
     return Dismissible(
@@ -57,7 +55,7 @@ class _CustomerListItem extends State<CustomerListItem> {
         },
         onDismissed: (direction) {
           if (DismissDirection.endToStart == direction) {
-            Provider.of<CustomerModel>(context, listen: false)
+            Provider.of<AccountModel>(context, listen: false)
                 .delete(widget.entry.id!)
                 .then((response) {
               ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
@@ -68,31 +66,18 @@ class _CustomerListItem extends State<CustomerListItem> {
           }
         },
         child: ListTile(
-          leading: Icon(Icons.person),
+          leading: Icon(Icons.folder),
           title: Text(
-            widget.entry.name,
+            widget.entry.description,
           ),
-          subtitle: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(widget.entry.taxIdentificationNumber != null
-                  ? widget.entry.taxIdentificationNumber!
-                  : '?'),
-              Text(
-                  '${widget.entry.addressLine1}, ${widget.entry.postalCode} ${widget.entry.city}'),
-              Text(widget.entry.hourlyRate != null
-                  ? currencyFormat.format(widget.entry.hourlyRate!)
-                  : '?')
-            ],
-          ),
-          isThreeLine: true,
+          isThreeLine: false,
           onTap: () {
             showModalBottomSheet(
               isScrollControlled: true,
               showDragHandle: true,
               useSafeArea: true,
               context: context,
-              builder: (context) => CustomerFormScreen(
+              builder: (context) => AccountFormScreen(
                 entry: widget.entry,
               ),
             );

@@ -3,7 +3,6 @@ import 'package:faktura/service/trip_service.dart';
 import 'package:faktura/state/trip_provider_state.dart';
 import 'package:faktura/view/screen/form_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import '../string_formats.dart';
