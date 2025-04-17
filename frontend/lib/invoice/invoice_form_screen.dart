@@ -1,27 +1,27 @@
 import 'package:faktura/common/widget/autocomplete_text_form_field.dart';
-import 'package:faktura/sale/article/sale_article_model.dart';
+import 'package:faktura/invoice/invoice_model.dart';
 import 'package:faktura_api/faktura_api.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../common/widget/datetime_picker_text_form_field.dart';
+import '../common/widget/datetime_picker_text_form_field.dart';
 
-class SaleArticleFormScreen extends StatefulWidget {
-  final SaleArticle? entry;
+class InvoiceFormScreen extends StatefulWidget {
+  final Invoice? entry;
 
-  const SaleArticleFormScreen({super.key, this.entry});
+  const InvoiceFormScreen({super.key, this.entry});
 
   @override
-  State<SaleArticleFormScreen> createState() => _SaleArticleFormScreenState();
+  State<InvoiceFormScreen> createState() => _InvoiceFormScreenState();
 }
 
-class _SaleArticleFormScreenState extends State<SaleArticleFormScreen> {
+class _InvoiceFormScreenState extends State<InvoiceFormScreen> {
   final _formKey = GlobalKey<FormState>();
 
-  SaleArticleBuilder builder = SaleArticleBuilder();
+  InvoiceBuilder builder = InvoiceBuilder();
 
-  Future<void> _initSaleArticle() async {
-    SaleArticleBuilder entityBuilder = SaleArticleBuilder();
+  Future<void> _initInvoice() async {
+    InvoiceBuilder entityBuilder = InvoiceBuilder();
 
     if (widget.entry == null) {
     } else {
@@ -37,7 +37,7 @@ class _SaleArticleFormScreenState extends State<SaleArticleFormScreen> {
   void initState() {
     super.initState();
 
-    _initSaleArticle();
+    _initInvoice();
   }
 
   @override
@@ -60,11 +60,11 @@ class _SaleArticleFormScreenState extends State<SaleArticleFormScreen> {
               const SizedBox(height: 20),
               DateTimePickerTextFormField(
                 key: UniqueKey(),
-                title: 'Eingang am',
-                initialValue: builder.incomingOn?.toDateTime(),
+                title: 'Erstellt am',
+                initialValue: builder.createdOn?.toDateTime(),
                 includeTime: false,
                 onChanged: (date) {
-                  builder.incomingOn = date.toDate();
+                  builder.createdOn = date.toDate();
                 },
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -76,11 +76,12 @@ class _SaleArticleFormScreenState extends State<SaleArticleFormScreen> {
               const SizedBox(height: 20),
               AutocompleteTextFormField(
                 key: UniqueKey(),
-                title: 'Beschreibung',
-                options: [],
-                initialValue: builder.description,
+                title: 'Rechnungs-Nr.',
+                options: const [],
+                initialValue: builder.invoiceNumber.toString(),
+                textInputType: TextInputType.number,
                 onChanged: (value) {
-                  builder.description = value;
+                  builder.invoiceNumber = int.tryParse(value);
                 },
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -94,7 +95,7 @@ class _SaleArticleFormScreenState extends State<SaleArticleFormScreen> {
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
                     try {
-                      Provider.of<SaleArticleModel>(context, listen: false)
+                      Provider.of<InvoiceModel>(context, listen: false)
                           .save(builder.build())
                           .then((response) {
                         ScaffoldMessenger.of(context)

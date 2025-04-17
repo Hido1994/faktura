@@ -1,9 +1,12 @@
 import 'package:dio/dio.dart';
 import 'package:faktura/app_state_model.dart';
 import 'package:faktura/paymentmethod/payment_method_model.dart';
+import 'package:faktura/prepaidtax/prepaid_tax_model.dart';
 import 'package:faktura/sale/article/sale_article_model.dart';
+import 'package:faktura/sale/service/sale_service_model.dart';
 import 'package:faktura/state/trip_provider_state.dart';
 import 'package:faktura/supplier/supplier_model.dart';
+import 'package:faktura/timeentry/time_entry_model.dart';
 import 'package:faktura_api/faktura_api.dart';
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
@@ -13,6 +16,7 @@ import 'account/account_model.dart';
 import 'common/app_routes.dart';
 import 'customer/customer_model.dart';
 import 'expense/expense_model.dart';
+import 'invoice/invoice_model.dart';
 
 void main() {
   runApp(
@@ -65,6 +69,14 @@ void main() {
             create: (context) => ExpenseModel(
                 Provider.of<AppStateModel>(context, listen: false),
                 Provider.of<ExpenseApi>(context, listen: false))),
+        Provider<SaleServiceApi>(
+          create: (context) => SaleServiceApi(
+              Provider.of<Dio>(context, listen: false), standardSerializers),
+        ),
+        ChangeNotifierProvider<SaleServiceModel>(
+            create: (context) => SaleServiceModel(
+                Provider.of<AppStateModel>(context, listen: false),
+                Provider.of<SaleServiceApi>(context, listen: false))),
         Provider<SaleArticleApi>(
           create: (context) => SaleArticleApi(
               Provider.of<Dio>(context, listen: false), standardSerializers),
@@ -73,6 +85,30 @@ void main() {
             create: (context) => SaleArticleModel(
                 Provider.of<AppStateModel>(context, listen: false),
                 Provider.of<SaleArticleApi>(context, listen: false))),
+        Provider<TimeEntryApi>(
+          create: (context) => TimeEntryApi(
+              Provider.of<Dio>(context, listen: false), standardSerializers),
+        ),
+        ChangeNotifierProvider<TimeEntryModel>(
+            create: (context) => TimeEntryModel(
+                Provider.of<AppStateModel>(context, listen: false),
+                Provider.of<TimeEntryApi>(context, listen: false))),
+        Provider<InvoiceApi>(
+          create: (context) => InvoiceApi(
+              Provider.of<Dio>(context, listen: false), standardSerializers),
+        ),
+        ChangeNotifierProvider<InvoiceModel>(
+            create: (context) => InvoiceModel(
+                Provider.of<AppStateModel>(context, listen: false),
+                Provider.of<InvoiceApi>(context, listen: false))),
+        Provider<PrepaidTaxApi>(
+          create: (context) => PrepaidTaxApi(
+              Provider.of<Dio>(context, listen: false), standardSerializers),
+        ),
+        ChangeNotifierProvider<PrepaidTaxModel>(
+            create: (context) => PrepaidTaxModel(
+                Provider.of<AppStateModel>(context, listen: false),
+                Provider.of<PrepaidTaxApi>(context, listen: false))),
       ],
       child: MyApp(),
     ),

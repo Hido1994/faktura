@@ -1,27 +1,25 @@
 import 'package:faktura/common/widget/autocomplete_text_form_field.dart';
-import 'package:faktura/sale/article/sale_article_model.dart';
+import 'package:faktura/prepaidtax/prepaid_tax_model.dart';
 import 'package:faktura_api/faktura_api.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../common/widget/datetime_picker_text_form_field.dart';
+class PrepaidTaxFormScreen extends StatefulWidget {
+  final PrepaidTax? entry;
 
-class SaleArticleFormScreen extends StatefulWidget {
-  final SaleArticle? entry;
-
-  const SaleArticleFormScreen({super.key, this.entry});
+  const PrepaidTaxFormScreen({super.key, this.entry});
 
   @override
-  State<SaleArticleFormScreen> createState() => _SaleArticleFormScreenState();
+  State<PrepaidTaxFormScreen> createState() => _PrepaidTaxFormScreenState();
 }
 
-class _SaleArticleFormScreenState extends State<SaleArticleFormScreen> {
+class _PrepaidTaxFormScreenState extends State<PrepaidTaxFormScreen> {
   final _formKey = GlobalKey<FormState>();
 
-  SaleArticleBuilder builder = SaleArticleBuilder();
+  PrepaidTaxBuilder builder = PrepaidTaxBuilder();
 
-  Future<void> _initSaleArticle() async {
-    SaleArticleBuilder entityBuilder = SaleArticleBuilder();
+  Future<void> _initPrepaidTax() async {
+    PrepaidTaxBuilder entityBuilder = PrepaidTaxBuilder();
 
     if (widget.entry == null) {
     } else {
@@ -37,7 +35,7 @@ class _SaleArticleFormScreenState extends State<SaleArticleFormScreen> {
   void initState() {
     super.initState();
 
-    _initSaleArticle();
+    _initPrepaidTax();
   }
 
   @override
@@ -58,43 +56,21 @@ class _SaleArticleFormScreenState extends State<SaleArticleFormScreen> {
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 20),
-              DateTimePickerTextFormField(
-                key: UniqueKey(),
-                title: 'Eingang am',
-                initialValue: builder.incomingOn?.toDateTime(),
-                includeTime: false,
-                onChanged: (date) {
-                  builder.incomingOn = date.toDate();
-                },
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return "Muss angegeben werden";
-                  }
-                  return null;
-                },
-              ),
-              const SizedBox(height: 20),
               AutocompleteTextFormField(
-                key: UniqueKey(),
-                title: 'Beschreibung',
-                options: [],
-                initialValue: builder.description,
-                onChanged: (value) {
-                  builder.description = value;
-                },
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return "Muss angegeben werden";
-                  }
-                  return null;
-                },
-              ),
+                  key: UniqueKey(),
+                  title: 'Jahr',
+                  options: const [],
+                  initialValue: builder.taxYear?.toString(),
+                  textInputType: TextInputType.number,
+                  onChanged: (value) {
+                    builder.taxYear = int.tryParse(value);
+                  }),
               const SizedBox(height: 20),
               ElevatedButton.icon(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
                     try {
-                      Provider.of<SaleArticleModel>(context, listen: false)
+                      Provider.of<PrepaidTaxModel>(context, listen: false)
                           .save(builder.build())
                           .then((response) {
                         ScaffoldMessenger.of(context)

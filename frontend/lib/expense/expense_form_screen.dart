@@ -4,6 +4,8 @@ import 'package:faktura_api/faktura_api.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../common/widget/datetime_picker_text_form_field.dart';
+
 class ExpenseFormScreen extends StatefulWidget {
   final Expense? entry;
 
@@ -54,6 +56,22 @@ class _ExpenseFormScreenState extends State<ExpenseFormScreen> {
                 widget.entry?.id == null ? "Erstellen" : "Bearbeiten",
                 style: Theme.of(context).textTheme.titleLarge,
                 textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 20),
+              DateTimePickerTextFormField(
+                key: UniqueKey(),
+                title: 'Eingang am',
+                initialValue: builder.incomingOn?.toDateTime(),
+                includeTime: false,
+                onChanged: (date) {
+                  builder.incomingOn = date.toDate();
+                },
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return "Muss angegeben werden";
+                  }
+                  return null;
+                },
               ),
               const SizedBox(height: 20),
               AutocompleteTextFormField(

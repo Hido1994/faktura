@@ -1,27 +1,27 @@
 import 'package:faktura/common/widget/autocomplete_text_form_field.dart';
-import 'package:faktura/sale/article/sale_article_model.dart';
+import 'package:faktura/timeentry/time_entry_model.dart';
 import 'package:faktura_api/faktura_api.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../common/widget/datetime_picker_text_form_field.dart';
+import '../common/widget/datetime_picker_text_form_field.dart';
 
-class SaleArticleFormScreen extends StatefulWidget {
-  final SaleArticle? entry;
+class TimeEntryFormScreen extends StatefulWidget {
+  final TimeEntry? entry;
 
-  const SaleArticleFormScreen({super.key, this.entry});
+  const TimeEntryFormScreen({super.key, this.entry});
 
   @override
-  State<SaleArticleFormScreen> createState() => _SaleArticleFormScreenState();
+  State<TimeEntryFormScreen> createState() => _TimeEntryFormScreenState();
 }
 
-class _SaleArticleFormScreenState extends State<SaleArticleFormScreen> {
+class _TimeEntryFormScreenState extends State<TimeEntryFormScreen> {
   final _formKey = GlobalKey<FormState>();
 
-  SaleArticleBuilder builder = SaleArticleBuilder();
+  TimeEntryBuilder builder = TimeEntryBuilder();
 
-  Future<void> _initSaleArticle() async {
-    SaleArticleBuilder entityBuilder = SaleArticleBuilder();
+  Future<void> _initTimeEntry() async {
+    TimeEntryBuilder entityBuilder = TimeEntryBuilder();
 
     if (widget.entry == null) {
     } else {
@@ -37,7 +37,7 @@ class _SaleArticleFormScreenState extends State<SaleArticleFormScreen> {
   void initState() {
     super.initState();
 
-    _initSaleArticle();
+    _initTimeEntry();
   }
 
   @override
@@ -60,11 +60,11 @@ class _SaleArticleFormScreenState extends State<SaleArticleFormScreen> {
               const SizedBox(height: 20),
               DateTimePickerTextFormField(
                 key: UniqueKey(),
-                title: 'Eingang am',
-                initialValue: builder.incomingOn?.toDateTime(),
+                title: 'Von',
+                initialValue: builder.startedOn,
                 includeTime: false,
                 onChanged: (date) {
-                  builder.incomingOn = date.toDate();
+                  builder.startedOn = date;
                 },
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -76,7 +76,7 @@ class _SaleArticleFormScreenState extends State<SaleArticleFormScreen> {
               const SizedBox(height: 20),
               AutocompleteTextFormField(
                 key: UniqueKey(),
-                title: 'Beschreibung',
+                title: 'Description',
                 options: [],
                 initialValue: builder.description,
                 onChanged: (value) {
@@ -94,7 +94,7 @@ class _SaleArticleFormScreenState extends State<SaleArticleFormScreen> {
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
                     try {
-                      Provider.of<SaleArticleModel>(context, listen: false)
+                      Provider.of<TimeEntryModel>(context, listen: false)
                           .save(builder.build())
                           .then((response) {
                         ScaffoldMessenger.of(context)
