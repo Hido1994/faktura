@@ -1,20 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart';
-import 'package:intl/intl.dart';
+
+import '../string_formats.dart';
 
 class DateTimePickerTextFormField extends StatefulWidget {
   final DateTime? initialValue;
   final String title;
   final ValueSetter<DateTime> onChanged;
   final FormFieldValidator<String>? validator;
+  final bool includeTime;
 
-  const DateTimePickerTextFormField({
-    super.key,
-    required this.title,
-    required this.onChanged,
-    this.initialValue,
-    this.validator,
-  });
+  const DateTimePickerTextFormField(
+      {super.key,
+      required this.title,
+      required this.onChanged,
+      this.initialValue,
+      this.validator,
+      this.includeTime = true});
 
   @override
   State<DateTimePickerTextFormField> createState() =>
@@ -23,15 +25,18 @@ class DateTimePickerTextFormField extends StatefulWidget {
 
 class _DateTimePickerTextFormFieldState
     extends State<DateTimePickerTextFormField> {
-  static final DateFormat dateTimeFormat = DateFormat('dd.MM.yyyy HH:mm');
-
   final TextEditingController _dateController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
     if (widget.initialValue != null) {
-      _dateController.text = dateTimeFormat.format(widget.initialValue!);
+
+      if (widget.includeTime) {
+        _dateController.text = dateTimeFormat.format(widget.initialValue!);
+      } else {
+        _dateController.text = dateFormat.format(widget.initialValue!);
+      }
     }
   }
 
@@ -42,11 +47,19 @@ class _DateTimePickerTextFormFieldState
       readOnly: true,
       controller: _dateController,
       onTap: () {
-        DatePicker.showDateTimePicker(context, showTitleActions: true,
-            onConfirm: (date) {
-          widget.onChanged(date);
-          _dateController.text = dateTimeFormat.format(date);
-        }, currentTime: widget.initialValue, locale: LocaleType.de);
+        if (widget.includeTime) {
+          DatePicker.showDateTimePicker(context, showTitleActions: true,
+              onConfirm: (date) {
+            widget.onChanged(date);
+            _dateController.text = dateTimeFormat.format(date);
+          }, currentTime: widget.initialValue, locale: LocaleType.de);
+        } else {
+          DatePicker.showDatePicker(context, showTitleActions: true,
+              onConfirm: (date) {
+            widget.onChanged(date);
+            _dateController.text = dateFormat.format(date);
+          }, currentTime: widget.initialValue, locale: LocaleType.de);
+        }
       },
       validator: widget.validator,
     );
