@@ -7,7 +7,7 @@ class PreferenceModel extends ChangeNotifier {
 
   PreferenceModel(this.sharedPreferences)
       : apiUrl =
-            sharedPreferences.getString('api-url') ?? 'https://localhost:8080/api/v1';
+            sharedPreferences.getString('api-url') ?? 'http://localhost:8080/api/v1';
 
   void setApiUrl(String value) {
     sharedPreferences.setString('api-url', value);
