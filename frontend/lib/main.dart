@@ -189,7 +189,6 @@ class _MainScreen extends State<MainScreen> {
       Provider.of<SupplierModel>(context, listen: false).getAll();
       Provider.of<InternationalInfoModel>(context, listen: false).getAll();
       Provider.of<CustomerModel>(context, listen: false).getAll();
-      Provider.of<TimeEntryModel>(context, listen: false).getAll();
     });
   }
 

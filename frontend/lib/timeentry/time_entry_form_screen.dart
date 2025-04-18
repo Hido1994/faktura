@@ -63,10 +63,10 @@ class _TimeEntryFormScreenState extends State<TimeEntryFormScreen> {
               DateTimePickerTextFormField(
                 key: UniqueKey(),
                 title: 'Von',
-                initialValue: builder.startedOn,
-                includeTime: false,
+                initialValue: builder.startedOn?.toLocal(),
+                includeTime: true,
                 onChanged: (date) {
-                  builder.startedOn = date;
+                  builder.startedOn = date.toUtc();
                 },
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -79,10 +79,10 @@ class _TimeEntryFormScreenState extends State<TimeEntryFormScreen> {
               DateTimePickerTextFormField(
                 key: UniqueKey(),
                 title: 'Bis',
-                initialValue: builder.endedOn,
-                includeTime: false,
+                initialValue: builder.endedOn?.toLocal(),
+                includeTime: true,
                 onChanged: (date) {
-                  builder.endedOn = date;
+                  builder.endedOn = date.toUtc();
                 },
                 validator: (value) {
                   if (builder.endedOn != null &&

@@ -42,7 +42,14 @@ class _MyCalendarScreen extends State<CalendarScreen> {
             monthViewSettings: MonthViewSettings(
                 appointmentDisplayMode: MonthAppointmentDisplayMode.appointment),
             controller: _calendarController,
-            dataSource: _TimeEntryDataSource(model.entities),
+            dataSource: _TimeEntryDataSource(model.calendarViewEntities),
+            onViewChanged: (ViewChangedDetails details) {
+              if (details.visibleDates.isNotEmpty) {
+                for (final date in details.visibleDates) {
+                  Provider.of<TimeEntryModel>(context, listen: false).onCalendarViewChanged(date.year);
+                }
+              }
+            },
             onLongPress: _handleCalendarLongPress,
             onTap: _handleCalendarTap,
           );
@@ -55,7 +62,7 @@ class _MyCalendarScreen extends State<CalendarScreen> {
   void _handleCalendarLongPress(CalendarLongPressDetails details) {
     if (details.targetElement == CalendarElement.calendarCell) {
       TimeEntryBuilder builder = TimeEntryBuilder();
-      builder.startedOn = details.date!;
+      builder.startedOn = details.date!.toUtc();
 
       showModalBottomSheet(
         isScrollControlled: true,
@@ -86,6 +93,7 @@ class _MyCalendarScreen extends State<CalendarScreen> {
   }
 }
 
+
 class _TimeEntryDataSource extends CalendarDataSource<TimeEntry> {
   _TimeEntryDataSource(List<TimeEntry> source) {
     appointments = source;
@@ -98,7 +106,7 @@ class _TimeEntryDataSource extends CalendarDataSource<TimeEntry> {
 
   @override
   DateTime getEndTime(int index) {
-    return appointments![index].endedOn ?? DateTime.now();
+    return appointments![index].endedOn ?? appointments![index].startedOn.add(Duration(hours: 1));
   }
 
   @override

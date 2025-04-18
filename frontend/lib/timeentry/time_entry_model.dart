@@ -22,6 +22,8 @@ class TimeEntryModel extends ChangeNotifier {
   TimeEntryFilterBuilder filter = _defaultFilter;
   ListBuilder<Sort>? sort = _defaultSort;
   PagingState<int, TimeEntry> pagingState = PagingState();
+  List<TimeEntry> calendarViewEntities = [];
+  int? calendarViewYear;
 
   TimeEntryModel(this._appStateModel, this._timeEntryApi);
 
@@ -80,6 +82,22 @@ class TimeEntryModel extends ChangeNotifier {
       pagingState = pagingState.copyWith(isLoading: false, error: error);
       notifyListeners();
     });
+  }
+
+  void onCalendarViewChanged(int year) async {
+    if(calendarViewYear != year) {
+      calendarViewYear = year;
+      _timeEntryApi.getTimeEntries(
+        timeEntryFilterRequest: TimeEntryFilterRequest((builder) {
+          builder.filter = filter;
+        }),
+      ).then((response) {
+        calendarViewEntities = response.data?.content?.toList() ?? [];
+        notifyListeners();
+      }).catchError((error) {
+        _appStateModel.setMessage("Ein unerwarteter Fehler ist aufgetreten.");
+      });
+    }
   }
 
   Future<void> save(TimeEntry timeEntry) {
