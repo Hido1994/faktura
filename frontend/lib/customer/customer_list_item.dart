@@ -61,7 +61,7 @@ class _CustomerListItem extends State<CustomerListItem> {
               useSafeArea: true,
               context: context,
               builder: (context) => CustomerFormScreen(
-                entry: builder.build(),
+                entry: builder,
               ),
             );
             return false;
@@ -105,7 +105,7 @@ class _CustomerListItem extends State<CustomerListItem> {
               useSafeArea: true,
               context: context,
               builder: (context) => CustomerFormScreen(
-                entry: widget.entry,
+                entry: widget.entry.toBuilder(),
               ),
             );
           },

@@ -60,7 +60,7 @@ class _ExpenseListItem extends State<ExpenseListItem> {
               useSafeArea: true,
               context: context,
               builder: (context) => ExpenseFormScreen(
-                entry: builder.build(),
+                entry: builder,
               ),
             );
             return false;
@@ -105,7 +105,7 @@ class _ExpenseListItem extends State<ExpenseListItem> {
               useSafeArea: true,
               context: context,
               builder: (context) => ExpenseFormScreen(
-                entry: widget.entry,
+                entry: widget.entry.toBuilder(),
               ),
             );
           },

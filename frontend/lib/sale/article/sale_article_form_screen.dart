@@ -14,7 +14,7 @@ import '../../paymentmethod/payment_method_model.dart';
 import '../../supplier/supplier_model.dart';
 
 class SaleArticleFormScreen extends StatefulWidget {
-  final SaleArticle? entry;
+  final SaleArticleBuilder? entry;
 
   const SaleArticleFormScreen({super.key, this.entry});
 
@@ -32,7 +32,7 @@ class _SaleArticleFormScreenState extends State<SaleArticleFormScreen> {
 
     if (widget.entry == null) {
     } else {
-      entityBuilder = widget.entry!.toBuilder();
+      entityBuilder = widget.entry!;
     }
 
     setState(() {

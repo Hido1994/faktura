@@ -11,7 +11,7 @@ import '../customer/customer_model.dart';
 import '../paymentmethod/payment_method_model.dart';
 
 class InvoiceFormScreen extends StatefulWidget {
-  final Invoice? entry;
+  final InvoiceBuilder? entry;
 
   const InvoiceFormScreen({super.key, this.entry});
 
@@ -29,7 +29,7 @@ class _InvoiceFormScreenState extends State<InvoiceFormScreen> {
 
     if (widget.entry == null) {
     } else {
-      entityBuilder = widget.entry!.toBuilder();
+      entityBuilder = widget.entry!;
     }
 
     setState(() {

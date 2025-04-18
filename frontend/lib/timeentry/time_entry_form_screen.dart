@@ -9,7 +9,7 @@ import '../common/widget/datetime_picker_text_form_field.dart';
 import '../customer/customer_model.dart';
 
 class TimeEntryFormScreen extends StatefulWidget {
-  final TimeEntry? entry;
+  final TimeEntryBuilder? entry;
 
   const TimeEntryFormScreen({super.key, this.entry});
 
@@ -27,7 +27,7 @@ class _TimeEntryFormScreenState extends State<TimeEntryFormScreen> {
 
     if (widget.entry == null) {
     } else {
-      entityBuilder = widget.entry!.toBuilder();
+      entityBuilder = widget.entry!;
     }
 
     setState(() {

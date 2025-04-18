@@ -60,7 +60,7 @@ class _TimeEntryListItem extends State<TimeEntryListItem> {
               useSafeArea: true,
               context: context,
               builder: (context) => TimeEntryFormScreen(
-                entry: builder.build(),
+                entry: builder,
               ),
             );
             return false;
@@ -90,7 +90,7 @@ class _TimeEntryListItem extends State<TimeEntryListItem> {
               useSafeArea: true,
               context: context,
               builder: (context) => TimeEntryFormScreen(
-                entry: widget.entry,
+                entry: widget.entry.toBuilder(),
               ),
             );
           },

@@ -10,7 +10,7 @@ import '../../common/widget/datetime_picker_text_form_field.dart';
 import '../../customer/customer_model.dart';
 
 class SaleServiceFormScreen extends StatefulWidget {
-  final SaleService? entry;
+  final SaleServiceBuilder? entry;
 
   const SaleServiceFormScreen({super.key, this.entry});
 
@@ -28,7 +28,7 @@ class _SaleServiceFormScreenState extends State<SaleServiceFormScreen> {
 
     if (widget.entry == null) {
     } else {
-      entityBuilder = widget.entry!.toBuilder();
+      entityBuilder = widget.entry!;
     }
 
     setState(() {

@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class SupplierFormScreen extends StatefulWidget {
-  final Supplier? entry;
+  final SupplierBuilder? entry;
 
   const SupplierFormScreen({super.key, this.entry});
 
@@ -23,7 +23,7 @@ class _SupplierFormScreenState extends State<SupplierFormScreen> {
 
     if (widget.entry == null) {
     } else {
-      entityBuilder = widget.entry!.toBuilder();
+      entityBuilder = widget.entry!;
     }
 
     setState(() {

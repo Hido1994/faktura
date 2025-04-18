@@ -59,7 +59,7 @@ class _SupplierListItem extends State<SupplierListItem> {
               useSafeArea: true,
               context: context,
               builder: (context) => SupplierFormScreen(
-                entry: builder.build(),
+                entry: builder,
               ),
             );
             return false;
@@ -89,7 +89,7 @@ class _SupplierListItem extends State<SupplierListItem> {
               useSafeArea: true,
               context: context,
               builder: (context) => SupplierFormScreen(
-                entry: widget.entry,
+                entry: widget.entry.toBuilder(),
               ),
             );
           },

@@ -8,19 +8,29 @@ class CustomDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Drawer(
         child: Padding(
-      padding: const EdgeInsets.only(top: 50.0),
-      child: ListView(
-        padding: EdgeInsets.zero,
-        children: [
-          ...appRoutes.map((item) => ListTile(
-                title: Text(item['title']),
-                onTap: () {
-                  Navigator.pop(context);
-                  Navigator.of(context).pushNamed(item['route']);
-                },
-              )),
-        ],
-      ),
-    ));
+          padding: const EdgeInsets.only(top: kToolbarHeight),
+          child: ListView(
+              padding: EdgeInsets.zero,
+              children: [
+              ...getGroupedRoutes(appRoutes).entries.expand((entry) { return [
+                ListTile(
+                  title: Text(
+                    entry.key,
+                    style: TextStyle(color: Theme.of(context).disabledColor),
+                  ),
+                ),
+                ...entry.value.map((item) =>
+                    ListTile(
+                      title: Text(item['title']),
+                      leading: item['icon'],
+                      onTap: () {
+                        Navigator.pop(context);
+                        Navigator.of(context).pushNamed(item['route']);
+                      },
+                    )),
+              ]; }),
+            ],
+          ),
+        ));
   }
 }

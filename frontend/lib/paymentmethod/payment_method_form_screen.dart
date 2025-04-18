@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class PaymentMethodFormScreen extends StatefulWidget {
-  final PaymentMethod? entry;
+  final PaymentMethodBuilder? entry;
 
   const PaymentMethodFormScreen({super.key, this.entry});
 
@@ -24,7 +24,7 @@ class _PaymentMethodFormScreenState extends State<PaymentMethodFormScreen> {
 
     if (widget.entry == null) {
     } else {
-      entityBuilder = widget.entry!.toBuilder();
+      entityBuilder = widget.entry!;
     }
 
     setState(() {

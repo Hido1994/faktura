@@ -59,7 +59,7 @@ class _SaleArticleListItem extends State<SaleArticleListItem> {
               useSafeArea: true,
               context: context,
               builder: (context) => SaleArticleFormScreen(
-                entry: builder.build(),
+                entry: builder,
               ),
             );
             return false;
@@ -90,7 +90,7 @@ class _SaleArticleListItem extends State<SaleArticleListItem> {
               useSafeArea: true,
               context: context,
               builder: (context) => SaleArticleFormScreen(
-                entry: widget.entry,
+                entry: widget.entry.toBuilder(),
               ),
             );
           },

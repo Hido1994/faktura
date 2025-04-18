@@ -6,7 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 class PrepaidTaxFormScreen extends StatefulWidget {
-  final PrepaidTax? entry;
+  final PrepaidTaxBuilder? entry;
 
   const PrepaidTaxFormScreen({super.key, this.entry});
 
@@ -24,7 +24,7 @@ class _PrepaidTaxFormScreenState extends State<PrepaidTaxFormScreen> {
 
     if (widget.entry == null) {
     } else {
-      entityBuilder = widget.entry!.toBuilder();
+      entityBuilder = widget.entry!;
     }
 
     setState(() {

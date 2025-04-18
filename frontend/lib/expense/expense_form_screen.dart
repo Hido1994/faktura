@@ -13,7 +13,7 @@ import '../internationalinfo/international_info_model.dart';
 import '../paymentmethod/payment_method_model.dart';
 
 class ExpenseFormScreen extends StatefulWidget {
-  final Expense? entry;
+  final ExpenseBuilder? entry;
 
   const ExpenseFormScreen({super.key, this.entry});
 
@@ -31,7 +31,7 @@ class _ExpenseFormScreenState extends State<ExpenseFormScreen> {
 
     if (widget.entry == null) {
     } else {
-      entityBuilder = widget.entry!.toBuilder();
+      entityBuilder = widget.entry!;
     }
 
     setState(() {

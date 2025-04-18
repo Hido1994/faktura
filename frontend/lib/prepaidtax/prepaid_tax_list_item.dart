@@ -59,7 +59,7 @@ class _PrepaidTaxListItem extends State<PrepaidTaxListItem> {
               useSafeArea: true,
               context: context,
               builder: (context) => PrepaidTaxFormScreen(
-                entry: builder.build(),
+                entry: builder,
               ),
             );
             return false;
@@ -89,7 +89,7 @@ class _PrepaidTaxListItem extends State<PrepaidTaxListItem> {
               useSafeArea: true,
               context: context,
               builder: (context) => PrepaidTaxFormScreen(
-                entry: widget.entry,
+                entry: widget.entry.toBuilder(),
               ),
             );
           },

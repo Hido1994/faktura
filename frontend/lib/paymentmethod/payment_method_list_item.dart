@@ -59,7 +59,7 @@ class _PaymentMethodListItem extends State<PaymentMethodListItem> {
               useSafeArea: true,
               context: context,
               builder: (context) => PaymentMethodFormScreen(
-                entry: builder.build(),
+                entry: builder,
               ),
             );
             return false;
@@ -90,7 +90,7 @@ class _PaymentMethodListItem extends State<PaymentMethodListItem> {
               useSafeArea: true,
               context: context,
               builder: (context) => PaymentMethodFormScreen(
-                entry: widget.entry,
+                entry: widget.entry.toBuilder(),
               ),
             );
           },

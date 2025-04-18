@@ -60,7 +60,7 @@ class _InternationalInfoListItem extends State<InternationalInfoListItem> {
               useSafeArea: true,
               context: context,
               builder: (context) => InternationalInfoFormScreen(
-                entry: builder.build(),
+                entry: builder,
               ),
             );
             return false;
@@ -91,7 +91,7 @@ class _InternationalInfoListItem extends State<InternationalInfoListItem> {
               useSafeArea: true,
               context: context,
               builder: (context) => InternationalInfoFormScreen(
-                entry: widget.entry,
+                entry: widget.entry.toBuilder(),
               ),
             );
           },

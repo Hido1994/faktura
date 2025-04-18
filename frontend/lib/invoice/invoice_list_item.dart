@@ -59,7 +59,7 @@ class _InvoiceListItem extends State<InvoiceListItem> {
               useSafeArea: true,
               context: context,
               builder: (context) => InvoiceFormScreen(
-                entry: builder.build(),
+                entry: builder,
               ),
             );
             return false;
@@ -89,7 +89,7 @@ class _InvoiceListItem extends State<InvoiceListItem> {
               useSafeArea: true,
               context: context,
               builder: (context) => InvoiceFormScreen(
-                entry: widget.entry,
+                entry: widget.entry.toBuilder(),
               ),
             );
           },

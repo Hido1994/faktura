@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class InternationalInfoFormScreen extends StatefulWidget {
-  final InternationalInfo? entry;
+  final InternationalInfoBuilder? entry;
 
   const InternationalInfoFormScreen({super.key, this.entry});
 
@@ -25,7 +25,7 @@ class _InternationalInfoFormScreenState
 
     if (widget.entry == null) {
     } else {
-      entityBuilder = widget.entry!.toBuilder();
+      entityBuilder = widget.entry!;
     }
 
     setState(() {

@@ -59,7 +59,7 @@ class _AccountListItem extends State<AccountListItem> {
               useSafeArea: true,
               context: context,
               builder: (context) => AccountFormScreen(
-                entry: builder.build(),
+                entry: builder,
               ),
             );
             return false;
@@ -90,7 +90,7 @@ class _AccountListItem extends State<AccountListItem> {
               useSafeArea: true,
               context: context,
               builder: (context) => AccountFormScreen(
-                entry: widget.entry,
+                entry: widget.entry.toBuilder(),
               ),
             );
           },

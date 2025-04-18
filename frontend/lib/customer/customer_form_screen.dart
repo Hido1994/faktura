@@ -6,7 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 class CustomerFormScreen extends StatefulWidget {
-  final Customer? entry;
+  final CustomerBuilder? entry;
 
   const CustomerFormScreen({super.key, this.entry});
 
@@ -24,7 +24,7 @@ class _CustomerFormScreenState extends State<CustomerFormScreen> {
 
     if (widget.entry == null) {
     } else {
-      entityBuilder = widget.entry!.toBuilder();
+      entityBuilder = widget.entry!;
     }
 
     setState(() {

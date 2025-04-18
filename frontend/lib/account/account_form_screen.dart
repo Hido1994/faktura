@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class AccountFormScreen extends StatefulWidget {
-  final Account? entry;
+  final AccountBuilder? entry;
 
   const AccountFormScreen({super.key, this.entry});
 
@@ -23,7 +23,7 @@ class _AccountFormScreenState extends State<AccountFormScreen> {
 
     if (widget.entry == null) {
     } else {
-      entityBuilder = widget.entry!.toBuilder();
+      entityBuilder = widget.entry!;
     }
 
     setState(() {
