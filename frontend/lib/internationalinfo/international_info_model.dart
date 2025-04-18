@@ -4,7 +4,8 @@ import 'package:faktura_api/faktura_api.dart';
 import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
-InternationalInfoFilterBuilder _defaultFilter = InternationalInfoFilterBuilder();
+InternationalInfoFilterBuilder _defaultFilter =
+    InternationalInfoFilterBuilder();
 ListBuilder<Sort>? _defaultSort = ListBuilder<Sort>([
   Sort((builder) {
     builder.property = "description";

@@ -132,38 +132,6 @@ class _ExpenseFormScreenState extends State<ExpenseFormScreen> {
                 );
               }),
               const SizedBox(height: 20),
-              Consumer<PaymentMethodModel>(builder: (context, model, child) {
-                return DropdownSearch<PaymentMethod>(
-                  items: (f, cs) => model.entities,
-                  selectedItem: builder.paymentMethod.id != null
-                      ? builder.paymentMethod.build()
-                      : null,
-                  itemAsString: (PaymentMethod entity) => entity.description,
-                  decoratorProps: DropDownDecoratorProps(
-                      decoration: InputDecoration(label: Text("Zahlart"))),
-                  compareFn: (e, e2) => e.id == e2.id,
-                  suffixProps: DropdownSuffixProps(
-                      clearButtonProps:
-                          const ClearButtonProps(isVisible: true)),
-                  popupProps:
-                      PopupProps.menu(showSearchBox: true, fit: FlexFit.loose),
-                  onChanged: (value) {
-                    builder.paymentMethod = value?.toBuilder();
-                  },
-                  filterFn: (PaymentMethod entity, String filter) {
-                    return entity.description
-                        .toLowerCase()
-                        .contains(filter.toLowerCase());
-                  },
-                  validator: (value) {
-                    if (value == null) {
-                      return "Muss angegeben werden";
-                    }
-                    return null;
-                  },
-                );
-              }),
-              const SizedBox(height: 20),
               Consumer<SupplierModel>(builder: (context, model, child) {
                 return DropdownSearch<Supplier>(
                   items: (f, cs) => model.entities,
@@ -215,6 +183,38 @@ class _ExpenseFormScreenState extends State<ExpenseFormScreen> {
                     return entity.description
                         .toLowerCase()
                         .contains(filter.toLowerCase());
+                  },
+                );
+              }),
+              const SizedBox(height: 20),
+              Consumer<PaymentMethodModel>(builder: (context, model, child) {
+                return DropdownSearch<PaymentMethod>(
+                  items: (f, cs) => model.entities,
+                  selectedItem: builder.paymentMethod.id != null
+                      ? builder.paymentMethod.build()
+                      : null,
+                  itemAsString: (PaymentMethod entity) => entity.description,
+                  decoratorProps: DropDownDecoratorProps(
+                      decoration: InputDecoration(label: Text("Zahlart"))),
+                  compareFn: (e, e2) => e.id == e2.id,
+                  suffixProps: DropdownSuffixProps(
+                      clearButtonProps:
+                          const ClearButtonProps(isVisible: true)),
+                  popupProps:
+                      PopupProps.menu(showSearchBox: true, fit: FlexFit.loose),
+                  onChanged: (value) {
+                    builder.paymentMethod = value?.toBuilder();
+                  },
+                  filterFn: (PaymentMethod entity, String filter) {
+                    return entity.description
+                        .toLowerCase()
+                        .contains(filter.toLowerCase());
+                  },
+                  validator: (value) {
+                    if (value == null) {
+                      return "Muss angegeben werden";
+                    }
+                    return null;
                   },
                 );
               }),
