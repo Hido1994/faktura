@@ -11,7 +11,6 @@ import 'package:faktura/timeentry/time_entry_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../customer/customer_screen.dart';
-import '../view/screen/calendar_screen.dart';
 import '../view/screen/report_screen.dart';
 import '../view/screen/settings_screen.dart';
 import '../view/screen/trips_screen.dart';
@@ -110,12 +109,6 @@ List<Map<String, dynamic>> appRoutes = [
     'title': 'Einstellungen',
     'component': const SettingsScreen(),
     'route': '/settings',
-    'icon': Icon(Icons.folder),
-  },
-  {
-    'title': 'Stundentafel',
-    'component': const CalendarScreen(),
-    'route': '/calendar',
     'icon': Icon(Icons.folder),
   },
 ];

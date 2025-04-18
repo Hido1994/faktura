@@ -47,17 +47,27 @@ class _DateTimePickerTextFormFieldState
       controller: _dateController,
       onTap: () {
         if (widget.includeTime) {
-          DatePicker.showDateTimePicker(context, showTitleActions: true,
-              onConfirm: (date) {
-            widget.onChanged(date);
-            _dateController.text = dateTimeFormat.format(date);
-          }, currentTime: widget.initialValue, locale: LocaleType.de);
+          DatePicker.showDateTimePicker(
+            context,
+            showTitleActions: true,
+            onConfirm: (date) {
+              widget.onChanged(date);
+              _dateController.text = dateTimeFormat.format(date);
+            },
+            currentTime: dateTimeFormat.parse(_dateController.text),
+            locale: LocaleType.de,
+          );
         } else {
-          DatePicker.showDatePicker(context, showTitleActions: true,
-              onConfirm: (date) {
-            widget.onChanged(date);
-            _dateController.text = dateFormat.format(date);
-          }, currentTime: widget.initialValue, locale: LocaleType.de);
+          DatePicker.showDatePicker(
+            context,
+            showTitleActions: true,
+            onConfirm: (date) {
+              widget.onChanged(date);
+              _dateController.text = dateFormat.format(date);
+            },
+            currentTime: dateFormat.parse(_dateController.text),
+            locale: LocaleType.de,
+          );
         }
       },
       validator: widget.validator,
