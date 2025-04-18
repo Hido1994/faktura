@@ -10,6 +10,10 @@ ListBuilder<Sort>? _defaultSort = ListBuilder<Sort>([
     builder.property = "taxYear";
     builder.direction = SortDirectionEnum.DESC;
   }),
+  Sort((builder) {
+    builder.property = "taxQuarter";
+    builder.direction = SortDirectionEnum.DESC;
+  }),
 ]);
 
 class PrepaidTaxModel extends ChangeNotifier {

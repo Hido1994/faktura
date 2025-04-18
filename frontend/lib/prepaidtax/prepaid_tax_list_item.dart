@@ -80,7 +80,7 @@ class _PrepaidTaxListItem extends State<PrepaidTaxListItem> {
         child: ListTile(
           leading: Icon(Icons.calculate),
           title: Text(
-            widget.entry.taxYear.toString(),
+            '${widget.entry.taxYear.toString()} - ${widget.entry.taxQuarter.toString()}'
           ),
           onTap: () {
             showModalBottomSheet(
