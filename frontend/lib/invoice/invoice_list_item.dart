@@ -50,8 +50,20 @@ class _InvoiceListItem extends State<InvoiceListItem> {
                 );
               },
             );
+          } else {
+            InvoiceBuilder builder = widget.entry.toBuilder();
+            builder.id = null;
+            showModalBottomSheet(
+              isScrollControlled: true,
+              showDragHandle: true,
+              useSafeArea: true,
+              context: context,
+              builder: (context) => InvoiceFormScreen(
+                entry: builder.build(),
+              ),
+            );
+            return false;
           }
-          return null;
         },
         onDismissed: (direction) {
           if (DismissDirection.endToStart == direction) {

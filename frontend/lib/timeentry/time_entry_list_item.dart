@@ -51,8 +51,20 @@ class _TimeEntryListItem extends State<TimeEntryListItem> {
                 );
               },
             );
+          } else {
+            TimeEntryBuilder builder = widget.entry.toBuilder();
+            builder.id = null;
+            showModalBottomSheet(
+              isScrollControlled: true,
+              showDragHandle: true,
+              useSafeArea: true,
+              context: context,
+              builder: (context) => TimeEntryFormScreen(
+                entry: builder.build(),
+              ),
+            );
+            return false;
           }
-          return null;
         },
         onDismissed: (direction) {
           if (DismissDirection.endToStart == direction) {

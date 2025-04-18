@@ -50,8 +50,20 @@ class _AccountListItem extends State<AccountListItem> {
                 );
               },
             );
+          } else {
+            AccountBuilder builder = widget.entry.toBuilder();
+            builder.id = null;
+            showModalBottomSheet(
+              isScrollControlled: true,
+              showDragHandle: true,
+              useSafeArea: true,
+              context: context,
+              builder: (context) => AccountFormScreen(
+                entry: builder.build(),
+              ),
+            );
+            return false;
           }
-          return null;
         },
         onDismissed: (direction) {
           if (DismissDirection.endToStart == direction) {

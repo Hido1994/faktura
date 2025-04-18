@@ -51,8 +51,20 @@ class _InternationalInfoListItem extends State<InternationalInfoListItem> {
                 );
               },
             );
+          } else {
+            InternationalInfoBuilder builder = widget.entry.toBuilder();
+            builder.id = null;
+            showModalBottomSheet(
+              isScrollControlled: true,
+              showDragHandle: true,
+              useSafeArea: true,
+              context: context,
+              builder: (context) => InternationalInfoFormScreen(
+                entry: builder.build(),
+              ),
+            );
+            return false;
           }
-          return null;
         },
         onDismissed: (direction) {
           if (DismissDirection.endToStart == direction) {

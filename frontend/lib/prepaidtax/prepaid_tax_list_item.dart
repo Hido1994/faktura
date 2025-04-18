@@ -50,8 +50,20 @@ class _PrepaidTaxListItem extends State<PrepaidTaxListItem> {
                 );
               },
             );
+          } else {
+            PrepaidTaxBuilder builder = widget.entry.toBuilder();
+            builder.id = null;
+            showModalBottomSheet(
+              isScrollControlled: true,
+              showDragHandle: true,
+              useSafeArea: true,
+              context: context,
+              builder: (context) => PrepaidTaxFormScreen(
+                entry: builder.build(),
+              ),
+            );
+            return false;
           }
-          return null;
         },
         onDismissed: (direction) {
           if (DismissDirection.endToStart == direction) {

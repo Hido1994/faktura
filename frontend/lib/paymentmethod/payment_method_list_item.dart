@@ -50,8 +50,20 @@ class _PaymentMethodListItem extends State<PaymentMethodListItem> {
                 );
               },
             );
+          } else {
+            PaymentMethodBuilder builder = widget.entry.toBuilder();
+            builder.id = null;
+            showModalBottomSheet(
+              isScrollControlled: true,
+              showDragHandle: true,
+              useSafeArea: true,
+              context: context,
+              builder: (context) => PaymentMethodFormScreen(
+                entry: builder.build(),
+              ),
+            );
+            return false;
           }
-          return null;
         },
         onDismissed: (direction) {
           if (DismissDirection.endToStart == direction) {
