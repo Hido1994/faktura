@@ -33,6 +33,7 @@ class _MyCalendarScreen extends State<CalendarScreen> {
               CalendarView.day,
               CalendarView.week,
               CalendarView.month,
+              CalendarView.schedule
             ],
             showNavigationArrow: true,
             showCurrentTimeIndicator: true,
@@ -116,7 +117,6 @@ class _TimeEntryDataSource extends CalendarDataSource<TimeEntry> {
 
   @override
   Color getColor(int index) {
-    // You could set colors based on customer or service type
     final colors = [
       Colors.blue,
       Colors.green,
@@ -127,11 +127,11 @@ class _TimeEntryDataSource extends CalendarDataSource<TimeEntry> {
       Colors.indigo,
     ];
 
-    final charCode = appointments![index].description.isNotEmpty
-        ? appointments![index].description.codeUnitAt(0)
-        : 0;
-
-    return colors[charCode % colors.length];
+    if(appointments![index].endedOn == null){
+      return Colors.grey;
+    } else {
+      return colors[0];
+    }
   }
 
   @override
