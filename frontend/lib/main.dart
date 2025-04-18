@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:faktura/app_state_model.dart';
 import 'package:faktura/paymentmethod/payment_method_model.dart';
+import 'package:faktura/preference/preference_model.dart';
 import 'package:faktura/prepaidtax/prepaid_tax_model.dart';
 import 'package:faktura/sale/article/sale_article_model.dart';
 import 'package:faktura/sale/service/sale_service_model.dart';
@@ -11,6 +12,7 @@ import 'package:faktura_api/faktura_api.dart';
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'account/account_model.dart';
 import 'common/app_routes.dart';
@@ -19,15 +21,25 @@ import 'expense/expense_model.dart';
 import 'internationalinfo/international_info_model.dart';
 import 'invoice/invoice_model.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  final sharedPreferences = await SharedPreferencesWithCache.create(
+    cacheOptions: const SharedPreferencesWithCacheOptions(
+      allowList: <String>{'api-url'}, // Allowed keys
+    ),
+  );
+
   runApp(
     MultiProvider(
       providers: [
         ChangeNotifierProvider<AppStateModel>(
             create: (context) => AppStateModel()),
+        ChangeNotifierProvider<PreferenceModel>(
+            create: (context) => PreferenceModel(sharedPreferences)),
         Provider<Dio>(
-          create: (_) => Dio(BaseOptions(
-              baseUrl: "http://10.0.2.2:8080/api/v1",
+          create: (context) => Dio(BaseOptions(
+              baseUrl: Provider.of<PreferenceModel>(context, listen: false).apiUrl,
               connectTimeout: Duration(seconds: 10))),
         ),
         Provider<AccountApi>(

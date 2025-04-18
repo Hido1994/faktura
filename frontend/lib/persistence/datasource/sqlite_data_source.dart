@@ -1,7 +1,7 @@
 import 'package:faktura/persistence/datasource/data_source.dart';
 import 'package:sqflite/sqflite.dart';
 
-import '../../service/preference_service.dart';
+import '../../view/screen/preference_service.dart';
 
 class SqliteDataSource extends DataSource {
   PreferenceService preferenceService = PreferenceService.instance;

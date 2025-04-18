@@ -12,7 +12,7 @@ import 'package:flutter/material.dart';
 
 import '../customer/customer_screen.dart';
 import '../view/screen/report_screen.dart';
-import '../view/screen/settings_screen.dart';
+import '../preference/preference_screen.dart';
 import '../view/screen/trips_screen.dart';
 
 List<Map<String, dynamic>> appRoutes = [
@@ -107,7 +107,7 @@ List<Map<String, dynamic>> appRoutes = [
   },
   {
     'title': 'Einstellungen',
-    'component': const SettingsScreen(),
+    'component': const PreferenceScreen(),
     'route': '/settings',
     'icon': Icon(Icons.folder),
   },
