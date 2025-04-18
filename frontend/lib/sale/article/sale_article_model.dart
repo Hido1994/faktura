@@ -4,6 +4,18 @@ import 'package:faktura_api/faktura_api.dart';
 import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
+SaleArticleFilterBuilder _defaultFilter = SaleArticleFilterBuilder();
+ListBuilder<Sort>? _defaultSort = ListBuilder<Sort>([
+  Sort((builder) {
+    builder.property = "paidOn";
+    builder.direction = SortDirectionEnum.DESC;
+  }),
+  Sort((builder) {
+    builder.property = "incomingOn";
+    builder.direction = SortDirectionEnum.DESC;
+  }),
+]);
+
 class SaleArticleModel extends ChangeNotifier {
   final AppStateModel _appStateModel;
   final SaleArticleApi _saleArticleApi;
@@ -11,36 +23,23 @@ class SaleArticleModel extends ChangeNotifier {
   List<SaleArticle> entities = [];
   SaleArticle? selectedEntity;
   int pageSize = 50;
-  SaleArticleFilterBuilder filter = SaleArticleFilterBuilder();
-  ListBuilder<Sort>? sort = ListBuilder<Sort>([
-    Sort((builder) {
-      builder.property = "paidOn";
-      builder.direction = SortDirectionEnum.DESC;
-    }),
-    Sort((builder) {
-      builder.property = "incomingOn";
-      builder.direction = SortDirectionEnum.DESC;
-    }),
-  ]);
+  SaleArticleFilterBuilder filter = _defaultFilter;
+  ListBuilder<Sort>? sort = _defaultSort;
   PagingState<int, SaleArticle> pagingState = PagingState();
 
   SaleArticleModel(this._appStateModel, this._saleArticleApi);
 
   void getAll() {
-    _appStateModel.setLoading(true);
     _saleArticleApi.getSaleArticles(
       saleArticleFilterRequest: SaleArticleFilterRequest((builder) {
-        builder.filter = filter;
+        builder.filter = _defaultFilter;
         builder.pageable = Pageable((builder) {
-          builder.sort = sort;
+          builder.sort = _defaultSort;
         }).toBuilder();
       }),
     ).then((response) {
       entities = response.data?.content?.toList() ?? [];
-      notifyListeners();
-      _appStateModel.setLoading(false);
     }).catchError((error) {
-      _appStateModel.setLoading(false);
       _appStateModel.setMessage("Ein unerwarteter Fehler ist aufgetreten.");
     });
   }

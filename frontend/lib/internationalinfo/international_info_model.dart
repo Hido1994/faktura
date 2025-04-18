@@ -4,6 +4,14 @@ import 'package:faktura_api/faktura_api.dart';
 import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
+InternationalInfoFilterBuilder _defaultFilter = InternationalInfoFilterBuilder();
+ListBuilder<Sort>? _defaultSort = ListBuilder<Sort>([
+  Sort((builder) {
+    builder.property = "description";
+    builder.direction = SortDirectionEnum.ASC;
+  }),
+]);
+
 class InternationalInfoModel extends ChangeNotifier {
   final AppStateModel _appStateModel;
   final InternationalInfoApi _internationalInfoApi;
@@ -11,32 +19,23 @@ class InternationalInfoModel extends ChangeNotifier {
   List<InternationalInfo> entities = [];
   InternationalInfo? selectedEntity;
   int pageSize = 50;
-  InternationalInfoFilterBuilder filter = InternationalInfoFilterBuilder();
-  ListBuilder<Sort>? sort = ListBuilder<Sort>([
-    Sort((builder) {
-      builder.property = "description";
-      builder.direction = SortDirectionEnum.ASC;
-    }),
-  ]);
+  InternationalInfoFilterBuilder filter = _defaultFilter;
+  ListBuilder<Sort>? sort = _defaultSort;
   PagingState<int, InternationalInfo> pagingState = PagingState();
 
   InternationalInfoModel(this._appStateModel, this._internationalInfoApi);
 
   void getAll() {
-    _appStateModel.setLoading(true);
     _internationalInfoApi.getInternationalInfos(
       internationalInfoFilterRequest: InternationalInfoFilterRequest((builder) {
-        builder.filter = filter;
+        builder.filter = _defaultFilter;
         builder.pageable = Pageable((builder) {
-          builder.sort = sort;
+          builder.sort = _defaultSort;
         }).toBuilder();
       }),
     ).then((response) {
       entities = response.data?.content?.toList() ?? [];
-      notifyListeners();
-      _appStateModel.setLoading(false);
     }).catchError((error) {
-      _appStateModel.setLoading(false);
       _appStateModel.setMessage("Ein unerwarteter Fehler ist aufgetreten.");
     });
   }

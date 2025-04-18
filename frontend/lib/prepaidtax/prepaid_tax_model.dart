@@ -4,6 +4,14 @@ import 'package:faktura_api/faktura_api.dart';
 import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
+PrepaidTaxFilterBuilder _defaultFilter = PrepaidTaxFilterBuilder();
+ListBuilder<Sort>? _defaultSort = ListBuilder<Sort>([
+  Sort((builder) {
+    builder.property = "taxYear";
+    builder.direction = SortDirectionEnum.DESC;
+  }),
+]);
+
 class PrepaidTaxModel extends ChangeNotifier {
   final AppStateModel _appStateModel;
   final PrepaidTaxApi _prepaidTaxApi;
@@ -11,32 +19,23 @@ class PrepaidTaxModel extends ChangeNotifier {
   List<PrepaidTax> entities = [];
   PrepaidTax? selectedEntity;
   int pageSize = 50;
-  PrepaidTaxFilterBuilder filter = PrepaidTaxFilterBuilder();
-  ListBuilder<Sort>? sort = ListBuilder<Sort>([
-    Sort((builder) {
-      builder.property = "taxYear";
-      builder.direction = SortDirectionEnum.DESC;
-    }),
-  ]);
+  PrepaidTaxFilterBuilder filter = _defaultFilter;
+  ListBuilder<Sort>? sort = _defaultSort;
   PagingState<int, PrepaidTax> pagingState = PagingState();
 
   PrepaidTaxModel(this._appStateModel, this._prepaidTaxApi);
 
   void getAll() {
-    _appStateModel.setLoading(true);
     _prepaidTaxApi.getPrepaidTaxes(
       prepaidTaxFilterRequest: PrepaidTaxFilterRequest((builder) {
-        builder.filter = filter;
+        builder.filter = _defaultFilter;
         builder.pageable = Pageable((builder) {
-          builder.sort = sort;
+          builder.sort = _defaultSort;
         }).toBuilder();
       }),
     ).then((response) {
       entities = response.data?.content?.toList() ?? [];
-      notifyListeners();
-      _appStateModel.setLoading(false);
     }).catchError((error) {
-      _appStateModel.setLoading(false);
       _appStateModel.setMessage("Ein unerwarteter Fehler ist aufgetreten.");
     });
   }

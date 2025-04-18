@@ -4,6 +4,18 @@ import 'package:faktura_api/faktura_api.dart';
 import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
+InvoiceFilterBuilder _defaultFilter = InvoiceFilterBuilder();
+ListBuilder<Sort>? _defaultSort = ListBuilder<Sort>([
+  Sort((builder) {
+    builder.property = "paidOn";
+    builder.direction = SortDirectionEnum.DESC;
+  }),
+  Sort((builder) {
+    builder.property = "createdOn";
+    builder.direction = SortDirectionEnum.DESC;
+  }),
+]);
+
 class InvoiceModel extends ChangeNotifier {
   final AppStateModel _appStateModel;
   final InvoiceApi _invoiceApi;
@@ -11,36 +23,23 @@ class InvoiceModel extends ChangeNotifier {
   List<Invoice> entities = [];
   Invoice? selectedEntity;
   int pageSize = 50;
-  InvoiceFilterBuilder filter = InvoiceFilterBuilder();
-  ListBuilder<Sort>? sort = ListBuilder<Sort>([
-    Sort((builder) {
-      builder.property = "paidOn";
-      builder.direction = SortDirectionEnum.DESC;
-    }),
-    Sort((builder) {
-      builder.property = "createdOn";
-      builder.direction = SortDirectionEnum.DESC;
-    }),
-  ]);
+  InvoiceFilterBuilder filter = _defaultFilter;
+  ListBuilder<Sort>? sort = _defaultSort;
   PagingState<int, Invoice> pagingState = PagingState();
 
   InvoiceModel(this._appStateModel, this._invoiceApi);
 
   void getAll() {
-    _appStateModel.setLoading(true);
     _invoiceApi.getInvoices(
       invoiceFilterRequest: InvoiceFilterRequest((builder) {
-        builder.filter = filter;
+        builder.filter = _defaultFilter;
         builder.pageable = Pageable((builder) {
-          builder.sort = sort;
+          builder.sort = _defaultSort;
         }).toBuilder();
       }),
     ).then((response) {
       entities = response.data?.content?.toList() ?? [];
-      notifyListeners();
-      _appStateModel.setLoading(false);
     }).catchError((error) {
-      _appStateModel.setLoading(false);
       _appStateModel.setMessage("Ein unerwarteter Fehler ist aufgetreten.");
     });
   }

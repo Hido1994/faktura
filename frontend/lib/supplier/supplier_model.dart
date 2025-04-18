@@ -4,6 +4,14 @@ import 'package:faktura_api/faktura_api.dart';
 import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
+SupplierFilterBuilder _defaultFilter = SupplierFilterBuilder();
+ListBuilder<Sort>? _defaultSort = ListBuilder<Sort>([
+  Sort((builder) {
+    builder.property = "name";
+    builder.direction = SortDirectionEnum.ASC;
+  }),
+]);
+
 class SupplierModel extends ChangeNotifier {
   final AppStateModel _appStateModel;
   final SupplierApi _supplierApi;
@@ -11,32 +19,23 @@ class SupplierModel extends ChangeNotifier {
   List<Supplier> entities = [];
   Supplier? selectedEntity;
   int pageSize = 50;
-  SupplierFilterBuilder filter = SupplierFilterBuilder();
-  ListBuilder<Sort>? sort = ListBuilder<Sort>([
-    Sort((builder) {
-      builder.property = "name";
-      builder.direction = SortDirectionEnum.ASC;
-    }),
-  ]);
+  SupplierFilterBuilder filter = _defaultFilter;
+  ListBuilder<Sort>? sort = _defaultSort;
   PagingState<int, Supplier> pagingState = PagingState();
 
   SupplierModel(this._appStateModel, this._supplierApi);
 
   void getAll() {
-    _appStateModel.setLoading(true);
     _supplierApi.getSuppliers(
       supplierFilterRequest: SupplierFilterRequest((builder) {
-        builder.filter = filter;
+        builder.filter = _defaultFilter;
         builder.pageable = Pageable((builder) {
-          builder.sort = sort;
+          builder.sort = _defaultSort;
         }).toBuilder();
       }),
     ).then((response) {
       entities = response.data?.content?.toList() ?? [];
-      notifyListeners();
-      _appStateModel.setLoading(false);
     }).catchError((error) {
-      _appStateModel.setLoading(false);
       _appStateModel.setMessage("Ein unerwarteter Fehler ist aufgetreten.");
     });
   }

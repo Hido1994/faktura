@@ -4,6 +4,14 @@ import 'package:faktura_api/faktura_api.dart';
 import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
+AccountFilterBuilder _defaultFilter = AccountFilterBuilder();
+ListBuilder<Sort>? _defaultSort = ListBuilder<Sort>([
+  Sort((builder) {
+    builder.property = "description";
+    builder.direction = SortDirectionEnum.ASC;
+  }),
+]);
+
 class AccountModel extends ChangeNotifier {
   final AppStateModel _appStateModel;
   final AccountApi _accountApi;
@@ -11,32 +19,23 @@ class AccountModel extends ChangeNotifier {
   List<Account> entities = [];
   Account? selectedEntity;
   int pageSize = 50;
-  AccountFilterBuilder filter = AccountFilterBuilder();
-  ListBuilder<Sort>? sort = ListBuilder<Sort>([
-    Sort((builder) {
-      builder.property = "description";
-      builder.direction = SortDirectionEnum.ASC;
-    }),
-  ]);
+  AccountFilterBuilder filter = _defaultFilter;
+  ListBuilder<Sort>? sort = _defaultSort;
   PagingState<int, Account> pagingState = PagingState();
 
   AccountModel(this._appStateModel, this._accountApi);
 
   void getAll() {
-    _appStateModel.setLoading(true);
     _accountApi.getAccounts(
       accountFilterRequest: AccountFilterRequest((builder) {
-        builder.filter = filter;
+        builder.filter = _defaultFilter;
         builder.pageable = Pageable((builder) {
-          builder.sort = sort;
+          builder.sort = _defaultSort;
         }).toBuilder();
       }),
     ).then((response) {
       entities = response.data?.content?.toList() ?? [];
-      notifyListeners();
-      _appStateModel.setLoading(false);
     }).catchError((error) {
-      _appStateModel.setLoading(false);
       _appStateModel.setMessage("Ein unerwarteter Fehler ist aufgetreten.");
     });
   }

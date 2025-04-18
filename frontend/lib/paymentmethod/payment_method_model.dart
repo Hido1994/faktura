@@ -4,6 +4,14 @@ import 'package:faktura_api/faktura_api.dart';
 import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
+PaymentMethodFilterBuilder _defaultFilter = PaymentMethodFilterBuilder();
+ListBuilder<Sort>? _defaultSort = ListBuilder<Sort>([
+  Sort((builder) {
+    builder.property = "description";
+    builder.direction = SortDirectionEnum.ASC;
+  }),
+]);
+
 class PaymentMethodModel extends ChangeNotifier {
   final AppStateModel _appStateModel;
   final PaymentMethodApi _paymentMethodApi;
@@ -11,32 +19,23 @@ class PaymentMethodModel extends ChangeNotifier {
   List<PaymentMethod> entities = [];
   PaymentMethod? selectedEntity;
   int pageSize = 50;
-  PaymentMethodFilterBuilder filter = PaymentMethodFilterBuilder();
-  ListBuilder<Sort>? sort = ListBuilder<Sort>([
-    Sort((builder) {
-      builder.property = "description";
-      builder.direction = SortDirectionEnum.ASC;
-    }),
-  ]);
+  PaymentMethodFilterBuilder filter = _defaultFilter;
+  ListBuilder<Sort>? sort = _defaultSort;
   PagingState<int, PaymentMethod> pagingState = PagingState();
 
   PaymentMethodModel(this._appStateModel, this._paymentMethodApi);
 
   void getAll() {
-    _appStateModel.setLoading(true);
     _paymentMethodApi.getPaymentMethods(
       paymentMethodFilterRequest: PaymentMethodFilterRequest((builder) {
-        builder.filter = filter;
+        builder.filter = _defaultFilter;
         builder.pageable = Pageable((builder) {
-          builder.sort = sort;
+          builder.sort = _defaultSort;
         }).toBuilder();
       }),
     ).then((response) {
       entities = response.data?.content?.toList() ?? [];
-      notifyListeners();
-      _appStateModel.setLoading(false);
     }).catchError((error) {
-      _appStateModel.setLoading(false);
       _appStateModel.setMessage("Ein unerwarteter Fehler ist aufgetreten.");
     });
   }
