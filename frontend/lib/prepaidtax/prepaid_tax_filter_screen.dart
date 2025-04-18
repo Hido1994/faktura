@@ -1,6 +1,7 @@
 import 'package:faktura/common/widget/autocomplete_text_form_field.dart';
 import 'package:faktura/prepaidtax/prepaid_tax_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 class PrepaidTaxFilterScreen extends StatefulWidget {
@@ -37,6 +38,7 @@ class _PrepaidTaxFilterScreenState extends State<PrepaidTaxFilterScreen> {
                     options: const [],
                     initialValue: model.filter.taxYear?.toString(),
                     textInputType: TextInputType.number,
+                    inputFormatter: [FilteringTextInputFormatter.digitsOnly],
                     onChanged: (value) {
                       model.filter.taxYear = int.tryParse(value);
                     }),

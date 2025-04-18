@@ -1,22 +1,23 @@
 import 'package:faktura/common/widget/autocomplete_text_form_field.dart';
-import 'package:faktura/paymentmethod/payment_method_model.dart';
+import 'package:faktura/internationalinfo/international_info_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class PaymentMethodFilterScreen extends StatefulWidget {
-  const PaymentMethodFilterScreen({super.key});
+class InternationalInfoFilterScreen extends StatefulWidget {
+  const InternationalInfoFilterScreen({super.key});
 
   @override
-  State<PaymentMethodFilterScreen> createState() =>
-      _PaymentMethodFilterScreenState();
+  State<InternationalInfoFilterScreen> createState() =>
+      _InternationalInfoFilterScreenState();
 }
 
-class _PaymentMethodFilterScreenState extends State<PaymentMethodFilterScreen> {
+class _InternationalInfoFilterScreenState
+    extends State<InternationalInfoFilterScreen> {
   final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<PaymentMethodModel>(builder: (context, model, child) {
+    return Consumer<InternationalInfoModel>(builder: (context, model, child) {
       return Form(
         key: _formKey,
         child: Container(
@@ -44,7 +45,8 @@ class _PaymentMethodFilterScreenState extends State<PaymentMethodFilterScreen> {
                 ElevatedButton.icon(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      Provider.of<PaymentMethodModel>(context, listen: false)
+                      Provider.of<InternationalInfoModel>(context,
+                              listen: false)
                           .refresh();
                       Navigator.pop(context);
                     }

@@ -85,7 +85,7 @@ class ReportService {
         if (cell != null && cell.value is DateTime) {
           cell.cellStyle = (cell.cellStyle ?? CellStyle()).copyWith(
             numberFormat:
-            const CustomDateTimeNumFormat(formatCode: 'dd.MM.yyyy HH:mm'),
+                const CustomDateTimeNumFormat(formatCode: 'dd.MM.yyyy HH:mm'),
           );
         }
       });

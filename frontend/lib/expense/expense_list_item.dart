@@ -51,8 +51,20 @@ class _ExpenseListItem extends State<ExpenseListItem> {
                 );
               },
             );
+          } else {
+            ExpenseBuilder builder = widget.entry.toBuilder();
+            builder.id = null;
+            showModalBottomSheet(
+              isScrollControlled: true,
+              showDragHandle: true,
+              useSafeArea: true,
+              context: context,
+              builder: (context) => ExpenseFormScreen(
+                entry: builder.build(),
+              ),
+            );
+            return false;
           }
-          return null;
         },
         onDismissed: (direction) {
           if (DismissDirection.endToStart == direction) {
@@ -69,8 +81,23 @@ class _ExpenseListItem extends State<ExpenseListItem> {
         child: ListTile(
           leading: Icon(Icons.payments),
           title: Text(
-            '${widget.entry.paidOn != null ? dateFormat.format(widget.entry.paidOn!.toDateTime()) : dateFormat.format(widget.entry.incomingOn.toDateTime())} - ${widget.entry.description}',
+            widget.entry.description,
           ),
+          trailing: Text(
+            '${widget.entry.paidOn != null ? dateFormat.format(widget.entry.paidOn!.toDateTime()) : dateFormat.format(widget.entry.incomingOn.toDateTime()) + '*'}',
+          ),
+          subtitle: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                '${widget.entry.supplier?.name}',
+              ),
+              Text(
+                '${widget.entry.account?.description}',
+              ),
+            ],
+          ),
+          isThreeLine: true,
           onTap: () {
             showModalBottomSheet(
               isScrollControlled: true,

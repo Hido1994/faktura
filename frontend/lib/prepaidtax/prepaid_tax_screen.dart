@@ -23,8 +23,8 @@ class PrepaidTaxScreen extends StatelessWidget {
             padding: const EdgeInsets.only(top: 20),
             separatorBuilder: (context, index) => const Divider(),
             state: model.pagingState,
-            fetchNextPage:
-                Provider.of<PrepaidTaxModel>(context, listen: false).getNextPage,
+            fetchNextPage: Provider.of<PrepaidTaxModel>(context, listen: false)
+                .getNextPage,
             builderDelegate: PagedChildBuilderDelegate(
               itemBuilder: (context, item, index) {
                 return PrepaidTaxListItem(entry: item);

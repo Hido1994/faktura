@@ -1,8 +1,8 @@
+import 'package:faktura/common/widget/custom_screen.dart';
 import 'package:faktura/paymentmethod/payment_method_filter_screen.dart';
 import 'package:faktura/paymentmethod/payment_method_form_screen.dart';
 import 'package:faktura/paymentmethod/payment_method_list_item.dart';
 import 'package:faktura/paymentmethod/payment_method_model.dart';
-import 'package:faktura/common/widget/custom_screen.dart';
 import 'package:faktura_api/faktura_api.dart';
 import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
@@ -24,7 +24,8 @@ class PaymentMethodScreen extends StatelessWidget {
             separatorBuilder: (context, index) => const Divider(),
             state: model.pagingState,
             fetchNextPage:
-                Provider.of<PaymentMethodModel>(context, listen: false).getNextPage,
+                Provider.of<PaymentMethodModel>(context, listen: false)
+                    .getNextPage,
             builderDelegate: PagedChildBuilderDelegate(
               itemBuilder: (context, item, index) {
                 return PaymentMethodListItem(entry: item);

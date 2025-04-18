@@ -69,11 +69,11 @@ class InvoiceModel extends ChangeNotifier {
     ).then((response) {
       final pageItems = response.data?.content?.toList() ?? [];
       if (pageItems.isEmpty) {
-        pagingState =
-            pagingState.copyWith(
-                pages: [...?pagingState.pages],
-                keys: [...?pagingState.keys],
-                hasNextPage: false, isLoading: false);
+        pagingState = pagingState.copyWith(
+            pages: [...?pagingState.pages],
+            keys: [...?pagingState.keys],
+            hasNextPage: false,
+            isLoading: false);
       } else {
         pagingState = pagingState.copyWith(
             pages: [...?pagingState.pages, pageItems],

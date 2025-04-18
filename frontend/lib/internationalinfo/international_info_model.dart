@@ -4,28 +4,28 @@ import 'package:faktura_api/faktura_api.dart';
 import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
-class PrepaidTaxModel extends ChangeNotifier {
+class InternationalInfoModel extends ChangeNotifier {
   final AppStateModel _appStateModel;
-  final PrepaidTaxApi _prepaidTaxApi;
+  final InternationalInfoApi _internationalInfoApi;
 
-  List<PrepaidTax> entities = [];
-  PrepaidTax? selectedEntity;
+  List<InternationalInfo> entities = [];
+  InternationalInfo? selectedEntity;
   int pageSize = 50;
-  PrepaidTaxFilterBuilder filter = PrepaidTaxFilterBuilder();
+  InternationalInfoFilterBuilder filter = InternationalInfoFilterBuilder();
   ListBuilder<Sort>? sort = ListBuilder<Sort>([
     Sort((builder) {
-      builder.property = "taxYear";
-      builder.direction = SortDirectionEnum.DESC;
+      builder.property = "description";
+      builder.direction = SortDirectionEnum.ASC;
     }),
   ]);
-  PagingState<int, PrepaidTax> pagingState = PagingState();
+  PagingState<int, InternationalInfo> pagingState = PagingState();
 
-  PrepaidTaxModel(this._appStateModel, this._prepaidTaxApi);
+  InternationalInfoModel(this._appStateModel, this._internationalInfoApi);
 
   void getAll() {
     _appStateModel.setLoading(true);
-    _prepaidTaxApi.getPrepaidTaxes(
-      prepaidTaxFilterRequest: PrepaidTaxFilterRequest((builder) {
+    _internationalInfoApi.getInternationalInfos(
+      internationalInfoFilterRequest: InternationalInfoFilterRequest((builder) {
         builder.filter = filter;
         builder.pageable = Pageable((builder) {
           builder.sort = sort;
@@ -51,10 +51,10 @@ class PrepaidTaxModel extends ChangeNotifier {
       return;
     }
 
-    pagingState.copyWith(isLoading: true);
+    pagingState = pagingState.copyWith(isLoading: true);
     final nextKey = (pagingState.keys?.last ?? -1) + 1;
-    _prepaidTaxApi.getPrepaidTaxes(
-      prepaidTaxFilterRequest: PrepaidTaxFilterRequest((builder) {
+    _internationalInfoApi.getInternationalInfos(
+      internationalInfoFilterRequest: InternationalInfoFilterRequest((builder) {
         builder.filter = filter;
         builder.pageable = Pageable((builder) {
           builder.pageNumber = nextKey;
@@ -83,9 +83,9 @@ class PrepaidTaxModel extends ChangeNotifier {
     });
   }
 
-  Future<void> save(PrepaidTax prepaidTax) {
-    return _prepaidTaxApi
-        .savePrepaidTax(prepaidTax: prepaidTax)
+  Future<void> save(InternationalInfo internationalInfo) {
+    return _internationalInfoApi
+        .saveInternationalInfo(internationalInfo: internationalInfo)
         .then((response) {
       refresh();
     }).catchError((error) {
@@ -94,7 +94,9 @@ class PrepaidTaxModel extends ChangeNotifier {
   }
 
   Future<void> delete(int id) {
-    return _prepaidTaxApi.deletePrepaidTax(id: id).then((response) {
+    return _internationalInfoApi
+        .deleteInternationalInfo(id: id)
+        .then((response) {
       refresh();
     }).catchError((error) {
       _appStateModel.setMessage("Ein unerwarteter Fehler ist aufgetreten.");

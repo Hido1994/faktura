@@ -8,6 +8,7 @@ class AutocompleteTextFormField extends StatefulWidget {
   final ValueSetter<String> onChanged;
   final ValueSetter<String>? onSelected;
   final TextInputType textInputType;
+  final List<TextInputFormatter>? inputFormatter;
   final FormFieldValidator<String>? validator;
 
   const AutocompleteTextFormField(
@@ -18,6 +19,7 @@ class AutocompleteTextFormField extends StatefulWidget {
       this.onSelected,
       this.initialValue,
       this.textInputType = TextInputType.text,
+      this.inputFormatter,
       this.validator});
 
   @override
@@ -53,9 +55,7 @@ class _AutocompleteTextFormFieldState extends State<AutocompleteTextFormField> {
           controller: fieldTextEditingController,
           focusNode: fieldFocusNode,
           onChanged: widget.onChanged,
-          inputFormatters: widget.textInputType == TextInputType.number
-              ? [FilteringTextInputFormatter.digitsOnly]
-              : null,
+          inputFormatters: widget.inputFormatter,
           keyboardType: widget.textInputType,
           decoration: InputDecoration(label: Text(widget.title)),
           validator: widget.validator,

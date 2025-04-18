@@ -84,7 +84,9 @@ class PaymentMethodModel extends ChangeNotifier {
   }
 
   Future<void> save(PaymentMethod paymentMethod) {
-    return _paymentMethodApi.savePaymentMethod(paymentMethod: paymentMethod).then((response) {
+    return _paymentMethodApi
+        .savePaymentMethod(paymentMethod: paymentMethod)
+        .then((response) {
       refresh();
     }).catchError((error) {
       _appStateModel.setMessage("Ein unerwarteter Fehler ist aufgetreten.");

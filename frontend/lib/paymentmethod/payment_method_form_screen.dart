@@ -1,5 +1,5 @@
-import 'package:faktura/paymentmethod/payment_method_model.dart';
 import 'package:faktura/common/widget/autocomplete_text_form_field.dart';
+import 'package:faktura/paymentmethod/payment_method_model.dart';
 import 'package:faktura_api/faktura_api.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -10,7 +10,8 @@ class PaymentMethodFormScreen extends StatefulWidget {
   const PaymentMethodFormScreen({super.key, this.entry});
 
   @override
-  State<PaymentMethodFormScreen> createState() => _PaymentMethodFormScreenState();
+  State<PaymentMethodFormScreen> createState() =>
+      _PaymentMethodFormScreenState();
 }
 
 class _PaymentMethodFormScreenState extends State<PaymentMethodFormScreen> {

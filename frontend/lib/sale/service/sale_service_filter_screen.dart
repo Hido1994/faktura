@@ -7,7 +7,8 @@ class SaleServiceFilterScreen extends StatefulWidget {
   const SaleServiceFilterScreen({super.key});
 
   @override
-  State<SaleServiceFilterScreen> createState() => _SaleServiceFilterScreenState();
+  State<SaleServiceFilterScreen> createState() =>
+      _SaleServiceFilterScreenState();
 }
 
 class _SaleServiceFilterScreenState extends State<SaleServiceFilterScreen> {

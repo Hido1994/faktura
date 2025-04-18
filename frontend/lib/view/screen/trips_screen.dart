@@ -1,7 +1,7 @@
+import 'package:faktura/common/widget/trip_list_item.dart';
 import 'package:faktura/service/trip_service.dart';
 import 'package:faktura/state/trip_provider_state.dart';
 import 'package:faktura/view/screen/form_screen.dart';
-import 'package:faktura/common/widget/trip_list_item.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

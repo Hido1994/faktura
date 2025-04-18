@@ -1,5 +1,6 @@
 import 'package:faktura/account/account_screen.dart';
 import 'package:faktura/expense/expense_screen.dart';
+import 'package:faktura/internationalinfo/international_info_screen.dart';
 import 'package:faktura/invoice/invoice_screen.dart';
 import 'package:faktura/paymentmethod/payment_method_screen.dart';
 import 'package:faktura/prepaidtax/prepaid_tax_screen.dart';
@@ -15,11 +16,7 @@ import '../view/screen/settings_screen.dart';
 import '../view/screen/trips_screen.dart';
 
 List<Map<String, dynamic>> appRoutes = [
-  {
-    'title': 'Konten',
-    'component': const AccountScreen(),
-    'route': '/accounts'
-  },
+  {'title': 'Konten', 'component': const AccountScreen(), 'route': '/accounts'},
   {
     'title': 'Lieferanten',
     'component': const SupplierScreen(),
@@ -34,6 +31,11 @@ List<Map<String, dynamic>> appRoutes = [
     'title': 'Zahlarten',
     'component': const PaymentMethodScreen(),
     'route': '/payment-methods'
+  },
+  {
+    'title': 'International Info',
+    'component': const InternationalInfoScreen(),
+    'route': '/international-info'
   },
   {
     'title': 'Ausgaben',
@@ -78,5 +80,3 @@ List<Map<String, dynamic>> appRoutes = [
     'route': '/calendar'
   },
 ];
-
-

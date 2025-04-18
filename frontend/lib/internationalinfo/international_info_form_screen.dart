@@ -1,26 +1,27 @@
 import 'package:faktura/common/widget/autocomplete_text_form_field.dart';
-import 'package:faktura/prepaidtax/prepaid_tax_model.dart';
+import 'package:faktura/internationalinfo/international_info_model.dart';
 import 'package:faktura_api/faktura_api.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
-class PrepaidTaxFormScreen extends StatefulWidget {
-  final PrepaidTax? entry;
+class InternationalInfoFormScreen extends StatefulWidget {
+  final InternationalInfo? entry;
 
-  const PrepaidTaxFormScreen({super.key, this.entry});
+  const InternationalInfoFormScreen({super.key, this.entry});
 
   @override
-  State<PrepaidTaxFormScreen> createState() => _PrepaidTaxFormScreenState();
+  State<InternationalInfoFormScreen> createState() =>
+      _InternationalInfoFormScreenState();
 }
 
-class _PrepaidTaxFormScreenState extends State<PrepaidTaxFormScreen> {
+class _InternationalInfoFormScreenState
+    extends State<InternationalInfoFormScreen> {
   final _formKey = GlobalKey<FormState>();
 
-  PrepaidTaxBuilder builder = PrepaidTaxBuilder();
+  InternationalInfoBuilder builder = InternationalInfoBuilder();
 
-  Future<void> _initPrepaidTax() async {
-    PrepaidTaxBuilder entityBuilder = PrepaidTaxBuilder();
+  Future<void> _initInternationalInfo() async {
+    InternationalInfoBuilder entityBuilder = InternationalInfoBuilder();
 
     if (widget.entry == null) {
     } else {
@@ -36,7 +37,7 @@ class _PrepaidTaxFormScreenState extends State<PrepaidTaxFormScreen> {
   void initState() {
     super.initState();
 
-    _initPrepaidTax();
+    _initInternationalInfo();
   }
 
   @override
@@ -58,21 +59,37 @@ class _PrepaidTaxFormScreenState extends State<PrepaidTaxFormScreen> {
               ),
               const SizedBox(height: 20),
               AutocompleteTextFormField(
-                  key: UniqueKey(),
-                  title: 'Jahr',
-                  options: const [],
-                  initialValue: builder.taxYear?.toString(),
-                  textInputType: TextInputType.number,
-                  inputFormatter: [FilteringTextInputFormatter.digitsOnly],
-                  onChanged: (value) {
-                    builder.taxYear = int.tryParse(value);
-                  }),
+                key: UniqueKey(),
+                title: 'Beschreibung',
+                options: [],
+                initialValue: builder.description,
+                onChanged: (value) {
+                  builder.description = value;
+                },
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return "Muss angegeben werden";
+                  }
+                  return null;
+                },
+              ),
+              const SizedBox(height: 20),
+              AutocompleteTextFormField(
+                key: UniqueKey(),
+                title: 'Rechnungs-Text',
+                options: [],
+                initialValue: builder.invoiceText,
+                onChanged: (value) {
+                  builder.invoiceText = value;
+                },
+              ),
               const SizedBox(height: 20),
               ElevatedButton.icon(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
                     try {
-                      Provider.of<PrepaidTaxModel>(context, listen: false)
+                      Provider.of<InternationalInfoModel>(context,
+                              listen: false)
                           .save(builder.build())
                           .then((response) {
                         ScaffoldMessenger.of(context)

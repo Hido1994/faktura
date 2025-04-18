@@ -22,7 +22,6 @@ class PreferenceService {
     prefs.setString('db_path', value);
   }
 
-
   Future<String> getApiBaseUrl() async {
     final prefs = await SharedPreferences.getInstance();
     if (prefs.containsKey('api_base_path')) {

@@ -2,6 +2,7 @@ import 'package:faktura/common/widget/autocomplete_text_form_field.dart';
 import 'package:faktura/customer/customer_model.dart';
 import 'package:faktura_api/faktura_api.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 class CustomerFormScreen extends StatefulWidget {
@@ -167,6 +168,9 @@ class _CustomerFormScreenState extends State<CustomerFormScreen> {
                   options: const [],
                   initialValue: builder.hourlyRate?.toString(),
                   textInputType: TextInputType.numberWithOptions(decimal: true),
+                  inputFormatter: [
+                    FilteringTextInputFormatter.allow(RegExp(r'[0-9.]'))
+                  ],
                   onChanged: (value) {
                     builder.hourlyRate = double.tryParse(value);
                   }),

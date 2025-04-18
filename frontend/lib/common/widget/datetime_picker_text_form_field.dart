@@ -31,7 +31,6 @@ class _DateTimePickerTextFormFieldState
   void initState() {
     super.initState();
     if (widget.initialValue != null) {
-
       if (widget.includeTime) {
         _dateController.text = dateTimeFormat.format(widget.initialValue!);
       } else {

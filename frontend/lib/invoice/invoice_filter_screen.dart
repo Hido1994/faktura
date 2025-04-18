@@ -1,6 +1,7 @@
 import 'package:faktura/common/widget/autocomplete_text_form_field.dart';
 import 'package:faktura/invoice/invoice_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 class InvoiceFilterScreen extends StatefulWidget {
@@ -37,6 +38,7 @@ class _InvoiceFilterScreenState extends State<InvoiceFilterScreen> {
                   options: const [],
                   initialValue: model.filter.invoiceNumber.toString(),
                   textInputType: TextInputType.number,
+                  inputFormatter: [FilteringTextInputFormatter.digitsOnly],
                   onChanged: (value) {
                     model.filter.invoiceNumber = int.tryParse(value);
                   },

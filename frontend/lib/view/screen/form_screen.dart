@@ -1,8 +1,9 @@
-import 'package:faktura/persistence/model/trip.dart';
-import 'package:faktura/service/trip_service.dart';
 import 'package:faktura/common/widget/autocomplete_text_form_field.dart';
 import 'package:faktura/common/widget/datetime_picker_text_form_field.dart';
+import 'package:faktura/persistence/model/trip.dart';
+import 'package:faktura/service/trip_service.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import '../../state/trip_provider_state.dart';
@@ -73,14 +74,11 @@ class _FormScreenState extends State<FormScreen> {
             trip.startMileage != null &&
             trip.endMileage == null) {
           tripService
-              .getLastTripDistance(
-              trip.startLocation, trip.endLocation)
+              .getLastTripDistance(trip.startLocation, trip.endLocation)
               .then((value) => setState(() {
-            trip.endMileage =
-            (trip.startMileage! + value!);
-          }));
+                    trip.endMileage = (trip.startMileage! + value!);
+                  }));
         }
-
       }
     }
 
@@ -118,7 +116,8 @@ class _FormScreenState extends State<FormScreen> {
                   title: 'Abfahrt',
                   initialValue: trip.startDate,
                   onChanged: (date) {
-                    date = DateTime(date.year, date.month, date.day, date.hour, date.minute);
+                    date = DateTime(date.year, date.month, date.day, date.hour,
+                        date.minute);
                     trip.startDate = date;
                   },
                 ),
@@ -127,7 +126,8 @@ class _FormScreenState extends State<FormScreen> {
                   title: 'Ankunft',
                   initialValue: trip.endDate,
                   onChanged: (date) {
-                    date = DateTime(date.year, date.month, date.day, date.hour, date.minute);
+                    date = DateTime(date.year, date.month, date.day, date.hour,
+                        date.minute);
                     trip.endDate = date;
                   },
                   validator: (value) {
@@ -207,6 +207,7 @@ class _FormScreenState extends State<FormScreen> {
                     options: const [],
                     initialValue: trip.startMileage?.toString(),
                     textInputType: TextInputType.number,
+                    inputFormatter: [FilteringTextInputFormatter.digitsOnly],
                     onChanged: (value) {
                       trip.startMileage = int.tryParse(value);
                     }),
@@ -216,6 +217,7 @@ class _FormScreenState extends State<FormScreen> {
                   options: const [],
                   initialValue: trip.endMileage?.toString(),
                   textInputType: TextInputType.number,
+                  inputFormatter: [FilteringTextInputFormatter.digitsOnly],
                   onChanged: (value) {
                     trip.endMileage = int.tryParse(value);
                   },

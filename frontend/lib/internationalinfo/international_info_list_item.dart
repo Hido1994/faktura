@@ -1,19 +1,20 @@
-import 'package:faktura/invoice/invoice_form_screen.dart';
-import 'package:faktura/invoice/invoice_model.dart';
+import 'package:faktura/internationalinfo/international_info_form_screen.dart';
+import 'package:faktura/internationalinfo/international_info_model.dart';
 import 'package:faktura_api/faktura_api.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class InvoiceListItem extends StatefulWidget {
-  final Invoice entry;
+class InternationalInfoListItem extends StatefulWidget {
+  final InternationalInfo entry;
 
-  const InvoiceListItem({super.key, required this.entry});
+  const InternationalInfoListItem({super.key, required this.entry});
 
   @override
-  State<InvoiceListItem> createState() => _InvoiceListItem();
+  State<InternationalInfoListItem> createState() =>
+      _InternationalInfoListItem();
 }
 
-class _InvoiceListItem extends State<InvoiceListItem> {
+class _InternationalInfoListItem extends State<InternationalInfoListItem> {
   @override
   Widget build(BuildContext context) {
     return Dismissible(
@@ -55,7 +56,7 @@ class _InvoiceListItem extends State<InvoiceListItem> {
         },
         onDismissed: (direction) {
           if (DismissDirection.endToStart == direction) {
-            Provider.of<InvoiceModel>(context, listen: false)
+            Provider.of<InternationalInfoModel>(context, listen: false)
                 .delete(widget.entry.id!)
                 .then((response) {
               ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
@@ -66,17 +67,18 @@ class _InvoiceListItem extends State<InvoiceListItem> {
           }
         },
         child: ListTile(
-          leading: Icon(Icons.file_copy),
+          leading: Icon(Icons.airplane_ticket),
           title: Text(
-            '${widget.entry.invoiceNumber}',
+            widget.entry.description,
           ),
+          isThreeLine: false,
           onTap: () {
             showModalBottomSheet(
               isScrollControlled: true,
               showDragHandle: true,
               useSafeArea: true,
               context: context,
-              builder: (context) => InvoiceFormScreen(
+              builder: (context) => InternationalInfoFormScreen(
                 entry: widget.entry,
               ),
             );

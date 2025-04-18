@@ -34,7 +34,7 @@ class CustomScreen extends StatelessWidget {
             ? [
                 IconButton(
                   icon: Icon(Icons.filter_list),
-                  onPressed: ()  {
+                  onPressed: () {
                     showModalBottomSheet(
                       isScrollControlled: true,
                       showDragHandle: true,

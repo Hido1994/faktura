@@ -16,6 +16,7 @@ import 'account/account_model.dart';
 import 'common/app_routes.dart';
 import 'customer/customer_model.dart';
 import 'expense/expense_model.dart';
+import 'internationalinfo/international_info_model.dart';
 import 'invoice/invoice_model.dart';
 
 void main() {
@@ -109,6 +110,14 @@ void main() {
             create: (context) => PrepaidTaxModel(
                 Provider.of<AppStateModel>(context, listen: false),
                 Provider.of<PrepaidTaxApi>(context, listen: false))),
+        Provider<InternationalInfoApi>(
+          create: (context) => InternationalInfoApi(
+              Provider.of<Dio>(context, listen: false), standardSerializers),
+        ),
+        ChangeNotifierProvider<InternationalInfoModel>(
+            create: (context) => InternationalInfoModel(
+                Provider.of<AppStateModel>(context, listen: false),
+                Provider.of<InternationalInfoApi>(context, listen: false))),
       ],
       child: MyApp(),
     ),
@@ -173,6 +182,13 @@ class _MainScreen extends State<MainScreen> {
   @override
   void initState() {
     super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Provider.of<AccountModel>(context, listen: false).getAll();
+      Provider.of<PaymentMethodModel>(context, listen: false).getAll();
+      Provider.of<SupplierModel>(context, listen: false).getAll();
+      Provider.of<InternationalInfoModel>(context, listen: false).getAll();
+    });
   }
 
   @override

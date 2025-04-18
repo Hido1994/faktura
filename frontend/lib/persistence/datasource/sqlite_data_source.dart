@@ -53,7 +53,8 @@ class SqliteDataSource extends DataSource {
 
   _onUpgrade(Database db, int oldVersion, int newVersion) async {
     if (oldVersion < 2) {
-      await db.execute("UPDATE Trip SET startDate = (startDate/1000)*1000, endDate = (endDate/1000)*1000");
+      await db.execute(
+          "UPDATE Trip SET startDate = (startDate/1000)*1000, endDate = (endDate/1000)*1000");
     }
   }
 

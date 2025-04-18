@@ -17,7 +17,6 @@ class TripListItem extends StatefulWidget {
 }
 
 class _TripListItem extends State<TripListItem> {
-
   TripService tripService = TripService.instance;
 
   @override
@@ -105,7 +104,8 @@ class _TripListItem extends State<TripListItem> {
           subtitle: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('(${widget.entry.endDate != null ? widget.entry.endDate!.difference(widget.entry.startDate!).inMinutes : "?"} min)'),
+              Text(
+                  '(${widget.entry.endDate != null ? widget.entry.endDate!.difference(widget.entry.startDate!).inMinutes : "?"} min)'),
               Text(
                 '${widget.entry.startLocation != null ? widget.entry.startLocation! : '?'} - ${widget.entry.endLocation != null ? widget.entry.endLocation! : '?'}',
               ),

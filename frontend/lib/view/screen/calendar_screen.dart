@@ -17,6 +17,9 @@ class _MyCalendarScreen extends State<CalendarScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: const Text('Calendar')), body: SfCalendar(view: CalendarView.week,));
+        appBar: AppBar(title: const Text('Calendar')),
+        body: SfCalendar(
+          view: CalendarView.week,
+        ));
   }
 }
