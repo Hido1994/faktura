@@ -42,7 +42,6 @@ class _SaleServiceFormScreenState extends State<SaleServiceFormScreen> {
     setState(() {
       builder = entityBuilder;
     });
-
   }
 
   Future<void> _loadTimeEntries(Customer? customer) async {
@@ -71,73 +70,78 @@ class _SaleServiceFormScreenState extends State<SaleServiceFormScreen> {
   Widget build(BuildContext context) {
     return Form(
       key: _formKey,
-      child: Stepper(
-        type: StepperType.horizontal,
-        elevation: 0,
-        currentStep: currentStep,
-        onStepContinue: () {
-          if (isLastStep) {
-            if (_formKey.currentState!.validate()) {
-              try {
-                Provider.of<SaleServiceModel>(context, listen: false)
-                    .save(builder.build())
-                    .then((response) {
-                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                    content: Text('Gespeichert'),
+      child: Theme(
+        data: Theme.of(context).copyWith(
+          canvasColor: Colors.transparent,
+        ),
+        child: Stepper(
+          type: StepperType.horizontal,
+          elevation: 0,
+          currentStep: currentStep,
+          onStepContinue: () {
+            if (isLastStep) {
+              if (_formKey.currentState!.validate()) {
+                try {
+                  Provider.of<SaleServiceModel>(context, listen: false)
+                      .save(builder.build())
+                      .then((response) {
+                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                      content: Text('Gespeichert'),
+                      behavior: SnackBarBehavior.floating,
+                    ));
+                    Navigator.pop(context);
+                  });
+                } catch (e) {
+                  print('Unexpected error: $e');
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    content: Text('Ein unerwarteter Fehler ist aufgetreten.'),
                     behavior: SnackBarBehavior.floating,
                   ));
-                  Navigator.pop(context);
-                });
-              } catch (e) {
-                print('Unexpected error: $e');
+                }
+              } else {
                 ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                  content: Text('Ein unerwarteter Fehler ist aufgetreten.'),
+                  content: Text('Objekt konnte nicht gespeichert werden.'),
                   behavior: SnackBarBehavior.floating,
                 ));
               }
             } else {
-              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                content: Text('Objekt konnte nicht gespeichert werden.'),
-                behavior: SnackBarBehavior.floating,
-              ));
+              setState(() {
+                currentStep += 1;
+              });
             }
-          } else {
-            setState(() {
-              currentStep += 1;
-            });
-          }
-        },
-        onStepCancel: isFirstStep
-            ? null
-            : () => setState(
-                  () {
-                    currentStep -= 1;
-                  },
-                ),
-        onStepTapped: (step) => setState(() {
-          currentStep = step;
-        }),
-        controlsBuilder: (BuildContext context, ControlsDetails details) {
-          return Container(
-            margin: EdgeInsets.only(top: 50),
-            child: Row(
-              children: [
-                ElevatedButton(
-                  onPressed: details.onStepContinue,
-                  child: Text(isLastStep ? 'Speichern' : 'Weiter'),
-                ),
-                if (!isFirstStep) ...[
-                  const SizedBox(width: 5),
-                  ElevatedButton(
-                    onPressed: details.onStepCancel,
-                    child: const Text('Zurück'),
+          },
+          onStepCancel: isFirstStep
+              ? null
+              : () => setState(
+                    () {
+                      currentStep -= 1;
+                    },
                   ),
-                ]
-              ],
-            ),
-          );
-        },
-        steps: steps(),
+          onStepTapped: (step) => setState(() {
+            currentStep = step;
+          }),
+          controlsBuilder: (BuildContext context, ControlsDetails details) {
+            return Container(
+              margin: EdgeInsets.only(top: 50),
+              child: Row(
+                children: [
+                  ElevatedButton(
+                    onPressed: details.onStepContinue,
+                    child: Text(isLastStep ? 'Speichern' : 'Weiter'),
+                  ),
+                  if (!isFirstStep) ...[
+                    const SizedBox(width: 5),
+                    ElevatedButton(
+                      onPressed: details.onStepCancel,
+                      child: const Text('Zurück'),
+                    ),
+                  ]
+                ],
+              ),
+            );
+          },
+          steps: steps(),
+        ),
       ),
     );
   }
