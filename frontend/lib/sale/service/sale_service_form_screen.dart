@@ -42,14 +42,13 @@ class _SaleServiceFormScreenState extends State<SaleServiceFormScreen> {
     setState(() {
       builder = entityBuilder;
     });
+
   }
 
   Future<void> _loadTimeEntries(Customer? customer) async {
     if (customer == null) {
-      setState(() {
-        timeEntries = [];
-        selectedTimeEntryIds = {};
-      });
+      timeEntries = [];
+      selectedTimeEntryIds = {};
     } else {
       var timeEntryBuilder = TimeEntryFilterBuilder();
       timeEntryBuilder.customerId = customer.id;
@@ -57,17 +56,14 @@ class _SaleServiceFormScreenState extends State<SaleServiceFormScreen> {
       var entries = await Provider.of<TimeEntryModel>(context, listen: false)
           .getAll(timeEntryBuilder);
 
-      setState(() {
-        timeEntries = entries;
-        selectedTimeEntryIds = {};
-      });
+      timeEntries = entries;
+      selectedTimeEntryIds = {};
     }
   }
 
   @override
   void initState() {
     super.initState();
-
     _initSaleService();
   }
 
