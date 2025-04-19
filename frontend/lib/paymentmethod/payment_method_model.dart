@@ -16,7 +16,7 @@ class PaymentMethodModel extends ChangeNotifier {
   final AppStateModel _appStateModel;
   final PaymentMethodApi _paymentMethodApi;
 
-  List<PaymentMethod> entities = [];
+  List<PaymentMethod> lovEntities = [];
   PaymentMethod? selectedEntity;
   int pageSize = 50;
   PaymentMethodFilterBuilder filter = _defaultFilter;
@@ -25,7 +25,7 @@ class PaymentMethodModel extends ChangeNotifier {
 
   PaymentMethodModel(this._appStateModel, this._paymentMethodApi);
 
-  void getAll() {
+  void initData() {
     _paymentMethodApi.getPaymentMethods(
       paymentMethodFilterRequest: PaymentMethodFilterRequest((builder) {
         builder.filter = _defaultFilter;
@@ -34,7 +34,7 @@ class PaymentMethodModel extends ChangeNotifier {
         }).toBuilder();
       }),
     ).then((response) {
-      entities = response.data?.content?.toList() ?? [];
+      lovEntities = response.data?.content?.toList() ?? [];
     }).catchError((error) {
       _appStateModel.setMessage("Ein unerwarteter Fehler ist aufgetreten.");
     });

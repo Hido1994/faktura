@@ -96,7 +96,7 @@ class _TimeEntryFormScreenState extends State<TimeEntryFormScreen> {
               const SizedBox(height: 20),
               Consumer<CustomerModel>(builder: (context, model, child) {
                 return DropdownSearch<Customer>(
-                  items: (f, cs) => model.entities,
+                  items: (f, cs) => model.lovEntities,
                   selectedItem: builder.customer.id != null
                       ? builder.customer.build()
                       : null,

@@ -12,6 +12,8 @@ public interface TimeEntryRepository extends JpaRepository<TimeEntry, Long>, Que
         BooleanBuilder builder = new BooleanBuilder();
         QTimeEntry qEntity = QTimeEntry.timeEntry;
         filter.getDescription().ifPresent(x -> builder.and(qEntity.description.lower().contains(x.toLowerCase())));
+        filter.getSaleServiceId().ifPresent(x -> builder.and(qEntity.saleService.id.eq(x)));
+        filter.getCustomerId().ifPresent(x -> builder.and(qEntity.customer.id.eq(x)));
         return builder;
     }
 }

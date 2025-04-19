@@ -12,11 +12,19 @@ part 'time_entry_filter.g.dart';
 ///
 /// Properties:
 /// * [description]
+/// * [customerId]
+/// * [saleServiceId]
 @BuiltValue()
 abstract class TimeEntryFilter
     implements Built<TimeEntryFilter, TimeEntryFilterBuilder> {
   @BuiltValueField(wireName: r'description')
   String? get description;
+
+  @BuiltValueField(wireName: r'customerId')
+  int? get customerId;
+
+  @BuiltValueField(wireName: r'saleServiceId')
+  int? get saleServiceId;
 
   TimeEntryFilter._();
 
@@ -51,6 +59,20 @@ class _$TimeEntryFilterSerializer
         specifiedType: const FullType.nullable(String),
       );
     }
+    if (object.customerId != null) {
+      yield r'customerId';
+      yield serializers.serialize(
+        object.customerId,
+        specifiedType: const FullType.nullable(int),
+      );
+    }
+    if (object.saleServiceId != null) {
+      yield r'saleServiceId';
+      yield serializers.serialize(
+        object.saleServiceId,
+        specifiedType: const FullType.nullable(int),
+      );
+    }
   }
 
   @override
@@ -83,6 +105,22 @@ class _$TimeEntryFilterSerializer
           ) as String?;
           if (valueDes == null) continue;
           result.description = valueDes;
+          break;
+        case r'customerId':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType.nullable(int),
+          ) as int?;
+          if (valueDes == null) continue;
+          result.customerId = valueDes;
+          break;
+        case r'saleServiceId':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType.nullable(int),
+          ) as int?;
+          if (valueDes == null) continue;
+          result.saleServiceId = valueDes;
           break;
         default:
           unhandled.add(key);

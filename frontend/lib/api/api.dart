@@ -1,9 +1,9 @@
-// Openapi Generator last run: : 2025-04-17T10:31:23.297971
+// Openapi Generator last run: : 2025-04-20T00:09:53.128837
 import 'package:openapi_generator_annotations/openapi_generator_annotations.dart';
 
 @Openapi(
     additionalProperties:
-        DioProperties(pubName: 'faktura_api', pubAuthor: 'David Hinterndorfer'),
+        DioProperties(pubName: 'faktura_api', pubAuthor: 'David Hinterndorfer', nullableFields: true),
     inputSpec:
         InputSpec(path: '../backend/src/main/openapi/faktura/api_v1.yaml'),
     generatorName: Generator.dio,

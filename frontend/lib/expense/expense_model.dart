@@ -20,7 +20,7 @@ class ExpenseModel extends ChangeNotifier {
   final AppStateModel _appStateModel;
   final ExpenseApi _expenseApi;
 
-  List<Expense> entities = [];
+  List<Expense> lovEntities = [];
   Expense? selectedEntity;
   int pageSize = 50;
   ExpenseFilterBuilder filter = _defaultFilter;
@@ -29,7 +29,7 @@ class ExpenseModel extends ChangeNotifier {
 
   ExpenseModel(this._appStateModel, this._expenseApi);
 
-  void getAll() {
+  void initData() {
     _expenseApi.getExpenses(
       expenseFilterRequest: ExpenseFilterRequest((builder) {
         builder.filter = _defaultFilter;
@@ -38,7 +38,7 @@ class ExpenseModel extends ChangeNotifier {
         }).toBuilder();
       }),
     ).then((response) {
-      entities = response.data?.content?.toList() ?? [];
+      lovEntities = response.data?.content?.toList() ?? [];
     }).catchError((error) {
       _appStateModel.setMessage("Ein unerwarteter Fehler ist aufgetreten.");
     });

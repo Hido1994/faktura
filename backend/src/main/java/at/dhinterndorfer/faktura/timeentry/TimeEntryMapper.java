@@ -4,7 +4,6 @@ import at.dhinterndorfer.faktura.commons.filter.NullableMapper;
 import at.dhinterndorfer.faktura.dto.v1.TimeEntryFilterRestDto;
 import at.dhinterndorfer.faktura.dto.v1.TimeEntryPageRestDto;
 import at.dhinterndorfer.faktura.dto.v1.TimeEntryRestDto;
-import at.dhinterndorfer.faktura.timeentry.TimeEntry;
 import org.mapstruct.Mapper;
 import org.springframework.data.domain.Page;
 

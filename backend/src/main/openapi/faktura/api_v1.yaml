@@ -1845,6 +1845,14 @@ components:
         description:
           type: string
           nullable: true
+        customerId:
+          type: integer
+          format: int64
+          nullable: true
+        saleServiceId:
+          type: integer
+          format: int64
+          nullable: true
     TimeEntryPage:
       description: typed Page
       type: object

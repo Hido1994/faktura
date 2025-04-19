@@ -14,4 +14,10 @@ public class TimeEntrySearchFilter {
     @Builder.Default
     private Nullable<String> description = Nullable.undefined();
 
+    @Builder.Default
+    private Nullable<Long> saleServiceId = Nullable.undefined();
+
+    @Builder.Default
+    private Nullable<Long> customerId = Nullable.undefined();
+
 }

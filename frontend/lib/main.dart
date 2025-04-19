@@ -196,11 +196,11 @@ class _MainScreen extends State<MainScreen> {
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      Provider.of<AccountModel>(context, listen: false).getAll();
-      Provider.of<PaymentMethodModel>(context, listen: false).getAll();
-      Provider.of<SupplierModel>(context, listen: false).getAll();
-      Provider.of<InternationalInfoModel>(context, listen: false).getAll();
-      Provider.of<CustomerModel>(context, listen: false).getAll();
+      Provider.of<AccountModel>(context, listen: false).initData();
+      Provider.of<PaymentMethodModel>(context, listen: false).initData();
+      Provider.of<SupplierModel>(context, listen: false).initData();
+      Provider.of<InternationalInfoModel>(context, listen: false).initData();
+      Provider.of<CustomerModel>(context, listen: false).initData();
     });
   }
 

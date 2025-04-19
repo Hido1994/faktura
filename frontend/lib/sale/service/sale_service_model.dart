@@ -16,7 +16,7 @@ class SaleServiceModel extends ChangeNotifier {
   final AppStateModel _appStateModel;
   final SaleServiceApi _saleServiceApi;
 
-  List<SaleService> entities = [];
+  List<SaleService> lovEntities = [];
   SaleService? selectedEntity;
   int pageSize = 50;
   SaleServiceFilterBuilder filter = _defaultFilter;
@@ -25,7 +25,7 @@ class SaleServiceModel extends ChangeNotifier {
 
   SaleServiceModel(this._appStateModel, this._saleServiceApi);
 
-  void getAll() {
+  void initData() {
     _saleServiceApi.getSaleServices(
       saleServiceFilterRequest: SaleServiceFilterRequest((builder) {
         builder.filter = _defaultFilter;
@@ -34,7 +34,7 @@ class SaleServiceModel extends ChangeNotifier {
         }).toBuilder();
       }),
     ).then((response) {
-      entities = response.data?.content?.toList() ?? [];
+      lovEntities = response.data?.content?.toList() ?? [];
     }).catchError((error) {
       _appStateModel.setMessage("Ein unerwarteter Fehler ist aufgetreten.");
     });

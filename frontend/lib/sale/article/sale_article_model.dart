@@ -20,7 +20,7 @@ class SaleArticleModel extends ChangeNotifier {
   final AppStateModel _appStateModel;
   final SaleArticleApi _saleArticleApi;
 
-  List<SaleArticle> entities = [];
+  List<SaleArticle> lovEntities = [];
   SaleArticle? selectedEntity;
   int pageSize = 50;
   SaleArticleFilterBuilder filter = _defaultFilter;
@@ -29,7 +29,7 @@ class SaleArticleModel extends ChangeNotifier {
 
   SaleArticleModel(this._appStateModel, this._saleArticleApi);
 
-  void getAll() {
+  void initData() {
     _saleArticleApi.getSaleArticles(
       saleArticleFilterRequest: SaleArticleFilterRequest((builder) {
         builder.filter = _defaultFilter;
@@ -38,7 +38,7 @@ class SaleArticleModel extends ChangeNotifier {
         }).toBuilder();
       }),
     ).then((response) {
-      entities = response.data?.content?.toList() ?? [];
+      lovEntities = response.data?.content?.toList() ?? [];
     }).catchError((error) {
       _appStateModel.setMessage("Ein unerwarteter Fehler ist aufgetreten.");
     });

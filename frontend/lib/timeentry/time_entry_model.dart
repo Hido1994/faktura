@@ -16,7 +16,7 @@ class TimeEntryModel extends ChangeNotifier {
   final AppStateModel _appStateModel;
   final TimeEntryApi _timeEntryApi;
 
-  List<TimeEntry> entities = [];
+  List<TimeEntry> lovEntities = [];
   TimeEntry? selectedEntity;
   int pageSize = 50;
   TimeEntryFilterBuilder filter = _defaultFilter;
@@ -27,7 +27,7 @@ class TimeEntryModel extends ChangeNotifier {
 
   TimeEntryModel(this._appStateModel, this._timeEntryApi);
 
-  void getAll() {
+  void initData() {
     _timeEntryApi.getTimeEntries(
       timeEntryFilterRequest: TimeEntryFilterRequest((builder) {
         builder.filter = _defaultFilter;
@@ -36,7 +36,7 @@ class TimeEntryModel extends ChangeNotifier {
         }).toBuilder();
       }),
     ).then((response) {
-      entities = response.data?.content?.toList() ?? [];
+      lovEntities = response.data?.content?.toList() ?? [];
     }).catchError((error) {
       _appStateModel.setMessage("Ein unerwarteter Fehler ist aufgetreten.");
     });
@@ -85,7 +85,7 @@ class TimeEntryModel extends ChangeNotifier {
   }
 
   void onCalendarViewChanged(int year) async {
-    if(calendarViewYear != year) {
+    if (calendarViewYear != year) {
       calendarViewYear = year;
       _timeEntryApi.getTimeEntries(
         timeEntryFilterRequest: TimeEntryFilterRequest((builder) {
@@ -113,6 +113,22 @@ class TimeEntryModel extends ChangeNotifier {
       refresh();
     }).catchError((error) {
       _appStateModel.setMessage("Ein unerwarteter Fehler ist aufgetreten.");
+    });
+  }
+
+  Future<List<TimeEntry>> getAll(TimeEntryFilterBuilder filter) {
+    return _timeEntryApi.getTimeEntries(
+      timeEntryFilterRequest: TimeEntryFilterRequest((builder) {
+        builder.filter = filter;
+        builder.pageable = Pageable((builder) {
+          builder.sort = _defaultSort;
+        }).toBuilder();
+      }),
+    ).then((response) {
+      return response.data?.content?.toList() ?? <TimeEntry>[];
+    }).catchError((error) {
+      _appStateModel.setMessage("Ein unerwarteter Fehler ist aufgetreten.");
+      return <TimeEntry>[];
     });
   }
 }

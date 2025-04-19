@@ -108,7 +108,7 @@ class _ExpenseFormScreenState extends State<ExpenseFormScreen> {
               const SizedBox(height: 20),
               Consumer<AccountModel>(builder: (context, model, child) {
                 return DropdownSearch<Account>(
-                  items: (f, cs) => model.entities,
+                  items: (f, cs) => model.lovEntities,
                   selectedItem: builder.account.id != null
                       ? builder.account.build()
                       : null,
@@ -134,7 +134,7 @@ class _ExpenseFormScreenState extends State<ExpenseFormScreen> {
               const SizedBox(height: 20),
               Consumer<SupplierModel>(builder: (context, model, child) {
                 return DropdownSearch<Supplier>(
-                  items: (f, cs) => model.entities,
+                  items: (f, cs) => model.lovEntities,
                   selectedItem: builder.supplier.id != null
                       ? builder.supplier.build()
                       : null,
@@ -161,7 +161,7 @@ class _ExpenseFormScreenState extends State<ExpenseFormScreen> {
               Consumer<InternationalInfoModel>(
                   builder: (context, model, child) {
                 return DropdownSearch<InternationalInfo>(
-                  items: (f, cs) => model.entities,
+                  items: (f, cs) => model.lovEntities,
                   selectedItem: builder.internationalInfo.id != null
                       ? builder.internationalInfo.build()
                       : null,
@@ -189,7 +189,7 @@ class _ExpenseFormScreenState extends State<ExpenseFormScreen> {
               const SizedBox(height: 20),
               Consumer<PaymentMethodModel>(builder: (context, model, child) {
                 return DropdownSearch<PaymentMethod>(
-                  items: (f, cs) => model.entities,
+                  items: (f, cs) => model.lovEntities,
                   selectedItem: builder.paymentMethod.id != null
                       ? builder.paymentMethod.build()
                       : null,

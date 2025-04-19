@@ -16,7 +16,7 @@ class AccountModel extends ChangeNotifier {
   final AppStateModel _appStateModel;
   final AccountApi _accountApi;
 
-  List<Account> entities = [];
+  List<Account> lovEntities = [];
   Account? selectedEntity;
   int pageSize = 50;
   AccountFilterBuilder filter = _defaultFilter;
@@ -25,7 +25,7 @@ class AccountModel extends ChangeNotifier {
 
   AccountModel(this._appStateModel, this._accountApi);
 
-  void getAll() {
+  void initData() {
     _accountApi.getAccounts(
       accountFilterRequest: AccountFilterRequest((builder) {
         builder.filter = _defaultFilter;
@@ -34,7 +34,7 @@ class AccountModel extends ChangeNotifier {
         }).toBuilder();
       }),
     ).then((response) {
-      entities = response.data?.content?.toList() ?? [];
+      lovEntities = response.data?.content?.toList() ?? [];
     }).catchError((error) {
       _appStateModel.setMessage("Ein unerwarteter Fehler ist aufgetreten.");
     });

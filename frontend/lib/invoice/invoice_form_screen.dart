@@ -98,7 +98,7 @@ class _InvoiceFormScreenState extends State<InvoiceFormScreen> {
               const SizedBox(height: 20),
               Consumer<CustomerModel>(builder: (context, model, child) {
                 return DropdownSearch<Customer>(
-                  items: (f, cs) => model.entities,
+                  items: (f, cs) => model.lovEntities,
                   selectedItem: builder.customer.id != null
                       ? builder.customer.build()
                       : null,
@@ -170,7 +170,7 @@ class _InvoiceFormScreenState extends State<InvoiceFormScreen> {
               const SizedBox(height: 20),
               Consumer<PaymentMethodModel>(builder: (context, model, child) {
                 return DropdownSearch<PaymentMethod>(
-                  items: (f, cs) => model.entities,
+                  items: (f, cs) => model.lovEntities,
                   selectedItem: builder.paymentMethod.id != null
                       ? builder.paymentMethod.build()
                       : null,

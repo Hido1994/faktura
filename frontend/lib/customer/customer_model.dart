@@ -16,7 +16,7 @@ class CustomerModel extends ChangeNotifier {
   final AppStateModel _appStateModel;
   final CustomerApi _customerApi;
 
-  List<Customer> entities = [];
+  List<Customer> lovEntities = [];
   Customer? selectedEntity;
   int pageSize = 50;
   CustomerFilterBuilder filter = _defaultFilter;
@@ -25,7 +25,7 @@ class CustomerModel extends ChangeNotifier {
 
   CustomerModel(this._appStateModel, this._customerApi);
 
-  void getAll() {
+  void initData() {
     _customerApi.getCustomers(
       customerFilterRequest: CustomerFilterRequest((builder) {
         builder.filter = _defaultFilter;
@@ -34,7 +34,7 @@ class CustomerModel extends ChangeNotifier {
         }).toBuilder();
       }),
     ).then((response) {
-      entities = response.data?.content?.toList() ?? [];
+      lovEntities = response.data?.content?.toList() ?? [];
     }).catchError((error) {
       _appStateModel.setMessage("Ein unerwarteter Fehler ist aufgetreten.");
     });

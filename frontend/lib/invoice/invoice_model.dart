@@ -20,7 +20,7 @@ class InvoiceModel extends ChangeNotifier {
   final AppStateModel _appStateModel;
   final InvoiceApi _invoiceApi;
 
-  List<Invoice> entities = [];
+  List<Invoice> lovEntities = [];
   Invoice? selectedEntity;
   int pageSize = 50;
   InvoiceFilterBuilder filter = _defaultFilter;
@@ -29,7 +29,7 @@ class InvoiceModel extends ChangeNotifier {
 
   InvoiceModel(this._appStateModel, this._invoiceApi);
 
-  void getAll() {
+  void initData() {
     _invoiceApi.getInvoices(
       invoiceFilterRequest: InvoiceFilterRequest((builder) {
         builder.filter = _defaultFilter;
@@ -38,7 +38,7 @@ class InvoiceModel extends ChangeNotifier {
         }).toBuilder();
       }),
     ).then((response) {
-      entities = response.data?.content?.toList() ?? [];
+      lovEntities = response.data?.content?.toList() ?? [];
     }).catchError((error) {
       _appStateModel.setMessage("Ein unerwarteter Fehler ist aufgetreten.");
     });

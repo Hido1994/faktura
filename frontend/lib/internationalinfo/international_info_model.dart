@@ -17,7 +17,7 @@ class InternationalInfoModel extends ChangeNotifier {
   final AppStateModel _appStateModel;
   final InternationalInfoApi _internationalInfoApi;
 
-  List<InternationalInfo> entities = [];
+  List<InternationalInfo> lovEntities = [];
   InternationalInfo? selectedEntity;
   int pageSize = 50;
   InternationalInfoFilterBuilder filter = _defaultFilter;
@@ -26,7 +26,7 @@ class InternationalInfoModel extends ChangeNotifier {
 
   InternationalInfoModel(this._appStateModel, this._internationalInfoApi);
 
-  void getAll() {
+  void initData() {
     _internationalInfoApi.getInternationalInfos(
       internationalInfoFilterRequest: InternationalInfoFilterRequest((builder) {
         builder.filter = _defaultFilter;
@@ -35,7 +35,7 @@ class InternationalInfoModel extends ChangeNotifier {
         }).toBuilder();
       }),
     ).then((response) {
-      entities = response.data?.content?.toList() ?? [];
+      lovEntities = response.data?.content?.toList() ?? [];
     }).catchError((error) {
       _appStateModel.setMessage("Ein unerwarteter Fehler ist aufgetreten.");
     });
