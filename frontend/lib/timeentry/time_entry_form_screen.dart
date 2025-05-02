@@ -26,6 +26,9 @@ class _TimeEntryFormScreenState extends State<TimeEntryFormScreen> {
     TimeEntryBuilder entityBuilder = TimeEntryBuilder();
 
     if (widget.entry == null) {
+      var now = DateTime.now();
+      entityBuilder.startedOn =
+          DateTime(now.year, now.month, now.day, now.hour);
     } else {
       entityBuilder = widget.entry!;
     }

@@ -1,5 +1,6 @@
 package at.dhinterndorfer.faktura.file;
 
+import at.dhinterndorfer.faktura.commons.date.DateTimeMapper;
 import at.dhinterndorfer.faktura.commons.filter.NullableMapper;
 import at.dhinterndorfer.faktura.dto.v1.FileFilterRestDto;
 import at.dhinterndorfer.faktura.dto.v1.FilePageRestDto;
@@ -12,7 +13,7 @@ import org.springframework.data.domain.Page;
 import java.io.IOException;
 import java.util.List;
 
-@Mapper(uses = {NullableMapper.class})
+@Mapper(uses = {NullableMapper.class, DateTimeMapper.class})
 public interface FileMapper {
 
     FileRestDto mapToDto(File entity);

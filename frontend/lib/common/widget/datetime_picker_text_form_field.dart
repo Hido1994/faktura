@@ -54,7 +54,7 @@ class _DateTimePickerTextFormFieldState
               widget.onChanged(date);
               _dateController.text = dateTimeFormat.format(date);
             },
-            currentTime: dateTimeFormat.parse(_dateController.text),
+            currentTime: _dateController.text.isEmpty ? null : dateTimeFormat.parse(_dateController.text),
             locale: LocaleType.de,
           );
         } else {
@@ -65,7 +65,7 @@ class _DateTimePickerTextFormFieldState
               widget.onChanged(date);
               _dateController.text = dateFormat.format(date);
             },
-            currentTime: dateFormat.parse(_dateController.text),
+            currentTime: _dateController.text.isEmpty ? null : dateTimeFormat.parse(_dateController.text),
             locale: LocaleType.de,
           );
         }

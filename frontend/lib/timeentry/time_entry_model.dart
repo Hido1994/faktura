@@ -43,7 +43,7 @@ class TimeEntryModel extends ChangeNotifier {
   }
 
   void refresh() {
-    pagingState = PagingState();
+    onCalendarViewChanged();
     notifyListeners();
   }
 
@@ -84,9 +84,9 @@ class TimeEntryModel extends ChangeNotifier {
     });
   }
 
-  void onCalendarViewChanged(int year) async {
-    if (calendarViewYear != year) {
-      calendarViewYear = year;
+  void onCalendarViewChanged({int? year}) async {
+    if (year == null || calendarViewYear != year) {
+      calendarViewYear = year ?? calendarViewYear;
       _timeEntryApi.getTimeEntries(
         timeEntryFilterRequest: TimeEntryFilterRequest((builder) {
           builder.filter = filter;
@@ -104,6 +104,7 @@ class TimeEntryModel extends ChangeNotifier {
     return _timeEntryApi.saveTimeEntry(timeEntry: timeEntry).then((response) {
       refresh();
     }).catchError((error) {
+      print(error);
       _appStateModel.setMessage("Ein unerwarteter Fehler ist aufgetreten.");
     });
   }

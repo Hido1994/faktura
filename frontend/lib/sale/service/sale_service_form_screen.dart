@@ -155,7 +155,6 @@ class _SaleServiceFormScreenState extends State<SaleServiceFormScreen> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              const SizedBox(height: 20),
               DateTimePickerTextFormField(
                 key: UniqueKey(),
                 title: 'Erbringung am',
