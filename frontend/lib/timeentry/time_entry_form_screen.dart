@@ -120,6 +120,12 @@ class _TimeEntryFormScreenState extends State<TimeEntryFormScreen> {
                         .toLowerCase()
                         .contains(filter.toLowerCase());
                   },
+                  validator: (value) {
+                    if (value == null) {
+                      return "Muss angegeben werden";
+                    }
+                    return null;
+                  },
                 );
               }),
               const SizedBox(height: 20),

@@ -39,7 +39,7 @@ class _TimeEntryFilterScreenState extends State<TimeEntryFilterScreen> {
                   spacing: 5,
                   children: [
                     FilterChip(
-                      label: Text("Verrechnet"),
+                      label: Text("Offen"),
                       selected: model.filter.saleServiceId.operator_ ==
                           NumberOperatorTupleOperator_Enum.IS_NULL,
                       onSelected: (bool selected) {
@@ -57,16 +57,16 @@ class _TimeEntryFilterScreenState extends State<TimeEntryFilterScreen> {
                       },
                     ),
                     FilterChip(
-                      label: Text("Unverrechnet"),
+                      label: Text("Verrechnet"),
                       selected: model.filter.saleServiceId.operator_ ==
-                          NumberOperatorTupleOperator_Enum.IS_NULL,
+                          NumberOperatorTupleOperator_Enum.IS_NOT_NULL,
                       onSelected: (bool selected) {
                         setState(() {
                           if (selected) {
                             NumberOperatorTupleBuilder operatorBuilder =
                                 NumberOperatorTupleBuilder();
                             operatorBuilder.operator_ =
-                                NumberOperatorTupleOperator_Enum.IS_NULL;
+                                NumberOperatorTupleOperator_Enum.IS_NOT_NULL;
                             model.filter.saleServiceId = operatorBuilder;
                           } else {
                             model.filter.saleServiceId = null;
