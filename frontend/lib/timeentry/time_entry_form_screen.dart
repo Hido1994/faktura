@@ -81,8 +81,10 @@ class _TimeEntryFormScreenState extends State<TimeEntryFormScreen> {
                 validator: (value) {
                   if (builder.endedOn != null &&
                       builder.startedOn != null &&
-                      builder.endedOn!.isBefore(builder.startedOn!)) {
-                    return "Bis-Zeit muss vor der Von-Zeit liegen";
+                      (builder.endedOn!.isBefore(builder.startedOn!) ||
+                          builder.endedOn!
+                              .isAtSameMomentAs(builder.startedOn!))) {
+                    return "Bis-Zeit muss nach der Von-Zeit liegen";
                   }
                   return null;
                 },
@@ -174,44 +176,30 @@ class _TimeEntryFormScreenState extends State<TimeEntryFormScreen> {
                       label: Text('Speichern'),
                     ),
                   ),
-                  Expanded(
-                    child: ElevatedButton.icon(
-                      onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          try {
-                            Provider.of<TimeEntryModel>(context, listen: false)
-                                .save(builder.build())
-                                .then((response) {
-                              ScaffoldMessenger.of(context)
-                                  .showSnackBar(const SnackBar(
-                                content: Text('Gespeichert'),
-                                behavior: SnackBarBehavior.floating,
-                              ));
-                              Navigator.pop(context);
-                            });
-                          } catch (e) {
-                            print('Unexpected error: $e');
-                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                              content: Text(
-                                  'Ein unerwarteter Fehler ist aufgetreten.'),
-                              behavior: SnackBarBehavior.floating,
-                            ));
-                          }
-                        } else {
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                            content:
-                                Text('Objekt konnte nicht gespeichert werden.'),
-                            behavior: SnackBarBehavior.floating,
-                          ));
-                        }
-                      },
-                      icon: Icon(Icons.delete),
-                      label: Text('Löschen'),
-                      style: ElevatedButton.styleFrom(
-                        elevation: 0,
-                      ),
-                    ),
-                  ),
+                  builder.id != null
+                      ? Expanded(
+                          child: ElevatedButton.icon(
+                            onPressed: () {
+                              Provider.of<TimeEntryModel>(context,
+                                      listen: false)
+                                  .delete(builder.id!)
+                                  .then((response) {
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(const SnackBar(
+                                  content: Text('Gelöscht'),
+                                  behavior: SnackBarBehavior.floating,
+                                ));
+                                Navigator.pop(context);
+                              });
+                            },
+                            icon: Icon(Icons.delete),
+                            label: Text('Löschen'),
+                            style: ElevatedButton.styleFrom(
+                              elevation: 0,
+                            ),
+                          ),
+                        )
+                      : const SizedBox.shrink(),
                 ],
               )
             ],
