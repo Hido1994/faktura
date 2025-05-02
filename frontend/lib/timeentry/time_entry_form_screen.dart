@@ -136,38 +136,84 @@ class _TimeEntryFormScreenState extends State<TimeEntryFormScreen> {
                 },
               ),
               const SizedBox(height: 20),
-              ElevatedButton.icon(
-                onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    try {
-                      Provider.of<TimeEntryModel>(context, listen: false)
-                          .save(builder.build())
-                          .then((response) {
-                        ScaffoldMessenger.of(context)
-                            .showSnackBar(const SnackBar(
-                          content: Text('Gespeichert'),
-                          behavior: SnackBarBehavior.floating,
-                        ));
-                        Navigator.pop(context);
-                      });
-                    } catch (e) {
-                      print('Unexpected error: $e');
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                        content:
-                            Text('Ein unerwarteter Fehler ist aufgetreten.'),
-                        behavior: SnackBarBehavior.floating,
-                      ));
-                    }
-                  } else {
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      content: Text('Objekt konnte nicht gespeichert werden.'),
-                      behavior: SnackBarBehavior.floating,
-                    ));
-                  }
-                },
-                icon: Icon(Icons.check),
-                label: Text('Speichern'),
-              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Expanded(
+                    child: ElevatedButton.icon(
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          try {
+                            Provider.of<TimeEntryModel>(context, listen: false)
+                                .save(builder.build())
+                                .then((response) {
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(const SnackBar(
+                                content: Text('Gespeichert'),
+                                behavior: SnackBarBehavior.floating,
+                              ));
+                              Navigator.pop(context);
+                            });
+                          } catch (e) {
+                            print('Unexpected error: $e');
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text(
+                                  'Ein unerwarteter Fehler ist aufgetreten.'),
+                              behavior: SnackBarBehavior.floating,
+                            ));
+                          }
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content:
+                                Text('Objekt konnte nicht gespeichert werden.'),
+                            behavior: SnackBarBehavior.floating,
+                          ));
+                        }
+                      },
+                      icon: Icon(Icons.check),
+                      label: Text('Speichern'),
+                    ),
+                  ),
+                  Expanded(
+                    child: ElevatedButton.icon(
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          try {
+                            Provider.of<TimeEntryModel>(context, listen: false)
+                                .save(builder.build())
+                                .then((response) {
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(const SnackBar(
+                                content: Text('Gespeichert'),
+                                behavior: SnackBarBehavior.floating,
+                              ));
+                              Navigator.pop(context);
+                            });
+                          } catch (e) {
+                            print('Unexpected error: $e');
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text(
+                                  'Ein unerwarteter Fehler ist aufgetreten.'),
+                              behavior: SnackBarBehavior.floating,
+                            ));
+                          }
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content:
+                                Text('Objekt konnte nicht gespeichert werden.'),
+                            behavior: SnackBarBehavior.floating,
+                          ));
+                        }
+                      },
+                      icon: Icon(Icons.delete),
+                      label: Text('Löschen'),
+                      style: ElevatedButton.styleFrom(
+                        elevation: 0,
+                      ),
+                    ),
+                  ),
+                ],
+              )
             ],
           ),
         ),
