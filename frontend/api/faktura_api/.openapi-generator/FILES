@@ -13,6 +13,7 @@ doc/CustomerFilter.md
 doc/CustomerFilterRequest.md
 doc/CustomerList.md
 doc/CustomerPage.md
+doc/DateOperatorTuple.md
 doc/Earning.md
 doc/EarningApi.md
 doc/EarningFilter.md
@@ -43,6 +44,7 @@ doc/InvoiceFilter.md
 doc/InvoiceFilterRequest.md
 doc/InvoiceList.md
 doc/InvoicePage.md
+doc/NumberOperatorTuple.md
 doc/Page.md
 doc/Pageable.md
 doc/PaymentMethod.md
@@ -76,6 +78,7 @@ doc/SettingFilterRequest.md
 doc/SettingList.md
 doc/SettingPage.md
 doc/Sort.md
+doc/StringOperatorTuple.md
 doc/Supplier.md
 doc/SupplierApi.md
 doc/SupplierFilter.md
@@ -122,6 +125,7 @@ lib/src/model/customer_filter_request.dart
 lib/src/model/customer_list.dart
 lib/src/model/customer_page.dart
 lib/src/model/date.dart
+lib/src/model/date_operator_tuple.dart
 lib/src/model/earning.dart
 lib/src/model/earning_filter.dart
 lib/src/model/earning_filter_request.dart
@@ -147,6 +151,7 @@ lib/src/model/invoice_filter.dart
 lib/src/model/invoice_filter_request.dart
 lib/src/model/invoice_list.dart
 lib/src/model/invoice_page.dart
+lib/src/model/number_operator_tuple.dart
 lib/src/model/page.dart
 lib/src/model/pageable.dart
 lib/src/model/payment_method.dart
@@ -175,6 +180,7 @@ lib/src/model/setting_filter_request.dart
 lib/src/model/setting_list.dart
 lib/src/model/setting_page.dart
 lib/src/model/sort.dart
+lib/src/model/string_operator_tuple.dart
 lib/src/model/supplier.dart
 lib/src/model/supplier_filter.dart
 lib/src/model/supplier_filter_request.dart

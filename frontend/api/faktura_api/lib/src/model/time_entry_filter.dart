@@ -3,6 +3,8 @@
 //
 
 // ignore_for_file: unused_element
+import 'package:faktura_api/src/model/string_operator_tuple.dart';
+import 'package:faktura_api/src/model/number_operator_tuple.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 
@@ -18,13 +20,13 @@ part 'time_entry_filter.g.dart';
 abstract class TimeEntryFilter
     implements Built<TimeEntryFilter, TimeEntryFilterBuilder> {
   @BuiltValueField(wireName: r'description')
-  String? get description;
+  StringOperatorTuple? get description;
 
   @BuiltValueField(wireName: r'customerId')
-  int? get customerId;
+  NumberOperatorTuple? get customerId;
 
   @BuiltValueField(wireName: r'saleServiceId')
-  int? get saleServiceId;
+  NumberOperatorTuple? get saleServiceId;
 
   TimeEntryFilter._();
 
@@ -56,21 +58,21 @@ class _$TimeEntryFilterSerializer
       yield r'description';
       yield serializers.serialize(
         object.description,
-        specifiedType: const FullType.nullable(String),
+        specifiedType: const FullType(StringOperatorTuple),
       );
     }
     if (object.customerId != null) {
       yield r'customerId';
       yield serializers.serialize(
         object.customerId,
-        specifiedType: const FullType.nullable(int),
+        specifiedType: const FullType(NumberOperatorTuple),
       );
     }
     if (object.saleServiceId != null) {
       yield r'saleServiceId';
       yield serializers.serialize(
         object.saleServiceId,
-        specifiedType: const FullType.nullable(int),
+        specifiedType: const FullType(NumberOperatorTuple),
       );
     }
   }
@@ -101,26 +103,23 @@ class _$TimeEntryFilterSerializer
         case r'description':
           final valueDes = serializers.deserialize(
             value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
-          if (valueDes == null) continue;
-          result.description = valueDes;
+            specifiedType: const FullType(StringOperatorTuple),
+          ) as StringOperatorTuple;
+          result.description.replace(valueDes);
           break;
         case r'customerId':
           final valueDes = serializers.deserialize(
             value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
-          if (valueDes == null) continue;
-          result.customerId = valueDes;
+            specifiedType: const FullType(NumberOperatorTuple),
+          ) as NumberOperatorTuple;
+          result.customerId.replace(valueDes);
           break;
         case r'saleServiceId':
           final valueDes = serializers.deserialize(
             value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
-          if (valueDes == null) continue;
-          result.saleServiceId = valueDes;
+            specifiedType: const FullType(NumberOperatorTuple),
+          ) as NumberOperatorTuple;
+          result.saleServiceId.replace(valueDes);
           break;
         default:
           unhandled.add(key);

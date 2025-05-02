@@ -116,7 +116,7 @@ class _TimeEntryDataSource extends CalendarDataSource<TimeEntry> {
 
   @override
   String getSubject(int index) {
-    return appointments![index].description;
+    return '${appointments![index].description} @ ${appointments![index].customer.name}';
   }
 
   @override

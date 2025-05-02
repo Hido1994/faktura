@@ -50,7 +50,10 @@ class _SaleServiceFormScreenState extends State<SaleServiceFormScreen> {
       selectedTimeEntryIds = {};
     } else {
       var timeEntryBuilder = TimeEntryFilterBuilder();
-      timeEntryBuilder.customerId = customer.id;
+      var operatorBuilder = NumberOperatorTupleBuilder();
+      operatorBuilder.operator_ = NumberOperatorTupleOperator_Enum.EQ;
+      operatorBuilder.value = customer.id;
+      timeEntryBuilder.customerId = operatorBuilder;
       timeEntryBuilder.saleServiceId = null;
       var entries = await Provider.of<TimeEntryModel>(context, listen: false)
           .getAll(timeEntryBuilder);

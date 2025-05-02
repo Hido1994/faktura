@@ -1843,16 +1843,11 @@ components:
       type: object
       properties:
         description:
-          type: string
-          nullable: true
+          $ref: "#/components/schemas/StringOperatorTuple"
         customerId:
-          type: integer
-          format: int64
-          nullable: true
+          $ref: "#/components/schemas/NumberOperatorTuple"
         saleServiceId:
-          type: integer
-          format: int64
-          nullable: true
+          $ref: "#/components/schemas/NumberOperatorTuple"
     TimeEntryPage:
       description: typed Page
       type: object
@@ -1894,3 +1889,46 @@ components:
         - customerId
         - startedOn
         - description
+    StringOperatorTuple:
+      type: object
+      properties:
+        operator:
+          enum:
+            - EQ
+            - CONTAINS
+            - IS_NULL
+        value:
+          type: string
+      required:
+        - operator
+    NumberOperatorTuple:
+      type: object
+      properties:
+        operator:
+          enum:
+            - EQ
+            - GT
+            - GTE
+            - LT
+            - LTE
+            - IS_NULL
+        value:
+          type: number
+      required:
+        - operator
+    DateOperatorTuple:
+      type: object
+      properties:
+        operator:
+          enum:
+            - EQ
+            - GT
+            - GTE
+            - LT
+            - LTE
+            - IS_NULL
+        value:
+          type: string
+          format: date-time
+      required:
+        - operator

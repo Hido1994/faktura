@@ -2,6 +2,7 @@ package at.dhinterndorfer.faktura.timeentry;
 
 import at.dhinterndorfer.faktura.commons.date.DateTimeMapper;
 import at.dhinterndorfer.faktura.commons.filter.NullableMapper;
+import at.dhinterndorfer.faktura.commons.filter.OperatorTupleMapper;
 import at.dhinterndorfer.faktura.dto.v1.TimeEntryFilterRestDto;
 import at.dhinterndorfer.faktura.dto.v1.TimeEntryPageRestDto;
 import at.dhinterndorfer.faktura.dto.v1.TimeEntryRestDto;
@@ -10,7 +11,7 @@ import org.springframework.data.domain.Page;
 
 import java.util.List;
 
-@Mapper(uses = {NullableMapper.class, DateTimeMapper.class})
+@Mapper(uses = {NullableMapper.class, DateTimeMapper.class, OperatorTupleMapper.class})
 public interface TimeEntryMapper {
 
     TimeEntryRestDto mapToDto(TimeEntry entity);

@@ -24,6 +24,7 @@ import 'package:faktura_api/src/model/customer_filter.dart';
 import 'package:faktura_api/src/model/customer_filter_request.dart';
 import 'package:faktura_api/src/model/customer_list.dart';
 import 'package:faktura_api/src/model/customer_page.dart';
+import 'package:faktura_api/src/model/date_operator_tuple.dart';
 import 'package:faktura_api/src/model/earning.dart';
 import 'package:faktura_api/src/model/earning_filter.dart';
 import 'package:faktura_api/src/model/earning_filter_request.dart';
@@ -49,6 +50,7 @@ import 'package:faktura_api/src/model/invoice_filter.dart';
 import 'package:faktura_api/src/model/invoice_filter_request.dart';
 import 'package:faktura_api/src/model/invoice_list.dart';
 import 'package:faktura_api/src/model/invoice_page.dart';
+import 'package:faktura_api/src/model/number_operator_tuple.dart';
 import 'package:faktura_api/src/model/page.dart';
 import 'package:faktura_api/src/model/pageable.dart';
 import 'package:faktura_api/src/model/payment_method.dart';
@@ -77,6 +79,7 @@ import 'package:faktura_api/src/model/setting_filter_request.dart';
 import 'package:faktura_api/src/model/setting_list.dart';
 import 'package:faktura_api/src/model/setting_page.dart';
 import 'package:faktura_api/src/model/sort.dart';
+import 'package:faktura_api/src/model/string_operator_tuple.dart';
 import 'package:faktura_api/src/model/supplier.dart';
 import 'package:faktura_api/src/model/supplier_filter.dart';
 import 'package:faktura_api/src/model/supplier_filter_request.dart';
@@ -103,6 +106,7 @@ part 'serializers.g.dart';
   CustomerList,
   $CustomerList,
   CustomerPage,
+  DateOperatorTuple,
   Earning,
   EarningFilter,
   EarningFilterRequest,
@@ -133,6 +137,7 @@ part 'serializers.g.dart';
   InvoiceList,
   $InvoiceList,
   InvoicePage,
+  NumberOperatorTuple,
   Page,
   $Page,
   Pageable,
@@ -167,6 +172,7 @@ part 'serializers.g.dart';
   $SettingList,
   SettingPage,
   Sort,
+  StringOperatorTuple,
   Supplier,
   SupplierFilter,
   SupplierFilterRequest,

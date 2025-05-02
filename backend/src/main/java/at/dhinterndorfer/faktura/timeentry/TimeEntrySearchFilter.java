@@ -1,6 +1,7 @@
 package at.dhinterndorfer.faktura.timeentry;
 
 import at.dhinterndorfer.faktura.commons.filter.Nullable;
+import at.dhinterndorfer.faktura.commons.filter.OperatorTuple;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -11,13 +12,10 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder(toBuilder = true)
 public class TimeEntrySearchFilter {
 
-    @Builder.Default
-    private Nullable<String> description = Nullable.undefined();
+    private OperatorTuple<String> description;
 
-    @Builder.Default
-    private Nullable<Long> saleServiceId = Nullable.undefined();
+    private OperatorTuple<Long> customerId;
 
-    @Builder.Default
-    private Nullable<Long> customerId = Nullable.undefined();
+    private OperatorTuple<Long> saleServiceId;
 
 }
