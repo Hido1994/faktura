@@ -1848,6 +1848,8 @@ components:
           $ref: "#/components/schemas/NumberOperatorTuple"
         saleServiceId:
           $ref: "#/components/schemas/NumberOperatorTuple"
+        startedOn:
+          $ref: "#/components/schemas/DateOperatorTuple"
     TimeEntryPage:
       description: typed Page
       type: object
@@ -1895,12 +1897,11 @@ components:
         operator:
           enum:
             - EQ
-            - CONTAINS
+            - STRING_CONTAINS
             - IS_NULL
+            - IS_NOT_NULL
         value:
           type: string
-      required:
-        - operator
     NumberOperatorTuple:
       type: object
       properties:
@@ -1908,14 +1909,13 @@ components:
           enum:
             - EQ
             - GT
-            - GTE
+            - GOE
             - LT
-            - LTE
+            - LOE
             - IS_NULL
+            - IS_NOT_NULL
         value:
           type: number
-      required:
-        - operator
     DateOperatorTuple:
       type: object
       properties:
@@ -1923,12 +1923,11 @@ components:
           enum:
             - EQ
             - GT
-            - GTE
+            - GOE
             - LT
-            - LTE
+            - LOE
             - IS_NULL
+            - IS_NOT_NULL
         value:
           type: string
           format: date-time
-      required:
-        - operator

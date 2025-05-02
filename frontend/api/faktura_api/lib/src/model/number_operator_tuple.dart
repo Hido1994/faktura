@@ -18,8 +18,8 @@ part 'number_operator_tuple.g.dart';
 abstract class NumberOperatorTuple
     implements Built<NumberOperatorTuple, NumberOperatorTupleBuilder> {
   @BuiltValueField(wireName: r'operator')
-  NumberOperatorTupleOperator_Enum get operator_;
-  // enum operator_Enum {  EQ,  GT,  GTE,  LT,  LTE,  IS_NULL,  };
+  NumberOperatorTupleOperator_Enum? get operator_;
+  // enum operator_Enum {  EQ,  GT,  GOE,  LT,  LOE,  IS_NULL,  IS_NOT_NULL,  };
 
   @BuiltValueField(wireName: r'value')
   num? get value;
@@ -53,11 +53,13 @@ class _$NumberOperatorTupleSerializer
     NumberOperatorTuple object, {
     FullType specifiedType = FullType.unspecified,
   }) sync* {
-    yield r'operator';
-    yield serializers.serialize(
-      object.operator_,
-      specifiedType: const FullType(NumberOperatorTupleOperator_Enum),
-    );
+    if (object.operator_ != null) {
+      yield r'operator';
+      yield serializers.serialize(
+        object.operator_,
+        specifiedType: const FullType(NumberOperatorTupleOperator_Enum),
+      );
+    }
     if (object.value != null) {
       yield r'value';
       yield serializers.serialize(
@@ -140,18 +142,21 @@ class NumberOperatorTupleOperator_Enum extends EnumClass {
   @BuiltValueEnumConst(wireName: r'GT')
   static const NumberOperatorTupleOperator_Enum GT =
       _$numberOperatorTupleOperatorEnum_GT;
-  @BuiltValueEnumConst(wireName: r'GTE')
-  static const NumberOperatorTupleOperator_Enum GTE =
-      _$numberOperatorTupleOperatorEnum_GTE;
+  @BuiltValueEnumConst(wireName: r'GOE')
+  static const NumberOperatorTupleOperator_Enum GOE =
+      _$numberOperatorTupleOperatorEnum_GOE;
   @BuiltValueEnumConst(wireName: r'LT')
   static const NumberOperatorTupleOperator_Enum LT =
       _$numberOperatorTupleOperatorEnum_LT;
-  @BuiltValueEnumConst(wireName: r'LTE')
-  static const NumberOperatorTupleOperator_Enum LTE =
-      _$numberOperatorTupleOperatorEnum_LTE;
+  @BuiltValueEnumConst(wireName: r'LOE')
+  static const NumberOperatorTupleOperator_Enum LOE =
+      _$numberOperatorTupleOperatorEnum_LOE;
   @BuiltValueEnumConst(wireName: r'IS_NULL')
   static const NumberOperatorTupleOperator_Enum IS_NULL =
       _$numberOperatorTupleOperatorEnum_IS_NULL;
+  @BuiltValueEnumConst(wireName: r'IS_NOT_NULL')
+  static const NumberOperatorTupleOperator_Enum IS_NOT_NULL =
+      _$numberOperatorTupleOperatorEnum_IS_NOT_NULL;
 
   static Serializer<NumberOperatorTupleOperator_Enum> get serializer =>
       _$numberOperatorTupleOperatorEnumSerializer;

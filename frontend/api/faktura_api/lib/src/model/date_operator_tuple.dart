@@ -18,8 +18,8 @@ part 'date_operator_tuple.g.dart';
 abstract class DateOperatorTuple
     implements Built<DateOperatorTuple, DateOperatorTupleBuilder> {
   @BuiltValueField(wireName: r'operator')
-  DateOperatorTupleOperator_Enum get operator_;
-  // enum operator_Enum {  EQ,  GT,  GTE,  LT,  LTE,  IS_NULL,  };
+  DateOperatorTupleOperator_Enum? get operator_;
+  // enum operator_Enum {  EQ,  GT,  GOE,  LT,  LOE,  IS_NULL,  IS_NOT_NULL,  };
 
   @BuiltValueField(wireName: r'value')
   DateTime? get value;
@@ -50,11 +50,13 @@ class _$DateOperatorTupleSerializer
     DateOperatorTuple object, {
     FullType specifiedType = FullType.unspecified,
   }) sync* {
-    yield r'operator';
-    yield serializers.serialize(
-      object.operator_,
-      specifiedType: const FullType(DateOperatorTupleOperator_Enum),
-    );
+    if (object.operator_ != null) {
+      yield r'operator';
+      yield serializers.serialize(
+        object.operator_,
+        specifiedType: const FullType(DateOperatorTupleOperator_Enum),
+      );
+    }
     if (object.value != null) {
       yield r'value';
       yield serializers.serialize(
@@ -137,18 +139,21 @@ class DateOperatorTupleOperator_Enum extends EnumClass {
   @BuiltValueEnumConst(wireName: r'GT')
   static const DateOperatorTupleOperator_Enum GT =
       _$dateOperatorTupleOperatorEnum_GT;
-  @BuiltValueEnumConst(wireName: r'GTE')
-  static const DateOperatorTupleOperator_Enum GTE =
-      _$dateOperatorTupleOperatorEnum_GTE;
+  @BuiltValueEnumConst(wireName: r'GOE')
+  static const DateOperatorTupleOperator_Enum GOE =
+      _$dateOperatorTupleOperatorEnum_GOE;
   @BuiltValueEnumConst(wireName: r'LT')
   static const DateOperatorTupleOperator_Enum LT =
       _$dateOperatorTupleOperatorEnum_LT;
-  @BuiltValueEnumConst(wireName: r'LTE')
-  static const DateOperatorTupleOperator_Enum LTE =
-      _$dateOperatorTupleOperatorEnum_LTE;
+  @BuiltValueEnumConst(wireName: r'LOE')
+  static const DateOperatorTupleOperator_Enum LOE =
+      _$dateOperatorTupleOperatorEnum_LOE;
   @BuiltValueEnumConst(wireName: r'IS_NULL')
   static const DateOperatorTupleOperator_Enum IS_NULL =
       _$dateOperatorTupleOperatorEnum_IS_NULL;
+  @BuiltValueEnumConst(wireName: r'IS_NOT_NULL')
+  static const DateOperatorTupleOperator_Enum IS_NOT_NULL =
+      _$dateOperatorTupleOperatorEnum_IS_NOT_NULL;
 
   static Serializer<DateOperatorTupleOperator_Enum> get serializer =>
       _$dateOperatorTupleOperatorEnumSerializer;

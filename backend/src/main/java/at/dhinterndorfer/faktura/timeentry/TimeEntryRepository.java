@@ -15,13 +15,16 @@ public interface TimeEntryRepository extends JpaRepository<TimeEntry, Long>, Que
         BooleanBuilder builder = new BooleanBuilder();
         QTimeEntry qEntity = QTimeEntry.timeEntry;
         Optional.ofNullable(filter.getDescription()).ifPresent(x -> builder.and(
-            Expressions.booleanOperation(x.getOperator(), qEntity.description,
-                x.getValue() == null ? Expressions.nullExpression() : Expressions.constant(x.getValue()))));
+            Expressions.booleanOperation(x.getOperator(), qEntity.description.lower(),
+                x.getValue() == null ? Expressions.nullExpression() : Expressions.constant(x.getValue().toLowerCase()))));
         Optional.ofNullable(filter.getSaleServiceId()).ifPresent(x -> builder.and(
             Expressions.booleanOperation(x.getOperator(), qEntity.saleService.id,
                 x.getValue() == null ? Expressions.nullExpression() : Expressions.constant(x.getValue()))));
         Optional.ofNullable(filter.getCustomerId()).ifPresent(x -> builder.and(
             Expressions.booleanOperation(x.getOperator(), qEntity.customer.id,
+                x.getValue() == null ? Expressions.nullExpression() : Expressions.constant(x.getValue()))));
+        Optional.ofNullable(filter.getStartedOn()).ifPresent(x -> builder.and(
+            Expressions.booleanOperation(x.getOperator(), qEntity.startedOn,
                 x.getValue() == null ? Expressions.nullExpression() : Expressions.constant(x.getValue()))));
         return builder;
     }

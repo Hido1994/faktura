@@ -18,8 +18,8 @@ part 'string_operator_tuple.g.dart';
 abstract class StringOperatorTuple
     implements Built<StringOperatorTuple, StringOperatorTupleBuilder> {
   @BuiltValueField(wireName: r'operator')
-  StringOperatorTupleOperator_Enum get operator_;
-  // enum operator_Enum {  EQ,  CONTAINS,  IS_NULL,  };
+  StringOperatorTupleOperator_Enum? get operator_;
+  // enum operator_Enum {  EQ,  STRING_CONTAINS,  IS_NULL,  IS_NOT_NULL,  };
 
   @BuiltValueField(wireName: r'value')
   String? get value;
@@ -53,11 +53,13 @@ class _$StringOperatorTupleSerializer
     StringOperatorTuple object, {
     FullType specifiedType = FullType.unspecified,
   }) sync* {
-    yield r'operator';
-    yield serializers.serialize(
-      object.operator_,
-      specifiedType: const FullType(StringOperatorTupleOperator_Enum),
-    );
+    if (object.operator_ != null) {
+      yield r'operator';
+      yield serializers.serialize(
+        object.operator_,
+        specifiedType: const FullType(StringOperatorTupleOperator_Enum),
+      );
+    }
     if (object.value != null) {
       yield r'value';
       yield serializers.serialize(
@@ -137,12 +139,15 @@ class StringOperatorTupleOperator_Enum extends EnumClass {
   @BuiltValueEnumConst(wireName: r'EQ')
   static const StringOperatorTupleOperator_Enum EQ =
       _$stringOperatorTupleOperatorEnum_EQ;
-  @BuiltValueEnumConst(wireName: r'CONTAINS')
-  static const StringOperatorTupleOperator_Enum CONTAINS =
-      _$stringOperatorTupleOperatorEnum_CONTAINS;
+  @BuiltValueEnumConst(wireName: r'STRING_CONTAINS')
+  static const StringOperatorTupleOperator_Enum STRING_CONTAINS =
+      _$stringOperatorTupleOperatorEnum_STRING_CONTAINS;
   @BuiltValueEnumConst(wireName: r'IS_NULL')
   static const StringOperatorTupleOperator_Enum IS_NULL =
       _$stringOperatorTupleOperatorEnum_IS_NULL;
+  @BuiltValueEnumConst(wireName: r'IS_NOT_NULL')
+  static const StringOperatorTupleOperator_Enum IS_NOT_NULL =
+      _$stringOperatorTupleOperatorEnum_IS_NOT_NULL;
 
   static Serializer<StringOperatorTupleOperator_Enum> get serializer =>
       _$stringOperatorTupleOperatorEnumSerializer;

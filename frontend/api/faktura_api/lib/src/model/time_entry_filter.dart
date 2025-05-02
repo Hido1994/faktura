@@ -5,6 +5,7 @@
 // ignore_for_file: unused_element
 import 'package:faktura_api/src/model/string_operator_tuple.dart';
 import 'package:faktura_api/src/model/number_operator_tuple.dart';
+import 'package:faktura_api/src/model/date_operator_tuple.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 
@@ -16,6 +17,7 @@ part 'time_entry_filter.g.dart';
 /// * [description]
 /// * [customerId]
 /// * [saleServiceId]
+/// * [startedOn]
 @BuiltValue()
 abstract class TimeEntryFilter
     implements Built<TimeEntryFilter, TimeEntryFilterBuilder> {
@@ -27,6 +29,9 @@ abstract class TimeEntryFilter
 
   @BuiltValueField(wireName: r'saleServiceId')
   NumberOperatorTuple? get saleServiceId;
+
+  @BuiltValueField(wireName: r'startedOn')
+  DateOperatorTuple? get startedOn;
 
   TimeEntryFilter._();
 
@@ -75,6 +80,13 @@ class _$TimeEntryFilterSerializer
         specifiedType: const FullType(NumberOperatorTuple),
       );
     }
+    if (object.startedOn != null) {
+      yield r'startedOn';
+      yield serializers.serialize(
+        object.startedOn,
+        specifiedType: const FullType(DateOperatorTuple),
+      );
+    }
   }
 
   @override
@@ -120,6 +132,13 @@ class _$TimeEntryFilterSerializer
             specifiedType: const FullType(NumberOperatorTuple),
           ) as NumberOperatorTuple;
           result.saleServiceId.replace(valueDes);
+          break;
+        case r'startedOn':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(DateOperatorTuple),
+          ) as DateOperatorTuple;
+          result.startedOn.replace(valueDes);
           break;
         default:
           unhandled.add(key);

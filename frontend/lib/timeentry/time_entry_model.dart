@@ -87,6 +87,11 @@ class TimeEntryModel extends ChangeNotifier {
   void onCalendarViewChanged({int? year}) async {
     if (year == null || calendarViewYear != year) {
       calendarViewYear = year ?? calendarViewYear;
+      DateTime from = DateTime.utc(calendarViewYear!);
+      var operatorBuilder = DateOperatorTupleBuilder();
+      operatorBuilder.operator_ = DateOperatorTupleOperator_Enum.GOE;
+      operatorBuilder.value = from;
+      filter.startedOn = operatorBuilder;
       _timeEntryApi.getTimeEntries(
         timeEntryFilterRequest: TimeEntryFilterRequest((builder) {
           builder.filter = filter;
@@ -95,6 +100,7 @@ class TimeEntryModel extends ChangeNotifier {
         calendarViewEntities = response.data?.content?.toList() ?? [];
         notifyListeners();
       }).catchError((error) {
+        print(error);
         _appStateModel.setMessage("Ein unerwarteter Fehler ist aufgetreten.");
       });
     }
