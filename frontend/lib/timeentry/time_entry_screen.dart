@@ -59,7 +59,6 @@ class _TimeEntryScreenState extends State<TimeEntryScreen> {
               if (details.targetElement == CalendarElement.calendarCell) {
                 TimeEntryBuilder builder = TimeEntryBuilder();
                 builder.startedOn = details.date!.toUtc();
-                builder.endedOn = builder.startedOn?.add(Duration(hours: 1));
 
                 showModalBottomSheet(
                   isScrollControlled: true,

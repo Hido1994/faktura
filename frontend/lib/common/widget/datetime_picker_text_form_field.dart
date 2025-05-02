@@ -5,6 +5,7 @@ import '../string_formats.dart';
 
 class DateTimePickerTextFormField extends StatefulWidget {
   final DateTime? initialValue;
+  final DateTime? defaultCurrentTime;
   final String title;
   final ValueSetter<DateTime> onChanged;
   final FormFieldValidator<String>? validator;
@@ -15,6 +16,7 @@ class DateTimePickerTextFormField extends StatefulWidget {
       required this.title,
       required this.onChanged,
       this.initialValue,
+      this.defaultCurrentTime,
       this.validator,
       this.includeTime = true});
 
@@ -54,7 +56,9 @@ class _DateTimePickerTextFormFieldState
               widget.onChanged(date);
               _dateController.text = dateTimeFormat.format(date);
             },
-            currentTime: _dateController.text.isEmpty ? null : dateTimeFormat.parse(_dateController.text),
+            currentTime: _dateController.text.isEmpty
+                ? widget.defaultCurrentTime
+                : dateTimeFormat.parse(_dateController.text),
             locale: LocaleType.de,
           );
         } else {
@@ -65,7 +69,9 @@ class _DateTimePickerTextFormFieldState
               widget.onChanged(date);
               _dateController.text = dateFormat.format(date);
             },
-            currentTime: _dateController.text.isEmpty ? null : dateTimeFormat.parse(_dateController.text),
+            currentTime: _dateController.text.isEmpty
+                ? widget.defaultCurrentTime
+                : dateTimeFormat.parse(_dateController.text),
             locale: LocaleType.de,
           );
         }

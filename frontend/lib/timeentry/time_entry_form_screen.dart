@@ -23,18 +23,8 @@ class _TimeEntryFormScreenState extends State<TimeEntryFormScreen> {
   TimeEntryBuilder builder = TimeEntryBuilder();
 
   Future<void> _initTimeEntry() async {
-    TimeEntryBuilder entityBuilder = TimeEntryBuilder();
-
-    if (widget.entry == null) {
-      var now = DateTime.now();
-      entityBuilder.startedOn =
-          DateTime(now.year, now.month, now.day, now.hour);
-    } else {
-      entityBuilder = widget.entry!;
-    }
-
     setState(() {
-      builder = entityBuilder;
+      builder = widget.entry ?? TimeEntryBuilder();
     });
   }
 
@@ -83,6 +73,7 @@ class _TimeEntryFormScreenState extends State<TimeEntryFormScreen> {
                 key: UniqueKey(),
                 title: 'Bis',
                 initialValue: builder.endedOn?.toLocal(),
+                defaultCurrentTime: builder.startedOn?.toLocal(),
                 includeTime: true,
                 onChanged: (date) {
                   builder.endedOn = date.toUtc();
