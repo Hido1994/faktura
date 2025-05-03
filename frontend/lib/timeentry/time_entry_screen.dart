@@ -88,7 +88,11 @@ class _TimeEntryScreenState extends State<TimeEntryScreen> {
               }
             },
             onSelectionChanged: (CalendarSelectionDetails details) {
-              builder.startedOn = details.date!.toUtc();
+              var timeEntryBuilder = TimeEntryBuilder();
+              timeEntryBuilder.startedOn = details.date!.toUtc();
+              setState(() {
+                builder = timeEntryBuilder;
+              });
             },
           );
         },
