@@ -8,17 +8,18 @@ import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
 @SuperBuilder(toBuilder = true)
 public class TimeEntrySearchFilter {
 
-    private OperatorTuple<String> description;
+    private List<OperatorTuple<String>> description;
 
-    private OperatorTuple<Long> customerId;
+    private List<OperatorTuple<Long>> customerId;
 
-    private OperatorTuple<Long> saleServiceId;
+    private List<OperatorTuple<Long>> saleServiceId;
 
-    private OperatorTuple<LocalDateTime> startedOn;
+    private List<OperatorTuple<LocalDateTime>> startedOn;
 }

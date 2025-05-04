@@ -88,10 +88,17 @@ class TimeEntryModel extends ChangeNotifier {
     if (year == null || calendarViewYear != year) {
       calendarViewYear = year ?? calendarViewYear;
       DateTime from = DateTime.utc(calendarViewYear!);
+      DateTime until = DateTime.utc(from.year + 1);
+      ListBuilder<DateOperatorTuple> startedOn = ListBuilder();
       var operatorBuilder = DateOperatorTupleBuilder();
       operatorBuilder.operator_ = DateOperatorTupleOperator_Enum.GOE;
       operatorBuilder.value = from;
-      filter.startedOn = operatorBuilder;
+      startedOn.add(operatorBuilder.build());
+      operatorBuilder = DateOperatorTupleBuilder();
+      operatorBuilder.operator_ = DateOperatorTupleOperator_Enum.LT;
+      operatorBuilder.value = until;
+      startedOn.add(operatorBuilder.build());
+      filter.startedOn = startedOn;
       _timeEntryApi.getTimeEntries(
         timeEntryFilterRequest: TimeEntryFilterRequest((builder) {
           builder.filter = filter;

@@ -1,3 +1,4 @@
+import 'package:built_collection/built_collection.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:faktura/common/widget/autocomplete_text_form_field.dart';
 import 'package:faktura/sale/service/sale_service_model.dart';
@@ -53,7 +54,7 @@ class _SaleServiceFormScreenState extends State<SaleServiceFormScreen> {
       var operatorBuilder = NumberOperatorTupleBuilder();
       operatorBuilder.operator_ = NumberOperatorTupleOperator_Enum.EQ;
       operatorBuilder.value = customer.id;
-      timeEntryBuilder.customerId = operatorBuilder;
+      timeEntryBuilder.customerId = ListBuilder([operatorBuilder.build()]);
       timeEntryBuilder.saleServiceId = null;
       var entries = await Provider.of<TimeEntryModel>(context, listen: false)
           .getAll(timeEntryBuilder);

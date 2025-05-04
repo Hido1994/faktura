@@ -5,6 +5,7 @@
 // ignore_for_file: unused_element
 import 'package:faktura_api/src/model/string_operator_tuple.dart';
 import 'package:faktura_api/src/model/number_operator_tuple.dart';
+import 'package:built_collection/built_collection.dart';
 import 'package:faktura_api/src/model/date_operator_tuple.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
@@ -22,16 +23,16 @@ part 'time_entry_filter.g.dart';
 abstract class TimeEntryFilter
     implements Built<TimeEntryFilter, TimeEntryFilterBuilder> {
   @BuiltValueField(wireName: r'description')
-  StringOperatorTuple? get description;
+  BuiltList<StringOperatorTuple>? get description;
 
   @BuiltValueField(wireName: r'customerId')
-  NumberOperatorTuple? get customerId;
+  BuiltList<NumberOperatorTuple>? get customerId;
 
   @BuiltValueField(wireName: r'saleServiceId')
-  NumberOperatorTuple? get saleServiceId;
+  BuiltList<NumberOperatorTuple>? get saleServiceId;
 
   @BuiltValueField(wireName: r'startedOn')
-  DateOperatorTuple? get startedOn;
+  BuiltList<DateOperatorTuple>? get startedOn;
 
   TimeEntryFilter._();
 
@@ -63,28 +64,31 @@ class _$TimeEntryFilterSerializer
       yield r'description';
       yield serializers.serialize(
         object.description,
-        specifiedType: const FullType(StringOperatorTuple),
+        specifiedType:
+            const FullType(BuiltList, [FullType(StringOperatorTuple)]),
       );
     }
     if (object.customerId != null) {
       yield r'customerId';
       yield serializers.serialize(
         object.customerId,
-        specifiedType: const FullType(NumberOperatorTuple),
+        specifiedType:
+            const FullType(BuiltList, [FullType(NumberOperatorTuple)]),
       );
     }
     if (object.saleServiceId != null) {
       yield r'saleServiceId';
       yield serializers.serialize(
         object.saleServiceId,
-        specifiedType: const FullType(NumberOperatorTuple),
+        specifiedType:
+            const FullType(BuiltList, [FullType(NumberOperatorTuple)]),
       );
     }
     if (object.startedOn != null) {
       yield r'startedOn';
       yield serializers.serialize(
         object.startedOn,
-        specifiedType: const FullType(DateOperatorTuple),
+        specifiedType: const FullType(BuiltList, [FullType(DateOperatorTuple)]),
       );
     }
   }
@@ -115,29 +119,33 @@ class _$TimeEntryFilterSerializer
         case r'description':
           final valueDes = serializers.deserialize(
             value,
-            specifiedType: const FullType(StringOperatorTuple),
-          ) as StringOperatorTuple;
+            specifiedType:
+                const FullType(BuiltList, [FullType(StringOperatorTuple)]),
+          ) as BuiltList<StringOperatorTuple>;
           result.description.replace(valueDes);
           break;
         case r'customerId':
           final valueDes = serializers.deserialize(
             value,
-            specifiedType: const FullType(NumberOperatorTuple),
-          ) as NumberOperatorTuple;
+            specifiedType:
+                const FullType(BuiltList, [FullType(NumberOperatorTuple)]),
+          ) as BuiltList<NumberOperatorTuple>;
           result.customerId.replace(valueDes);
           break;
         case r'saleServiceId':
           final valueDes = serializers.deserialize(
             value,
-            specifiedType: const FullType(NumberOperatorTuple),
-          ) as NumberOperatorTuple;
+            specifiedType:
+                const FullType(BuiltList, [FullType(NumberOperatorTuple)]),
+          ) as BuiltList<NumberOperatorTuple>;
           result.saleServiceId.replace(valueDes);
           break;
         case r'startedOn':
           final valueDes = serializers.deserialize(
             value,
-            specifiedType: const FullType(DateOperatorTuple),
-          ) as DateOperatorTuple;
+            specifiedType:
+                const FullType(BuiltList, [FullType(DateOperatorTuple)]),
+          ) as BuiltList<DateOperatorTuple>;
           result.startedOn.replace(valueDes);
           break;
         default:

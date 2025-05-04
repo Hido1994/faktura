@@ -1843,13 +1843,21 @@ components:
       type: object
       properties:
         description:
-          $ref: "#/components/schemas/StringOperatorTuple"
+          type: array
+          items:
+            $ref: "#/components/schemas/StringOperatorTuple"
         customerId:
-          $ref: "#/components/schemas/NumberOperatorTuple"
+          type: array
+          items:
+            $ref: "#/components/schemas/NumberOperatorTuple"
         saleServiceId:
-          $ref: "#/components/schemas/NumberOperatorTuple"
+          type: array
+          items:
+            $ref: "#/components/schemas/NumberOperatorTuple"
         startedOn:
-          $ref: "#/components/schemas/DateOperatorTuple"
+          type: array
+          items:
+            $ref: "#/components/schemas/DateOperatorTuple"
     TimeEntryPage:
       description: typed Page
       type: object

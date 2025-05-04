@@ -1,3 +1,4 @@
+import 'package:built_collection/built_collection.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:faktura/common/widget/autocomplete_text_form_field.dart';
 import 'package:faktura/timeentry/time_entry_model.dart';
@@ -40,8 +41,8 @@ class _TimeEntryFilterScreenState extends State<TimeEntryFilterScreen> {
                   children: [
                     FilterChip(
                       label: Text("Offen"),
-                      selected: model.filter.saleServiceId.operator_ ==
-                          NumberOperatorTupleOperator_Enum.IS_NULL,
+                      selected: model.filter.saleServiceId.isNotEmpty && model.filter.saleServiceId.build()
+                          .any((item) => item.operator_ == NumberOperatorTupleOperator_Enum.IS_NULL),
                       onSelected: (bool selected) {
                         setState(() {
                           if (selected) {
@@ -49,7 +50,7 @@ class _TimeEntryFilterScreenState extends State<TimeEntryFilterScreen> {
                                 NumberOperatorTupleBuilder();
                             operatorBuilder.operator_ =
                                 NumberOperatorTupleOperator_Enum.IS_NULL;
-                            model.filter.saleServiceId = operatorBuilder;
+                            model.filter.saleServiceId = ListBuilder([operatorBuilder.build()]);
                           } else {
                             model.filter.saleServiceId = null;
                           }
@@ -58,8 +59,8 @@ class _TimeEntryFilterScreenState extends State<TimeEntryFilterScreen> {
                     ),
                     FilterChip(
                       label: Text("Verrechnet"),
-                      selected: model.filter.saleServiceId.operator_ ==
-                          NumberOperatorTupleOperator_Enum.IS_NOT_NULL,
+                      selected: model.filter.saleServiceId.isNotEmpty && model.filter.saleServiceId.build()
+                          .any((item) => item.operator_ == NumberOperatorTupleOperator_Enum.IS_NOT_NULL),
                       onSelected: (bool selected) {
                         setState(() {
                           if (selected) {
@@ -67,7 +68,7 @@ class _TimeEntryFilterScreenState extends State<TimeEntryFilterScreen> {
                                 NumberOperatorTupleBuilder();
                             operatorBuilder.operator_ =
                                 NumberOperatorTupleOperator_Enum.IS_NOT_NULL;
-                            model.filter.saleServiceId = operatorBuilder;
+                            model.filter.saleServiceId = ListBuilder([operatorBuilder.build()]);
                           } else {
                             model.filter.saleServiceId = null;
                           }
@@ -81,9 +82,9 @@ class _TimeEntryFilterScreenState extends State<TimeEntryFilterScreen> {
                     builder: (context, customerModel, child) {
                   return DropdownSearch<Customer>(
                     items: (f, cs) => customerModel.lovEntities,
-                    selectedItem: model.filter.customerId.value != null
+                    selectedItem: model.filter.customerId.isNotEmpty
                         ? customerModel.lovEntities.firstWhere(
-                            (item) => item.id == model.filter.customerId.value)
+                            (item) => item.id == model.filter.customerId[0].value)
                         : null,
                     itemAsString: (Customer customer) => customer.name,
                     decoratorProps: DropDownDecoratorProps(
@@ -101,7 +102,7 @@ class _TimeEntryFilterScreenState extends State<TimeEntryFilterScreen> {
                         operatorBuilder.operator_ =
                             NumberOperatorTupleOperator_Enum.EQ;
                         operatorBuilder.value = value.id;
-                        model.filter.customerId = operatorBuilder;
+                        model.filter.customerId = ListBuilder([operatorBuilder.build()]);
                       } else {
                         model.filter.customerId = null;
                       }
@@ -118,14 +119,14 @@ class _TimeEntryFilterScreenState extends State<TimeEntryFilterScreen> {
                     key: UniqueKey(),
                     title: 'Beschreibung',
                     options: [],
-                    initialValue: model.filter.description.value,
+                    initialValue: model.filter.description.isNotEmpty ? model.filter.description[0].value : null,
                     onChanged: (value) {
                       StringOperatorTupleBuilder operatorBuilder =
                           StringOperatorTupleBuilder();
                       operatorBuilder.operator_ =
                           StringOperatorTupleOperator_Enum.STRING_CONTAINS;
                       operatorBuilder.value = value;
-                      model.filter.description = operatorBuilder;
+                      model.filter.description = ListBuilder([operatorBuilder.build()]);
                     }),
                 const SizedBox(height: 20),
                 ElevatedButton.icon(

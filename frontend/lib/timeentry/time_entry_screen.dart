@@ -49,10 +49,9 @@ class _TimeEntryScreenState extends State<TimeEntryScreen> {
             dataSource: _TimeEntryDataSource(model.calendarViewEntities),
             onViewChanged: (ViewChangedDetails details) {
               if (details.visibleDates.isNotEmpty) {
-                for (final date in details.visibleDates) {
-                  Provider.of<TimeEntryModel>(context, listen: false)
-                      .onCalendarViewChanged(year: date.year);
-                }
+                DateTime date = details.visibleDates[details.visibleDates.length ~/ 2];
+                Provider.of<TimeEntryModel>(context, listen: false)
+                    .onCalendarViewChanged(year: date.year);
               }
             },
             onLongPress: (CalendarLongPressDetails details) {
