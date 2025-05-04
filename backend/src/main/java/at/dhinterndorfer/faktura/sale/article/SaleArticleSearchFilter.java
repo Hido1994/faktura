@@ -1,17 +1,19 @@
 package at.dhinterndorfer.faktura.sale.article;
 
 import at.dhinterndorfer.faktura.commons.filter.Nullable;
+import at.dhinterndorfer.faktura.commons.filter.OperatorTuple;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+
+import java.util.List;
 
 @Getter
 @Setter
 @SuperBuilder(toBuilder = true)
 public class SaleArticleSearchFilter {
 
-    @Builder.Default
-    private Nullable<String> description = Nullable.undefined();
+    private List<OperatorTuple<String>> description;
 
 }

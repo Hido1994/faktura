@@ -1,6 +1,7 @@
 package at.dhinterndorfer.faktura.prepaidtax;
 
 import at.dhinterndorfer.faktura.commons.filter.NullableMapper;
+import at.dhinterndorfer.faktura.commons.filter.OperatorTupleMapper;
 import at.dhinterndorfer.faktura.dto.v1.PrepaidTaxFilterRestDto;
 import at.dhinterndorfer.faktura.dto.v1.PrepaidTaxPageRestDto;
 import at.dhinterndorfer.faktura.dto.v1.PrepaidTaxRestDto;
@@ -9,7 +10,7 @@ import org.springframework.data.domain.Page;
 
 import java.util.List;
 
-@Mapper(uses = {NullableMapper.class})
+@Mapper(uses = {NullableMapper.class, OperatorTupleMapper.class})
 public interface PrepaidTaxMapper {
 
     PrepaidTaxRestDto mapToDto(PrepaidTax entity);

@@ -1,5 +1,7 @@
+import 'package:built_collection/built_collection.dart';
 import 'package:faktura/common/widget/autocomplete_text_form_field.dart';
 import 'package:faktura/invoice/invoice_model.dart';
+import 'package:faktura_api/faktura_api.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -36,11 +38,15 @@ class _InvoiceFilterScreenState extends State<InvoiceFilterScreen> {
                   key: UniqueKey(),
                   title: 'Rechnungs-Nr.',
                   options: const [],
-                  initialValue: model.filter.invoiceNumber.toString(),
+                  initialValue: model.filter.invoiceNumber.isNotEmpty ? model.filter.invoiceNumber[0].value.toString() : null,
                   textInputType: TextInputType.number,
                   inputFormatter: [FilteringTextInputFormatter.digitsOnly],
                   onChanged: (value) {
-                    model.filter.invoiceNumber = int.tryParse(value);
+                    var operatorBuilder = NumberOperatorTupleBuilder();
+                    operatorBuilder.operator_ =
+                        NumberOperatorTupleOperator_Enum.EQ;
+                    operatorBuilder.value = int.tryParse(value);
+                    model.filter.invoiceNumber = ListBuilder([operatorBuilder.build()]);
                   },
                 ),
                 const SizedBox(height: 20),

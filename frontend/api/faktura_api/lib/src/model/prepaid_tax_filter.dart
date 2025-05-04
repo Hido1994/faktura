@@ -3,6 +3,8 @@
 //
 
 // ignore_for_file: unused_element
+import 'package:faktura_api/src/model/number_operator_tuple.dart';
+import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 
@@ -16,7 +18,7 @@ part 'prepaid_tax_filter.g.dart';
 abstract class PrepaidTaxFilter
     implements Built<PrepaidTaxFilter, PrepaidTaxFilterBuilder> {
   @BuiltValueField(wireName: r'taxYear')
-  int? get taxYear;
+  BuiltList<NumberOperatorTuple>? get taxYear;
 
   PrepaidTaxFilter._();
 
@@ -48,7 +50,8 @@ class _$PrepaidTaxFilterSerializer
       yield r'taxYear';
       yield serializers.serialize(
         object.taxYear,
-        specifiedType: const FullType.nullable(int),
+        specifiedType:
+            const FullType(BuiltList, [FullType(NumberOperatorTuple)]),
       );
     }
   }
@@ -79,10 +82,10 @@ class _$PrepaidTaxFilterSerializer
         case r'taxYear':
           final valueDes = serializers.deserialize(
             value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
-          if (valueDes == null) continue;
-          result.taxYear = valueDes;
+            specifiedType:
+                const FullType(BuiltList, [FullType(NumberOperatorTuple)]),
+          ) as BuiltList<NumberOperatorTuple>;
+          result.taxYear.replace(valueDes);
           break;
         default:
           unhandled.add(key);

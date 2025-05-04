@@ -1,6 +1,7 @@
 package at.dhinterndorfer.faktura.sale.article;
 
 import at.dhinterndorfer.faktura.commons.filter.NullableMapper;
+import at.dhinterndorfer.faktura.commons.filter.OperatorTupleMapper;
 import at.dhinterndorfer.faktura.dto.v1.SaleArticleFilterRestDto;
 import at.dhinterndorfer.faktura.dto.v1.SaleArticlePageRestDto;
 import at.dhinterndorfer.faktura.dto.v1.SaleArticleRestDto;
@@ -10,7 +11,7 @@ import org.springframework.data.domain.Page;
 
 import java.util.List;
 
-@Mapper(uses = {NullableMapper.class})
+@Mapper(uses = {NullableMapper.class, OperatorTupleMapper.class})
 public interface SaleArticleMapper {
 
     SaleArticleRestDto mapToDto(SaleArticle entity);

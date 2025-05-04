@@ -1,6 +1,7 @@
 package at.dhinterndorfer.faktura.invoice;
 
 import com.querydsl.core.BooleanBuilder;
+import com.querydsl.core.types.dsl.Expressions;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import org.springframework.lang.NonNull;
@@ -11,7 +12,14 @@ public interface InvoiceRepository extends JpaRepository<Invoice, Long>, Queryds
     default BooleanBuilder getDefaultFilterClause(@NonNull InvoiceSearchFilter filter) {
         BooleanBuilder builder = new BooleanBuilder();
         QInvoice qEntity = QInvoice.invoice;
-        filter.getInvoiceNumber().ifPresent(x -> builder.and(qEntity.invoiceNumber.eq(x)));
+
+        if (filter.getInvoiceNumber() != null && !filter.getInvoiceNumber().isEmpty()) {
+            filter.getInvoiceNumber().forEach(x -> {
+                builder.and(Expressions.booleanOperation(x.getOperator(), qEntity.invoiceNumber,
+                    x.getValue() == null ? Expressions.nullExpression() : Expressions.constant(
+                        x.getValue())));
+            });
+        }
         return builder;
     }
 }

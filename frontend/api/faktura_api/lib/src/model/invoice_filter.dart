@@ -3,6 +3,8 @@
 //
 
 // ignore_for_file: unused_element
+import 'package:faktura_api/src/model/number_operator_tuple.dart';
+import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 
@@ -16,7 +18,7 @@ part 'invoice_filter.g.dart';
 abstract class InvoiceFilter
     implements Built<InvoiceFilter, InvoiceFilterBuilder> {
   @BuiltValueField(wireName: r'invoiceNumber')
-  int? get invoiceNumber;
+  BuiltList<NumberOperatorTuple>? get invoiceNumber;
 
   InvoiceFilter._();
 
@@ -47,7 +49,8 @@ class _$InvoiceFilterSerializer implements PrimitiveSerializer<InvoiceFilter> {
       yield r'invoiceNumber';
       yield serializers.serialize(
         object.invoiceNumber,
-        specifiedType: const FullType.nullable(int),
+        specifiedType:
+            const FullType(BuiltList, [FullType(NumberOperatorTuple)]),
       );
     }
   }
@@ -78,10 +81,10 @@ class _$InvoiceFilterSerializer implements PrimitiveSerializer<InvoiceFilter> {
         case r'invoiceNumber':
           final valueDes = serializers.deserialize(
             value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
-          if (valueDes == null) continue;
-          result.invoiceNumber = valueDes;
+            specifiedType:
+                const FullType(BuiltList, [FullType(NumberOperatorTuple)]),
+          ) as BuiltList<NumberOperatorTuple>;
+          result.invoiceNumber.replace(valueDes);
           break;
         default:
           unhandled.add(key);

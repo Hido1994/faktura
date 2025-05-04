@@ -1,6 +1,7 @@
 package at.dhinterndorfer.faktura.internationalinfo;
 
 import at.dhinterndorfer.faktura.commons.filter.NullableMapper;
+import at.dhinterndorfer.faktura.commons.filter.OperatorTupleMapper;
 import at.dhinterndorfer.faktura.dto.v1.InternationalInfoFilterRestDto;
 import at.dhinterndorfer.faktura.dto.v1.InternationalInfoPageRestDto;
 import at.dhinterndorfer.faktura.dto.v1.InternationalInfoRestDto;
@@ -9,7 +10,7 @@ import org.springframework.data.domain.Page;
 
 import java.util.List;
 
-@Mapper(uses = {NullableMapper.class})
+@Mapper(uses = {NullableMapper.class, OperatorTupleMapper.class})
 public interface InternationalInfoMapper {
 
     InternationalInfoRestDto mapToDto(InternationalInfo entity);

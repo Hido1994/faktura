@@ -1,6 +1,7 @@
 package at.dhinterndorfer.faktura.setting;
 
 import at.dhinterndorfer.faktura.commons.filter.NullableMapper;
+import at.dhinterndorfer.faktura.commons.filter.OperatorTupleMapper;
 import at.dhinterndorfer.faktura.dto.v1.SettingFilterRestDto;
 import at.dhinterndorfer.faktura.dto.v1.SettingPageRestDto;
 import at.dhinterndorfer.faktura.dto.v1.SettingRestDto;
@@ -10,7 +11,7 @@ import org.springframework.data.domain.Page;
 
 import java.util.List;
 
-@Mapper(uses = {NullableMapper.class})
+@Mapper(uses = {NullableMapper.class, OperatorTupleMapper.class})
 public interface SettingMapper {
 
     SettingRestDto mapToDto(Setting entity);

@@ -3,6 +3,8 @@
 //
 
 // ignore_for_file: unused_element
+import 'package:faktura_api/src/model/string_operator_tuple.dart';
+import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 
@@ -15,7 +17,7 @@ part 'file_filter.g.dart';
 @BuiltValue()
 abstract class FileFilter implements Built<FileFilter, FileFilterBuilder> {
   @BuiltValueField(wireName: r'key')
-  String? get key;
+  BuiltList<StringOperatorTuple>? get key;
 
   FileFilter._();
 
@@ -44,7 +46,8 @@ class _$FileFilterSerializer implements PrimitiveSerializer<FileFilter> {
       yield r'key';
       yield serializers.serialize(
         object.key,
-        specifiedType: const FullType.nullable(String),
+        specifiedType:
+            const FullType(BuiltList, [FullType(StringOperatorTuple)]),
       );
     }
   }
@@ -75,10 +78,10 @@ class _$FileFilterSerializer implements PrimitiveSerializer<FileFilter> {
         case r'key':
           final valueDes = serializers.deserialize(
             value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
-          if (valueDes == null) continue;
-          result.key = valueDes;
+            specifiedType:
+                const FullType(BuiltList, [FullType(StringOperatorTuple)]),
+          ) as BuiltList<StringOperatorTuple>;
+          result.key.replace(valueDes);
           break;
         default:
           unhandled.add(key);

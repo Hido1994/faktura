@@ -3,6 +3,8 @@
 //
 
 // ignore_for_file: unused_element
+import 'package:faktura_api/src/model/string_operator_tuple.dart';
+import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 
@@ -16,7 +18,7 @@ part 'customer_filter.g.dart';
 abstract class CustomerFilter
     implements Built<CustomerFilter, CustomerFilterBuilder> {
   @BuiltValueField(wireName: r'name')
-  String? get name;
+  BuiltList<StringOperatorTuple>? get name;
 
   CustomerFilter._();
 
@@ -48,7 +50,8 @@ class _$CustomerFilterSerializer
       yield r'name';
       yield serializers.serialize(
         object.name,
-        specifiedType: const FullType.nullable(String),
+        specifiedType:
+            const FullType(BuiltList, [FullType(StringOperatorTuple)]),
       );
     }
   }
@@ -79,10 +82,10 @@ class _$CustomerFilterSerializer
         case r'name':
           final valueDes = serializers.deserialize(
             value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
-          if (valueDes == null) continue;
-          result.name = valueDes;
+            specifiedType:
+                const FullType(BuiltList, [FullType(StringOperatorTuple)]),
+          ) as BuiltList<StringOperatorTuple>;
+          result.name.replace(valueDes);
           break;
         default:
           unhandled.add(key);

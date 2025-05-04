@@ -1,5 +1,7 @@
+import 'package:built_collection/built_collection.dart';
 import 'package:faktura/common/widget/autocomplete_text_form_field.dart';
 import 'package:faktura/supplier/supplier_model.dart';
+import 'package:faktura_api/faktura_api.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -35,9 +37,13 @@ class _SupplierFilterScreenState extends State<SupplierFilterScreen> {
                     key: UniqueKey(),
                     title: 'Name',
                     options: [],
-                    initialValue: model.filter.name,
+                    initialValue: model.filter.name.isNotEmpty ? model.filter.name[0].value : null,
                     onChanged: (value) {
-                      model.filter.name = value;
+                      var operatorBuilder = StringOperatorTupleBuilder();
+                      operatorBuilder.operator_ =
+                          StringOperatorTupleOperator_Enum.STRING_CONTAINS;
+                      operatorBuilder.value = value;
+                      model.filter.name = ListBuilder([operatorBuilder.build()]);
                     }),
                 const SizedBox(height: 20),
                 ElevatedButton.icon(
