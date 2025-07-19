@@ -23,6 +23,7 @@ class SaleServiceFormScreen extends StatefulWidget {
 class _SaleServiceFormScreenState extends State<SaleServiceFormScreen> {
   final _formKey = GlobalKey<FormState>();
   int currentStep = 0;
+  late TextEditingController _hoursController;
 
   bool get isFirstStep => currentStep == 0;
 
@@ -74,6 +75,9 @@ class _SaleServiceFormScreenState extends State<SaleServiceFormScreen> {
   @override
   void initState() {
     super.initState();
+
+    _hoursController = TextEditingController();
+
     _initSaleService();
   }
 
@@ -167,7 +171,7 @@ class _SaleServiceFormScreenState extends State<SaleServiceFormScreen> {
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               DateTimePickerTextFormField(
-                key: UniqueKey(),
+                key: Key('supplied_on'),
                 title: 'Erbringung am',
                 initialValue: builder.suppliedOn?.toDateTime(),
                 includeTime: false,
@@ -210,7 +214,7 @@ class _SaleServiceFormScreenState extends State<SaleServiceFormScreen> {
               }),
               const SizedBox(height: 20),
               AutocompleteTextFormField(
-                  key: UniqueKey(),
+                  key: Key('hourly_rate'),
                   title: 'Stundensatz',
                   options: const [],
                   initialValue: builder.hourlyRate?.toString(),
@@ -223,10 +227,11 @@ class _SaleServiceFormScreenState extends State<SaleServiceFormScreen> {
                   }),
               const SizedBox(height: 20),
               AutocompleteTextFormField(
-                  key: UniqueKey(),
+                  key: Key('hours'),
                   title: 'Stunden',
                   options: const [],
                   initialValue: builder.hours?.toString(),
+                  controller: _hoursController,
                   textInputType: TextInputType.numberWithOptions(decimal: true),
                   inputFormatter: [
                     FilteringTextInputFormatter.allow(RegExp(r'[0-9.]'))
@@ -236,7 +241,7 @@ class _SaleServiceFormScreenState extends State<SaleServiceFormScreen> {
                   }),
               const SizedBox(height: 20),
               AutocompleteTextFormField(
-                key: UniqueKey(),
+                key: Key('description'),
                 title: 'Description',
                 options: [],
                 initialValue: builder.description,
@@ -294,6 +299,7 @@ class _SaleServiceFormScreenState extends State<SaleServiceFormScreen> {
                                               .difference(entry.startedOn)
                                               .inMinutes /
                                           60.0));
+                              _hoursController.text = builder.hours!.toString();
                             });
                           },
                         );

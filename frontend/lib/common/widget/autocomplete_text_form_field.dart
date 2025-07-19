@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 
 class AutocompleteTextFormField extends StatefulWidget {
   final String? initialValue;
+  final TextEditingController? controller;
   final String title;
   final List<String> options;
   final ValueSetter<String> onChanged;
@@ -18,6 +19,7 @@ class AutocompleteTextFormField extends StatefulWidget {
       required this.onChanged,
       this.onSelected,
       this.initialValue,
+      this.controller,
       this.textInputType = TextInputType.text,
       this.inputFormatter,
       this.validator});
@@ -28,6 +30,19 @@ class AutocompleteTextFormField extends StatefulWidget {
 }
 
 class _AutocompleteTextFormFieldState extends State<AutocompleteTextFormField> {
+  late TextEditingController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.controller != null) {
+      _controller = widget.controller!;
+    } else {
+      _controller = TextEditingController();
+    }
+    _controller.text = widget.initialValue ?? '';
+  }
+
   @override
   Widget build(BuildContext context) {
     return Autocomplete(
@@ -52,7 +67,7 @@ class _AutocompleteTextFormFieldState extends State<AutocompleteTextFormField> {
           FocusNode fieldFocusNode,
           VoidCallback onFieldSubmitted) {
         return TextFormField(
-          controller: fieldTextEditingController,
+          controller: _controller,
           focusNode: fieldFocusNode,
           onChanged: widget.onChanged,
           inputFormatters: widget.inputFormatter,
