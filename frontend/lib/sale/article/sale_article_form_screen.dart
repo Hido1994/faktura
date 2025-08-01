@@ -66,7 +66,6 @@ class _SaleArticleFormScreenState extends State<SaleArticleFormScreen> {
               ),
               const SizedBox(height: 20),
               DateTimePickerTextFormField(
-                key: UniqueKey(),
                 title: 'Eingang am',
                 initialValue: builder.incomingOn?.toDateTime(),
                 includeTime: false,
@@ -82,7 +81,6 @@ class _SaleArticleFormScreenState extends State<SaleArticleFormScreen> {
               ),
               const SizedBox(height: 20),
               DateTimePickerTextFormField(
-                key: UniqueKey(),
                 title: 'Bezahlt am',
                 initialValue: builder.paidOn?.toDateTime(),
                 includeTime: false,
@@ -92,7 +90,6 @@ class _SaleArticleFormScreenState extends State<SaleArticleFormScreen> {
               ),
               const SizedBox(height: 20),
               AutocompleteTextFormField(
-                key: UniqueKey(),
                 title: 'Beschreibung',
                 options: [],
                 initialValue: builder.description,
@@ -221,7 +218,6 @@ class _SaleArticleFormScreenState extends State<SaleArticleFormScreen> {
               }),
               const SizedBox(height: 20),
               AutocompleteTextFormField(
-                  key: UniqueKey(),
                   title: 'Einkauf Netto',
                   options: const [],
                   initialValue: builder.priceNet?.toString(),
@@ -234,7 +230,6 @@ class _SaleArticleFormScreenState extends State<SaleArticleFormScreen> {
                   }),
               const SizedBox(height: 20),
               AutocompleteTextFormField(
-                  key: UniqueKey(),
                   title: 'Einkauf Ust.',
                   options: const [],
                   initialValue: builder.priceTax?.toString(),
@@ -273,7 +268,6 @@ class _SaleArticleFormScreenState extends State<SaleArticleFormScreen> {
               }),
               const SizedBox(height: 20),
               AutocompleteTextFormField(
-                  key: UniqueKey(),
                   title: 'Verkauf Netto',
                   options: const [],
                   initialValue: builder.salesNet?.toString(),
@@ -286,7 +280,6 @@ class _SaleArticleFormScreenState extends State<SaleArticleFormScreen> {
                   }),
               const SizedBox(height: 20),
               AutocompleteTextFormField(
-                  key: UniqueKey(),
                   title: 'Verkauf Ust.',
                   options: const [],
                   initialValue: builder.salesTax?.toString(),
@@ -299,7 +292,6 @@ class _SaleArticleFormScreenState extends State<SaleArticleFormScreen> {
                   }),
               const SizedBox(height: 20),
               AutocompleteTextFormField(
-                key: UniqueKey(),
                 title: 'Info',
                 options: [],
                 initialValue: builder.info,

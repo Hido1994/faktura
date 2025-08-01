@@ -30,7 +30,6 @@ class _SettingsScreen extends State<PreferenceScreen> {
           child: SingleChildScrollView(
             child: Column(children: <Widget>[
               AutocompleteTextFormField(
-                key: UniqueKey(),
                 title: 'API-URL',
                 options: [],
                 initialValue:

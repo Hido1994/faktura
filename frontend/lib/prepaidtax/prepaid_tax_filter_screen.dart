@@ -35,7 +35,6 @@ class _PrepaidTaxFilterScreenState extends State<PrepaidTaxFilterScreen> {
                 ),
                 const SizedBox(height: 20),
                 AutocompleteTextFormField(
-                    key: UniqueKey(),
                     title: 'Jahr',
                     options: const [],
                     initialValue: model.filter.taxYear.isNotEmpty ? model.filter.taxYear[0].value.toString() : null,

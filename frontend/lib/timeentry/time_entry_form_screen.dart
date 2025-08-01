@@ -54,7 +54,6 @@ class _TimeEntryFormScreenState extends State<TimeEntryFormScreen> {
               ),
               const SizedBox(height: 20),
               DateTimePickerTextFormField(
-                key: UniqueKey(),
                 title: 'Von',
                 initialValue: builder.startedOn?.toLocal(),
                 includeTime: true,
@@ -70,7 +69,6 @@ class _TimeEntryFormScreenState extends State<TimeEntryFormScreen> {
               ),
               const SizedBox(height: 20),
               DateTimePickerTextFormField(
-                key: UniqueKey(),
                 title: 'Bis',
                 initialValue: builder.endedOn?.toLocal(),
                 defaultCurrentTime: builder.startedOn?.toLocal(),
@@ -123,7 +121,6 @@ class _TimeEntryFormScreenState extends State<TimeEntryFormScreen> {
               }),
               const SizedBox(height: 20),
               AutocompleteTextFormField(
-                key: UniqueKey(),
                 title: 'Beschreibung',
                 options: [],
                 initialValue: builder.description,

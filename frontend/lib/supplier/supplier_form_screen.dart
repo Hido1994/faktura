@@ -57,7 +57,6 @@ class _SupplierFormScreenState extends State<SupplierFormScreen> {
               ),
               const SizedBox(height: 20),
               AutocompleteTextFormField(
-                key: UniqueKey(),
                 title: 'Name',
                 options: [],
                 initialValue: builder.name,

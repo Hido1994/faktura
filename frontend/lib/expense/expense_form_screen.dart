@@ -65,7 +65,6 @@ class _ExpenseFormScreenState extends State<ExpenseFormScreen> {
               ),
               const SizedBox(height: 20),
               DateTimePickerTextFormField(
-                key: UniqueKey(),
                 title: 'Eingang am',
                 initialValue: builder.incomingOn?.toDateTime(),
                 includeTime: false,
@@ -81,7 +80,6 @@ class _ExpenseFormScreenState extends State<ExpenseFormScreen> {
               ),
               const SizedBox(height: 20),
               DateTimePickerTextFormField(
-                key: UniqueKey(),
                 title: 'Bezahlt am',
                 initialValue: builder.paidOn?.toDateTime(),
                 includeTime: false,
@@ -91,7 +89,6 @@ class _ExpenseFormScreenState extends State<ExpenseFormScreen> {
               ),
               const SizedBox(height: 20),
               AutocompleteTextFormField(
-                key: UniqueKey(),
                 title: 'Beschreibung',
                 options: [],
                 initialValue: builder.description,
@@ -220,7 +217,6 @@ class _ExpenseFormScreenState extends State<ExpenseFormScreen> {
               }),
               const SizedBox(height: 20),
               AutocompleteTextFormField(
-                  key: UniqueKey(),
                   title: 'Netto',
                   options: const [],
                   initialValue: builder.priceNet?.toString(),
@@ -233,7 +229,6 @@ class _ExpenseFormScreenState extends State<ExpenseFormScreen> {
                   }),
               const SizedBox(height: 20),
               AutocompleteTextFormField(
-                  key: UniqueKey(),
                   title: 'Ust.',
                   options: const [],
                   initialValue: builder.priceTax?.toString(),
@@ -246,7 +241,6 @@ class _ExpenseFormScreenState extends State<ExpenseFormScreen> {
                   }),
               const SizedBox(height: 20),
               AutocompleteTextFormField(
-                key: UniqueKey(),
                 title: 'Notiz',
                 options: [],
                 initialValue: builder.note,
@@ -256,7 +250,6 @@ class _ExpenseFormScreenState extends State<ExpenseFormScreen> {
               ),
               const SizedBox(height: 20),
               AutocompleteTextFormField(
-                  key: UniqueKey(),
                   title: 'AFA-Jahre',
                   options: const [],
                   initialValue: builder.depreciationYears?.toString(),

@@ -35,7 +35,6 @@ class _SaleServiceFilterScreenState extends State<SaleServiceFilterScreen> {
                 ),
                 const SizedBox(height: 20),
                 AutocompleteTextFormField(
-                    key: UniqueKey(),
                     title: 'Beschreibung',
                     options: [],
                     initialValue: model.filter.description.isNotEmpty ? model.filter.description[0].value : null,

@@ -63,7 +63,6 @@ class _InvoiceFormScreenState extends State<InvoiceFormScreen> {
               ),
               const SizedBox(height: 20),
               DateTimePickerTextFormField(
-                key: UniqueKey(),
                 title: 'Erstellt am',
                 initialValue: builder.createdOn?.toDateTime(),
                 includeTime: false,
@@ -79,7 +78,6 @@ class _InvoiceFormScreenState extends State<InvoiceFormScreen> {
               ),
               const SizedBox(height: 20),
               AutocompleteTextFormField(
-                key: UniqueKey(),
                 title: 'Rechnungs-Nr.',
                 options: const [],
                 initialValue: builder.invoiceNumber?.toString(),
@@ -123,7 +121,6 @@ class _InvoiceFormScreenState extends State<InvoiceFormScreen> {
               }),
               const SizedBox(height: 20),
               AutocompleteTextFormField(
-                key: UniqueKey(),
                 title: 'Betreff',
                 options: [],
                 initialValue: builder.subject,
@@ -139,7 +136,6 @@ class _InvoiceFormScreenState extends State<InvoiceFormScreen> {
               ),
               const SizedBox(height: 20),
               AutocompleteTextFormField(
-                key: UniqueKey(),
                 title: 'Leistungszeitraum',
                 options: [],
                 initialValue: builder.servicePeriod,
@@ -149,7 +145,6 @@ class _InvoiceFormScreenState extends State<InvoiceFormScreen> {
               ),
               const SizedBox(height: 20),
               AutocompleteTextFormField(
-                key: UniqueKey(),
                 title: 'Revision',
                 options: [],
                 initialValue: builder.revision,
@@ -159,7 +154,6 @@ class _InvoiceFormScreenState extends State<InvoiceFormScreen> {
               ),
               const SizedBox(height: 20),
               DateTimePickerTextFormField(
-                key: UniqueKey(),
                 title: 'Bezahlt am',
                 initialValue: builder.paidOn?.toDateTime(),
                 includeTime: false,

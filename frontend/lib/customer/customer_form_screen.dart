@@ -58,7 +58,6 @@ class _CustomerFormScreenState extends State<CustomerFormScreen> {
               ),
               const SizedBox(height: 20),
               AutocompleteTextFormField(
-                key: UniqueKey(),
                 title: 'Name',
                 options: [],
                 initialValue: builder.name,
@@ -75,7 +74,6 @@ class _CustomerFormScreenState extends State<CustomerFormScreen> {
 
               const SizedBox(height: 20),
               AutocompleteTextFormField(
-                key: UniqueKey(),
                 title: 'Adresszeile 1',
                 options: [],
                 initialValue: builder.addressLine1,
@@ -91,7 +89,6 @@ class _CustomerFormScreenState extends State<CustomerFormScreen> {
               ),
               const SizedBox(height: 20),
               AutocompleteTextFormField(
-                key: UniqueKey(),
                 title: 'Adresszeile 2',
                 options: [],
                 initialValue: builder.addressLine2,
@@ -101,7 +98,6 @@ class _CustomerFormScreenState extends State<CustomerFormScreen> {
               ),
               const SizedBox(height: 20),
               AutocompleteTextFormField(
-                key: UniqueKey(),
                 title: 'Stadt',
                 options: [],
                 initialValue: builder.city,
@@ -117,7 +113,6 @@ class _CustomerFormScreenState extends State<CustomerFormScreen> {
               ),
               const SizedBox(height: 20),
               AutocompleteTextFormField(
-                key: UniqueKey(),
                 title: 'PLZ',
                 options: [],
                 initialValue: builder.postalCode,
@@ -133,7 +128,6 @@ class _CustomerFormScreenState extends State<CustomerFormScreen> {
               ),
               const SizedBox(height: 20),
               AutocompleteTextFormField(
-                key: UniqueKey(),
                 title: 'UID',
                 options: [],
                 initialValue: builder.taxIdentificationNumber,
@@ -143,7 +137,6 @@ class _CustomerFormScreenState extends State<CustomerFormScreen> {
               ),
               const SizedBox(height: 20),
               AutocompleteTextFormField(
-                key: UniqueKey(),
                 title: 'E-Mail',
                 options: [],
                 initialValue: builder.email,
@@ -153,7 +146,6 @@ class _CustomerFormScreenState extends State<CustomerFormScreen> {
               ),
               const SizedBox(height: 20),
               AutocompleteTextFormField(
-                key: UniqueKey(),
                 title: 'Telefon',
                 options: [],
                 initialValue: builder.phone,
@@ -163,7 +155,6 @@ class _CustomerFormScreenState extends State<CustomerFormScreen> {
               ),
               const SizedBox(height: 20),
               AutocompleteTextFormField(
-                  key: UniqueKey(),
                   title: 'Stundensatz',
                   options: const [],
                   initialValue: builder.hourlyRate?.toString(),
@@ -176,7 +167,6 @@ class _CustomerFormScreenState extends State<CustomerFormScreen> {
                   }),
               const SizedBox(height: 20),
               AutocompleteTextFormField(
-                key: UniqueKey(),
                 title: 'Ländercode',
                 options: [],
                 initialValue: builder.countryCode,
@@ -192,7 +182,6 @@ class _CustomerFormScreenState extends State<CustomerFormScreen> {
               ),
               const SizedBox(height: 20),
               AutocompleteTextFormField(
-                key: UniqueKey(),
                 title: 'Zahlungsbedingung',
                 options: [],
                 initialValue: builder.paymentInfo,

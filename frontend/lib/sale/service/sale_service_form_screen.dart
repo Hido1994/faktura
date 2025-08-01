@@ -171,7 +171,6 @@ class _SaleServiceFormScreenState extends State<SaleServiceFormScreen> {
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               DateTimePickerTextFormField(
-                key: Key('supplied_on'),
                 title: 'Erbringung am',
                 initialValue: builder.suppliedOn?.toDateTime(),
                 includeTime: false,
@@ -214,7 +213,6 @@ class _SaleServiceFormScreenState extends State<SaleServiceFormScreen> {
               }),
               const SizedBox(height: 20),
               AutocompleteTextFormField(
-                  key: Key('hourly_rate'),
                   title: 'Stundensatz',
                   options: const [],
                   initialValue: builder.hourlyRate?.toString(),
@@ -227,7 +225,6 @@ class _SaleServiceFormScreenState extends State<SaleServiceFormScreen> {
                   }),
               const SizedBox(height: 20),
               AutocompleteTextFormField(
-                  key: Key('hours'),
                   title: 'Stunden',
                   options: const [],
                   initialValue: builder.hours?.toString(),
@@ -241,7 +238,6 @@ class _SaleServiceFormScreenState extends State<SaleServiceFormScreen> {
                   }),
               const SizedBox(height: 20),
               AutocompleteTextFormField(
-                key: Key('description'),
                 title: 'Description',
                 options: [],
                 initialValue: builder.description,

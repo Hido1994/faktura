@@ -34,7 +34,6 @@ class _CustomerFilterScreenState extends State<CustomerFilterScreen> {
                 ),
                 const SizedBox(height: 20),
                 AutocompleteTextFormField(
-                    key: UniqueKey(),
                     title: 'Name',
                     options: [],
                     initialValue: model.filter.name.isNotEmpty ? model.filter.name[0].value : null,

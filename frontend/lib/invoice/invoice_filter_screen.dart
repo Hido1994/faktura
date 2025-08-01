@@ -35,7 +35,6 @@ class _InvoiceFilterScreenState extends State<InvoiceFilterScreen> {
                 ),
                 const SizedBox(height: 20),
                 AutocompleteTextFormField(
-                  key: UniqueKey(),
                   title: 'Rechnungs-Nr.',
                   options: const [],
                   initialValue: model.filter.invoiceNumber.isNotEmpty ? model.filter.invoiceNumber[0].value.toString() : null,

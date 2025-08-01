@@ -59,7 +59,6 @@ class _InternationalInfoFormScreenState
               ),
               const SizedBox(height: 20),
               AutocompleteTextFormField(
-                key: UniqueKey(),
                 title: 'Beschreibung',
                 options: [],
                 initialValue: builder.description,
@@ -75,7 +74,6 @@ class _InternationalInfoFormScreenState
               ),
               const SizedBox(height: 20),
               AutocompleteTextFormField(
-                key: UniqueKey(),
                 title: 'Rechnungs-Text',
                 options: [],
                 initialValue: builder.invoiceText,

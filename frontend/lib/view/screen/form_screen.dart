@@ -112,7 +112,6 @@ class _FormScreenState extends State<FormScreen> {
             child: Column(
               children: <Widget>[
                 DateTimePickerTextFormField(
-                  key: UniqueKey(),
                   title: 'Abfahrt',
                   initialValue: trip.startDate,
                   onChanged: (date) {
@@ -122,7 +121,6 @@ class _FormScreenState extends State<FormScreen> {
                   },
                 ),
                 DateTimePickerTextFormField(
-                  key: UniqueKey(),
                   title: 'Ankunft',
                   initialValue: trip.endDate,
                   onChanged: (date) {
@@ -140,7 +138,6 @@ class _FormScreenState extends State<FormScreen> {
                   },
                 ),
                 AutocompleteTextFormField(
-                    key: UniqueKey(),
                     title: 'Art',
                     options: types,
                     initialValue: trip.type,
@@ -148,7 +145,6 @@ class _FormScreenState extends State<FormScreen> {
                       trip.type = value;
                     }),
                 AutocompleteTextFormField(
-                    key: UniqueKey(),
                     title: 'Zweck',
                     options: reasons,
                     initialValue: trip.reason,
@@ -156,7 +152,6 @@ class _FormScreenState extends State<FormScreen> {
                       trip.reason = value;
                     }),
                 AutocompleteTextFormField(
-                    key: UniqueKey(),
                     title: 'Fahrzeug',
                     options: vehicles,
                     initialValue: trip.vehicle,
@@ -174,7 +169,6 @@ class _FormScreenState extends State<FormScreen> {
                               }));
                     }),
                 AutocompleteTextFormField(
-                    key: UniqueKey(),
                     title: 'Abfahrtsort',
                     options: locations,
                     initialValue: trip.startLocation,
@@ -182,7 +176,6 @@ class _FormScreenState extends State<FormScreen> {
                       trip.startLocation = value;
                     }),
                 AutocompleteTextFormField(
-                    key: UniqueKey(),
                     title: 'Ankunftsort',
                     options: locations,
                     initialValue: trip.endLocation,
@@ -202,7 +195,6 @@ class _FormScreenState extends State<FormScreen> {
                       }
                     }),
                 AutocompleteTextFormField(
-                    key: UniqueKey(),
                     title: 'KM-Abfahrt',
                     options: const [],
                     initialValue: trip.startMileage?.toString(),
@@ -212,7 +204,6 @@ class _FormScreenState extends State<FormScreen> {
                       trip.startMileage = int.tryParse(value);
                     }),
                 AutocompleteTextFormField(
-                  key: UniqueKey(),
                   title: 'KM-Ankunft',
                   options: const [],
                   initialValue: trip.endMileage?.toString(),

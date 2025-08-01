@@ -57,7 +57,6 @@ class _AccountFormScreenState extends State<AccountFormScreen> {
               ),
               const SizedBox(height: 20),
               AutocompleteTextFormField(
-                key: UniqueKey(),
                 title: 'Beschreibung',
                 options: [],
                 initialValue: builder.description,

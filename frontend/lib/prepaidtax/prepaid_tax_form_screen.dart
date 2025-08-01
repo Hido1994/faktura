@@ -58,7 +58,6 @@ class _PrepaidTaxFormScreenState extends State<PrepaidTaxFormScreen> {
               ),
               const SizedBox(height: 20),
               AutocompleteTextFormField(
-                key: UniqueKey(),
                 title: 'Jahr',
                 options: const [],
                 initialValue: builder.taxYear?.toString(),
@@ -76,7 +75,6 @@ class _PrepaidTaxFormScreenState extends State<PrepaidTaxFormScreen> {
               ),
               const SizedBox(height: 20),
               AutocompleteTextFormField(
-                key: UniqueKey(),
                 title: 'Quartal',
                 options: const [],
                 initialValue: builder.taxQuarter?.toString(),
@@ -94,7 +92,6 @@ class _PrepaidTaxFormScreenState extends State<PrepaidTaxFormScreen> {
               ),
               const SizedBox(height: 20),
               AutocompleteTextFormField(
-                  key: UniqueKey(),
                   title: 'Steuerkonto Guthaben',
                   options: const [],
                   initialValue: builder.accountSurplus?.toString(),
@@ -107,7 +104,6 @@ class _PrepaidTaxFormScreenState extends State<PrepaidTaxFormScreen> {
                   }),
               const SizedBox(height: 20),
               AutocompleteTextFormField(
-                  key: UniqueKey(),
                   title: 'Steuerkonto Vorsteuer',
                   options: const [],
                   initialValue: builder.taxCalculated?.toString(),
@@ -120,7 +116,6 @@ class _PrepaidTaxFormScreenState extends State<PrepaidTaxFormScreen> {
                   }),
               const SizedBox(height: 20),
               AutocompleteTextFormField(
-                  key: UniqueKey(),
                   title: 'Überweisung',
                   options: const [],
                   initialValue: builder.cashTransfer?.toString(),
@@ -133,7 +128,6 @@ class _PrepaidTaxFormScreenState extends State<PrepaidTaxFormScreen> {
                   }),
               const SizedBox(height: 20),
               AutocompleteTextFormField(
-                key: UniqueKey(),
                 title: 'Notiz',
                 options: [],
                 initialValue: builder.note,

@@ -58,7 +58,6 @@ class _PaymentMethodFormScreenState extends State<PaymentMethodFormScreen> {
               ),
               const SizedBox(height: 20),
               AutocompleteTextFormField(
-                key: UniqueKey(),
                 title: 'Beschreibung',
                 options: [],
                 initialValue: builder.description,
