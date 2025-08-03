@@ -23,7 +23,6 @@ class SaleServiceFormScreen extends StatefulWidget {
 class _SaleServiceFormScreenState extends State<SaleServiceFormScreen> {
   final _formKey = GlobalKey<FormState>();
   int currentStep = 0;
-  late TextEditingController _hoursController;
 
   bool get isFirstStep => currentStep == 0;
 
@@ -31,8 +30,10 @@ class _SaleServiceFormScreenState extends State<SaleServiceFormScreen> {
 
   SaleServiceBuilder builder = SaleServiceBuilder();
   List<TimeEntry> timeEntries = [];
+  List<String> previousDescriptions = [];
 
   Future<void> _initSaleService() async {
+    _loadPrevious(widget.entry);
     _loadTimeEntries(widget.entry);
 
     setState(() {
@@ -55,7 +56,7 @@ class _SaleServiceFormScreenState extends State<SaleServiceFormScreen> {
       operatorBuilder.operator_ = NumberOperatorTupleOperator_Enum.IS_NULL;
       timeEntryBuilder.saleServiceId = ListBuilder([operatorBuilder.build()]);
       timeEntries = await Provider.of<TimeEntryModel>(context, listen: false)
-              .getAll(timeEntryBuilder);
+          .getAll(timeEntryBuilder);
 
       operatorBuilder = NumberOperatorTupleBuilder();
       operatorBuilder.operator_ = NumberOperatorTupleOperator_Enum.EQ;
@@ -66,11 +67,40 @@ class _SaleServiceFormScreenState extends State<SaleServiceFormScreen> {
     }
   }
 
+  Future<void> _loadPrevious(SaleServiceBuilder? saleServiceBuilder) async {
+    if (saleServiceBuilder?.customer != null) {
+      var filterBuilder = SaleServiceFilterBuilder();
+      var operatorBuilder = NumberOperatorTupleBuilder();
+      operatorBuilder.operator_ = NumberOperatorTupleOperator_Enum.EQ;
+      operatorBuilder.value = saleServiceBuilder!.customer.id;
+      filterBuilder.customerId = ListBuilder([operatorBuilder.build()]);
+
+      var pageable = PageableBuilder();
+      pageable.sort = ListBuilder<Sort>([
+        Sort((builder) {
+          builder.property = "suppliedOn";
+          builder.direction = SortDirectionEnum.DESC;
+        })
+      ]);
+      pageable.pageNumber = 0;
+      pageable.pageSize = 10;
+
+      var previousSaleServices =
+          await Provider.of<SaleServiceModel>(context, listen: false)
+              .getAll(filterBuilder, pageable);
+
+      setState(() {
+        previousDescriptions = previousSaleServices
+            .map((entity) => entity.description)
+            .toSet()
+            .toList();
+      });
+    }
+  }
+
   @override
   void initState() {
     super.initState();
-
-    _hoursController = TextEditingController();
 
     _initSaleService();
   }
@@ -197,7 +227,9 @@ class _SaleServiceFormScreenState extends State<SaleServiceFormScreen> {
                       PopupProps.menu(showSearchBox: true, fit: FlexFit.loose),
                   onChanged: (value) {
                     builder.customer = value?.toBuilder();
+                    builder.hourlyRate = builder.customer.hourlyRate;
                     _loadTimeEntries(builder);
+                    _loadPrevious(builder);
                   },
                   filterFn: (Customer customer, String filter) {
                     return customer.name
@@ -223,7 +255,6 @@ class _SaleServiceFormScreenState extends State<SaleServiceFormScreen> {
                   title: 'Stunden',
                   options: const [],
                   initialValue: builder.hours?.toString(),
-                  controller: _hoursController,
                   textInputType: TextInputType.numberWithOptions(decimal: true),
                   inputFormatter: [
                     FilteringTextInputFormatter.allow(RegExp(r'[0-9.]'))
@@ -235,7 +266,7 @@ class _SaleServiceFormScreenState extends State<SaleServiceFormScreen> {
               const SizedBox(height: 20),
               AutocompleteTextFormField(
                 title: 'Description',
-                options: [],
+                options: previousDescriptions,
                 initialValue: builder.description,
                 onChanged: (value) {
                   builder.description = value;
@@ -255,7 +286,7 @@ class _SaleServiceFormScreenState extends State<SaleServiceFormScreen> {
           isActive: currentStep >= 1,
           title: Text('Stunden'),
           content: SizedBox(
-            height: MediaQuery.of(context).size.height * 0.6,
+            height: MediaQuery.of(context).size.height * 0.65,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
@@ -272,7 +303,8 @@ class _SaleServiceFormScreenState extends State<SaleServiceFormScreen> {
                       itemCount: timeEntries.length,
                       itemBuilder: (context, index) {
                         final entry = timeEntries[index];
-                        final isSelected = builder.timeEntries.build().contains(entry);
+                        final isSelected =
+                            builder.timeEntries.build().contains(entry);
                         return CheckboxListTile(
                           title: Text(entry.description),
                           value: isSelected,
@@ -283,15 +315,16 @@ class _SaleServiceFormScreenState extends State<SaleServiceFormScreen> {
                               } else {
                                 builder.timeEntries.remove(entry);
                               }
-                              builder.hours = builder.timeEntries.build().fold<double>(
-                                  0,
-                                  (sum, entry) =>
-                                      sum +
-                                      (entry.endedOn!
-                                              .difference(entry.startedOn)
-                                              .inMinutes /
-                                          60.0));
-                              _hoursController.text = builder.hours!.toString();
+                              builder.hours = builder.timeEntries
+                                  .build()
+                                  .fold<double>(
+                                      0,
+                                      (sum, entry) =>
+                                          sum +
+                                          (entry.endedOn!
+                                                  .difference(entry.startedOn)
+                                                  .inMinutes /
+                                              60.0));
                             });
                           },
                         );

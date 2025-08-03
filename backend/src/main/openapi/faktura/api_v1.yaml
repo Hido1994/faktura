@@ -1788,6 +1788,10 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/StringOperatorTuple"
+        customerId:
+          type: array
+          items:
+            $ref: "#/components/schemas/NumberOperatorTuple"
     SaleServicePage:
       description: typed Page
       type: object

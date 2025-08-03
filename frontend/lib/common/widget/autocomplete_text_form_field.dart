@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 
 class AutocompleteTextFormField extends StatefulWidget {
   final String? initialValue;
-  final TextEditingController? controller;
   final String title;
   final List<String> options;
   final ValueSetter<String> onChanged;
@@ -19,7 +18,6 @@ class AutocompleteTextFormField extends StatefulWidget {
       required this.onChanged,
       this.onSelected,
       this.initialValue,
-      this.controller,
       this.textInputType = TextInputType.text,
       this.inputFormatter,
       this.validator});
@@ -35,48 +33,67 @@ class _AutocompleteTextFormFieldState extends State<AutocompleteTextFormField> {
   @override
   void initState() {
     super.initState();
-    if (widget.controller != null) {
-      _controller = widget.controller!;
-    } else {
-      _controller = TextEditingController();
+    _controller = TextEditingController(text: widget.initialValue ?? '');
+  }
+
+  @override
+  void didUpdateWidget(AutocompleteTextFormField oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    if (widget.initialValue != oldWidget.initialValue) {
+      _controller.text = widget.initialValue ?? '';
     }
-    _controller.text = widget.initialValue ?? '';
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Autocomplete(
+    return Autocomplete<String>(
       initialValue: TextEditingValue(text: widget.initialValue ?? ''),
       optionsBuilder: (TextEditingValue textEditingValue) {
-        // if (textEditingValue.text == '') {
-        return widget.options;
-        // } else {
-        //   List<String> matches = <String>[];
-        //   matches.addAll(widget.options);
-        //
-        //   matches.retainWhere((s) {
-        //     return s
-        //         .toLowerCase()
-        //         .contains(textEditingValue.text.toLowerCase());
-        //   });
-        //   return matches;
-        // }
+        if (textEditingValue.text.isEmpty) {
+          return widget.options;
+        } else {
+          return widget.options.where((String option) {
+            return option
+                .toLowerCase()
+                .contains(textEditingValue.text.toLowerCase());
+          });
+        }
       },
       fieldViewBuilder: (BuildContext context,
           TextEditingController fieldTextEditingController,
           FocusNode fieldFocusNode,
           VoidCallback onFieldSubmitted) {
+        if (fieldTextEditingController.text != _controller.text) {
+          fieldTextEditingController.text = _controller.text;
+        }
         return TextFormField(
-          controller: _controller,
+          controller: fieldTextEditingController,
           focusNode: fieldFocusNode,
-          onChanged: widget.onChanged,
+          onChanged: (value) {
+            _controller.text = value;
+            widget.onChanged(value);
+          },
           inputFormatters: widget.inputFormatter,
           keyboardType: widget.textInputType,
           decoration: InputDecoration(label: Text(widget.title)),
           validator: widget.validator,
         );
       },
-      onSelected: widget.onSelected ?? widget.onChanged,
+      onSelected: (String selection) {
+        _controller.text = selection;
+        if (widget.onSelected != null) {
+          widget.onSelected!(selection);
+        } else {
+          widget.onChanged(selection);
+        }
+      },
     );
   }
 }

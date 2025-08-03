@@ -99,4 +99,20 @@ class SaleServiceModel extends ChangeNotifier {
       _appStateModel.setMessage("Ein unerwarteter Fehler ist aufgetreten.");
     });
   }
+
+  Future<List<SaleService>> getAll(SaleServiceFilterBuilder filter, PageableBuilder? pageable) {
+    return _saleServiceApi.getSaleServices(
+      saleServiceFilterRequest: SaleServiceFilterRequest((builder) {
+        builder.filter = filter;
+        builder.pageable = pageable ?? Pageable((builder) {
+          builder.sort = _defaultSort;
+        }).toBuilder();
+      }),
+    ).then((response) {
+      return response.data?.content?.toList() ?? <SaleService>[];
+    }).catchError((error) {
+      _appStateModel.setMessage("Ein unerwarteter Fehler ist aufgetreten.");
+      return <SaleService>[];
+    });
+  }
 }
