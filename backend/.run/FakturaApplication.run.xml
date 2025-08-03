@@ -1,5 +1,6 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="FakturaApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+    <option name="ACTIVE_PROFILES" value="dev" />
     <module name="faktura" />
     <option name="SPRING_BOOT_MAIN_CLASS" value="at.dhinterndorfer.faktura.FakturaApplication" />
     <extension name="coverage">

@@ -3,6 +3,7 @@ package at.dhinterndorfer.faktura.timeentry;
 import at.dhinterndorfer.faktura.customer.Customer;
 import at.dhinterndorfer.faktura.sale.service.SaleService;
 import jakarta.persistence.*;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -31,6 +32,6 @@ public class TimeEntry {
     private String description;
 
     @ManyToOne
-    @JoinColumn(name = "sale_service_id")
+    @JoinColumn(name = "sales_service_id")
     private SaleService saleService;
 }

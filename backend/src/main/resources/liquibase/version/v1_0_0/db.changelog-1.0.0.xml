@@ -303,6 +303,7 @@
             </column>
             <column name="sales_service_id" type="bigint"/>
         </createTable>
+
     </changeSet>
 
     <!--
@@ -374,11 +375,21 @@
 
         <renameColumn tableName="timetable" oldColumnName="startedon" newColumnName="started_on"/>
         <renameColumn tableName="timetable" oldColumnName="endedon" newColumnName="ended_on"/>
-        <renameColumn tableName="timetable" oldColumnName="sales_service_id" newColumnName="sale_service_id"/>
 
         <renameColumn tableName="settings" oldColumnName="settings_key" newColumnName="setting_key"/>
         <renameColumn tableName="settings" oldColumnName="settings_value" newColumnName="setting_value"/>
 
         <renameColumn tableName="files" oldColumnName="last_update_date" newColumnName="last_updated_on"/>
+    </changeSet>
+
+
+    <changeSet id="foreign-keys" author="David Hinterndorfer">
+        <addForeignKeyConstraint
+                baseTableName="timetable"
+                baseColumnNames="sales_service_id"
+                referencedTableName="sales_services"
+                referencedColumnNames="id"
+                constraintName="fk_timetable_sales_service"
+                onDelete="SET NULL"/>
     </changeSet>
 </databaseChangeLog>
