@@ -17,6 +17,7 @@ Name | Type | Description | Notes
 **invoice** | [**Invoice**](Invoice.md) |  | [optional] 
 **timeInfo** | **String** | Time information for the service | [optional] 
 **salesNet** | **double** | Net sales amount | [optional] 
+**timeEntries** | [**BuiltList&lt;TimeEntry&gt;**](TimeEntry.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

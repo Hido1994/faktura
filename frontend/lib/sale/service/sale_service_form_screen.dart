@@ -31,7 +31,6 @@ class _SaleServiceFormScreenState extends State<SaleServiceFormScreen> {
 
   SaleServiceBuilder builder = SaleServiceBuilder();
   List<TimeEntry> timeEntries = [];
-  Set<TimeEntry> selectedTimeEntries = {};
 
   Future<void> _initSaleService() async {
     _loadTimeEntries(widget.entry);
@@ -44,7 +43,7 @@ class _SaleServiceFormScreenState extends State<SaleServiceFormScreen> {
   Future<void> _loadTimeEntries(SaleServiceBuilder? saleServiceBuilder) async {
     if (saleServiceBuilder?.customer == null) {
       timeEntries = [];
-      selectedTimeEntries = {};
+      builder.timeEntries = ListBuilder();
     } else {
       var timeEntryBuilder = TimeEntryFilterBuilder();
       var operatorBuilder = NumberOperatorTupleBuilder();
@@ -53,22 +52,17 @@ class _SaleServiceFormScreenState extends State<SaleServiceFormScreen> {
       timeEntryBuilder.customerId = ListBuilder([operatorBuilder.build()]);
 
       operatorBuilder = NumberOperatorTupleBuilder();
-      operatorBuilder.operator_ = NumberOperatorTupleOperator_Enum.EQ;
-      operatorBuilder.value = saleServiceBuilder.id;
+      operatorBuilder.operator_ = NumberOperatorTupleOperator_Enum.IS_NULL;
       timeEntryBuilder.saleServiceId = ListBuilder([operatorBuilder.build()]);
-      var selectedEntries =
-          await Provider.of<TimeEntryModel>(context, listen: false)
+      timeEntries = await Provider.of<TimeEntryModel>(context, listen: false)
               .getAll(timeEntryBuilder);
 
       operatorBuilder = NumberOperatorTupleBuilder();
-      operatorBuilder.operator_ = NumberOperatorTupleOperator_Enum.IS_NULL;
+      operatorBuilder.operator_ = NumberOperatorTupleOperator_Enum.EQ;
+      operatorBuilder.value = saleServiceBuilder.id;
       timeEntryBuilder.saleServiceId = ListBuilder([operatorBuilder.build()]);
-      var unassignedEntries =
-          await Provider.of<TimeEntryModel>(context, listen: false)
-              .getAll(timeEntryBuilder);
-
-      timeEntries = selectedEntries + unassignedEntries;
-      selectedTimeEntries = selectedEntries.toSet();
+      timeEntries += await Provider.of<TimeEntryModel>(context, listen: false)
+          .getAll(timeEntryBuilder);
     }
   }
 
@@ -187,6 +181,7 @@ class _SaleServiceFormScreenState extends State<SaleServiceFormScreen> {
               const SizedBox(height: 20),
               Consumer<CustomerModel>(builder: (context, model, child) {
                 return DropdownSearch<Customer>(
+                  enabled: builder.id == null,
                   items: (f, cs) => model.lovEntities,
                   selectedItem: builder.customer.id != null
                       ? builder.customer.build()
@@ -235,6 +230,7 @@ class _SaleServiceFormScreenState extends State<SaleServiceFormScreen> {
                   ],
                   onChanged: (value) {
                     builder.hours = double.tryParse(value);
+                    builder.timeEntries = ListBuilder();
                   }),
               const SizedBox(height: 20),
               AutocompleteTextFormField(
@@ -276,18 +272,18 @@ class _SaleServiceFormScreenState extends State<SaleServiceFormScreen> {
                       itemCount: timeEntries.length,
                       itemBuilder: (context, index) {
                         final entry = timeEntries[index];
-                        final isSelected = selectedTimeEntries.contains(entry);
+                        final isSelected = builder.timeEntries.build().contains(entry);
                         return CheckboxListTile(
                           title: Text(entry.description),
                           value: isSelected,
                           onChanged: (bool? value) {
                             setState(() {
                               if (value ?? false) {
-                                selectedTimeEntries.add(entry);
+                                builder.timeEntries.add(entry);
                               } else {
-                                selectedTimeEntries.remove(entry);
+                                builder.timeEntries.remove(entry);
                               }
-                              builder.hours = selectedTimeEntries.fold<double>(
+                              builder.hours = builder.timeEntries.build().fold<double>(
                                   0,
                                   (sum, entry) =>
                                       sum +

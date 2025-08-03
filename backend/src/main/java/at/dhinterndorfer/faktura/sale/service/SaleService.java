@@ -2,12 +2,15 @@ package at.dhinterndorfer.faktura.sale.service;
 
 import at.dhinterndorfer.faktura.customer.Customer;
 import at.dhinterndorfer.faktura.invoice.Invoice;
+import at.dhinterndorfer.faktura.timeentry.TimeEntry;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -43,4 +46,7 @@ public class SaleService {
 
     @Column(name = "sales_net")
     private BigDecimal salesNet;
+
+    @OneToMany(mappedBy = "saleService", cascade = {CascadeType.MERGE})
+    private List<TimeEntry> timeEntries;
 }

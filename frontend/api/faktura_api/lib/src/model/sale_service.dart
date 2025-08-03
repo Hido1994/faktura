@@ -4,7 +4,9 @@
 
 // ignore_for_file: unused_element
 import 'package:faktura_api/src/model/invoice.dart';
+import 'package:built_collection/built_collection.dart';
 import 'package:faktura_api/src/model/customer.dart';
+import 'package:faktura_api/src/model/time_entry.dart';
 import 'package:faktura_api/src/model/date.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
@@ -23,6 +25,7 @@ part 'sale_service.g.dart';
 /// * [invoice]
 /// * [timeInfo] - Time information for the service
 /// * [salesNet] - Net sales amount
+/// * [timeEntries]
 @BuiltValue()
 abstract class SaleService implements Built<SaleService, SaleServiceBuilder> {
   /// Hourly rate for the service
@@ -58,6 +61,9 @@ abstract class SaleService implements Built<SaleService, SaleServiceBuilder> {
   /// Net sales amount
   @BuiltValueField(wireName: r'salesNet')
   double? get salesNet;
+
+  @BuiltValueField(wireName: r'timeEntries')
+  BuiltList<TimeEntry>? get timeEntries;
 
   SaleService._();
 
@@ -135,6 +141,13 @@ class _$SaleServiceSerializer implements PrimitiveSerializer<SaleService> {
       yield serializers.serialize(
         object.salesNet,
         specifiedType: const FullType(double),
+      );
+    }
+    if (object.timeEntries != null) {
+      yield r'timeEntries';
+      yield serializers.serialize(
+        object.timeEntries,
+        specifiedType: const FullType(BuiltList, [FullType(TimeEntry)]),
       );
     }
   }
@@ -224,6 +237,13 @@ class _$SaleServiceSerializer implements PrimitiveSerializer<SaleService> {
             specifiedType: const FullType(double),
           ) as double;
           result.salesNet = valueDes;
+          break;
+        case r'timeEntries':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(BuiltList, [FullType(TimeEntry)]),
+          ) as BuiltList<TimeEntry>;
+          result.timeEntries.replace(valueDes);
           break;
         default:
           unhandled.add(key);

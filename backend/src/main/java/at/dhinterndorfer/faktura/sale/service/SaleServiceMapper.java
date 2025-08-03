@@ -5,12 +5,13 @@ import at.dhinterndorfer.faktura.commons.filter.OperatorTupleMapper;
 import at.dhinterndorfer.faktura.dto.v1.SaleServiceFilterRestDto;
 import at.dhinterndorfer.faktura.dto.v1.SaleServicePageRestDto;
 import at.dhinterndorfer.faktura.dto.v1.SaleServiceRestDto;
+import at.dhinterndorfer.faktura.timeentry.TimeEntryMapper;
 import org.mapstruct.Mapper;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
 
-@Mapper(uses = {NullableMapper.class, OperatorTupleMapper.class})
+@Mapper(uses = {NullableMapper.class, OperatorTupleMapper.class, TimeEntryMapper.class})
 public interface SaleServiceMapper {
 
     SaleServiceRestDto mapToDto(SaleService entity);
