@@ -84,7 +84,7 @@ class _SaleServiceFormScreenState extends State<SaleServiceFormScreen> {
       timeEntryBuilder.saleServiceId = ListBuilder([operatorBuilder.build()]);
       timeEntries += await Provider.of<TimeEntryModel>(context, listen: false)
           .getAll(timeEntryBuilder);
-      timeEntries.sort((a, b) => a.startedOn.compareTo(b.startedOn));
+      timeEntries.sort((a, b) => b.startedOn.compareTo(a.startedOn));
     }
   }
 
