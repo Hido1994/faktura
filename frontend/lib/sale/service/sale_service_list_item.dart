@@ -80,9 +80,21 @@ class _SaleServiceListItem extends State<SaleServiceListItem> {
         },
         child: ListTile(
           leading: Icon(Icons.work),
+          isThreeLine: true,
           title: Text(
-            '${dateFormat.format(widget.entry.suppliedOn.toDateTime())} - ${widget.entry.description}',
+            '${widget.entry.description}',
           ),
+          subtitle: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                widget.entry.customer!.name,
+              ),
+              Text(
+                  '${widget.entry.hours} h x ${currencyFormat.format(widget.entry.hourlyRate)} => ${currencyFormat.format(widget.entry.hourlyRate * widget.entry.hours)}'),
+            ],
+          ),
+          trailing: Text(dateFormat.format(widget.entry.suppliedOn.toDateTime())),
           onTap: () {
             showModalBottomSheet(
               isScrollControlled: true,
