@@ -144,7 +144,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Faktura',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.blue,
+          brightness: Brightness.light,
+        ),
+
       ),
       themeMode: ThemeMode.light,
       home: Stack(children: [

@@ -19,6 +19,7 @@ part 'time_entry_filter.g.dart';
 /// * [customerId]
 /// * [saleServiceId]
 /// * [startedOn]
+/// * [endedOn]
 @BuiltValue()
 abstract class TimeEntryFilter
     implements Built<TimeEntryFilter, TimeEntryFilterBuilder> {
@@ -33,6 +34,9 @@ abstract class TimeEntryFilter
 
   @BuiltValueField(wireName: r'startedOn')
   BuiltList<DateOperatorTuple>? get startedOn;
+
+  @BuiltValueField(wireName: r'endedOn')
+  BuiltList<DateOperatorTuple>? get endedOn;
 
   TimeEntryFilter._();
 
@@ -88,6 +92,13 @@ class _$TimeEntryFilterSerializer
       yield r'startedOn';
       yield serializers.serialize(
         object.startedOn,
+        specifiedType: const FullType(BuiltList, [FullType(DateOperatorTuple)]),
+      );
+    }
+    if (object.endedOn != null) {
+      yield r'endedOn';
+      yield serializers.serialize(
+        object.endedOn,
         specifiedType: const FullType(BuiltList, [FullType(DateOperatorTuple)]),
       );
     }
@@ -147,6 +158,14 @@ class _$TimeEntryFilterSerializer
                 const FullType(BuiltList, [FullType(DateOperatorTuple)]),
           ) as BuiltList<DateOperatorTuple>;
           result.startedOn.replace(valueDes);
+          break;
+        case r'endedOn':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType:
+                const FullType(BuiltList, [FullType(DateOperatorTuple)]),
+          ) as BuiltList<DateOperatorTuple>;
+          result.endedOn.replace(valueDes);
           break;
         default:
           unhandled.add(key);

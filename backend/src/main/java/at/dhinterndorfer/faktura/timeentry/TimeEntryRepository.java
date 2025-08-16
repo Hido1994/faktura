@@ -40,6 +40,13 @@ public interface TimeEntryRepository extends JpaRepository<TimeEntry, Long>, Que
                         x.getValue())));
             });
         }
+        if (filter.getEndedOn() != null && !filter.getEndedOn().isEmpty()) {
+            filter.getEndedOn().forEach(x -> {
+                builder.and(Expressions.booleanOperation(x.getOperator(), qEntity.endedOn,
+                    x.getValue() == null ? Expressions.nullExpression() : Expressions.constant(
+                        x.getValue())));
+            });
+        }
         return builder;
     }
 }

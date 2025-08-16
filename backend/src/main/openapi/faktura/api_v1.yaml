@@ -1877,6 +1877,10 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/DateOperatorTuple"
+        endedOn:
+          type: array
+          items:
+            $ref: "#/components/schemas/DateOperatorTuple"
     TimeEntryPage:
       description: typed Page
       type: object

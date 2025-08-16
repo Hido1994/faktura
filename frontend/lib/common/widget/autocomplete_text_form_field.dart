@@ -41,7 +41,21 @@ class _AutocompleteTextFormFieldState extends State<AutocompleteTextFormField> {
     super.didUpdateWidget(oldWidget);
 
     if (widget.initialValue != oldWidget.initialValue) {
-      _controller.text = widget.initialValue ?? '';
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) {
+          _controller.text = widget.initialValue ?? '';
+        }
+      });
+    }
+  }
+
+  void _syncControllers(TextEditingController fieldController) {
+    if (fieldController.text != _controller.text) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted && fieldController.text != _controller.text) {
+          fieldController.text = _controller.text;
+        }
+      });
     }
   }
 
@@ -55,6 +69,34 @@ class _AutocompleteTextFormFieldState extends State<AutocompleteTextFormField> {
   Widget build(BuildContext context) {
     return Autocomplete<String>(
       initialValue: TextEditingValue(text: widget.initialValue ?? ''),
+      optionsViewBuilder: (context, onSelected, options) {
+        return Align(
+          alignment: Alignment.topLeft,
+          child: Card(
+            margin: const EdgeInsets.only(top: 4),
+            elevation: 4,
+            child: ConstrainedBox(
+              constraints: BoxConstraints(
+                maxHeight: 200,
+                maxWidth: MediaQuery.of(context).size.width - 32,
+              ),
+              child: ListView.builder(
+                padding: EdgeInsets.zero,
+                shrinkWrap: true,
+                itemCount: options.length,
+                itemBuilder: (context, index) {
+                  final option = options.elementAt(index);
+                  return ListTile(
+                    dense: true,
+                    title: Text(option),
+                    onTap: () => onSelected(option),
+                  );
+                },
+              ),
+            ),
+          ),
+        );
+      },
       optionsBuilder: (TextEditingValue textEditingValue) {
         if (textEditingValue.text.isEmpty) {
           return widget.options;
@@ -70,9 +112,7 @@ class _AutocompleteTextFormFieldState extends State<AutocompleteTextFormField> {
           TextEditingController fieldTextEditingController,
           FocusNode fieldFocusNode,
           VoidCallback onFieldSubmitted) {
-        if (fieldTextEditingController.text != _controller.text) {
-          fieldTextEditingController.text = _controller.text;
-        }
+        _syncControllers(fieldTextEditingController);
         return TextFormField(
           controller: fieldTextEditingController,
           focusNode: fieldFocusNode,
@@ -87,12 +127,16 @@ class _AutocompleteTextFormFieldState extends State<AutocompleteTextFormField> {
         );
       },
       onSelected: (String selection) {
-        _controller.text = selection;
-        if (widget.onSelected != null) {
-          widget.onSelected!(selection);
-        } else {
-          widget.onChanged(selection);
-        }
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          if (mounted) {
+            _controller.text = selection;
+            if (widget.onSelected != null) {
+              widget.onSelected!(selection);
+            } else {
+              widget.onChanged(selection);
+            }
+          }
+        });
       },
     );
   }

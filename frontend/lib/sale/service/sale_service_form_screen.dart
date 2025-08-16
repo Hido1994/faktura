@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
+import '../../common/string_formats.dart';
 import '../../common/widget/datetime_picker_text_form_field.dart';
 import '../../customer/customer_model.dart';
 
@@ -32,12 +33,26 @@ class _SaleServiceFormScreenState extends State<SaleServiceFormScreen> {
   List<TimeEntry> timeEntries = [];
   List<String> previousDescriptions = [];
 
+  void updateHours() {
+    builder.hours = builder.timeEntries.build().fold<double>(
+        0,
+        (sum, entry) =>
+            sum +
+            (entry.endedOn!.difference(entry.startedOn).inMinutes / 60.0));
+  }
+
   Future<void> _initSaleService() async {
     _loadPrevious(widget.entry);
     _loadTimeEntries(widget.entry);
 
     setState(() {
-      builder = widget.entry ?? SaleServiceBuilder();
+      if (widget.entry == null) {
+        final newBuilder = SaleServiceBuilder();
+        newBuilder.suppliedOn = Date.now();
+        builder = newBuilder;
+      } else {
+        builder = widget.entry!;
+      }
     });
   }
 
@@ -52,6 +67,11 @@ class _SaleServiceFormScreenState extends State<SaleServiceFormScreen> {
       operatorBuilder.value = saleServiceBuilder!.customer.id;
       timeEntryBuilder.customerId = ListBuilder([operatorBuilder.build()]);
 
+      var dateOperatorBuilder = DateOperatorTupleBuilder();
+      dateOperatorBuilder.operator_ =
+          DateOperatorTupleOperator_Enum.IS_NOT_NULL;
+      timeEntryBuilder.endedOn = ListBuilder([dateOperatorBuilder.build()]);
+
       operatorBuilder = NumberOperatorTupleBuilder();
       operatorBuilder.operator_ = NumberOperatorTupleOperator_Enum.IS_NULL;
       timeEntryBuilder.saleServiceId = ListBuilder([operatorBuilder.build()]);
@@ -64,6 +84,7 @@ class _SaleServiceFormScreenState extends State<SaleServiceFormScreen> {
       timeEntryBuilder.saleServiceId = ListBuilder([operatorBuilder.build()]);
       timeEntries += await Provider.of<TimeEntryModel>(context, listen: false)
           .getAll(timeEntryBuilder);
+      timeEntries.sort((a, b) => a.startedOn.compareTo(b.startedOn));
     }
   }
 
@@ -228,8 +249,13 @@ class _SaleServiceFormScreenState extends State<SaleServiceFormScreen> {
                   onChanged: (value) {
                     builder.customer = value?.toBuilder();
                     builder.hourlyRate = builder.customer.hourlyRate;
+                    builder.timeEntries.clear();
+                    builder.hours = 0;
                     _loadTimeEntries(builder);
                     _loadPrevious(builder);
+                    setState(() {
+
+                    });
                   },
                   filterFn: (Customer customer, String filter) {
                     return customer.name
@@ -286,7 +312,7 @@ class _SaleServiceFormScreenState extends State<SaleServiceFormScreen> {
           isActive: currentStep >= 1,
           title: Text('Stunden'),
           content: SizedBox(
-            height: MediaQuery.of(context).size.height * 0.65,
+            height: MediaQuery.of(context).size.height * 0.60,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
@@ -297,40 +323,51 @@ class _SaleServiceFormScreenState extends State<SaleServiceFormScreen> {
                     ),
                   )
                 else
-                  Expanded(
-                    child: ListView.builder(
-                      shrinkWrap: false,
-                      itemCount: timeEntries.length,
-                      itemBuilder: (context, index) {
-                        final entry = timeEntries[index];
-                        final isSelected =
-                            builder.timeEntries.build().contains(entry);
-                        return CheckboxListTile(
-                          title: Text(entry.description),
-                          value: isSelected,
-                          onChanged: (bool? value) {
-                            setState(() {
-                              if (value ?? false) {
-                                builder.timeEntries.add(entry);
-                              } else {
-                                builder.timeEntries.remove(entry);
-                              }
-                              builder.hours = builder.timeEntries
-                                  .build()
-                                  .fold<double>(
-                                      0,
-                                      (sum, entry) =>
-                                          sum +
-                                          (entry.endedOn!
-                                                  .difference(entry.startedOn)
-                                                  .inMinutes /
-                                              60.0));
-                            });
-                          },
-                        );
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        setState(() {
+                          builder.timeEntries.clear();
+                          builder.timeEntries.addAll(timeEntries);
+                          updateHours();
+                        });
                       },
+                      child: Text('Alle auswählen'),
                     ),
                   ),
+                Expanded(
+                  child: ListView.builder(
+                    shrinkWrap: false,
+                    itemCount: timeEntries.length,
+                    itemBuilder: (context, index) {
+                      final entry = timeEntries[index];
+                      final isSelected =
+                          builder.timeEntries.build().contains(entry);
+                      return CheckboxListTile(
+                        subtitle: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text('${dateTimeFormat.format(entry.startedOn)}'
+                                  ' - ${entry.startedOn.day == entry.endedOn!.day ? dateTimeTimeOnlyFormat.format(entry.endedOn!) : dateTimeFormat.format(entry.startedOn)}'
+                                  ' (${entry.endedOn!.difference(entry.startedOn).inHours.toString()}h)'),
+                            ]),
+                        title: Text(entry.description),
+                        value: isSelected,
+                        onChanged: (bool? value) {
+                          setState(() {
+                            if (value ?? false) {
+                              builder.timeEntries.add(entry);
+                            } else {
+                              builder.timeEntries.remove(entry);
+                            }
+                            updateHours();
+                          });
+                        },
+                      );
+                    },
+                  ),
+                ),
               ],
             ),
           ),

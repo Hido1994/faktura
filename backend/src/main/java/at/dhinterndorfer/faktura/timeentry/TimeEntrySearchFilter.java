@@ -22,4 +22,6 @@ public class TimeEntrySearchFilter {
     private List<OperatorTuple<Long>> saleServiceId;
 
     private List<OperatorTuple<LocalDateTime>> startedOn;
+
+    private List<OperatorTuple<LocalDateTime>> endedOn;
 }
