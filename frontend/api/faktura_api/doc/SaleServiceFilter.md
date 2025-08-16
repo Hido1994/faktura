@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **description** | [**BuiltList&lt;StringOperatorTuple&gt;**](StringOperatorTuple.md) |  | [optional] 
 **customerId** | [**BuiltList&lt;NumberOperatorTuple&gt;**](NumberOperatorTuple.md) |  | [optional] 
+**invoiceId** | [**BuiltList&lt;NumberOperatorTuple&gt;**](NumberOperatorTuple.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

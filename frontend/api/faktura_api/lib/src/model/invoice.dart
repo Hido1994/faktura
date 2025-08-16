@@ -3,8 +3,11 @@
 //
 
 // ignore_for_file: unused_element
+import 'package:faktura_api/src/model/sale_service.dart';
+import 'package:built_collection/built_collection.dart';
 import 'package:faktura_api/src/model/customer.dart';
 import 'package:faktura_api/src/model/payment_method.dart';
+import 'package:faktura_api/src/model/sale_article.dart';
 import 'package:faktura_api/src/model/date.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
@@ -23,6 +26,8 @@ part 'invoice.g.dart';
 /// * [customer]
 /// * [servicePeriod] - Period of service covered by the invoice
 /// * [revision] - Revision information for the invoice
+/// * [saleServices]
+/// * [saleArticles]
 @BuiltValue()
 abstract class Invoice implements Built<Invoice, InvoiceBuilder> {
   /// Subject of the invoice
@@ -58,6 +63,12 @@ abstract class Invoice implements Built<Invoice, InvoiceBuilder> {
   /// Revision information for the invoice
   @BuiltValueField(wireName: r'revision')
   String? get revision;
+
+  @BuiltValueField(wireName: r'saleServices')
+  BuiltList<SaleService>? get saleServices;
+
+  @BuiltValueField(wireName: r'saleArticles')
+  BuiltList<SaleArticle>? get saleArticles;
 
   Invoice._();
 
@@ -139,6 +150,20 @@ class _$InvoiceSerializer implements PrimitiveSerializer<Invoice> {
       yield serializers.serialize(
         object.revision,
         specifiedType: const FullType(String),
+      );
+    }
+    if (object.saleServices != null) {
+      yield r'saleServices';
+      yield serializers.serialize(
+        object.saleServices,
+        specifiedType: const FullType(BuiltList, [FullType(SaleService)]),
+      );
+    }
+    if (object.saleArticles != null) {
+      yield r'saleArticles';
+      yield serializers.serialize(
+        object.saleArticles,
+        specifiedType: const FullType(BuiltList, [FullType(SaleArticle)]),
       );
     }
   }
@@ -228,6 +253,20 @@ class _$InvoiceSerializer implements PrimitiveSerializer<Invoice> {
             specifiedType: const FullType(String),
           ) as String;
           result.revision = valueDes;
+          break;
+        case r'saleServices':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(BuiltList, [FullType(SaleService)]),
+          ) as BuiltList<SaleService>;
+          result.saleServices.replace(valueDes);
+          break;
+        case r'saleArticles':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType(BuiltList, [FullType(SaleArticle)]),
+          ) as BuiltList<SaleArticle>;
+          result.saleArticles.replace(valueDes);
           break;
         default:
           unhandled.add(key);

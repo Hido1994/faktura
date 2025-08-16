@@ -5,12 +5,14 @@ import at.dhinterndorfer.faktura.commons.filter.OperatorTupleMapper;
 import at.dhinterndorfer.faktura.dto.v1.InvoiceFilterRestDto;
 import at.dhinterndorfer.faktura.dto.v1.InvoicePageRestDto;
 import at.dhinterndorfer.faktura.dto.v1.InvoiceRestDto;
+import at.dhinterndorfer.faktura.sale.article.SaleArticleMapper;
+import at.dhinterndorfer.faktura.sale.service.SaleServiceMapper;
 import org.mapstruct.Mapper;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
 
-@Mapper(uses = {NullableMapper.class, OperatorTupleMapper.class})
+@Mapper(uses = {NullableMapper.class, OperatorTupleMapper.class, SaleServiceMapper.class, SaleArticleMapper.class})
 public interface InvoiceMapper {
 
     InvoiceRestDto mapToDto(Invoice entity);

@@ -2,11 +2,14 @@ package at.dhinterndorfer.faktura.invoice;
 
 import at.dhinterndorfer.faktura.customer.Customer;
 import at.dhinterndorfer.faktura.paymentmethod.PaymentMethod;
+import at.dhinterndorfer.faktura.sale.article.SaleArticle;
+import at.dhinterndorfer.faktura.sale.service.SaleService;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Getter
 @Setter
@@ -42,4 +45,10 @@ public class Invoice {
 
     @Column(name = "revision", length = 1024)
     private String revision;
+
+    @OneToMany(mappedBy = "invoice", cascade = {CascadeType.MERGE})
+    private List<SaleService> saleServices;
+
+    @OneToMany(mappedBy = "invoice", cascade = {CascadeType.MERGE})
+    private List<SaleArticle> saleArticles;
 }

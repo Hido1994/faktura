@@ -16,4 +16,6 @@ public class SaleServiceSearchFilter {
 
     private List<OperatorTuple<Long>> customerId;
 
+    private List<OperatorTuple<Long>> invoiceId;
+
 }

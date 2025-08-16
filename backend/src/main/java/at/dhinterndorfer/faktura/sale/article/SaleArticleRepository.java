@@ -21,6 +21,20 @@ public interface SaleArticleRepository extends JpaRepository<SaleArticle, Long>,
                         x.getValue().toLowerCase())));
             });
         }
+        if (filter.getCustomerId() != null && !filter.getCustomerId().isEmpty()) {
+            filter.getCustomerId().forEach(x -> {
+                builder.and(Expressions.booleanOperation(x.getOperator(), qEntity.customer.id,
+                    x.getValue() == null ? Expressions.nullExpression() : Expressions.constant(
+                        x.getValue())));
+            });
+        }
+        if (filter.getInvoiceId() != null && !filter.getInvoiceId().isEmpty()) {
+            filter.getInvoiceId().forEach(x -> {
+                builder.and(Expressions.booleanOperation(x.getOperator(), qEntity.invoice.id,
+                    x.getValue() == null ? Expressions.nullExpression() : Expressions.constant(
+                        x.getValue())));
+            });
+        }
         return builder;
     }
 }

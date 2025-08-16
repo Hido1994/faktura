@@ -17,6 +17,8 @@ Name | Type | Description | Notes
 **customer** | [**Customer**](Customer.md) |  | [optional] 
 **servicePeriod** | **String** | Period of service covered by the invoice | [optional] 
 **revision** | **String** | Revision information for the invoice | [optional] 
+**saleServices** | [**BuiltList&lt;SaleService&gt;**](SaleService.md) |  | [optional] 
+**saleArticles** | [**BuiltList&lt;SaleArticle&gt;**](SaleArticle.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

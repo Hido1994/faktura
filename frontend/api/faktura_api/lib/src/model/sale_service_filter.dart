@@ -16,6 +16,7 @@ part 'sale_service_filter.g.dart';
 /// Properties:
 /// * [description]
 /// * [customerId]
+/// * [invoiceId]
 @BuiltValue()
 abstract class SaleServiceFilter
     implements Built<SaleServiceFilter, SaleServiceFilterBuilder> {
@@ -24,6 +25,9 @@ abstract class SaleServiceFilter
 
   @BuiltValueField(wireName: r'customerId')
   BuiltList<NumberOperatorTuple>? get customerId;
+
+  @BuiltValueField(wireName: r'invoiceId')
+  BuiltList<NumberOperatorTuple>? get invoiceId;
 
   SaleServiceFilter._();
 
@@ -63,6 +67,14 @@ class _$SaleServiceFilterSerializer
       yield r'customerId';
       yield serializers.serialize(
         object.customerId,
+        specifiedType:
+            const FullType(BuiltList, [FullType(NumberOperatorTuple)]),
+      );
+    }
+    if (object.invoiceId != null) {
+      yield r'invoiceId';
+      yield serializers.serialize(
+        object.invoiceId,
         specifiedType:
             const FullType(BuiltList, [FullType(NumberOperatorTuple)]),
       );
@@ -107,6 +119,14 @@ class _$SaleServiceFilterSerializer
                 const FullType(BuiltList, [FullType(NumberOperatorTuple)]),
           ) as BuiltList<NumberOperatorTuple>;
           result.customerId.replace(valueDes);
+          break;
+        case r'invoiceId':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType:
+                const FullType(BuiltList, [FullType(NumberOperatorTuple)]),
+          ) as BuiltList<NumberOperatorTuple>;
+          result.invoiceId.replace(valueDes);
           break;
         default:
           unhandled.add(key);

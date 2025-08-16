@@ -91,6 +91,9 @@ class _InvoiceListItem extends State<InvoiceListItem> {
               Text(
                 widget.entry.customer!.name,
               ),
+              Text('${widget.entry.saleServices!.fold<double>(0, (sum, entry) => sum + (entry.hours * entry.hourlyRate)).toString()}'
+                  ' + ${(widget.entry.saleServices!.fold<double>(0, (sum, entry) => sum + (entry.hours * entry.hourlyRate)) * 0.2).toString()}'
+                  ' => ${(widget.entry.saleServices!.fold<double>(0, (sum, entry) => sum + (entry.hours * entry.hourlyRate)) * 1.2).toString()}'),
             ],
           ),
           trailing: Text(dateFormat.format(widget.entry.paidOn != null ? widget.entry.paidOn!.toDateTime() : widget.entry.createdOn.toDateTime())),

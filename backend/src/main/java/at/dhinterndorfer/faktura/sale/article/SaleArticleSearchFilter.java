@@ -16,4 +16,8 @@ public class SaleArticleSearchFilter {
 
     private List<OperatorTuple<String>> description;
 
+    private List<OperatorTuple<Long>> customerId;
+
+    private List<OperatorTuple<Long>> invoiceId;
+
 }

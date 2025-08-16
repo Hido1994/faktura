@@ -4,6 +4,7 @@
 
 // ignore_for_file: unused_element
 import 'package:faktura_api/src/model/string_operator_tuple.dart';
+import 'package:faktura_api/src/model/number_operator_tuple.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
@@ -14,11 +15,19 @@ part 'sale_article_filter.g.dart';
 ///
 /// Properties:
 /// * [description]
+/// * [customerId]
+/// * [invoiceId]
 @BuiltValue()
 abstract class SaleArticleFilter
     implements Built<SaleArticleFilter, SaleArticleFilterBuilder> {
   @BuiltValueField(wireName: r'description')
   BuiltList<StringOperatorTuple>? get description;
+
+  @BuiltValueField(wireName: r'customerId')
+  BuiltList<NumberOperatorTuple>? get customerId;
+
+  @BuiltValueField(wireName: r'invoiceId')
+  BuiltList<NumberOperatorTuple>? get invoiceId;
 
   SaleArticleFilter._();
 
@@ -54,6 +63,22 @@ class _$SaleArticleFilterSerializer
             const FullType(BuiltList, [FullType(StringOperatorTuple)]),
       );
     }
+    if (object.customerId != null) {
+      yield r'customerId';
+      yield serializers.serialize(
+        object.customerId,
+        specifiedType:
+            const FullType(BuiltList, [FullType(NumberOperatorTuple)]),
+      );
+    }
+    if (object.invoiceId != null) {
+      yield r'invoiceId';
+      yield serializers.serialize(
+        object.invoiceId,
+        specifiedType:
+            const FullType(BuiltList, [FullType(NumberOperatorTuple)]),
+      );
+    }
   }
 
   @override
@@ -86,6 +111,22 @@ class _$SaleArticleFilterSerializer
                 const FullType(BuiltList, [FullType(StringOperatorTuple)]),
           ) as BuiltList<StringOperatorTuple>;
           result.description.replace(valueDes);
+          break;
+        case r'customerId':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType:
+                const FullType(BuiltList, [FullType(NumberOperatorTuple)]),
+          ) as BuiltList<NumberOperatorTuple>;
+          result.customerId.replace(valueDes);
+          break;
+        case r'invoiceId':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType:
+                const FullType(BuiltList, [FullType(NumberOperatorTuple)]),
+          ) as BuiltList<NumberOperatorTuple>;
+          result.invoiceId.replace(valueDes);
           break;
         default:
           unhandled.add(key);

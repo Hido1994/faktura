@@ -1395,6 +1395,14 @@ components:
           type: string
           maxLength: 1024
           description: Revision information for the invoice
+        saleServices:
+          type: array
+          items:
+            $ref: '#/components/schemas/SaleService'
+        saleArticles:
+          type: array
+          items:
+            $ref: '#/components/schemas/SaleArticle'
       required:
         - subject
         - createdOn
@@ -1698,6 +1706,14 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/StringOperatorTuple"
+        customerId:
+          type: array
+          items:
+            $ref: "#/components/schemas/NumberOperatorTuple"
+        invoiceId:
+          type: array
+          items:
+            $ref: "#/components/schemas/NumberOperatorTuple"
     SaleArticlePage:
       description: typed Page
       type: object
@@ -1789,6 +1805,10 @@ components:
           items:
             $ref: "#/components/schemas/StringOperatorTuple"
         customerId:
+          type: array
+          items:
+            $ref: "#/components/schemas/NumberOperatorTuple"
+        invoiceId:
           type: array
           items:
             $ref: "#/components/schemas/NumberOperatorTuple"
