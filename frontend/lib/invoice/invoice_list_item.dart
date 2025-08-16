@@ -4,6 +4,8 @@ import 'package:faktura_api/faktura_api.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../common/string_formats.dart';
+
 class InvoiceListItem extends StatefulWidget {
   final Invoice entry;
 
@@ -79,9 +81,19 @@ class _InvoiceListItem extends State<InvoiceListItem> {
         },
         child: ListTile(
           leading: Icon(Icons.file_copy),
+          isThreeLine: true,
           title: Text(
-            '${widget.entry.invoiceNumber}',
+            'Rechnung ${widget.entry.invoiceNumber}',
           ),
+          subtitle: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                widget.entry.customer!.name,
+              ),
+            ],
+          ),
+          trailing: Text(dateFormat.format(widget.entry.paidOn != null ? widget.entry.paidOn!.toDateTime() : widget.entry.createdOn.toDateTime())),
           onTap: () {
             showModalBottomSheet(
               isScrollControlled: true,
